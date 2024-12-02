@@ -6,6 +6,99 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id  Int  @id @default(autoincrement())
+  name String?
+  birth_year Int?
+  email String
+  username String @unique
+  password String
+  security_question_1 String
+  security_question_2 String
+  security_answer_1 String
+  security_answer_2 String
+  total_logins Int
+  last_login DateTime
+  score_math Score_math?
+  badge_math Badge_math?
+  score_reading Score_reading?
+  badge_reading Badge_reading?
+}
+
+model Score_math {
+  id   Int   @id @default(autoincrement())
+  addition_score  Int? @default(0)
+  subtraction_score  Int?  @default(0)
+  multiplication_score  Int? @default(0)
+  division_score  Int? @default(0)
+  math_L1_points Int? @default(0)
+  math_L2_points Int? @default(0)
+  math_L3_points Int? @default(0)
+  math_L4_points Int? @default(0)
+  math_L5_points Int? @default(0)
+  user User @relation(fields: [user_id], references: [id])
+  user_id Int @unique
+}
+
+model Badge_math {
+  id Int @id @default(autoincrement())
+  Level_1_1 Boolean? @default(false)
+  Level_1_2 Boolean? @default(false)
+  Level_1_3 Boolean? @default(false)
+  Level_1_4 Boolean? @default(false)
+  Level_1_5 Boolean? @default(false)
+  Level_1_6 Boolean? @default(false)
+  Level_1_7 Boolean? @default(false)
+  Level_1_8 Boolean? @default(false)
+  Level_2_1 Boolean? @default(false)
+  Level_2_2 Boolean? @default(false)
+  Level_2_3 Boolean? @default(false)
+  Level_2_4 Boolean? @default(false)
+  Level_2_5 Boolean? @default(false)
+  Level_2_6 Boolean? @default(false)
+  Level_2_7 Boolean? @default(false)
+  Level_2_8 Boolean? @default(false)
+  user User @relation(fields: [user_id], references: [id])
+  user_id Int @unique
+}
+
+model Score_reading {
+  id   Int   @id @default(autoincrement())
+  score  Int? @default(0)
+  reading_L1_points Int? @default(0)
+  reading_L2_points Int? @default(0)
+  reading_L3_points Int? @default(0)
+  reading_L4_points Int? @default(0)
+  reading_L5_points Int? @default(0)
+  user User @relation(fields: [user_id], references: [id])
+  user_id Int @unique
+}
+
+model Badge_reading {
+  id Int @id @default(autoincrement())
+  Level_1_1 Boolean? @default(false)
+  Level_1_2 Boolean? @default(false)
+  Level_1_3 Boolean? @default(false)
+  Level_1_4 Boolean? @default(false)
+  Level_1_5 Boolean? @default(false)
+  Level_1_6 Boolean? @default(false)
+  Level_1_7 Boolean? @default(false)
+  Level_1_8 Boolean? @default(false)
+  Level_2_1 Boolean? @default(false)
+  Level_2_2 Boolean? @default(false)
+  Level_2_3 Boolean? @default(false)
+  Level_2_4 Boolean? @default(false)
+  Level_2_5 Boolean? @default(false)
+  Level_2_6 Boolean? @default(false)
+  Level_2_7 Boolean? @default(false)
+  Level_2_8 Boolean? @default(false)
+  user User @relation(fields: [user_id], references: [id])
+  user_id Int @unique
+}
+
+
+
