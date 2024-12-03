@@ -8,6 +8,28 @@ const { verifyToken } = require("../utilities/verifyToken");
 
 const prisma = new PrismaClient();
 
+// Gets a single user: user data, scores, badges
+// validate and find user info
+router.get("/me", verifyToken, async (req, res) => {
+  try {
+    const user = await prisma.user.findUnique({
+      where: {
+        id: parseInt(req.user),
+      },
+      include: {
+        score_math: true,
+        badge_math: true,
+        score_reading: true,
+        badge_reading: true,
+      },
+    });
+    res.send(user);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+});
+
 // Deletes a user
 router.delete("/:id", verifyToken, async (req, res) => {
   try {

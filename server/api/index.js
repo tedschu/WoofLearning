@@ -1,5 +1,3 @@
-// include routes for math and reading sites
-
 // THIS FILE INITIATLIZES THE EXPRESS SERVER AND THE MAIN ROUTES TO OUR DB TABLES
 
 const express = require("express");
@@ -56,12 +54,12 @@ app.get(baseQuery, (req, res) => [
 app.use("/auth", require("../auth/index")); // for register and login
 app.use(baseQuery + "users", require("./users"));
 app.use(baseQuery + "users-math", require("./math/users"));
-// app.use(baseQuery + "users-reading", require("./reading/users"));
-// // app.use(baseQuery + "game_state", require("./game_state"));
+app.use(baseQuery + "users-reading", require("./reading/users"));
+app.use("/anthropic", require("../anthropic/anthropicAPI")); // for Anthropic API routes / endpoints
 
 app.use(express.static(path.join(__dirname, "/../../client/dist")));
 app.use("*", express.static(path.join(__dirname, "/../../client/dist")));
 
 app.listen(port, () => {
-  console.log(`WoofMath is running at port ${port}`);
+  console.log(`WoofLearning is running at port ${port}`);
 });

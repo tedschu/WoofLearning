@@ -8,26 +8,6 @@ const { verifyToken } = require("../../utilities/verifyToken");
 
 const prisma = new PrismaClient();
 
-// Gets a single user: user data, scores, badges
-// validate and find user info
-router.get("/me", verifyToken, async (req, res) => {
-  try {
-    const user = await prisma.user.findUnique({
-      where: {
-        id: parseInt(req.user),
-      },
-      include: {
-        score_math: true,
-        badge_math: true,
-      },
-    });
-    res.send(user);
-  } catch (error) {
-    console.log(error);
-    res.sendStatus(500);
-  }
-});
-
 // Updates a score for a given user (e.g. on submit button in gamePlay)
 router.put("/:user_id/score", verifyToken, async (req, res) => {
   try {
