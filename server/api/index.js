@@ -54,7 +54,9 @@ app.get(baseQuery, (req, res) => [
 
 // Requiring each of our routes - UPDATE AS THESE ARE COMPLETED
 app.use("/auth", require("../auth/index")); // for register and login
-// app.use(baseQuery + "users", require("./users"));
+app.use(baseQuery + "users", require("./users"));
+app.use(baseQuery + "users-math", require("./math/users"));
+// app.use(baseQuery + "users-reading", require("./reading/users"));
 // // app.use(baseQuery + "game_state", require("./game_state"));
 
 app.use(express.static(path.join(__dirname, "/../../client/dist")));

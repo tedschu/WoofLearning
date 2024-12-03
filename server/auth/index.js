@@ -63,6 +63,11 @@ router.post("/register", async (req, res) => {
             subtraction_score: 0,
             multiplication_score: 0,
             division_score: 0,
+            math_L1_points: 0,
+            math_L2_points: 0,
+            math_L3_points: 0,
+            math_L4_points: 0,
+            math_L5_points: 0,
           },
         },
         badge_math: {
@@ -73,6 +78,11 @@ router.post("/register", async (req, res) => {
         score_reading: {
           create: {
             score: 0,
+            reading_L1_points: 0,
+            reading_L2_points: 0,
+            reading_L3_points: 0,
+            reading_L4_points: 0,
+            reading_L5_points: 0,
           },
         },
         badge_reading: {
