@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { UserScore, UserBadges, UserInfo } from "./types/types";
-import Game from "./pages/Game";
 import Me from "./pages/Me";
 import Register from "./pages/Register";
 import Login from "./pages/Login";

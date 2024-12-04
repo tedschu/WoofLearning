@@ -39,11 +39,20 @@ export type GameSelectorType =
 export type ModalBadgeType =
   | "bernese"
   | "chihuahua"
+  | "waterdog"
   | "boxer"
   | "husky"
   | "golden"
   | "cat"
   | "goldendoodle_trophy"
+  | "borderCollie"
+  | "terrier"
+  | "australianShepherd"
+  | "shibaInu"
+  | "cat2"
+  | "bernese2"
+  | "poodle"
+  | "goldendoodleTrophy2"
   | "";
 
 // Section 2: Component props

@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import NumberGenerator from "./NumberGenerator";
+
 import {
   GameSelectorType,
   UserScore,

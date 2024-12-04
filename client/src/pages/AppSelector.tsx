@@ -2,7 +2,7 @@
 // Default landing page for logged-in users
 
 function AppSelector() {
-  return "yo";
+  return "fuck this";
 }
 
 export default AppSelector;
