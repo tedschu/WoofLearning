@@ -2,7 +2,7 @@ import React from "react";
 
 import woofMathLogo from "../assets/woofmath_logo_1.png";
 import { Link } from "react-router-dom";
-import storyPrompts from "../utils/storyPrompts";
+import storyPrompts from "../../utils/storyPrompts";
 
 function Prompts({ isLoggedIn }) {
   // Shows a list of all prompts in use from storyPrompts.js, from "About" page
