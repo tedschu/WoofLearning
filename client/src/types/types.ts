@@ -2,20 +2,35 @@
 
 // in App.tsx
 export type UserScore = {
-  addition_score: number;
-  subtraction_score: number;
-  multiplication_score: number;
-  division_score: number;
+  math_addition_score: number;
+  math_subtraction_score: number;
+  math_multiplication_score: number;
+  math_division_score: number;
+  reading_score: number;
+};
+
+export type BadgeLevel = {
+  math_level: number;
+  reading_level: number;
 };
 
 export type UserBadges = {
-  bernese: boolean;
-  boxer: boolean;
-  cat: boolean;
-  chihuahua: boolean;
-  golden: boolean;
-  husky: boolean;
-  goldendoodle_trophy: boolean;
+  badge_1_1_bernese: boolean;
+  badge_1_2_chihuahua: boolean;
+  badge_1_3_waterdog: boolean;
+  badge_1_4_boxer: boolean;
+  badge_1_5_husky: boolean;
+  badge_1_6_golden: boolean;
+  badge_1_7_cat: boolean;
+  badge_1_8_goldendoodle: boolean;
+  badge_2_1_borderCollie: boolean;
+  badge_2_2_terrier: boolean;
+  badge_2_3_australianShepherd: boolean;
+  badge_2_4_shibaInu: boolean;
+  badge_2_5_cat: boolean;
+  badge_2_6_bernese: boolean;
+  badge_2_7_poodle: boolean;
+  badge_2_8_golden: boolean;
 };
 
 export type UserInfo = {
@@ -66,4 +81,5 @@ export type GameProps = {
   userInfo: UserInfo;
   totalScore: number;
   setTotalScore: React.Dispatch<React.SetStateAction<number>>;
+  badgeLevel: BadgeLevel;
 };

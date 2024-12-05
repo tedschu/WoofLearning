@@ -6,9 +6,9 @@ import Slider from "../../components/math/Slider";
 import GamePlay from "../../components/math/GamePlay";
 import GameSelector from "../../components/math/GameSelector";
 import Nav from "../../components/Nav";
-import BadgeModal from "../../components/math/BadgeModal";
+import BadgeModal from "../../components/BadgeModal";
 
-function Game({
+function GameMath({
   isLoggedIn,
   userScore,
   setUserScore,
@@ -17,6 +17,7 @@ function Game({
   userInfo,
   totalScore,
   setTotalScore,
+  badgeLevel,
 }: GameProps) {
   // Establishing state values for gameplay functionality that will be passed to multiple child components
   const [sliderValue, setSliderValue] = useState(1);

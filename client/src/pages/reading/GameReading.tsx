@@ -7,6 +7,8 @@ import BadgeModal from "../../components/reading/BadgeModal";
 import Slider from "../../components/reading/Slider";
 import StorySelector from "../../components/reading/StorySelector";
 
+//TODO: CONVERT TO TS, ADD TYPE DECLARATIONS
+
 function GameReading({
   isLoggedIn,
   loginForm,
@@ -17,6 +19,7 @@ function GameReading({
   userInfo,
   totalScore,
   setTotalScore,
+  badgeLevel,
 }) {
   const [sliderValue, setSliderValue] = useState(1);
   const [storyType, setStoryType] = useState("story");

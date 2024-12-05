@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import woofMathLogo from "../assets/woofmath_logo_1.png";
 import gameplayPic from "../assets/gameplay.png";
-import badge_bernese from "../assets/badges/badge_bernese.png";
-import badge_chihuahua from "../assets/badges/badge_chihuahua.png";
+import badge_bernese from "../assets/badges/badge_1_1.png";
+import badge_chihuahua from "../assets/badges/badge_1_2.png";
 import goldendoodle_trophy from "../assets/goldendoodle_trophy_large.png";
-import badge_boxer from "../assets/badges/badge_boxer.png";
+import badge_boxer from "../assets/badges/badge_1_4.png";
 
 function Welcome() {
   return (

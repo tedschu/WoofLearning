@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
-import { UserScore, UserBadges, UserInfo } from "./types/types";
+import { UserScore, UserBadges, UserInfo, BadgeLevel } from "./types/types";
 import Me from "./pages/Me";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
@@ -25,20 +25,34 @@ function App() {
     security_answer_2: "",
   });
   const [userScore, setUserScore] = useState<UserScore>({
-    addition_score: 0,
-    subtraction_score: 0,
-    multiplication_score: 0,
-    division_score: 0,
+    math_addition_score: 0,
+    math_subtraction_score: 0,
+    math_multiplication_score: 0,
+    math_division_score: 0,
+    reading_score: 0,
   });
-  const [totalScore, setTotalScore] = useState(0);
+  const [badgeLevel, setBadgeLevel] = useState<BadgeLevel>({
+    math_level: 1,
+    reading_level: 1,
+  });
+  const [totalMathScore, setTotalMathScore] = useState(0);
   const [userBadges, setUserBadges] = useState<UserBadges>({
-    bernese: false,
-    boxer: false,
-    cat: false,
-    chihuahua: false,
-    golden: false,
-    husky: false,
-    goldendoodle_trophy: false,
+    badge_1_1_bernese: false,
+    badge_1_2_chihuahua: false,
+    badge_1_3_waterdog: false,
+    badge_1_4_boxer: false,
+    badge_1_5_husky: false,
+    badge_1_6_golden: false,
+    badge_1_7_cat: false,
+    badge_1_8_goldendoodle: false,
+    badge_2_1_borderCollie: false,
+    badge_2_2_terrier: false,
+    badge_2_3_australianShepherd: false,
+    badge_2_4_shibaInu: false,
+    badge_2_5_cat: false,
+    badge_2_6_bernese: false,
+    badge_2_7_poodle: false,
+    badge_2_8_golden: false,
   });
   const [token, setToken] = useState(storedToken || "");
 
@@ -74,6 +88,8 @@ function App() {
   // IF token exists: update setters (isLoggedIn, badges, userscore, userId)
   // IF token doesn't exist, navigate to /login
 
+  // TODO: UPDATE FUNCTION TO LOAD STATE VALUES FOR MATH AND READING SCORES / BADGES / LEVELS (FOR EACH)
+
   useEffect(() => {
     if (storedToken) {
       setIsLoggedIn(true);
@@ -106,11 +122,11 @@ function App() {
             });
             setUserScore(data.score);
             setUserBadges(data.badge);
-            setTotalScore(
-              parseInt(data.score.addition_score) +
-                parseInt(data.score.subtraction_score) +
-                parseInt(data.score.multiplication_score) +
-                parseInt(data.score.division_score)
+            setTotalMathScore(
+              parseInt(data.score.math_addition_score) +
+                parseInt(data.score.math_subtraction_score) +
+                parseInt(data.score.math_multiplication_score) +
+                parseInt(data.score.math_division_score)
             );
           }
           // ADDED TO HANDLE CASE WHERE API CALL IS BAD OR HASN'T COME BACK
@@ -143,8 +159,8 @@ function App() {
               setUserScore={setUserScore}
               userBadges={userBadges}
               setUserBadges={setUserBadges}
-              totalScore={totalScore}
-              setTotalScore={setTotalScore}
+              totalScore={totalMathScore}
+              setTotalScore={setTotalMathScore}
             />
           }
         />
@@ -159,8 +175,8 @@ function App() {
               setUserScore={setUserScore}
               userBadges={userBadges}
               setUserBadges={setUserBadges}
-              totalScore={totalScore}
-              setTotalScore={setTotalScore}
+              totalScore={totalMathScore}
+              setTotalScore={setTotalMathScore}
             />
           }
         />
@@ -172,7 +188,7 @@ function App() {
               isLoggedIn={isLoggedIn}
               userInfo={userInfo}
               userScore={userScore}
-              totalScore={totalScore}
+              totalScore={totalMathScore}
               userBadges={userBadges}
               setIsLoggedIn={setIsLoggedIn}
             />
