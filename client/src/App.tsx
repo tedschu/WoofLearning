@@ -161,6 +161,10 @@ function App() {
                 parseInt(data.score_math.multiplication_score) +
                 parseInt(data.score_math.division_score)
             );
+            setBadgeLevel({
+              math_level: data.badge_math.badge_level,
+              reading_level: data.badge_reading.badge_level,
+            });
           }
           // ADDED TO HANDLE CASE WHERE API CALL IS BAD OR HASN'T COME BACK
           else if (!response.ok) {
