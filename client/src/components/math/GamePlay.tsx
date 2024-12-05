@@ -6,7 +6,7 @@ import {
   GameSelectorType,
   UserScore,
   UserInfo,
-  UserBadges,
+  UserMathBadges,
   ModalBadgeType,
 } from "../../types/types";
 
@@ -20,8 +20,8 @@ type GamePlayProps = {
   gotWrong: boolean;
   setGotRight: React.Dispatch<React.SetStateAction<boolean>>;
   setGotWrong: React.Dispatch<React.SetStateAction<boolean>>;
-  userBadges: UserBadges;
-  setUserBadges: React.Dispatch<React.SetStateAction<UserBadges>>;
+  userMathBadges: UserMathBadges;
+  setUserMathBadges: React.Dispatch<React.SetStateAction<UserMathBadges>>;
   totalScore: number;
   setTotalScore: React.Dispatch<React.SetStateAction<number>>;
   isModalOpen: boolean;
@@ -39,8 +39,8 @@ function GamePlay({
   gotWrong,
   setGotRight,
   setGotWrong,
-  userBadges,
-  setUserBadges,
+  userMathBadges,
+  setUserMathBadges,
   setTotalScore,
   setIsModalOpen,
   setModalBadge,
@@ -128,50 +128,88 @@ function GamePlay({
     }
   }
 
-  function updateBadges(newTotalScore: number, newUserScore: UserScore) {
-    setUserBadges((prevBadges) => {
-      const updatedBadges: Partial<UserBadges> = {};
+  console.log(userMathBadges);
 
-      if (newTotalScore >= 100 && !userBadges.bernese) {
-        updatedBadges.bernese = true;
-        setModalBadge("bernese");
-      } else if (newTotalScore >= 500 && !userBadges.chihuahua) {
-        updatedBadges.chihuahua = true;
-        setModalBadge("chihuahua");
-      } else if (newTotalScore >= 1000 && !userBadges.boxer) {
-        updatedBadges.boxer = true;
-        setModalBadge("boxer");
+  function updateBadges(newTotalScore: number, newUserScore: UserScore) {
+    setUserMathBadges((prevBadges) => {
+      const updatedBadges: Partial<userMathBadges> = {};
+
+      if (newTotalScore >= 100 && !userMathBadges.badge_1_1_bernese) {
+        updatedBadges.badge_1_1_bernese = true;
+        setModalBadge("badge_1_1_bernese");
+      } else if (newTotalScore >= 500 && !userMathBadges.badge_1_2_chihuahua) {
+        updatedBadges.badge_1_2_chihuahua = true;
+        setModalBadge("badge_1_2_chihuahua");
+      } else if (newTotalScore >= 1000 && !userMathBadges.badge_1_3_waterdog) {
+        updatedBadges.badge_1_3_waterdog = true;
+        setModalBadge("badge_1_3_waterdog");
+      } else if (newTotalScore >= 1000 && !userMathBadges.badge_1_4_boxer) {
+        updatedBadges.badge_1_4_boxer = true;
+        setModalBadge("badge_1_4_boxer");
       } else if (
         newTotalScore >= 1000 &&
         newUserScore.addition_score >= 250 &&
         newUserScore.subtraction_score >= 250 &&
         newUserScore.multiplication_score >= 250 &&
         newUserScore.division_score >= 250 &&
-        !userBadges.husky
+        !userMathBadges.badge_1_5_husky
       ) {
-        updatedBadges.husky = true;
-        setModalBadge("husky");
-      } else if (newTotalScore >= 2000 && !userBadges.golden) {
-        updatedBadges.golden = true;
-        setModalBadge("golden");
+        updatedBadges.badge_1_5_husky = true;
+        setModalBadge("badge_1_5_husky");
+      } else if (newTotalScore >= 2000 && !userMathBadges.badge_1_6_golden) {
+        updatedBadges.badge_1_6_golden = true;
+        setModalBadge("badge_1_6_golden");
       } else if (
         newTotalScore >= 2000 &&
         newUserScore.addition_score >= 500 &&
         newUserScore.subtraction_score >= 500 &&
         newUserScore.multiplication_score >= 500 &&
         newUserScore.division_score >= 500 &&
-        !userBadges.cat
+        !userMathBadges.badge_1_7_cat
       ) {
-        updatedBadges.cat = true;
-        setModalBadge("cat");
-      } else if (newTotalScore >= 3000 && !userBadges.goldendoodle_trophy) {
-        updatedBadges.goldendoodle_trophy = true;
-        setModalBadge("goldendoodle_trophy");
+        updatedBadges.badge_1_7_cat = true;
+        setModalBadge("badge_1_7_cat");
+      } else if (
+        newTotalScore >= 3000 &&
+        !userMathBadges.badge_1_8_goldendoodle
+      ) {
+        updatedBadges.badge_1_8_goldendoodle = true;
+        setModalBadge("badge_1_8_goldendoodle");
+      } else if (
+        newTotalScore >= 3250 &&
+        !userMathBadges.badge_2_1_borderCollie
+      ) {
+        updatedBadges.badge_2_1_borderCollie = true;
+        setModalBadge("badge_2_1_borderCollie");
+      } else if (newTotalScore >= 3500 && !userMathBadges.badge_2_2_terrier) {
+        updatedBadges.badge_2_2_terrier = true;
+        setModalBadge("badge_2_2_terrier");
+      } else if (
+        newTotalScore >= 3750 &&
+        !userMathBadges.badge_2_3_australianShepherd
+      ) {
+        updatedBadges.badge_2_3_australianShepherd = true;
+        setModalBadge("badge_2_3_australianShepherd");
+      } else if (newTotalScore >= 4000 && !userMathBadges.badge_2_4_shibaInu) {
+        updatedBadges.badge_2_4_shibaInu = true;
+        setModalBadge("badge_2_4_shibaInu");
+      } else if (newTotalScore >= 4500 && !userMathBadges.badge_2_5_cat) {
+        updatedBadges.badge_2_5_cat = true;
+        setModalBadge("badge_2_5_cat");
+      } else if (newTotalScore >= 5000 && !userMathBadges.badge_2_6_bernese) {
+        updatedBadges.badge_2_6_bernese = true;
+        setModalBadge("badge_2_6_bernese");
+      } else if (newTotalScore >= 6000 && !userMathBadges.badge_2_7_poodle) {
+        updatedBadges.badge_2_7_poodle = true;
+        setModalBadge("badge_2_7_poodle");
+      } else if (newTotalScore >= 7500 && !userMathBadges.badge_2_8_golden) {
+        updatedBadges.badge_2_8_golden = true;
+        setModalBadge("badge_2_8_golden");
       }
 
       if (Object.keys(updatedBadges).length > 0) {
         const newBadges = { ...prevBadges, ...updatedBadges };
-        postUserBadges(updatedBadges);
+        postuserMathBadges(updatedBadges);
         openModal();
         return newBadges;
       }
@@ -248,7 +286,7 @@ function GamePlay({
 
       // SET ALL STATE VALUES HERE (SCORES, BADGES, USER INFO, ETC.)
       if (response.ok) {
-        //setUserBadges(data.badge);
+        //setuserMathBadges(data.badge);
         setTotalScore(
           data.addition_score +
             data.subtraction_score +
@@ -297,8 +335,8 @@ function GamePlay({
   }, [gotRight]);
 
   // Function to pass the updated score to the database, update scores state values for gameplay
-  const postUserBadges = async (
-    updatedBadges: Partial<UserBadges>
+  const postuserMathBadges = async (
+    updatedBadges: Partial<userMathBadges>
   ): Promise<void> => {
     try {
       // const updatedScores = getUpdatedScores(gameSelector, addToScore);
@@ -318,7 +356,7 @@ function GamePlay({
 
       // SET ALL STATE VALUES HERE (SCORES, BADGES, USER INFO, ETC.)
       if (response.ok) {
-        //setUserBadges(data.badge);
+        //setuserMathBadges(data.badge);
         // console.log(data);
       }
     } catch (error) {

@@ -12,12 +12,13 @@ function GameMath({
   isLoggedIn,
   userScore,
   setUserScore,
-  userBadges,
-  setUserBadges,
+  userMathBadges,
+  setUserMathBadges,
   userInfo,
   totalScore,
   setTotalScore,
   badgeLevel,
+  setBadgeLevel,
 }: GameProps) {
   // Establishing state values for gameplay functionality that will be passed to multiple child components
   const [sliderValue, setSliderValue] = useState(1);
@@ -51,8 +52,10 @@ function GameMath({
       <div className="mainContainer">
         <ScoreBar
           userScore={userScore}
-          userBadges={userBadges}
+          userMathBadges={userMathBadges}
           totalScore={totalScore}
+          badgeLevel={badgeLevel}
+          setBadgeLevel={setBadgeLevel}
         />
 
         <GameSelector
@@ -80,8 +83,8 @@ function GameMath({
           gotWrong={gotWrong}
           setGotRight={setGotRight}
           setGotWrong={setGotWrong}
-          userBadges={userBadges}
-          setUserBadges={setUserBadges}
+          userMathBadges={userMathBadges}
+          setUserMathBadges={setUserMathBadges}
           isModalOpen={isModalOpen}
           setIsModalOpen={setIsModalOpen}
           modalBadge={modalBadge}

@@ -199,6 +199,9 @@ function App() {
               totalScore={totalMathScore}
               setTotalScore={setTotalMathScore}
               badgeLevel={badgeLevel}
+              setBadgeLevel={setBadgeLevel}
+              userReadingBadges={userReadingBadges}
+              setUserReadingBadges={setUserReadingBadges}
             />
           }
         />
@@ -213,6 +216,8 @@ function App() {
               setUserScore={setUserScore}
               userReadingBadges={userReadingBadges}
               setUserReadingBadges={setUserReadingBadges}
+              userMathBadges={userMathBadges}
+              setUserMathBadges={setUserMathBadges}
               totalScore={totalMathScore}
               setTotalScore={setTotalMathScore}
               badgeLevel={badgeLevel}

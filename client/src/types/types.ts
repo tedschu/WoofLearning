@@ -1,5 +1,7 @@
 // Section 1: Core data types used as props across multiple components
 
+import React from "react";
+
 // in App.tsx
 export type UserScore = {
   addition_score: number;
@@ -71,22 +73,22 @@ export type GameSelectorType =
   | "multiplication"
   | "division";
 export type ModalBadgeType =
-  | "bernese"
-  | "chihuahua"
-  | "waterdog"
-  | "boxer"
-  | "husky"
-  | "golden"
-  | "cat"
-  | "goldendoodle_trophy"
-  | "borderCollie"
-  | "terrier"
-  | "australianShepherd"
-  | "shibaInu"
-  | "cat2"
-  | "bernese2"
-  | "poodle"
-  | "goldendoodleTrophy2"
+  | "badge_1_1_bernese"
+  | "badge_1_2_chihuahua"
+  | "badge_1_3_waterdog"
+  | "badge_1_4_boxer"
+  | "badge_1_5_husky"
+  | "badge_1_6_golden"
+  | "badge_1_7_cat"
+  | "badge_1_8_goldendoodle"
+  | "badge_2_1_borderCollie"
+  | "badge_2_2_terrier"
+  | "badge_2_3_australianShepherd"
+  | "badge_2_4_shibaInu"
+  | "badge_2_5_cat"
+  | "badge_2_6_bernese"
+  | "badge_2_7_poodle"
+  | "badge_2_8_golden"
   | "";
 
 // Section 2: Component props
@@ -95,10 +97,13 @@ export type GameProps = {
   isLoggedIn: boolean;
   userScore: UserScore;
   setUserScore: React.Dispatch<React.SetStateAction<UserScore>>;
-  userBadges: UserBadges;
-  setUserBadges: React.Dispatch<React.SetStateAction<UserBadges>>;
+  userMathBadges: UserMathBadges;
+  userReadingBadges: UserReadingBadges;
+  setUserMathBadges: React.Dispatch<React.SetStateAction<UserMathBadges>>;
+  setUserReadingBadges: React.Dispatch<React.SetStateAction<UserReadingBadges>>;
   userInfo: UserInfo;
   totalScore: number;
   setTotalScore: React.Dispatch<React.SetStateAction<number>>;
   badgeLevel: BadgeLevel;
+  setBadgeLevel: React.Dispatch<React.SetStateAction<BadgeLevel>>;
 };

@@ -19,6 +19,10 @@ function GameReading({
   totalScore,
   setTotalScore,
   badgeLevel,
+  userReadingBadges,
+  setUserReadingBadges,
+  userMathBadges,
+  setUserMathBadges,
 }) {
   const [sliderValue, setSliderValue] = useState(1);
   const [storyType, setStoryType] = useState("story");
