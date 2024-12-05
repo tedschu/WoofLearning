@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import ScoreBar from "../../components/reading/ScoreBar";
 import GamePlay from "../../components/reading/GamePlay";
 import Nav from "../../components/Nav";
-import BadgeModal from "../../components/reading/BadgeModal";
+import BadgeModal from "../../components/BadgeModal";
 import Slider from "../../components/reading/Slider";
 import StorySelector from "../../components/reading/StorySelector";
 
@@ -11,7 +11,6 @@ import StorySelector from "../../components/reading/StorySelector";
 
 function GameReading({
   isLoggedIn,
-  loginForm,
   userScore,
   setUserScore,
   userBadges,
@@ -53,7 +52,6 @@ function GameReading({
       <div className="mainContainer">
         <ScoreBar
           isLoggedIn={isLoggedIn}
-          loginForm={loginForm}
           userScore={userScore}
           setUserScore={setUserScore}
           userBadges={userBadges}
@@ -117,4 +115,4 @@ function GameReading({
   );
 }
 
-export default Game;
+export default GameReading;

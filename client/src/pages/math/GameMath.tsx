@@ -98,4 +98,4 @@ function GameMath({
   );
 }
 
-export default Game;
+export default GameMath;

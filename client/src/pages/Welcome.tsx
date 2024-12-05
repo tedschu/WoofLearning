@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import woofMathLogo from "../assets/woofmath_logo_1.png";
 import gameplayPic from "../assets/gameplay.png";
-import badge_bernese from "../assets/badges/badge_1_1.png";
-import badge_chihuahua from "../assets/badges/badge_1_2.png";
+import badge_bernese from "../assets/badges/badge_1_1_bernese.png";
+import badge_chihuahua from "../assets/badges/badge_1_2_chihuahua.png";
 import goldendoodle_trophy from "../assets/goldendoodle_trophy_large.png";
-import badge_boxer from "../assets/badges/badge_1_4.png";
+import badge_boxer from "../assets/badges/badge_1_4_boxer.png";
 
 function Welcome() {
   return (
@@ -20,10 +20,10 @@ function Welcome() {
           </div>
 
           <div className="welcomeContentContainer">
-            <h1>Woof Math</h1>
+            <h1>Woof Learning</h1>
             <p>
-              Earn points + super cool animal badges as you play a fun math
-              game. The more math you do, the more badges you get!
+              Earn points + super cool animal badges as you play fun math and
+              reading games. The more you play, the more badges you get!
             </p>
 
             <div className="welcomeButtonContainer">

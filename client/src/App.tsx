@@ -1,6 +1,12 @@
 import { useEffect, useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
-import { UserScore, UserBadges, UserInfo, BadgeLevel } from "./types/types";
+import {
+  UserScore,
+  UserMathBadges,
+  UserReadingBadges,
+  UserInfo,
+  BadgeLevel,
+} from "./types/types";
 import Me from "./pages/Me";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
@@ -25,10 +31,10 @@ function App() {
     security_answer_2: "",
   });
   const [userScore, setUserScore] = useState<UserScore>({
-    math_addition_score: 0,
-    math_subtraction_score: 0,
-    math_multiplication_score: 0,
-    math_division_score: 0,
+    addition_score: 0,
+    subtraction_score: 0,
+    multiplication_score: 0,
+    division_score: 0,
     reading_score: 0,
   });
   const [badgeLevel, setBadgeLevel] = useState<BadgeLevel>({
@@ -36,7 +42,7 @@ function App() {
     reading_level: 1,
   });
   const [totalMathScore, setTotalMathScore] = useState(0);
-  const [userBadges, setUserBadges] = useState<UserBadges>({
+  const [userMathBadges, setUserMathBadges] = useState<UserMathBadges>({
     badge_1_1_bernese: false,
     badge_1_2_chihuahua: false,
     badge_1_3_waterdog: false,
@@ -54,6 +60,26 @@ function App() {
     badge_2_7_poodle: false,
     badge_2_8_golden: false,
   });
+  const [userReadingBadges, setUserReadingBadges] = useState<UserReadingBadges>(
+    {
+      badge_1_1_bernese: false,
+      badge_1_2_chihuahua: false,
+      badge_1_3_waterdog: false,
+      badge_1_4_boxer: false,
+      badge_1_5_husky: false,
+      badge_1_6_golden: false,
+      badge_1_7_cat: false,
+      badge_1_8_goldendoodle: false,
+      badge_2_1_borderCollie: false,
+      badge_2_2_terrier: false,
+      badge_2_3_australianShepherd: false,
+      badge_2_4_shibaInu: false,
+      badge_2_5_cat: false,
+      badge_2_6_bernese: false,
+      badge_2_7_poodle: false,
+      badge_2_8_golden: false,
+    }
+  );
   const [token, setToken] = useState(storedToken || "");
 
   const navigate = useNavigate();
@@ -120,13 +146,20 @@ function App() {
               security_question_2: data.security_question_2,
               security_answer_2: data.security_answer_2,
             });
-            setUserScore(data.score);
-            setUserBadges(data.badge);
+            setUserScore({
+              addition_score: data.score_math.addition_score,
+              subtraction_score: data.score_math.subtraction_score,
+              multiplication_score: data.score_math.multiplication_score,
+              division_score: data.score_math.division_score,
+              reading_score: data.score_reading.reading_score,
+            });
+            setUserMathBadges(data.badge_math);
+            setUserReadingBadges(data.badge_reading);
             setTotalMathScore(
-              parseInt(data.score.math_addition_score) +
-                parseInt(data.score.math_subtraction_score) +
-                parseInt(data.score.math_multiplication_score) +
-                parseInt(data.score.math_division_score)
+              parseInt(data.score_math.addition_score) +
+                parseInt(data.score_math.subtraction_score) +
+                parseInt(data.score_math.multiplication_score) +
+                parseInt(data.score_math.division_score)
             );
           }
           // ADDED TO HANDLE CASE WHERE API CALL IS BAD OR HASN'T COME BACK
@@ -157,10 +190,11 @@ function App() {
               userInfo={userInfo}
               userScore={userScore}
               setUserScore={setUserScore}
-              userBadges={userBadges}
-              setUserBadges={setUserBadges}
+              userMathBadges={userMathBadges}
+              setUserMathBadges={setUserMathBadges}
               totalScore={totalMathScore}
               setTotalScore={setTotalMathScore}
+              badgeLevel={badgeLevel}
             />
           }
         />
@@ -173,10 +207,11 @@ function App() {
               userInfo={userInfo}
               userScore={userScore}
               setUserScore={setUserScore}
-              userBadges={userBadges}
-              setUserBadges={setUserBadges}
+              userReadingBadges={userReadingBadges}
+              setUserReadingBadges={setUserReadingBadges}
               totalScore={totalMathScore}
               setTotalScore={setTotalMathScore}
+              badgeLevel={badgeLevel}
             />
           }
         />
@@ -189,7 +224,8 @@ function App() {
               userInfo={userInfo}
               userScore={userScore}
               totalScore={totalMathScore}
-              userBadges={userBadges}
+              userMathBadges={userMathBadges}
+              userReadingBadges={userReadingBadges}
               setIsLoggedIn={setIsLoggedIn}
             />
           }

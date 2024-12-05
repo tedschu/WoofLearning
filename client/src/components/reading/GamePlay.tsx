@@ -2,10 +2,10 @@ import React from "react";
 import { useState, useEffect } from "react";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import TipsAndUpdatesIcon from "@mui/icons-material/TipsAndUpdates";
-import storyPrompts from "../utils/storyPrompts";
+import storyPrompts from "../../utils/storyPrompts";
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 import CircularColor from "./CircularColor";
-import badWords from "../utils/badWords";
+import badWords from "../../utils/badWords";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 

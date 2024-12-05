@@ -69,7 +69,7 @@ model Badge_math {
 
 model Score_reading {
   id   Int   @id @default(autoincrement())
-  score  Int? @default(0)
+  reading_score  Int? @default(0)
   reading_L1_points Int? @default(0)
   reading_L2_points Int? @default(0)
   reading_L3_points Int? @default(0)

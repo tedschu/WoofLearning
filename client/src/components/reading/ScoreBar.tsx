@@ -1,13 +1,21 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import badge_bernese from "../assets/badges/badge_bernese.png";
-import badge_chihuahua from "../assets/badges/badge_chihuahua.png";
-import badge_boxer from "../assets/badges/badge_boxer.png";
-import badge_husky from "../assets/badges/badge_husky.png";
-import badge_golden from "../assets/badges/badge_golden.png";
-import badge_cat from "../assets/badges/badge_cat.png";
-import badge_goldendoodle_trophy from "../assets/badges/goldendoodle_trophy_color.png";
-import badge_waterdog from "../assets/badges/waterdog.png";
+import badge_1_1_bernese from "../../assets/badges/badge_1_1_bernese.png";
+import badge_1_2_chihuahua from "../../assets/badges/badge_1_2_chihuahua.png";
+import badge_1_3_waterdog from "../../assets/badges/badge_1_3_waterdog.png";
+import badge_1_4_boxer from "../../assets/badges/badge_1_4_boxer.png";
+import badge_1_5_husky from "../../assets/badges/badge_1_5_husky.png";
+import badge_1_6_golden from "../../assets/badges/badge_1_6_golden.png";
+import badge_1_7_cat from "../../assets/badges/badge_1_7_cat.png";
+import badge_1_8_goldendoodle from "../../assets/badges/badge_1_8_goldendoodle.png";
+import badge_2_1_borderCollie from "../../assets/badges/badge_2_1_borderCollie.png";
+import badge_2_2_terrier from "../../assets/badges/badge_2_2_terrier.png";
+import badge_2_3_australianShepherd from "../../assets/badges/badge_2_3_australianShepherd.png";
+import badge_2_4_shibaInu from "../../assets/badges/badge_2_4_shibaInu.png";
+import badge_2_5_cat from "../../assets/badges/badge_2_5_cat.png";
+import badge_2_6_bernese from "../../assets/badges/badge_2_6_bernese.png";
+import badge_2_7_poodle from "../../assets/badges/badge_2_7_poodle.png";
+import badge_2_8_golden from "../../assets/badges/badge_2_8_golden.png";
 
 function ScoreBar({ userScore, userBadges }) {
   return (

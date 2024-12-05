@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import storyPrompts from "../utils/storyPrompts";
+import storyPrompts from "../../utils/storyPrompts";
 
 export default function StorySelector({
   setStorySelection,

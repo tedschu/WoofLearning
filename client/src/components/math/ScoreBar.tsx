@@ -36,19 +36,19 @@ function ScoreBar({ userScore, userBadges, totalScore }: ScoreBarProps) {
           </div>
 
           <div className="individualScores">
-            <h1>{userScore.addition_score}</h1>
+            <h1>{userScore.math_addition_score}</h1>
             <h5>ADD</h5>
           </div>
           <div className="individualScores">
-            <h1>{userScore.subtraction_score}</h1>
+            <h1>{userScore.math_subtraction_score}</h1>
             <h5>SUBTRACT</h5>
           </div>
           <div className="individualScores">
-            <h1>{userScore.multiplication_score}</h1>
+            <h1>{userScore.math_multiplication_score}</h1>
             <h5>MULTIPLY</h5>
           </div>
           <div className="individualScores">
-            <h1>{userScore.division_score}</h1>
+            <h1>{userScore.math_division_score}</h1>
             <h5>DIVIDE</h5>
           </div>
         </div>
@@ -58,70 +58,167 @@ function ScoreBar({ userScore, userBadges, totalScore }: ScoreBarProps) {
             <img
               src={badge_1_1_bernese}
               alt=""
-              className={userBadges.bernese ? "badgeEnabled" : "badgeDisabled"}
+              className={
+                userBadges.badge_1_1_bernese ? "badgeEnabled" : "badgeDisabled"
+              }
             />
             <h3>100</h3>
           </div>
           <div className="eachBadge">
             <img
-              src={badge_1_2}
+              src={badge_1_2_chihuahua}
               alt=""
               className={
-                userBadges.chihuahua ? "badgeEnabled" : "badgeDisabled"
+                userBadges.badge_1_2_chihuahua
+                  ? "badgeEnabled"
+                  : "badgeDisabled"
               }
             />
             <h3>500</h3>
           </div>
           <div className="eachBadge">
             <img
-              src={badge_1_3}
+              src={badge_1_3_waterdog}
               alt=""
               className={
-                userBadges.chihuahua ? "badgeEnabled" : "badgeDisabled"
+                userBadges.badge_1_3_waterdog ? "badgeEnabled" : "badgeDisabled"
               }
             />
             <h3>500</h3>
           </div>
           <div className="eachBadge">
             <img
-              src={badge_boxer}
+              src={badge_1_4_boxer}
               alt=""
-              className={userBadges.boxer ? "badgeEnabled" : "badgeDisabled"}
+              className={
+                userBadges.badge_1_4_boxer ? "badgeEnabled" : "badgeDisabled"
+              }
             />
             <h3>1,000</h3>
           </div>
           <div className="eachBadge">
             <img
-              src={badge_husky}
+              src={badge_1_5_husky}
               alt=""
-              className={userBadges.husky ? "badgeEnabled" : "badgeDisabled"}
+              className={
+                userBadges.badge_1_5_husky ? "badgeEnabled" : "badgeDisabled"
+              }
             />
             <h3>250 each</h3>
           </div>
           <div className="eachBadge">
             <img
-              src={badge_golden}
+              src={badge_1_6_golden}
               alt=""
-              className={userBadges.golden ? "badgeEnabled" : "badgeDisabled"}
+              className={
+                userBadges.badge_1_6_golden ? "badgeEnabled" : "badgeDisabled"
+              }
             />
             <h3>2,000</h3>
           </div>
           <div className="eachBadge">
             <img
-              src={badge_cat}
+              src={badge_1_7_cat}
               alt=""
-              className={userBadges.cat ? "badgeEnabled" : "badgeDisabled"}
+              className={
+                userBadges.badge_1_7_cat ? "badgeEnabled" : "badgeDisabled"
+              }
             />
             <h3>500 each</h3>
           </div>
           <div className="eachBadge">
             <img
-              src={badge_goldendoodle_trophy}
+              src={badge_1_8_goldendoodle}
               alt=""
               className={
-                userBadges.goldendoodle_trophy
+                userBadges.badge_1_8_goldendoodle
                   ? "badgeEnabled"
                   : "badgeDisabled"
+              }
+            />
+            <h3>3,000</h3>
+          </div>
+          {/* TODO: ADD A CONDITIONAL HERE TO DISPLAY THE ABOVE BLOCK OR BELOW BASED ON BADGE_LEVEL STATE */}
+          <div className="eachBadge">
+            <img
+              src={badge_2_1_borderCollie}
+              alt=""
+              className={
+                userBadges.badge_2_1_borderCollie
+                  ? "badgeEnabled"
+                  : "badgeDisabled"
+              }
+            />
+            <h3>100</h3>
+          </div>
+          <div className="eachBadge">
+            <img
+              src={badge_2_2_terrier}
+              alt=""
+              className={
+                userBadges.badge_2_2_terrier ? "badgeEnabled" : "badgeDisabled"
+              }
+            />
+            <h3>500</h3>
+          </div>
+          <div className="eachBadge">
+            <img
+              src={badge_2_3_australianShepherd}
+              alt=""
+              className={
+                userBadges.badge_2_3_australianShepherd
+                  ? "badgeEnabled"
+                  : "badgeDisabled"
+              }
+            />
+            <h3>500</h3>
+          </div>
+          <div className="eachBadge">
+            <img
+              src={badge_2_4_shibaInu}
+              alt=""
+              className={
+                userBadges.badge_2_4_shibaInu ? "badgeEnabled" : "badgeDisabled"
+              }
+            />
+            <h3>1,000</h3>
+          </div>
+          <div className="eachBadge">
+            <img
+              src={badge_2_5_cat}
+              alt=""
+              className={
+                userBadges.badge_2_5_cat ? "badgeEnabled" : "badgeDisabled"
+              }
+            />
+            <h3>250 each</h3>
+          </div>
+          <div className="eachBadge">
+            <img
+              src={badge_2_6_bernese}
+              alt=""
+              className={
+                userBadges.badge_2_6_bernese ? "badgeEnabled" : "badgeDisabled"
+              }
+            />
+            <h3>2,000</h3>
+          </div>
+          <div className="eachBadge">
+            <img
+              src={badge_2_7_poodle}
+              alt=""
+              className={
+                userBadges.badge_2_7_poodle ? "badgeEnabled" : "badgeDisabled"
+              }
+            />
+            <h3>500 each</h3>
+          </div>
+          <div className="eachBadge">
+            <img
+              src={badge_2_8_golden}
+              alt=""
+              className={
+                userBadges.badge_2_8_golden ? "badgeEnabled" : "badgeDisabled"
               }
             />
             <h3>3,000</h3>
