@@ -402,6 +402,60 @@ button {
   border-radius: 6px;
 }
 
+/* APP SELECTOR PAGE STYLING */
+.appSelector-Wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(
+    to bottom right,
+    #04628a,
+    #7dc2e0,
+    #dd6e55,
+    #d4492b
+  );
+  z-index: 0;
+}
+
+.appSelector-Wrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("./assets/woof-logo-transparent.png");
+  opacity: 0.1;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.appSelector-Wrapper > * {
+  z-index: 2; /* Place content above the background image */
+  position: relative; /* This helps with z-index */
+}
+
+.appSelector-ContentContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+.appSelector-contentBox {
+  border: 1px solid gray;
+  border-radius: 12px;
+  padding: 160px;
+  margin: 10px;
+  background: white;
+  box-shadow: 2px 2px 7px gray;
+}
+
 /* NAV BAR STYLING */
 nav {
   height: 65px;
