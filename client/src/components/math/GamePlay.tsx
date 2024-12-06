@@ -61,9 +61,6 @@ function GamePlay({
   // passes to NumberGenerator. Will update with expected value (score) to add to userScore IF the question is answered correctly.
   const [addToScore, setAddToScore] = useState(0);
 
-  // Will be set to "true" when the user achieves the final badge in level 1 (ex. at 3000 points) to ensure this is passed in postUserScore
-  const [levelChange, setLevelChange] = useState(false);
-
   const openModal = () => {
     setIsModalOpen(true);
   };
@@ -188,7 +185,6 @@ function GamePlay({
         setModalBadge("badge_1_8_goldendoodle");
         // SETS badgeLevel to "2" WHICH WILL RENDER THE SECOND SET (LEVEL) OF BADGES
         setBadgeLevel(2);
-        setLevelChange(true);
       } else if (
         newTotalScore >= 3250 &&
         !userMathBadges.badge_2_1_borderCollie

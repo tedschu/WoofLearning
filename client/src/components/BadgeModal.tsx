@@ -106,10 +106,10 @@ function BadgeModal({ isModalOpen, closeModal, modalBadge }: BadgeModalTypes) {
           <h2>YESSSSS! </h2>
           {/* TERNARY BELOW RENDERS DIFFERENT H2 TEXT IF A USER HAS BEATEN A LEVEL OR GETS A CAT BADGE. OTHERWISE, DEFAULTS TO "badgeText" */}
           {modalBadge == "badge_1_8_goldendoodle" ? (
-            <h2>
-              You won the goldendoodle trophy badge! Way to go, champ. You're
-              ready for level 2!
-            </h2>
+            <>
+              <h2>You won the goldendoodle trophy badge! Way to go, champ.</h2>
+              <h2>You're ready for...LEVEL 2!</h2>
+            </>
           ) : modalBadge == "badge_2_8_golden" ? (
             <h2>Wow, you just won the game! You are amazing.</h2>
           ) : badgeText == "cat" ? (
