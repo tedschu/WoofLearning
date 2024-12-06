@@ -43,6 +43,7 @@ export type UserMathBadges = {
   badge_2_6_bernese: boolean;
   badge_2_7_poodle: boolean;
   badge_2_8_golden: boolean;
+  badge_level: number;
 };
 
 export type UserReadingBadges = {
@@ -62,6 +63,7 @@ export type UserReadingBadges = {
   badge_2_6_bernese: boolean;
   badge_2_7_poodle: boolean;
   badge_2_8_golden: boolean;
+  badge_level: number;
 };
 
 export type UserInfo = {

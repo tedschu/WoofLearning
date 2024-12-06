@@ -88,6 +88,8 @@ function GameMath({
           setIsModalOpen={setIsModalOpen}
           modalBadge={modalBadge}
           setModalBadge={setModalBadge}
+          badgeLevel={badgeLevel}
+          setBadgeLevel={setBadgeLevel}
         />
 
         <BadgeModal

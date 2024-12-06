@@ -28,6 +28,8 @@ type GamePlayProps = {
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   modalBadge: ModalBadgeType;
   setModalBadge: React.Dispatch<React.SetStateAction<ModalBadgeType>>;
+  badgeLevel: number;
+  setBadgeLevel: React.Dispatch<React.SetStateAction<number>>;
 };
 
 function GamePlay({
@@ -44,6 +46,8 @@ function GamePlay({
   setTotalScore,
   setIsModalOpen,
   setModalBadge,
+  badgeLevel,
+  setBadgeLevel,
 }: GamePlayProps) {
   const [questionCount, setQuestionCount] = useState(1);
   const [mathOperator, setMathOperator] = useState("+");
@@ -57,8 +61,10 @@ function GamePlay({
   // passes to NumberGenerator. Will update with expected value (score) to add to userScore IF the question is answered correctly.
   const [addToScore, setAddToScore] = useState(0);
 
+  // Will be set to "true" when the user achieves the final badge in level 1 (ex. at 3000 points) to ensure this is passed in postUserScore
+  const [levelChange, setLevelChange] = useState(false);
+
   const openModal = () => {
-    // console.log("Inside openModal: ", modalBadge);
     setIsModalOpen(true);
   };
 
@@ -178,7 +184,11 @@ function GamePlay({
         !userMathBadges.badge_1_8_goldendoodle
       ) {
         updatedBadges.badge_1_8_goldendoodle = true;
+        updatedBadges.badge_level = 2;
         setModalBadge("badge_1_8_goldendoodle");
+        // SETS badgeLevel to "2" WHICH WILL RENDER THE SECOND SET (LEVEL) OF BADGES
+        setBadgeLevel(2);
+        setLevelChange(true);
       } else if (
         newTotalScore >= 3250 &&
         !userMathBadges.badge_2_1_borderCollie
@@ -210,6 +220,8 @@ function GamePlay({
         updatedBadges.badge_2_8_golden = true;
         setModalBadge("badge_2_8_golden");
       }
+
+      console.log(updatedBadges);
 
       if (Object.keys(updatedBadges).length > 0) {
         const newBadges = { ...prevBadges, ...updatedBadges };
@@ -252,10 +264,9 @@ function GamePlay({
 
     const mathKey = getMathLevelKey(sliderValue);
 
-    console.log(currentScore);
-
     // UPDATES POINTS BY LEVEL (EX. "math_L1_points") IN "SCORE_MATH" TABLE
     updatedScores[mathKey] = addToScore + currentScore[mathKey];
+
     return updatedScores;
   }
 
