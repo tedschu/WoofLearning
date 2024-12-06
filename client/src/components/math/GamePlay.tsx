@@ -62,6 +62,12 @@ function GamePlay({
     setIsModalOpen(true);
   };
 
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    findAnswer();
+    setSubmitted(true);
+  };
+
   // Determines the correct answer to the generated question AND stores value in questionResult
   // Compares userAnswer to questionResult to determine if answer is correct
   function findAnswer() {
@@ -101,7 +107,7 @@ function GamePlay({
   function checkResult() {
     if (userAnswer === questionResult) {
       setGotWrong(false);
-      // FUNCTION TO SET USERSCORE WILL GO HERE
+      // FUNCTION TO SET USERSCORE
       setUserScore((prevScore) => {
         const updatedScores = getUpdatedScores(
           gameSelector,
@@ -128,11 +134,9 @@ function GamePlay({
     }
   }
 
-  console.log(userMathBadges);
-
   function updateBadges(newTotalScore: number, newUserScore: UserScore) {
     setUserMathBadges((prevBadges) => {
-      const updatedBadges: Partial<userMathBadges> = {};
+      const updatedBadges: Partial<UserMathBadges> = {};
 
       if (newTotalScore >= 100 && !userMathBadges.badge_1_1_bernese) {
         updatedBadges.badge_1_1_bernese = true;
@@ -209,7 +213,7 @@ function GamePlay({
 
       if (Object.keys(updatedBadges).length > 0) {
         const newBadges = { ...prevBadges, ...updatedBadges };
-        postuserMathBadges(updatedBadges);
+        postUserMathBadges(updatedBadges);
         openModal();
         return newBadges;
       }
@@ -273,7 +277,10 @@ function GamePlay({
       // const updatedScores = getUpdatedScores(gameSelector, addToScore);
       const storedToken = localStorage.getItem("token");
 
-      const response = await fetch(`/api/users/${userInfo.id}/score`, {
+      console.log("updatedScores is:" + updatedScores);
+      console.log("sliderValue is:" + sliderValue);
+
+      const response = await fetch(`/api/users-math/${userInfo.id}/score`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -317,12 +324,6 @@ function GamePlay({
     setGotWrong(false);
   }
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    findAnswer();
-    setSubmitted(true);
-  };
-
   // Controls alert when question was right. Visible for 3 seconds.
   useEffect(() => {
     let timer: number;
@@ -335,14 +336,14 @@ function GamePlay({
   }, [gotRight]);
 
   // Function to pass the updated score to the database, update scores state values for gameplay
-  const postuserMathBadges = async (
-    updatedBadges: Partial<userMathBadges>
+  const postUserMathBadges = async (
+    updatedBadges: Partial<UserMathBadges>
   ): Promise<void> => {
     try {
       // const updatedScores = getUpdatedScores(gameSelector, addToScore);
       const storedToken = localStorage.getItem("token");
 
-      const response = await fetch(`/api/users/${userInfo.id}/badge`, {
+      const response = await fetch(`/api/users-math/${userInfo.id}/badge`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

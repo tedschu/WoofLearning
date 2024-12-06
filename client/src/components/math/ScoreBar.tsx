@@ -16,8 +16,6 @@ import badge_2_7_poodle from "../../assets/badges/badge_2_7_poodle.png";
 import badge_2_8_golden from "../../assets/badges/badge_2_8_golden.png";
 import { UserScore, UserMathBadges, BadgeLevel } from "../../types/types";
 
-//TODO: IMPORT GLOBAL STATE ("BADGE_LEVEL") AND SET CONDITIONAL TO LOAD EITHER LEVEL ONE BADGES OR LEVEL 2 BELOW
-
 type ScoreBarProps = {
   userScore: UserScore;
   userMathBadges: UserMathBadges;
@@ -31,8 +29,6 @@ function ScoreBar({
   totalScore,
   badgeLevel,
 }: ScoreBarProps) {
-  console.log(badgeLevel.math_level);
-
   return (
     <>
       <div className="scoreBarContainer">
@@ -62,199 +58,210 @@ function ScoreBar({
         </div>
 
         {/* DIVS FOR THE BADGES */}
-        {/* THE IF STATEMENT WILL RENDER BADGES BASED ON WHETHER A USER IS IN LEVEL 1 OR 2 (E.G. IF badgeLevel STATE IS "1" OR "2") */}
 
         <div className="badgesContainer">
-          <div className="eachBadge">
-            <img
-              src={badge_1_1_bernese}
-              alt=""
-              className={
-                userMathBadges.badge_1_1_bernese
-                  ? "badgeEnabled"
-                  : "badgeDisabled"
-              }
-            />
-            <h3>100</h3>
-          </div>
-          <div className="eachBadge">
-            <img
-              src={badge_1_2_chihuahua}
-              alt=""
-              className={
-                userMathBadges.badge_1_2_chihuahua
-                  ? "badgeEnabled"
-                  : "badgeDisabled"
-              }
-            />
-            <h3>500</h3>
-          </div>
-          <div className="eachBadge">
-            <img
-              src={badge_1_3_waterdog}
-              alt=""
-              className={
-                userMathBadges.badge_1_3_waterdog
-                  ? "badgeEnabled"
-                  : "badgeDisabled"
-              }
-            />
-            <h3>500</h3>
-          </div>
-          <div className="eachBadge">
-            <img
-              src={badge_1_4_boxer}
-              alt=""
-              className={
-                userMathBadges.badge_1_4_boxer
-                  ? "badgeEnabled"
-                  : "badgeDisabled"
-              }
-            />
-            <h3>1,000</h3>
-          </div>
-          <div className="eachBadge">
-            <img
-              src={badge_1_5_husky}
-              alt=""
-              className={
-                userMathBadges.badge_1_5_husky
-                  ? "badgeEnabled"
-                  : "badgeDisabled"
-              }
-            />
-            <h3>250 each</h3>
-          </div>
-          <div className="eachBadge">
-            <img
-              src={badge_1_6_golden}
-              alt=""
-              className={
-                userMathBadges.badge_1_6_golden
-                  ? "badgeEnabled"
-                  : "badgeDisabled"
-              }
-            />
-            <h3>2,000</h3>
-          </div>
-          <div className="eachBadge">
-            <img
-              src={badge_1_7_cat}
-              alt=""
-              className={
-                userMathBadges.badge_1_7_cat ? "badgeEnabled" : "badgeDisabled"
-              }
-            />
-            <h3>500 each</h3>
-          </div>
-          <div className="eachBadge">
-            <img
-              src={badge_1_8_goldendoodle}
-              alt=""
-              className={
-                userMathBadges.badge_1_8_goldendoodle
-                  ? "badgeEnabled"
-                  : "badgeDisabled"
-              }
-            />
-            <h3>3,000</h3>
-          </div>
+          {/* THE TERNARY WILL RENDER BADGES BASED ON WHETHER A USER IS IN LEVEL 1 OR 2 (E.G. IF badgeLevel STATE IS "1" OR "2") */}
 
-          {/* SEPARATOR FOR LEVEL 2 */}
-          <div className="eachBadge">
-            <img
-              src={badge_2_1_borderCollie}
-              alt=""
-              className={
-                userMathBadges.badge_2_1_borderCollie
-                  ? "badgeEnabled"
-                  : "badgeDisabled"
-              }
-            />
-            <h3>100</h3>
-          </div>
-          <div className="eachBadge">
-            <img
-              src={badge_2_2_terrier}
-              alt=""
-              className={
-                userMathBadges.badge_2_2_terrier
-                  ? "badgeEnabled"
-                  : "badgeDisabled"
-              }
-            />
-            <h3>500</h3>
-          </div>
-          <div className="eachBadge">
-            <img
-              src={badge_2_3_australianShepherd}
-              alt=""
-              className={
-                userMathBadges.badge_2_3_australianShepherd
-                  ? "badgeEnabled"
-                  : "badgeDisabled"
-              }
-            />
-            <h3>500</h3>
-          </div>
-          <div className="eachBadge">
-            <img
-              src={badge_2_4_shibaInu}
-              alt=""
-              className={
-                userMathBadges.badge_2_4_shibaInu
-                  ? "badgeEnabled"
-                  : "badgeDisabled"
-              }
-            />
-            <h3>1,000</h3>
-          </div>
-          <div className="eachBadge">
-            <img
-              src={badge_2_5_cat}
-              alt=""
-              className={
-                userMathBadges.badge_2_5_cat ? "badgeEnabled" : "badgeDisabled"
-              }
-            />
-            <h3>250 each</h3>
-          </div>
-          <div className="eachBadge">
-            <img
-              src={badge_2_6_bernese}
-              alt=""
-              className={
-                userMathBadges.badge_2_6_bernese
-                  ? "badgeEnabled"
-                  : "badgeDisabled"
-              }
-            />
-            <h3>2,000</h3>
-          </div>
-          <div className="eachBadge">
-            <img
-              src={badge_2_7_poodle}
-              alt=""
-              className={
-                userMathBadges.badge_2_7_poodle
-                  ? "badgeEnabled"
-                  : "badgeDisabled"
-              }
-            />
-            <h3>500 each</h3>
-          </div>
-          <div className="eachBadge">
-            <img
-              src={badge_2_8_golden}
-              alt=""
-              className={
-                userMathBadges.badge_2_8_golden
-                  ? "badgeEnabled"
-                  : "badgeDisabled"
-              }
-            />
-            <h3>3,000</h3>
-          </div>
+          {badgeLevel.math_level === 1 ? (
+            <>
+              <div className="eachBadge">
+                <img
+                  src={badge_1_1_bernese}
+                  alt=""
+                  className={
+                    userMathBadges.badge_1_1_bernese
+                      ? "badgeEnabled"
+                      : "badgeDisabled"
+                  }
+                />
+                <h3>100</h3>
+              </div>
+              <div className="eachBadge">
+                <img
+                  src={badge_1_2_chihuahua}
+                  alt=""
+                  className={
+                    userMathBadges.badge_1_2_chihuahua
+                      ? "badgeEnabled"
+                      : "badgeDisabled"
+                  }
+                />
+                <h3>500</h3>
+              </div>
+              <div className="eachBadge">
+                <img
+                  src={badge_1_3_waterdog}
+                  alt=""
+                  className={
+                    userMathBadges.badge_1_3_waterdog
+                      ? "badgeEnabled"
+                      : "badgeDisabled"
+                  }
+                />
+                <h3>500</h3>
+              </div>
+              <div className="eachBadge">
+                <img
+                  src={badge_1_4_boxer}
+                  alt=""
+                  className={
+                    userMathBadges.badge_1_4_boxer
+                      ? "badgeEnabled"
+                      : "badgeDisabled"
+                  }
+                />
+                <h3>1,000</h3>
+              </div>
+              <div className="eachBadge">
+                <img
+                  src={badge_1_5_husky}
+                  alt=""
+                  className={
+                    userMathBadges.badge_1_5_husky
+                      ? "badgeEnabled"
+                      : "badgeDisabled"
+                  }
+                />
+                <h3>250 each</h3>
+              </div>
+              <div className="eachBadge">
+                <img
+                  src={badge_1_6_golden}
+                  alt=""
+                  className={
+                    userMathBadges.badge_1_6_golden
+                      ? "badgeEnabled"
+                      : "badgeDisabled"
+                  }
+                />
+                <h3>2,000</h3>
+              </div>
+              <div className="eachBadge">
+                <img
+                  src={badge_1_7_cat}
+                  alt=""
+                  className={
+                    userMathBadges.badge_1_7_cat
+                      ? "badgeEnabled"
+                      : "badgeDisabled"
+                  }
+                />
+                <h3>500 each</h3>
+              </div>
+              <div className="eachBadge">
+                <img
+                  src={badge_1_8_goldendoodle}
+                  alt=""
+                  className={
+                    userMathBadges.badge_1_8_goldendoodle
+                      ? "badgeEnabled"
+                      : "badgeDisabled"
+                  }
+                />
+                <h3>3,000</h3>
+              </div>
+            </>
+          ) : (
+            <>
+              {/* SEPARATOR FOR LEVEL 2 */}
+              <div className="eachBadge">
+                <img
+                  src={badge_2_1_borderCollie}
+                  alt=""
+                  className={
+                    userMathBadges.badge_2_1_borderCollie
+                      ? "badgeEnabled"
+                      : "badgeDisabled"
+                  }
+                />
+                <h3>100</h3>
+              </div>
+              <div className="eachBadge">
+                <img
+                  src={badge_2_2_terrier}
+                  alt=""
+                  className={
+                    userMathBadges.badge_2_2_terrier
+                      ? "badgeEnabled"
+                      : "badgeDisabled"
+                  }
+                />
+                <h3>500</h3>
+              </div>
+              <div className="eachBadge">
+                <img
+                  src={badge_2_3_australianShepherd}
+                  alt=""
+                  className={
+                    userMathBadges.badge_2_3_australianShepherd
+                      ? "badgeEnabled"
+                      : "badgeDisabled"
+                  }
+                />
+                <h3>500</h3>
+              </div>
+              <div className="eachBadge">
+                <img
+                  src={badge_2_4_shibaInu}
+                  alt=""
+                  className={
+                    userMathBadges.badge_2_4_shibaInu
+                      ? "badgeEnabled"
+                      : "badgeDisabled"
+                  }
+                />
+                <h3>1,000</h3>
+              </div>
+              <div className="eachBadge">
+                <img
+                  src={badge_2_5_cat}
+                  alt=""
+                  className={
+                    userMathBadges.badge_2_5_cat
+                      ? "badgeEnabled"
+                      : "badgeDisabled"
+                  }
+                />
+                <h3>250 each</h3>
+              </div>
+              <div className="eachBadge">
+                <img
+                  src={badge_2_6_bernese}
+                  alt=""
+                  className={
+                    userMathBadges.badge_2_6_bernese
+                      ? "badgeEnabled"
+                      : "badgeDisabled"
+                  }
+                />
+                <h3>2,000</h3>
+              </div>
+              <div className="eachBadge">
+                <img
+                  src={badge_2_7_poodle}
+                  alt=""
+                  className={
+                    userMathBadges.badge_2_7_poodle
+                      ? "badgeEnabled"
+                      : "badgeDisabled"
+                  }
+                />
+                <h3>500 each</h3>
+              </div>
+              <div className="eachBadge">
+                <img
+                  src={badge_2_8_golden}
+                  alt=""
+                  className={
+                    userMathBadges.badge_2_8_golden
+                      ? "badgeEnabled"
+                      : "badgeDisabled"
+                  }
+                />
+                <h3>3,000</h3>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </>

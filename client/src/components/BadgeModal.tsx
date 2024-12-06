@@ -28,55 +28,72 @@ function BadgeModal({ isModalOpen, closeModal, modalBadge }: BadgeModalTypes) {
   if (!isModalOpen) return null;
 
   let badgeImage: string | undefined = undefined;
+  let badgeText: string | undefined = undefined;
 
   switch (modalBadge) {
-    case "bernese":
+    case "badge_1_1_bernese":
       badgeImage = bernese;
+      badgeText = "Bernese";
       break;
-    case "chihuahua":
+    case "badge_1_2_chihuahua":
       badgeImage = chihuahua;
+      badgeText = "Chihuahua";
       break;
-    case "waterdog":
+    case "badge_1_3_waterdog":
       badgeImage = waterdog;
+      badgeText = "Water Dog";
       break;
-    case "boxer":
+    case "badge_1_4_boxer":
       badgeImage = boxer;
+      badgeText = "Boxer";
       break;
-    case "husky":
+    case "badge_1_5_husky":
       badgeImage = husky;
+      badgeText = "Husky";
       break;
-    case "golden":
+    case "badge_1_6_golden":
       badgeImage = golden;
+      badgeText = "Goldendoodle";
       break;
-    case "cat":
+    case "badge_1_7_cat":
       badgeImage = cat;
+      badgeText = "cat";
       break;
-    case "goldendoodle_trophy":
+    case "badge_1_8_goldendoodle":
       badgeImage = goldendoodleTrophy;
+      badgeText = "Goldendoodle trophy";
       break;
-    case "borderCollie":
+    case "badge_2_1_borderCollie":
       badgeImage = borderCollie;
+      badgeText = "Border Collie";
       break;
-    case "terrier":
+    case "badge_2_2_terrier":
       badgeImage = terrier;
+      badgeText = "Terrier";
       break;
-    case "australianShepherd":
+    case "badge_2_3_australianShepherd":
       badgeImage = australianShepherd;
+      badgeText = "Australian Shepherd";
       break;
-    case "shibaInu":
+    case "badge_2_4_shibaInu":
       badgeImage = shibaInu;
+      badgeText = "Shiba Inu";
       break;
-    case "cat2":
+    case "badge_2_5_cat":
       badgeImage = cat2;
+      badgeText = "cat";
       break;
-    case "bernese2":
+    case "badge_2_6_bernese":
       badgeImage = bernese2;
+      badgeText = "Bernese";
       break;
-    case "poodle":
+    case "badge_2_7_poodle":
       badgeImage = poodle;
+      badgeText = "Preppy Poodle";
       break;
-    case "goldendoodleTrophy2":
+    case "badge_2_8_golden":
       badgeImage = goldendoodleTrophy2;
+      badgeText = "Goldendoodle trophy";
       break;
     default:
       badgeImage = undefined;
@@ -87,14 +104,20 @@ function BadgeModal({ isModalOpen, closeModal, modalBadge }: BadgeModalTypes) {
       <div className="badgeModalOverlay">
         <div className="badgeModalContent">
           <h2>YESSSSS! </h2>
-          {modalBadge == "goldendoodle_trophy" ? (
-            <h2>You won the goldendoodle trophy badge! Way to go, champ!</h2>
-          ) : modalBadge == "cat" ? (
+          {/* TERNARY BELOW RENDERS DIFFERENT H2 TEXT IF A USER HAS BEATEN A LEVEL OR GETS A CAT BADGE. OTHERWISE, DEFAULTS TO "badgeText" */}
+          {modalBadge == "badge_1_8_goldendoodle" ? (
+            <h2>
+              You won the goldendoodle trophy badge! Way to go, champ. You're
+              ready for level 2!
+            </h2>
+          ) : modalBadge == "badge_2_8_golden" ? (
+            <h2>Wow, you just won the game! You are amazing.</h2>
+          ) : badgeText == "cat" ? (
             <h2>
               Meow! A cat badge? They are a bit sneaky, after all. Congrats!
             </h2>
           ) : (
-            <h2>You won the {modalBadge} badge!</h2>
+            <h2>You won the {badgeText} badge!</h2>
           )}
 
           <img src={badgeImage} alt="" />
