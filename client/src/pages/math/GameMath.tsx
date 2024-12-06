@@ -55,7 +55,6 @@ function GameMath({
           userMathBadges={userMathBadges}
           totalScore={totalScore}
           badgeLevel={badgeLevel}
-          setBadgeLevel={setBadgeLevel}
         />
 
         <GameSelector

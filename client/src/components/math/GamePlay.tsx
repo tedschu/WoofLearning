@@ -244,6 +244,18 @@ function GamePlay({
         updatedScores.division_score = addToScore + currentScore.division_score;
         break;
     }
+
+    function getMathLevelKey(level: number): keyof UserScore {
+      const key = `math_L${level}_points` as keyof UserScore;
+      return key;
+    }
+
+    const mathKey = getMathLevelKey(sliderValue);
+
+    console.log(currentScore);
+
+    // UPDATES POINTS BY LEVEL (EX. "math_L1_points") IN "SCORE_MATH" TABLE
+    updatedScores[mathKey] = addToScore + currentScore[mathKey];
     return updatedScores;
   }
 
@@ -276,9 +288,6 @@ function GamePlay({
     try {
       // const updatedScores = getUpdatedScores(gameSelector, addToScore);
       const storedToken = localStorage.getItem("token");
-
-      console.log("updatedScores is:" + updatedScores);
-      console.log("sliderValue is:" + sliderValue);
 
       const response = await fetch(`/api/users-math/${userInfo.id}/score`, {
         method: "PUT",
@@ -326,7 +335,7 @@ function GamePlay({
 
   // Controls alert when question was right. Visible for 3 seconds.
   useEffect(() => {
-    let timer: number;
+    let timer: NodeJS.Timeout;
     if (gotRight) {
       timer = setTimeout(() => {
         setGotRight(false);
@@ -355,10 +364,8 @@ function GamePlay({
       const data = await response.json();
       //console.log(data);
 
-      // SET ALL STATE VALUES HERE (SCORES, BADGES, USER INFO, ETC.)
       if (response.ok) {
-        //setuserMathBadges(data.badge);
-        // console.log(data);
+        return;
       }
     } catch (error) {
       console.error("Error fetching user data:", error);

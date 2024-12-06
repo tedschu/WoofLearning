@@ -36,6 +36,16 @@ function App() {
     multiplication_score: 0,
     division_score: 0,
     reading_score: 0,
+    math_L1_points: 0,
+    math_L2_points: 0,
+    math_L3_points: 0,
+    math_L4_points: 0,
+    math_L5_points: 0,
+    reading_L1_points: 0,
+    reading_L2_points: 0,
+    reading_L3_points: 0,
+    reading_L4_points: 0,
+    reading_L5_points: 0,
   });
   const [badgeLevel, setBadgeLevel] = useState<BadgeLevel>({
     math_level: 1,
@@ -152,6 +162,16 @@ function App() {
               multiplication_score: data.score_math.multiplication_score,
               division_score: data.score_math.division_score,
               reading_score: data.score_reading.reading_score,
+              math_L1_points: data.score_math.math_L1_points,
+              math_L2_points: data.score_math.math_L2_points,
+              math_L3_points: data.score_math.math_L3_points,
+              math_L4_points: data.score_math.math_L4_points,
+              math_L5_points: data.score_math.math_L5_points,
+              reading_L1_points: data.score_reading.reading_L1_points,
+              reading_L2_points: data.score_reading.reading_L2_points,
+              reading_L3_points: data.score_reading.reading_L3_points,
+              reading_L4_points: data.score_reading.reading_L4_points,
+              reading_L5_points: data.score_reading.reading_L5_points,
             });
             setUserMathBadges(data.badge_math);
             setUserReadingBadges(data.badge_reading);

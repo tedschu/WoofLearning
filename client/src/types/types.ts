@@ -9,6 +9,16 @@ export type UserScore = {
   multiplication_score: number;
   division_score: number;
   reading_score: number;
+  math_L1_points: number;
+  math_L2_points: number;
+  math_L3_points: number;
+  math_L4_points: number;
+  math_L5_points: number;
+  reading_L1_points: number;
+  reading_L2_points: number;
+  reading_L3_points: number;
+  reading_L4_points: number;
+  reading_L5_points: number;
 };
 
 export type BadgeLevel = {
