@@ -21,15 +21,16 @@ function AppSelector() {
     <>
       <div className="appSelector-Wrapper">
         <div className="appSelector-ContentContainer">
-          <div className="appSelector-contentBox">Woof Reading</div>
-          <div className="appSelector-contentBox">Woof Math</div>
-          {/* <Link to={"/game-math"} className="welcomePrivacyNotice">
-              Math
+          <div className="appSelector-contentBox">
+            <Link to={"/game-reading"} className="testFont">
+              READING
             </Link>
-            <br />
-            <Link to={"/game-reading"} className="welcomePrivacyNotice">
-              Reading
-            </Link> */}
+          </div>
+          <div className="appSelector-contentBox">
+            <Link to={"/game-math"} className="testFont">
+              MATH
+            </Link>
+          </div>
         </div>
       </div>
     </>

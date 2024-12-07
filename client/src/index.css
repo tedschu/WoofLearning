@@ -16,6 +16,12 @@
   font-style: normal;
 }
 
+.darumadrop-one-regular {
+  font-family: "Darumadrop One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -410,13 +416,7 @@ button {
   justify-content: center;
   width: 100%;
   min-height: 100vh;
-  background: linear-gradient(
-    to bottom right,
-    #04628a,
-    #7dc2e0,
-    #dd6e55,
-    #d4492b
-  );
+  background: linear-gradient(to bottom right, #04628a, #7dc2e0, #dd6e55);
   z-index: 0;
 }
 
@@ -448,12 +448,18 @@ button {
 }
 
 .appSelector-contentBox {
-  border: 1px solid gray;
+  border: 1px solid rgb(190, 190, 190);
   border-radius: 12px;
   padding: 160px;
   margin: 10px;
   background: white;
   box-shadow: 2px 2px 7px gray;
+}
+
+.testFont {
+  color: black;
+  font-family: "Darumadrop One";
+  font-size: 50px;
 }
 
 /* NAV BAR STYLING */
