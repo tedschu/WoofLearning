@@ -217,6 +217,16 @@ button {
   box-shadow: 2px 2px 6px #c1c1c1;
 }
 
+.button.gameSelect {
+  width: 200px;
+  border-radius: 10px;
+  background-image: linear-gradient(#0085bd, #71afcb);
+  color: white;
+  font-size: 22px;
+  border: none;
+  box-shadow: 2px 2px 6px #c1c1c1;
+}
+
 /* WELCOME PAGE STYLING */
 .welcomePageContainer {
   display: flex;
@@ -441,25 +451,43 @@ button {
 .appSelector-ContentContainer {
   width: 100%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   z-index: 2;
 }
 
-.appSelector-contentBox {
-  border: 1px solid rgb(190, 190, 190);
-  border-radius: 12px;
-  padding: 160px;
-  margin: 10px;
-  background: white;
-  box-shadow: 2px 2px 7px gray;
+.appSelector-logoContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
 }
 
-.testFont {
-  color: black;
+.appSelector-logoContainer > img {
+  animation: wiggle 2.5s linear infinite;
+}
+
+.appSelector-flexRow {
+  display: flex;
+  flex-direction: row;
+}
+
+.appSelector-contentBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 350px;
+  align-items: center;
+  border: 1px solid rgb(190, 190, 190);
+  border-radius: 12px;
   font-family: "Darumadrop One";
-  font-size: 50px;
+  font-size: 40px;
+  margin: 10px;
+  box-shadow: 2px 2px 7px gray;
+  padding: 10px;
+  background-color: white;
 }
 
 /* NAV BAR STYLING */

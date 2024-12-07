@@ -4,6 +4,7 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import woofMathLogo from "./../assets/woofmath_logo_1.png";
 
 function AppSelector() {
   const navigate = useNavigate();
@@ -17,19 +18,39 @@ function AppSelector() {
     }
   }, []);
 
+  const navMath = () => {
+    navigate("/game-math");
+  };
+
+  const navReading = () => {
+    navigate("/game-reading");
+  };
+
   return (
     <>
       <div className="appSelector-Wrapper">
         <div className="appSelector-ContentContainer">
-          <div className="appSelector-contentBox">
-            <Link to={"/game-reading"} className="testFont">
-              READING
-            </Link>
+          <div className="appSelector-logoContainer">
+            <img
+              src={woofMathLogo}
+              alt="WoofMath logo"
+              className="woofMathLogo"
+            />
+            <h1>Which game do you want to play?</h1>
           </div>
-          <div className="appSelector-contentBox">
-            <Link to={"/game-math"} className="testFont">
-              MATH
-            </Link>
+          <div className="appSelector-flexRow">
+            <div className="appSelector-contentBox">
+              WOOF READING
+              <button className="button gameSelect" onClick={navReading}>
+                Go play!
+              </button>
+            </div>
+            <div className="appSelector-contentBox">
+              WOOF MATH
+              <button className="button gameSelect" onClick={navMath}>
+                Go play!
+              </button>
+            </div>
           </div>
         </div>
       </div>
