@@ -17,7 +17,7 @@ import badge_2_6_bernese from "../../assets/badges/badge_2_6_bernese.png";
 import badge_2_7_poodle from "../../assets/badges/badge_2_7_poodle.png";
 import badge_2_8_golden from "../../assets/badges/badge_2_8_golden.png";
 
-function ScoreBar({ userScore, userBadges }) {
+function ScoreBar({ userScore, userReadingBadges, userInfo, badgeLevel }) {
   return (
     <>
       <div className="scoreBarContainer">

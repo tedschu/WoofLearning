@@ -63,6 +63,7 @@ model Badge_math {
   badge_2_7_poodle Boolean? @default(false)
   badge_2_8_golden Boolean? @default(false)
   badge_level Int @default(1)
+  badges Int @default(0)
   user User @relation(fields: [user_id], references: [id])
   user_id Int @unique
 }
@@ -97,7 +98,8 @@ model Badge_reading {
   badge_2_6_bernese Boolean? @default(false)
   badge_2_7_poodle Boolean? @default(false)
   badge_2_8_golden Boolean? @default(false)
-    badge_level Int @default(1)
+  badge_level Int @default(1)
+  badges Int @default(0)
   user User @relation(fields: [user_id], references: [id])
   user_id Int @unique
 }

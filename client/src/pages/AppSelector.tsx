@@ -36,7 +36,7 @@ function AppSelector() {
               alt="WoofMath logo"
               className="woofMathLogo"
             />
-            <h1>Which game do you want to play?</h1>
+            <h1>Hey you! Which game do you want to play?</h1>
           </div>
           <div className="appSelector-flexRow">
             <div className="appSelector-contentBox">

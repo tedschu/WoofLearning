@@ -26,6 +26,11 @@ export type BadgeLevel = {
   reading_level: number;
 };
 
+export type BadgeProgress = {
+  math_badges: number;
+  reading_badges: number;
+};
+
 export type UserMathBadges = {
   badge_1_1_bernese: boolean;
   badge_1_2_chihuahua: boolean;
@@ -118,4 +123,6 @@ export type GameProps = {
   setTotalScore: React.Dispatch<React.SetStateAction<number>>;
   badgeLevel: BadgeLevel;
   setBadgeLevel: React.Dispatch<React.SetStateAction<BadgeLevel>>;
+  badgeProgress: BadgeProgress;
+  setBadgeProgress: React.Dispatch<React.SetStateAction<BadgeProgress>>;
 };

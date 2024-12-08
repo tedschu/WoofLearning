@@ -6,6 +6,7 @@ import Nav from "../../components/Nav";
 import BadgeModal from "../../components/BadgeModal";
 import Slider from "../../components/reading/Slider";
 import StorySelector from "../../components/reading/StorySelector";
+import { GameProps, GameSelectorType, ModalBadgeType } from "../../types/types";
 
 //TODO: CONVERT TO TS, ADD TYPE DECLARATIONS
 
@@ -13,8 +14,6 @@ function GameReading({
   isLoggedIn,
   userScore,
   setUserScore,
-  userBadges,
-  setUserBadges,
   userInfo,
   totalScore,
   setTotalScore,
@@ -23,7 +22,9 @@ function GameReading({
   setUserReadingBadges,
   userMathBadges,
   setUserMathBadges,
-}) {
+  badgeProgress,
+  setBadgeProgress,
+}: GameProps) {
   const [sliderValue, setSliderValue] = useState(1);
   const [storyType, setStoryType] = useState("story");
   const [storyLength, setStoryLength] = useState(250);
@@ -55,16 +56,10 @@ function GameReading({
 
       <div className="mainContainer">
         <ScoreBar
-          isLoggedIn={isLoggedIn}
           userScore={userScore}
-          setUserScore={setUserScore}
-          userBadges={userBadges}
-          setUserBadges={setUserBadges}
+          userReadingBadges={userReadingBadges}
           userInfo={userInfo}
-          totalScore={totalScore}
-          setTotalScore={setTotalScore}
-          setPointsToWin={setPointsToWin}
-          pointsToWin={pointsToWin}
+          badgeLevel={badgeLevel}
         />
 
         <StorySelector
@@ -107,6 +102,8 @@ function GameReading({
           storyType={storyType}
           setStoryType={setStoryType}
           pointsToWin={pointsToWin}
+          badgeProgress={badgeProgress}
+          setBadgeProgress={setBadgeProgress}
         />
 
         <BadgeModal

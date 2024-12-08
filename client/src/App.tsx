@@ -6,6 +6,7 @@ import {
   UserReadingBadges,
   UserInfo,
   BadgeLevel,
+  BadgeProgress,
 } from "./types/types";
 import Me from "./pages/Me";
 import Register from "./pages/Register";
@@ -50,6 +51,10 @@ function App() {
   const [badgeLevel, setBadgeLevel] = useState<BadgeLevel>({
     math_level: 1,
     reading_level: 1,
+  });
+  const [badgeProgress, setBadgeProgress] = useState<BadgeProgress>({
+    math_badges: 0,
+    reading_badges: 0,
   });
   const [totalMathScore, setTotalMathScore] = useState(0);
   const [userMathBadges, setUserMathBadges] = useState<UserMathBadges>({
@@ -222,6 +227,8 @@ function App() {
               setBadgeLevel={setBadgeLevel}
               userReadingBadges={userReadingBadges}
               setUserReadingBadges={setUserReadingBadges}
+              badgeProgress={badgeProgress}
+              setBadgeProgress={setBadgeProgress}
             />
           }
         />
@@ -241,6 +248,8 @@ function App() {
               totalScore={totalMathScore}
               setTotalScore={setTotalMathScore}
               badgeLevel={badgeLevel}
+              badgeProgress={badgeProgress}
+              setBadgeProgress={setBadgeProgress}
             />
           }
         />

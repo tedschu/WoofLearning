@@ -19,6 +19,8 @@ function GameMath({
   setTotalScore,
   badgeLevel,
   setBadgeLevel,
+  badgeProgress,
+  setBadgeProgress,
 }: GameProps) {
   // Establishing state values for gameplay functionality that will be passed to multiple child components
   const [sliderValue, setSliderValue] = useState(1);
@@ -90,6 +92,8 @@ function GameMath({
           setModalBadge={setModalBadge}
           badgeLevel={badgeLevel}
           setBadgeLevel={setBadgeLevel}
+          badgeProgress={badgeProgress}
+          setBadgeProgress={setBadgeProgress}
         />
 
         <BadgeModal

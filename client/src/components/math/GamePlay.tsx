@@ -8,6 +8,8 @@ import {
   UserInfo,
   UserMathBadges,
   ModalBadgeType,
+  BadgeLevel,
+  BadgeProgress,
 } from "../../types/types";
 
 type GamePlayProps = {
@@ -28,8 +30,10 @@ type GamePlayProps = {
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   modalBadge: ModalBadgeType;
   setModalBadge: React.Dispatch<React.SetStateAction<ModalBadgeType>>;
-  badgeLevel: number;
-  setBadgeLevel: React.Dispatch<React.SetStateAction<number>>;
+  badgeLevel: BadgeLevel;
+  setBadgeLevel: React.Dispatch<React.SetStateAction<BadgeLevel>>;
+  badgeProgress: BadgeProgress;
+  setBadgeProgress: React.Dispatch<React.SetStateAction<BadgeProgress>>;
 };
 
 function GamePlay({
@@ -48,6 +52,8 @@ function GamePlay({
   setModalBadge,
   badgeLevel,
   setBadgeLevel,
+  badgeProgress,
+  setBadgeProgress,
 }: GamePlayProps) {
   const [questionCount, setQuestionCount] = useState(1);
   const [mathOperator, setMathOperator] = useState("+");
