@@ -45,6 +45,10 @@ function GameMath({
     if (!token) {
       navigate("/welcome");
     }
+
+    if (!currentApp) {
+      setCurrentApp("Woof Math");
+    }
   }, []);
 
   const closeModal = () => setIsModalOpen(false);

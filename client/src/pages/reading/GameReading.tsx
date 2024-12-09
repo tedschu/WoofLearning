@@ -26,6 +26,7 @@ function GameReading({
   badgeProgress,
   setBadgeProgress,
   currentApp,
+  setCurrentApp,
 }: GameProps) {
   const [sliderValue, setSliderValue] = useState(1);
   const [storyType, setStoryType] = useState<StoryType>("story");
@@ -47,6 +48,10 @@ function GameReading({
 
     if (!token) {
       navigate("/welcome");
+    }
+
+    if (!currentApp) {
+      setCurrentApp("Woof Reading");
     }
   }, []);
 
