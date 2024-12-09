@@ -10,7 +10,6 @@ type NavTypes = {
 
 // TODO: STATE VALUE TO SET WHICH GAME THE USER IS ON + TO SET NAV TITLE (MATH OR READING)
 function Nav({ isLoggedIn, userInfo, currentApp }: NavTypes) {
-  console.log(currentApp);
   return (
     <>
       <nav>

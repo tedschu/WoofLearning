@@ -190,7 +190,10 @@ function GamePlay({
         updatedBadges.badge_level = 2;
         setModalBadge("badge_1_8_goldendoodle");
         // SETS badgeLevel to "2" WHICH WILL RENDER THE SECOND SET (LEVEL) OF BADGES
-        setBadgeLevel(2);
+        setBadgeLevel((prev) => ({
+          ...prev,
+          math_level: 2,
+        }));
       } else if (
         newTotalScore >= 3250 &&
         !userMathBadges.badge_2_1_borderCollie

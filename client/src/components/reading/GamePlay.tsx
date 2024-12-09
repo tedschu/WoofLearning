@@ -65,6 +65,7 @@ function GamePlay({
   storyType,
   pointsToWin,
   setPointsToWin,
+  setBadgeLevel,
 }: GamePlayProps) {
   const [triggerNewStory, setTriggerNewStory] = useState(false);
   const [triggerNewEvaluation, setTriggerNewEvaluation] = useState(false);
@@ -97,42 +98,15 @@ function GamePlay({
   const [potentialPoints, setPotentialPoints] = useState(0);
 
   // ***** STORY GENERATION *****
-  // Function to hit generate_story endpoint (e.g. Anthropic API) to get a story based on values passed in
-  const getStory = async () => {
-    try {
-      const queryParams = new URLSearchParams({
-        story_length: storyLength.toString(),
-        difficulty: sliderValue.toString(),
-        story_topic: storyPrompt,
-        story_type: storyType,
-      });
 
-      const response = await fetch(
-        `/anthropic/generate_story?${queryParams.toString()}`
-      );
-
-      if (!response.ok) {
-        const textResponse = await response.text();
-        console.error("Server response:", textResponse);
-        throw new Error("Failed to generate the story");
-      }
-
-      const data = await response.json();
-      setCircularProgress(false);
-      setStoryResponseData({
-        title: data.Title,
-        body: data.Body,
-        question_1: data.Question_1,
-        question_2: data.Question_2,
-        question_3: data.Question_3,
-      });
-
-      //return await response.json();
-    } catch (error) {
-      console.error("Error generating story:", error);
-      setCircularProgress(false);
-      throw error;
-    }
+  // Handles button click "write story," setting TriggerNewStory = true which also triggers the useEffect above
+  const handleClick = () => {
+    setCircularProgress(true);
+    setTriggerNewStory(true);
+    setShowEvaluationChecks(false);
+    setGotWrong(false);
+    setErrorText("");
+    setPotentialPoints(pointsToWin);
   };
 
   // Triggers the getStory function but only after all input values (slider, prompt, storylength, storyType) have been updated
@@ -143,19 +117,52 @@ function GamePlay({
     }
   }, [triggerNewStory, storyLength, sliderValue, storyPrompt, storyType]);
 
-  // Handles button click "write story," setting TriggerNewStory = true which also triggers the useEffect above
-  const handleClick = () => {
-    setCircularProgress(true);
-    setTriggerNewStory(true);
-    setShowEvaluationChecks(false);
-    setStoryResponseData({
-      answer_1: "",
-      answer_2: "",
-      answer_3: "",
-    });
-    setGotWrong(false);
-    setErrorText("");
-    setPotentialPoints(pointsToWin);
+  // Function to hit generate_story endpoint (e.g. Anthropic API) to get a story based on values passed in
+  const getStory = async () => {
+    try {
+      const queryParams = new URLSearchParams({
+        story_length: storyLength.toString(),
+        difficulty: sliderValue.toString(),
+        story_topic: storyPrompt,
+        story_type: storyType,
+      });
+
+      console.log("Making API call with params:", queryParams.toString());
+      console.log("Making fetch call...");
+
+      const response = await fetch(
+        `/anthropic/generate_story?${queryParams.toString()}`
+      );
+
+      console.log("Got response back: ", response.status);
+
+      if (!response.ok) {
+        const textResponse = await response.text();
+        console.error("Server response:", textResponse);
+        console.log("Status:", response.status);
+        throw new Error("Failed to generate the story");
+      }
+
+      const data = await response.json();
+      console.log("Success data ", data);
+      setCircularProgress(false);
+      setStoryResponseData({
+        title: data.Title,
+        body: data.Body,
+        question_1: data.Question_1,
+        question_2: data.Question_2,
+        question_3: data.Question_3,
+        answer_1: "",
+        answer_2: "",
+        answer_3: "",
+      });
+
+      //return await response.json();
+    } catch (error) {
+      console.error("Error generating story:", error);
+      setCircularProgress(false);
+      throw error;
+    }
   };
 
   // ***** USER ANSWERS AND EVALUATION *****
@@ -305,34 +312,87 @@ function GamePlay({
   };
 
   // Function setting the logic on updating badges (true / false) based on point totals
-  function updateBadges(newTotalScore) {
-    setUserBadges((prevBadges) => {
-      const updatedBadges = {};
+  function updateBadges(newTotalScore: number) {
+    setUserReadingBadges((prevBadges) => {
+      const updatedBadges: Partial<UserReadingBadges> = {};
 
-      if (newTotalScore >= 100 && !userBadges.bernese) {
-        updatedBadges.bernese = true;
-        setModalBadge("bernese");
-      } else if (newTotalScore >= 250 && !userBadges.chihuahua) {
-        updatedBadges.chihuahua = true;
-        setModalBadge("chihuahua");
-      } else if (newTotalScore >= 500 && !userBadges.waterdog) {
-        updatedBadges.waterdog = true;
-        setModalBadge("Water Dog");
-      } else if (newTotalScore >= 1000 && !userBadges.boxer) {
-        updatedBadges.boxer = true;
-        setModalBadge("boxer");
-      } else if (newTotalScore >= 1500 && !userBadges.husky) {
-        updatedBadges.husky = true;
-        setModalBadge("husky");
-      } else if (newTotalScore >= 2000 && !userBadges.golden) {
-        updatedBadges.golden = true;
-        setModalBadge("golden");
-      } else if (newTotalScore >= 2500 && !userBadges.cat) {
-        updatedBadges.cat = true;
-        setModalBadge("cat");
-      } else if (newTotalScore >= 3000 && !userBadges.goldendoodle_trophy) {
-        updatedBadges.goldendoodle_trophy = true;
-        setModalBadge("goldendoodle_trophy");
+      if (newTotalScore >= 100 && !userReadingBadges.badge_1_1_bernese) {
+        updatedBadges.badge_1_1_bernese = true;
+        setModalBadge("badge_1_1_bernese");
+      } else if (
+        newTotalScore >= 250 &&
+        !userReadingBadges.badge_1_2_chihuahua
+      ) {
+        updatedBadges.badge_1_2_chihuahua = true;
+        setModalBadge("badge_1_2_chihuahua");
+      } else if (
+        newTotalScore >= 500 &&
+        !userReadingBadges.badge_1_3_waterdog
+      ) {
+        updatedBadges.badge_1_3_waterdog = true;
+        setModalBadge("badge_1_3_waterdog");
+      } else if (newTotalScore >= 1000 && !userReadingBadges.badge_1_4_boxer) {
+        updatedBadges.badge_1_4_boxer = true;
+        setModalBadge("badge_1_4_boxer");
+      } else if (newTotalScore >= 1500 && !userReadingBadges.badge_1_5_husky) {
+        updatedBadges.badge_1_5_husky = true;
+        setModalBadge("badge_1_5_husky");
+      } else if (newTotalScore >= 2000 && !userReadingBadges.badge_1_6_golden) {
+        updatedBadges.badge_1_6_golden = true;
+        setModalBadge("badge_1_6_golden");
+      } else if (newTotalScore >= 2500 && !userReadingBadges.badge_1_7_cat) {
+        updatedBadges.badge_1_7_cat = true;
+        setModalBadge("badge_1_7_cat");
+      } else if (
+        newTotalScore >= 3000 &&
+        !userReadingBadges.badge_1_8_goldendoodle
+      ) {
+        updatedBadges.badge_1_8_goldendoodle = true;
+        setModalBadge("badge_1_8_goldendoodle");
+        // SETS badgeLevel to "2" WHICH WILL RENDER THE SECOND SET (LEVEL) OF BADGES
+        setBadgeLevel((prev) => ({
+          ...prev,
+          reading_level: 2,
+        }));
+      } else if (
+        newTotalScore >= 3250 &&
+        !userReadingBadges.badge_2_1_borderCollie
+      ) {
+        updatedBadges.badge_2_1_borderCollie = true;
+        setModalBadge("badge_2_1_borderCollie");
+      } else if (
+        newTotalScore >= 3500 &&
+        !userReadingBadges.badge_2_2_terrier
+      ) {
+        updatedBadges.badge_2_2_terrier = true;
+        setModalBadge("badge_2_2_terrier");
+      } else if (
+        newTotalScore >= 3750 &&
+        !userReadingBadges.badge_2_3_australianShepherd
+      ) {
+        updatedBadges.badge_2_3_australianShepherd = true;
+        setModalBadge("badge_2_3_australianShepherd");
+      } else if (
+        newTotalScore >= 4000 &&
+        !userReadingBadges.badge_2_4_shibaInu
+      ) {
+        updatedBadges.badge_2_4_shibaInu = true;
+        setModalBadge("badge_2_4_shibaInu");
+      } else if (newTotalScore >= 4500 && !userReadingBadges.badge_2_5_cat) {
+        updatedBadges.badge_2_5_cat = true;
+        setModalBadge("badge_2_5_cat");
+      } else if (
+        newTotalScore >= 5000 &&
+        !userReadingBadges.badge_2_6_bernese
+      ) {
+        updatedBadges.badge_2_6_bernese = true;
+        setModalBadge("badge_2_6_bernese");
+      } else if (newTotalScore >= 6000 && !userReadingBadges.badge_2_7_poodle) {
+        updatedBadges.badge_2_7_poodle = true;
+        setModalBadge("badge_2_7_poodle");
+      } else if (newTotalScore >= 7500 && !userReadingBadges.badge_2_8_golden) {
+        updatedBadges.badge_2_8_golden = true;
+        setModalBadge("badge_2_8_golden");
       }
 
       if (Object.keys(updatedBadges).length > 0) {
