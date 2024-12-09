@@ -1,6 +1,6 @@
 // Section 1: Core data types used as props across multiple components
 
-import React from "react";
+import React, { SetStateAction } from "react";
 
 // in App.tsx
 export type UserScore = {
@@ -125,4 +125,13 @@ export type GameProps = {
   setBadgeLevel: React.Dispatch<React.SetStateAction<BadgeLevel>>;
   badgeProgress: BadgeProgress;
   setBadgeProgress: React.Dispatch<React.SetStateAction<BadgeProgress>>;
+};
+
+export type StoryType = "story" | "poem" | "ballad";
+
+export type StorySelectorProps = {
+  storyPrompt: string;
+  setStoryPrompt: React.Dispatch<SetStateAction<string>>;
+  setStoryType: React.Dispatch<SetStateAction<StoryType>>;
+  storyType: StoryType;
 };

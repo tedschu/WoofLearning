@@ -1,19 +1,14 @@
-import React from "react";
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import storyPrompts from "../../utils/storyPrompts";
+import { StorySelectorProps } from "../../types/types";
 
 export default function StorySelector({
-  setStorySelection,
-  setGotRight,
-  setGotWrong,
   storyPrompt,
   setStoryPrompt,
   setStoryType,
   storyType,
-}) {
+}: StorySelectorProps) {
   // Finds a random value in the storyPrompt array and sets it in state (storyPrompt)
   const selectPrompt = () => {
     const randomIndex = Math.floor(Math.random() * storyPrompts.length);

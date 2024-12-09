@@ -6,7 +6,7 @@ import Nav from "../../components/Nav";
 import BadgeModal from "../../components/BadgeModal";
 import Slider from "../../components/reading/Slider";
 import StorySelector from "../../components/reading/StorySelector";
-import { GameProps, GameSelectorType, ModalBadgeType } from "../../types/types";
+import { GameProps, StoryType, StorySelectorProps } from "../../types/types";
 
 //TODO: CONVERT TO TS, ADD TYPE DECLARATIONS
 
@@ -15,26 +15,22 @@ function GameReading({
   userScore,
   setUserScore,
   userInfo,
-  totalScore,
-  setTotalScore,
   badgeLevel,
   userReadingBadges,
   setUserReadingBadges,
-  userMathBadges,
-  setUserMathBadges,
   badgeProgress,
   setBadgeProgress,
 }: GameProps) {
   const [sliderValue, setSliderValue] = useState(1);
-  const [storyType, setStoryType] = useState("story");
+  const [storyType, setStoryType] = useState<StoryType>("story");
   const [storyLength, setStoryLength] = useState(250);
   const [gotRight, setGotRight] = useState(false);
   const [gotWrong, setGotWrong] = useState(false);
 
   // state for modal that opens when a new badge is won
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalBadge, setModalBadge] = useState("");
-  const [storyPrompt, setStoryPrompt] = useState("");
+  const [modalBadge, setModalBadge] = useState<string>("");
+  const [storyPrompt, setStoryPrompt] = useState<string>("");
   const [pointsToWin, setPointsToWin] = useState(10);
 
   const navigate = useNavigate();
@@ -89,8 +85,6 @@ function GameReading({
           gotWrong={gotWrong}
           setGotRight={setGotRight}
           setGotWrong={setGotWrong}
-          userBadges={userBadges}
-          setUserBadges={setUserBadges}
           isModalOpen={isModalOpen}
           setIsModalOpen={setIsModalOpen}
           modalBadge={modalBadge}
@@ -104,6 +98,8 @@ function GameReading({
           pointsToWin={pointsToWin}
           badgeProgress={badgeProgress}
           setBadgeProgress={setBadgeProgress}
+          userReadingBadges={userReadingBadges}
+          setUserReadingBadges={setUserReadingBadges}
         />
 
         <BadgeModal

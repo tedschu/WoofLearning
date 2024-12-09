@@ -1,5 +1,3 @@
-import React from "react";
-import { useState, useEffect } from "react";
 import badge_1_1_bernese from "../../assets/badges/badge_1_1_bernese.png";
 import badge_1_2_chihuahua from "../../assets/badges/badge_1_2_chihuahua.png";
 import badge_1_3_waterdog from "../../assets/badges/badge_1_3_waterdog.png";
@@ -16,30 +14,44 @@ import badge_2_5_cat from "../../assets/badges/badge_2_5_cat.png";
 import badge_2_6_bernese from "../../assets/badges/badge_2_6_bernese.png";
 import badge_2_7_poodle from "../../assets/badges/badge_2_7_poodle.png";
 import badge_2_8_golden from "../../assets/badges/badge_2_8_golden.png";
+import { UserScore, UserReadingBadges, BadgeLevel } from "../../types/types";
 
-function ScoreBar({ userScore, userReadingBadges, userInfo, badgeLevel }) {
+type ScoreBarProps = {
+  userScore: UserScore;
+  userReadingBadges: UserReadingBadges;
+  totalScore: number;
+  badgeLevel: BadgeLevel;
+};
+
+function ScoreBar({ userScore, userReadingBadges, badgeLevel }: ScoreBarProps) {
   return (
     <>
       <div className="scoreBarContainer">
         <div className="badgesContainer">
           <div className="badgesSubContainer">
             <div className="badgesSubContainer2">
+              {/* TERNARY TO RENDER BADGES BASED ON "badgeLevel" */}
+
               <div className="eachBadge">
                 <img
-                  src={badge_bernese}
+                  src={badge_1_1_bernese}
                   alt=""
                   className={
-                    userBadges.bernese ? "badgeEnabled" : "badgeDisabled"
+                    userReadingBadges.badge_1_1_bernese
+                      ? "badgeEnabled"
+                      : "badgeDisabled"
                   }
                 />
                 <h3>100</h3>
               </div>
               <div className="eachBadge">
                 <img
-                  src={badge_chihuahua}
+                  src={badge_1_2_chihuahua}
                   alt=""
                   className={
-                    userBadges.chihuahua ? "badgeEnabled" : "badgeDisabled"
+                    userReadingBadges.badge_1_2_chihuahua
+                      ? "badgeEnabled"
+                      : "badgeDisabled"
                   }
                 />
                 <h3>250</h3>
@@ -48,20 +60,24 @@ function ScoreBar({ userScore, userReadingBadges, userInfo, badgeLevel }) {
             <div className="badgesSubContainer2">
               <div className="eachBadge">
                 <img
-                  src={badge_waterdog}
+                  src={badge_1_3_waterdog}
                   alt=""
                   className={
-                    userBadges.waterdog ? "badgeEnabled" : "badgeDisabled"
+                    userReadingBadges.badge_1_3_waterdog
+                      ? "badgeEnabled"
+                      : "badgeDisabled"
                   }
                 />
                 <h3>500</h3>
               </div>
               <div className="eachBadge">
                 <img
-                  src={badge_boxer}
+                  src={badge_1_4_boxer}
                   alt=""
                   className={
-                    userBadges.boxer ? "badgeEnabled" : "badgeDisabled"
+                    userReadingBadges.badge_1_4_boxer
+                      ? "badgeEnabled"
+                      : "badgeDisabled"
                   }
                 />
                 <h3>1,000</h3>
@@ -70,27 +86,31 @@ function ScoreBar({ userScore, userReadingBadges, userInfo, badgeLevel }) {
           </div>
           {/* SCORE CONTAINER */}
           <div className="totalScore">
-            <h1 className="scoreFont">{userScore.score}</h1>
+            <h1 className="scoreFont">{userScore.reading_score}</h1>
             <h5>TOTAL SCORE</h5>
           </div>
           <div className="badgesSubContainer">
             <div className="badgesSubContainer2">
               <div className="eachBadge">
                 <img
-                  src={badge_husky}
+                  src={badge_1_5_husky}
                   alt=""
                   className={
-                    userBadges.husky ? "badgeEnabled" : "badgeDisabled"
+                    userReadingBadges.badge_1_5_husky
+                      ? "badgeEnabled"
+                      : "badgeDisabled"
                   }
                 />
                 <h3>1,500</h3>
               </div>
               <div className="eachBadge">
                 <img
-                  src={badge_golden}
+                  src={badge_1_6_golden}
                   alt=""
                   className={
-                    userBadges.golden ? "badgeEnabled" : "badgeDisabled"
+                    userReadingBadges.badge_1_6_golden
+                      ? "badgeEnabled"
+                      : "badgeDisabled"
                   }
                 />
                 <h3>2,000</h3>
@@ -99,18 +119,22 @@ function ScoreBar({ userScore, userReadingBadges, userInfo, badgeLevel }) {
             <div className="badgesSubContainer2">
               <div className="eachBadge">
                 <img
-                  src={badge_cat}
+                  src={badge_1_7_cat}
                   alt=""
-                  className={userBadges.cat ? "badgeEnabled" : "badgeDisabled"}
+                  className={
+                    userReadingBadges.badge_1_7_cat
+                      ? "badgeEnabled"
+                      : "badgeDisabled"
+                  }
                 />
                 <h3>2,500</h3>
               </div>
               <div className="eachBadge">
                 <img
-                  src={badge_goldendoodle_trophy}
+                  src={badge_1_8_goldendoodle}
                   alt=""
                   className={
-                    userBadges.goldendoodle_trophy
+                    userReadingBadges.badge_1_8_goldendoodle
                       ? "badgeEnabled"
                       : "badgeDisabled"
                   }

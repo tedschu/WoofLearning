@@ -74,6 +74,7 @@ function App() {
     badge_2_6_bernese: false,
     badge_2_7_poodle: false,
     badge_2_8_golden: false,
+    badge_level: 1,
   });
   const [userReadingBadges, setUserReadingBadges] = useState<UserReadingBadges>(
     {
@@ -93,6 +94,7 @@ function App() {
       badge_2_6_bernese: false,
       badge_2_7_poodle: false,
       badge_2_8_golden: false,
+      badge_level: 1,
     }
   );
   const [token, setToken] = useState(storedToken || "");
