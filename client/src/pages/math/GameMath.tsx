@@ -21,6 +21,8 @@ function GameMath({
   setBadgeLevel,
   badgeProgress,
   setBadgeProgress,
+  currentApp,
+  setCurrentApp,
 }: GameProps) {
   // Establishing state values for gameplay functionality that will be passed to multiple child components
   const [sliderValue, setSliderValue] = useState(1);
@@ -49,7 +51,11 @@ function GameMath({
 
   return (
     <>
-      <Nav isLoggedIn={isLoggedIn} userInfo={userInfo} />
+      <Nav
+        isLoggedIn={isLoggedIn}
+        userInfo={userInfo}
+        currentApp={currentApp}
+      />
 
       <div className="mainContainer">
         <ScoreBar

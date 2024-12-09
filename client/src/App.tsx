@@ -7,6 +7,7 @@ import {
   UserInfo,
   BadgeLevel,
   BadgeProgress,
+  CurrentApp,
 } from "./types/types";
 import Me from "./pages/Me";
 import Register from "./pages/Register";
@@ -97,6 +98,7 @@ function App() {
       badge_level: 1,
     }
   );
+  const [currentApp, setCurrentApp] = useState<CurrentApp>("");
   const [token, setToken] = useState(storedToken || "");
 
   const navigate = useNavigate();
@@ -211,7 +213,15 @@ function App() {
       {/* <Nav isLoggedIn={isLoggedIn} userInfo={userInfo} /> */}
 
       <Routes>
-        <Route index element={<AppSelector />} />
+        <Route
+          index
+          element={
+            <AppSelector
+              currentApp={currentApp}
+              setCurrentApp={setCurrentApp}
+            />
+          }
+        />
 
         <Route
           path="/game-math"
@@ -231,6 +241,8 @@ function App() {
               setUserReadingBadges={setUserReadingBadges}
               badgeProgress={badgeProgress}
               setBadgeProgress={setBadgeProgress}
+              currentApp={currentApp}
+              setCurrentApp={setCurrentApp}
             />
           }
         />
@@ -252,6 +264,8 @@ function App() {
               badgeLevel={badgeLevel}
               badgeProgress={badgeProgress}
               setBadgeProgress={setBadgeProgress}
+              currentApp={currentApp}
+              setCurrentApp={setCurrentApp}
             />
           }
         />
@@ -267,6 +281,7 @@ function App() {
               userMathBadges={userMathBadges}
               userReadingBadges={userReadingBadges}
               setIsLoggedIn={setIsLoggedIn}
+              currentApp={currentApp}
             />
           }
         />

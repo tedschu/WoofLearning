@@ -3,24 +3,34 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 //import ScoreBar from "../components/";
 import Nav from "../components/Nav";
-import { UserInfo, UserBadges, UserScore } from "../types/types";
+import {
+  UserInfo,
+  UserReadingBadges,
+  UserMathBadges,
+  UserScore,
+  CurrentApp,
+} from "../types/types";
 
 type MeProps = {
   userInfo: UserInfo;
   userScore: UserScore;
   totalScore: number;
-  userBadges: UserBadges;
+  userReadingBadges: UserReadingBadges;
+  userMathBadges: UserMathBadges;
   isLoggedIn: boolean;
   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
+  currentApp: CurrentApp;
 };
 
 function Me({
   userInfo,
   userScore,
   totalScore,
-  userBadges,
+  userReadingBadges,
+  userMathBadges,
   isLoggedIn,
   setIsLoggedIn,
+  currentApp,
 }: MeProps) {
   const navigate = useNavigate();
 
@@ -33,7 +43,11 @@ function Me({
   };
 
   const navHome = () => {
-    navigate("/");
+    if (currentApp === "Woof Reading") {
+      navigate("/game-reading");
+    } else if (currentApp === "Woof Math") {
+      navigate("/game-math");
+    } else navigate("/");
   };
 
   function handleDelete() {
@@ -72,7 +86,11 @@ function Me({
 
   return (
     <>
-      <Nav isLoggedIn={isLoggedIn} userInfo={userInfo} />
+      <Nav
+        isLoggedIn={isLoggedIn}
+        userInfo={userInfo}
+        currentApp={currentApp}
+      />
 
       <div className="mainContainer">
         {/* <ScoreBar

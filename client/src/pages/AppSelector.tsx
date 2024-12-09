@@ -2,11 +2,16 @@
 // Default landing page for logged-in users
 
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { CurrentApp } from "../types/types";
 import woofMathLogo from "./../assets/woofmath_logo_1.png";
 
-function AppSelector() {
+type AppSelectorProps = {
+  currentApp: CurrentApp;
+  setCurrentApp: React.Dispatch<React.SetStateAction<CurrentApp>>;
+};
+
+function AppSelector({ setCurrentApp }: AppSelectorProps) {
   const navigate = useNavigate();
 
   // If a user is not signed in (no token) they are redirected to the login page.
@@ -19,10 +24,12 @@ function AppSelector() {
   }, []);
 
   const navMath = () => {
+    setCurrentApp("Woof Math");
     navigate("/game-math");
   };
 
   const navReading = () => {
+    setCurrentApp("Woof Reading");
     navigate("/game-reading");
   };
 

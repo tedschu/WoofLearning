@@ -1,5 +1,4 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import TipsAndUpdatesIcon from "@mui/icons-material/TipsAndUpdates";
 import storyPrompts from "../../utils/storyPrompts";
@@ -7,7 +6,45 @@ import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 import CircularColor from "./CircularColor";
 import badWords from "../../utils/badWords";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import {
+  UserScore,
+  BadgeLevel,
+  BadgeProgress,
+  UserReadingBadges,
+  UserInfo,
+  ModalBadgeType,
+  StorySelectorProps,
+  StoryType,
+  StoryResponseData,
+  EvaluationData,
+} from "../../types/types";
+
+type GamePlayProps = {
+  sliderValue: number;
+  userScore: UserScore;
+  setUserScore: React.Dispatch<React.SetStateAction<UserScore>>;
+  userInfo: UserInfo;
+  userReadingBadges: UserReadingBadges;
+  setUserReadingBadges: React.Dispatch<React.SetStateAction<UserReadingBadges>>;
+  gotRight: boolean;
+  gotWrong: boolean;
+  setGotRight: React.Dispatch<React.SetStateAction<boolean>>;
+  setGotWrong: React.Dispatch<React.SetStateAction<boolean>>;
+  isModalOpen: boolean;
+  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  modalBadge: ModalBadgeType;
+  setModalBadge: React.Dispatch<React.SetStateAction<ModalBadgeType>>;
+  badgeLevel: BadgeLevel;
+  setBadgeLevel: React.Dispatch<React.SetStateAction<BadgeLevel>>;
+  badgeProgress: BadgeProgress;
+  setBadgeProgress: React.Dispatch<React.SetStateAction<BadgeProgress>>;
+  storyLength: number;
+  storyPrompt: string;
+  setStoryPrompt: React.Dispatch<React.SetStateAction<string>>;
+  storyType: StoryType;
+  pointsToWin: number;
+  setPointsToWin: React.Dispatch<React.SetStateAction<number>>;
+};
 
 function GamePlay({
   sliderValue,
@@ -18,11 +55,9 @@ function GamePlay({
   gotWrong,
   setGotRight,
   setGotWrong,
-  userBadges,
-  setUserBadges,
-  isModalOpen,
+  userReadingBadges,
+  setUserReadingBadges,
   setIsModalOpen,
-  modalBadge,
   setModalBadge,
   storyLength,
   storyPrompt,
@@ -30,20 +65,22 @@ function GamePlay({
   storyType,
   pointsToWin,
   setPointsToWin,
-}) {
+}: GamePlayProps) {
   const [triggerNewStory, setTriggerNewStory] = useState(false);
   const [triggerNewEvaluation, setTriggerNewEvaluation] = useState(false);
-  const [storyResponseData, setStoryResponseData] = useState({
-    title: "",
-    body: "",
-    question_1: "",
-    question_2: "",
-    question_3: "",
-    answer_1: "",
-    answer_2: "",
-    answer_3: "",
-  });
-  const [evaluationData, setEvaluationData] = useState({
+  const [storyResponseData, setStoryResponseData] = useState<StoryResponseData>(
+    {
+      title: "",
+      body: "",
+      question_1: "",
+      question_2: "",
+      question_3: "",
+      answer_1: "",
+      answer_2: "",
+      answer_3: "",
+    }
+  );
+  const [evaluationData, setEvaluationData] = useState<EvaluationData>({
     is_correct_1: "",
     feedback_1: "",
     is_correct_2: "",
@@ -61,18 +98,13 @@ function GamePlay({
 
   // ***** STORY GENERATION *****
   // Function to hit generate_story endpoint (e.g. Anthropic API) to get a story based on values passed in
-  const getStory = async (
-    story_length,
-    difficulty,
-    story_topic,
-    story_type
-  ) => {
+  const getStory = async () => {
     try {
       const queryParams = new URLSearchParams({
-        story_length: story_length,
-        difficulty: difficulty,
-        story_topic: story_topic,
-        story_type: story_type,
+        story_length: storyLength.toString(),
+        difficulty: sliderValue.toString(),
+        story_topic: storyPrompt,
+        story_type: storyType,
       });
 
       const response = await fetch(
@@ -106,7 +138,7 @@ function GamePlay({
   // Triggers the getStory function but only after all input values (slider, prompt, storylength, storyType) have been updated
   useEffect(() => {
     if (triggerNewStory) {
-      getStory(storyLength, sliderValue, storyPrompt, storyType);
+      getStory();
       setTriggerNewStory(false);
     }
   }, [triggerNewStory, storyLength, sliderValue, storyPrompt, storyType]);

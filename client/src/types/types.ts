@@ -83,6 +83,8 @@ export type UserInfo = {
   [key: string]: string | undefined; // Index signature
 };
 
+export type CurrentApp = "Woof Math" | "Woof Reading" | "Woof Learning" | "";
+
 // in Game.tsx
 export type GameSelectorType =
   | "addition"
@@ -125,6 +127,8 @@ export type GameProps = {
   setBadgeLevel: React.Dispatch<React.SetStateAction<BadgeLevel>>;
   badgeProgress: BadgeProgress;
   setBadgeProgress: React.Dispatch<React.SetStateAction<BadgeProgress>>;
+  currentApp: CurrentApp;
+  setCurrentApp: React.Dispatch<React.SetStateAction<CurrentApp>>;
 };
 
 export type StoryType = "story" | "poem" | "ballad";
@@ -134,4 +138,26 @@ export type StorySelectorProps = {
   setStoryPrompt: React.Dispatch<SetStateAction<string>>;
   setStoryType: React.Dispatch<SetStateAction<StoryType>>;
   storyType: StoryType;
+};
+
+// Section 3: Reading site state
+export type StoryResponseData = {
+  title: string;
+  body: string;
+  question_1: string;
+  question_2: string;
+  question_3: string;
+  answer_1: string;
+  answer_2: string;
+  answer_3: string;
+};
+
+export type EvaluationData = {
+  is_correct_1: string;
+  feedback_1: string;
+  is_correct_2: string;
+  feedback_2: string;
+  is_correct_3: string;
+  feedback_3: string;
+  score: string;
 };
