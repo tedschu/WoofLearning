@@ -167,15 +167,16 @@ function GamePlay({
 
   // ***** USER ANSWERS AND EVALUATION *****
   // Handles user input values in "answer" boxes
-  const setFormValues = (event) => {
+  const setFormValues = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newObj = { ...storyResponseData };
-    newObj[event.target.name] = event.target.value;
+    const inputName = event.target.name as keyof StoryResponseData;
+    newObj[inputName] = event.target.value;
     setStoryResponseData(newObj);
   };
 
   // Submit button that calls "evaluateAnswers" function / API call
   // Only calls evaluateAnswers IF there are no user responses (answers) that are "bad words", from the badWords list.
-  const submit = (event) => {
+  const submit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (checkBadWords() === true) {
       setErrorText("Please only use nice words.");
@@ -213,7 +214,7 @@ function GamePlay({
   }, [triggerNewEvaluation, storyResponseData]);
 
   // Function to hit evaluate_answers endpoint (e.g. Anthropic API) to get a story based on values passed in
-  const evaluateAnswers = async (storyResponseData) => {
+  const evaluateAnswers = async (storyResponseData: StoryResponseData) => {
     try {
       const response = await fetch("/anthropic/evaluate_answers", {
         method: "POST",
@@ -272,10 +273,10 @@ function GamePlay({
 
   // Takes in raw evaluation score (0 - 3 questions correct) and adds multipliers to create point system.
   // Multiplier increases as the difficulty slider increases
-  function calculateScore(rawScore) {
+  function calculateScore(rawScore: number) {
     let addToScore = potentialPoints * rawScore;
 
-    let updatedScore = addToScore + userScore.score;
+    let updatedScore = addToScore + userScore.reading_score;
 
     postUserScore(updatedScore);
     setPointsWon(addToScore);
@@ -283,7 +284,7 @@ function GamePlay({
   }
 
   // Function to pass the updated score to the database, update scores state values for gameplay
-  const postUserScore = async (updatedScore) => {
+  const postUserScore = async (updatedScore: number) => {
     try {
       const storedToken = localStorage.getItem("token");
 
@@ -302,9 +303,10 @@ function GamePlay({
 
       // SET ALL STATE VALUES HERE (SCORES, BADGES, USER INFO, ETC.)
       if (response.ok) {
-        setUserScore({
-          score: updatedScore,
-        });
+        setUserScore((prevScores) => ({
+          ...prevScores,
+          reading_score: updatedScore,
+        }));
       }
     } catch (error) {
       console.error("Error fetching user data:", error);
@@ -406,7 +408,7 @@ function GamePlay({
   }
 
   // Function to pass the updated badges to the database
-  const postUserBadges = async (updatedBadges) => {
+  const postUserBadges = async (updatedBadges: Partial<UserReadingBadges>) => {
     try {
       const storedToken = localStorage.getItem("token");
 
@@ -432,7 +434,7 @@ function GamePlay({
 
   // Controls alert to user after submitting their answers, showing how many questions they got right and points accrued. Visible for 3.5 seconds.
   useEffect(() => {
-    let timer;
+    let timer: NodeJS.Timeout;
     if (gotRight) {
       timer = setTimeout(() => {
         setGotRight(false);

@@ -11,6 +11,7 @@ import {
   StoryType,
   StorySelectorProps,
   CurrentApp,
+  ModalBadgeType,
 } from "../../types/types";
 
 //TODO: CONVERT TO TS, ADD TYPE DECLARATIONS
@@ -36,7 +37,7 @@ function GameReading({
 
   // state for modal that opens when a new badge is won
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalBadge, setModalBadge] = useState<string>("");
+  const [modalBadge, setModalBadge] = useState<ModalBadgeType>("");
   const [storyPrompt, setStoryPrompt] = useState<string>("");
   const [pointsToWin, setPointsToWin] = useState(10);
 
@@ -106,12 +107,12 @@ function GameReading({
           sliderValue={sliderValue}
           setStoryPrompt={setStoryPrompt}
           storyType={storyType}
-          setStoryType={setStoryType}
           pointsToWin={pointsToWin}
           badgeProgress={badgeProgress}
           setBadgeProgress={setBadgeProgress}
           userReadingBadges={userReadingBadges}
           setUserReadingBadges={setUserReadingBadges}
+          badgeLEvel
         />
 
         <BadgeModal
