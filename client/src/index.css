@@ -549,14 +549,32 @@ nav {
   color: gray;
 }
 
-.totalScore {
+.totalScore-reading {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-.scoreFont {
+.totalScores-math {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* border: 1px solid #7dc2e0; */
+}
+
+.scoresContainer-math {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 0px;
+  gap: 5px;
+
+  /* grid-template-columns: [first] 50% [line2] 50%; */
+}
+
+.scoreFont-reading {
   /* color: #539ab9; */
   color: #d4492b;
   border: 1px solid lightgray;
@@ -564,6 +582,16 @@ nav {
   font-size: 60px;
   padding: 0px 15px;
   margin: 0px 10px;
+}
+
+.scoreFont-math {
+  /* color: #539ab9; */
+  color: #d4492b;
+  border: 1px solid lightgray;
+  border-radius: 8px;
+  font-size: 45px;
+  padding: 0px 12px;
+  margin: 0px 5px;
 }
 
 .subScoreContainer {
@@ -589,13 +617,22 @@ nav {
   font-size: 25px;
 }
 
-.badgesContainer {
+.badgesContainer-reading {
   display: flex;
   justify-content: center;
   align-items: center;
   /* flex-wrap: wrap; */
   padding: 10px 0;
   margin-top: 2px;
+}
+
+.badgesContainer-math {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 10px 0;
+  gap: 2px;
 }
 
 .badgesSubContainer {
@@ -650,6 +687,15 @@ nav {
 }
 
 /* GAME SELECTION and SLIDER STYLING */
+.gameSelectContainer-math {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0 10px 0;
+  gap: 5px;
+}
+
 .storySelectContainer {
   display: flex;
   flex-direction: column;
@@ -729,6 +775,29 @@ nav {
 }
 
 /* GAME PLAY CONTAINER and BOX STYLING */
+.gamePlayContainer-math {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.gamePlay-math {
+  background-color: #f6fcff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 95%;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 2px 2px 10px lightgray;
+}
+
+.gamePlay-math > form {
+  padding: 7px 0 0 0;
+}
+
 .storyContainer {
   display: flex;
   flex-direction: column;
@@ -1447,7 +1516,7 @@ ul li {
     width: 70px;
   }
 
-  .badgesContainer {
+  .badgesContainer-reading {
     gap: 5px;
   }
 

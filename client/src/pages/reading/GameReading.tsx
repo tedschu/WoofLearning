@@ -28,6 +28,7 @@ function GameReading({
   setBadgeProgress,
   currentApp,
   setCurrentApp,
+  setBadgeLevel,
 }: GameProps) {
   const [sliderValue, setSliderValue] = useState(1);
   const [storyType, setStoryType] = useState<StoryType>("story");
@@ -112,7 +113,9 @@ function GameReading({
           setBadgeProgress={setBadgeProgress}
           userReadingBadges={userReadingBadges}
           setUserReadingBadges={setUserReadingBadges}
-          badgeLEvel
+          badgeLevel={badgeLevel}
+          setBadgeLevel={setBadgeLevel}
+          setPointsToWin={setPointsToWin}
         />
 
         <BadgeModal

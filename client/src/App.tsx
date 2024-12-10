@@ -266,6 +266,7 @@ function App() {
               setBadgeProgress={setBadgeProgress}
               currentApp={currentApp}
               setCurrentApp={setCurrentApp}
+              setBadgeLevel={setBadgeLevel}
             />
           }
         />

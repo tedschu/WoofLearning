@@ -32,10 +32,10 @@ function ScoreBar({
   return (
     <>
       <div className="scoreBarContainer">
-        <div className="scoresContainer">
+        <div className="scoresContainer-math">
           {/* <div className="totalScores"> */}
-          <div className="totalScore">
-            <h1 className="scoreFont">{totalScore}</h1>
+          <div className="totalScores-math">
+            <h1 className="scoreFont-math">{totalScore}</h1>
             <h5>TOTAL SCORE</h5>
           </div>
 
@@ -59,7 +59,7 @@ function ScoreBar({
 
         {/* DIVS FOR THE BADGES */}
 
-        <div className="badgesContainer">
+        <div className="badgesContainer-math">
           {/* THE TERNARY WILL RENDER BADGES BASED ON WHETHER A USER IS IN LEVEL 1 OR 2 (E.G. IF badgeLevel STATE IS "1" OR "2") */}
 
           {badgeLevel.math_level === 1 ? (

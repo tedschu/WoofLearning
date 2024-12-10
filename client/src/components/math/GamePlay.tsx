@@ -392,8 +392,8 @@ function GamePlay({
 
   return (
     <>
-      <div className="gamePlayContainer">
-        <div className="gamePlay">
+      <div className="gamePlayContainer-math">
+        <div className="gamePlay-math">
           <h3>
             Question #{questionCount} (for
             <span className="pointsHighlight"> {addToScore} points</span>):

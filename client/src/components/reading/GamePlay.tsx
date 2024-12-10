@@ -66,6 +66,7 @@ function GamePlay({
   pointsToWin,
   setPointsToWin,
   setBadgeLevel,
+  badgeLevel,
 }: GamePlayProps) {
   const [triggerNewStory, setTriggerNewStory] = useState(false);
   const [triggerNewEvaluation, setTriggerNewEvaluation] = useState(false);
@@ -127,14 +128,9 @@ function GamePlay({
         story_type: storyType,
       });
 
-      console.log("Making API call with params:", queryParams.toString());
-      console.log("Making fetch call...");
-
       const response = await fetch(
         `/anthropic/generate_story?${queryParams.toString()}`
       );
-
-      console.log("Got response back: ", response.status);
 
       if (!response.ok) {
         const textResponse = await response.text();
@@ -241,6 +237,7 @@ function GamePlay({
       }
 
       const data = await response.json();
+      console.log(data);
 
       // Sets API response data into evaluationData state
       setCircularProgressSubmit(false);
@@ -287,19 +284,21 @@ function GamePlay({
   const postUserScore = async (updatedScore: number) => {
     try {
       const storedToken = localStorage.getItem("token");
+      console.log("updatedScore is:", updatedScore);
 
-      const response = await fetch(`/api/users/${userInfo.id}/score_reading`, {
+      const response = await fetch(`/api/users-reading/${userInfo.id}/score`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${storedToken}`,
         },
         body: JSON.stringify({
-          score: updatedScore,
+          reading_score: updatedScore,
         }),
       });
 
       const data = await response.json();
+      console.log(data);
 
       // SET ALL STATE VALUES HERE (SCORES, BADGES, USER INFO, ETC.)
       if (response.ok) {

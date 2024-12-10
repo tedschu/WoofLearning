@@ -26,7 +26,7 @@ function ScoreBar({ userScore, userReadingBadges, badgeLevel }: ScoreBarProps) {
   return (
     <>
       <div className="scoreBarContainer">
-        <div className="badgesContainer">
+        <div className="badgesContainer-reading">
           {/* TERNARY TO RENDER BADGES BASED ON "badgeLevel" STATE */}
           {badgeLevel.reading_level === 1 ? (
             <>
@@ -150,7 +150,7 @@ function ScoreBar({ userScore, userReadingBadges, badgeLevel }: ScoreBarProps) {
 
           {/* SCORE CONTAINER */}
           <div className="totalScore">
-            <h1 className="scoreFont">{userScore.reading_score}</h1>
+            <h1 className="scoreFont-reading">{userScore.reading_score}</h1>
             <h5>TOTAL SCORE</h5>
           </div>
 
