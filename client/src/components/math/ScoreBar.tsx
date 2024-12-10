@@ -31,7 +31,7 @@ function ScoreBar({
 }: ScoreBarProps) {
   return (
     <>
-      <div className="scoreBarContainer">
+      <div className="scoreBarContainer-math">
         <div className="scoresContainer-math">
           {/* <div className="totalScores"> */}
           <div className="totalScores-math">

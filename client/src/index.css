@@ -549,6 +549,16 @@ nav {
   color: gray;
 }
 
+.scoreBarContainer-math {
+  /* background: rgb(237, 237, 237); */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  grid-template-columns: [first] 50% [line2] 50%;
+  border-bottom: 1px solid rgb(232, 232, 232);
+  color: gray;
+}
+
 .totalScore-reading {
   display: flex;
   flex-direction: column;
@@ -589,7 +599,7 @@ nav {
   color: #d4492b;
   border: 1px solid lightgray;
   border-radius: 8px;
-  font-size: 45px;
+  font-size: 35px;
   padding: 0px 12px;
   margin: 0px 5px;
 }
@@ -631,7 +641,7 @@ nav {
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  padding: 10px 0;
+  padding: 10px 50px;
   gap: 2px;
 }
 
@@ -692,7 +702,7 @@ nav {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 20px 0 10px 0;
+  padding: 15px 0 10px 0;
   gap: 5px;
 }
 
@@ -767,7 +777,7 @@ nav {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 10px 0 5px 0;
+  padding: 7px 0 5px 0;
 }
 
 .sliderBox {
@@ -790,12 +800,12 @@ nav {
   align-items: center;
   width: 95%;
   border-radius: 10px;
-  padding: 10px;
+  padding: 20px 0px;
   box-shadow: 2px 2px 10px lightgray;
 }
 
 .gamePlay-math > form {
-  padding: 7px 0 0 0;
+  padding: 5px 0 0 0;
 }
 
 .storyContainer {
@@ -1472,6 +1482,10 @@ ul li {
     width: 57px;
   }
 
+  .badgesContainer-math {
+    padding: 10px 0;
+  }
+
   .storyContentContainer {
     width: 80%;
     padding: 10px 30px;
@@ -1497,18 +1511,34 @@ ul li {
     width: 75%;
   }
 
+  .gamePlay-math {
+    width: 75%;
+  }
+
   .scoresContainer {
+    gap: 15px;
+  }
+
+  .scoresContainer-math {
     gap: 15px;
   }
 
   .individualScores > h1 {
     font-size: 30px;
   }
+
+  .scoreFont-math {
+    font-size: 45px;
+  }
 }
 
 /* SCREEN IS ABOVE 900px (desktop) */
 @media screen and (min-width: 900px) {
   .scoresContainer {
+    gap: 2px;
+  }
+
+  .scoresContainer-math {
     gap: 2px;
   }
 
@@ -1634,5 +1664,19 @@ ul li {
   .gamePlay {
     width: 70%;
     padding: 30px 0px;
+  }
+
+  .gamePlay-math {
+    width: 60%;
+  }
+}
+
+/* SCREEN IS ABOVE 1,200px (desktop) */
+@media screen and (min-width: 1200px) {
+  .scoreBarContainer-math {
+    /* background: rgb(237, 237, 237); */
+    display: grid;
+    grid-template-columns: [first] 50% [line2] 50%;
+    border-bottom: 1px solid rgb(232, 232, 232);
   }
 }

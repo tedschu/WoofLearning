@@ -1,9 +1,16 @@
-import React from "react";
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
+import React from "react";
+
+type SliderTypes = {
+  setSliderValue: React.Dispatch<React.SetStateAction<number>>;
+  sliderValue: number;
+  setGotRight: React.Dispatch<React.SetStateAction<boolean>>;
+  setGotWrong: React.Dispatch<React.SetStateAction<boolean>>;
+  setStoryLength: React.Dispatch<React.SetStateAction<number>>;
+  pointsToWin: number;
+  setPointsToWin: React.Dispatch<React.SetStateAction<number>>;
+};
 
 const marks = [
   {
@@ -28,7 +35,7 @@ const marks = [
   },
 ];
 
-function valuetext(value) {
+function valuetext(value: number) {
   return `${value}°C`;
 }
 
@@ -40,17 +47,17 @@ export default function DiscreteSlider({
   setStoryLength,
   pointsToWin,
   setPointsToWin,
-}) {
-  const handleSliderChange = (event, newValue) => {
-    setSliderValue(newValue);
+}: SliderTypes) {
+  const handleSliderChange = (event: Event, newValue: number | number[]) => {
+    setSliderValue(newValue as number);
     setGotRight(false);
     setGotWrong(false);
-    storyLength(newValue);
-    assignPoints(newValue);
+    storyLength(newValue as number);
+    assignPoints(newValue as number);
   };
 
   // Sets the length of the story (ex. 500 words) in prompt based on the difficulty slider value
-  function storyLength(sliderValue) {
+  function storyLength(sliderValue: number) {
     switch (sliderValue) {
       case 1:
         setStoryLength(250);
@@ -71,7 +78,7 @@ export default function DiscreteSlider({
   }
 
   // Default state value for pointsToWin === 10 (in Game)
-  function assignPoints(sliderValue) {
+  function assignPoints(sliderValue: number) {
     let points;
 
     switch (sliderValue) {
