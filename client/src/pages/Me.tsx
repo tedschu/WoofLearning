@@ -121,6 +121,30 @@ function Me({
     }
   };
 
+  const readingList = Object.entries(userReadingBadges)
+    .filter(([key, value]) => value === true)
+    .map(([badgeName, value]) => (
+      <img
+        key={badgeName}
+        src={badgeImages[badgeName as BadgeName]}
+        alt=""
+        className="badgeEnabled-me"
+      />
+      // <h1>{badgeName}</h1>
+    ));
+
+  const mathList = Object.entries(userMathBadges)
+    .filter(([key, value]) => value === true)
+    .map(([badgeName, value]) => (
+      <img
+        key={badgeName}
+        src={badgeImages[badgeName as BadgeName]}
+        alt=""
+        className="badgeEnabled-me"
+      />
+      // <h1>{badgeName}</h1>
+    ));
+
   return (
     <>
       <Nav
@@ -141,36 +165,27 @@ function Me({
           {/* CONTAINER FOR USER PLAY DATA */}
           <div className="accountContentContainer">
             <h2>Here's your progress on Woof Learning games:</h2>
-            <h3>Badges:</h3>
+            <h3>Badges you've earned:</h3>
             <div className="accountRowContainer">
               <div className="accountBadges">
-                {Object.entries(userReadingBadges)
-                  .filter(([key, value]) => value === true)
-                  .map(([badgeName, value]) => (
-                    <img
-                      key={badgeName}
-                      src={badgeImages[badgeName as BadgeName]}
-                      alt=""
-                      className="badgeEnabled-me"
-                    />
-                    // <h1>{badgeName}</h1>
-                  ))}
+                <h3 className="reading-font">Woof Reading:</h3>
+                {readingList.length === 0 ? (
+                  <span className="accountAlert">None yet!</span>
+                ) : (
+                  readingList
+                )}
               </div>
+
               <div className="accountBadges">
-                {Object.entries(userMathBadges)
-                  .filter(([key, value]) => value === true)
-                  .map(([badgeName, value]) => (
-                    <img
-                      key={badgeName}
-                      src={badgeImages[badgeName as BadgeName]}
-                      alt=""
-                      className="badgeEnabled-me"
-                    />
-                    // <h1>{badgeName}</h1>
-                  ))}
+                <h3 className="math-font">Woof Math:</h3>
+                {mathList.length === 0 ? (
+                  <span className="accountAlert">None yet!</span>
+                ) : (
+                  mathList
+                )}
               </div>
             </div>
-            <h3>Points you've earned by level:</h3>
+            <h3>Points you've earned by difficulty level:</h3>
             <div className="accountRowContainer">
               <div className="accountBadges">Reading</div>
               <div className="accountBadges">Math</div>
