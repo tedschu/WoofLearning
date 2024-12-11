@@ -227,6 +227,23 @@ button {
   box-shadow: 2px 2px 6px #c1c1c1;
 }
 
+.button.gameSelect-base {
+  width: 200px;
+  border-radius: 10px;
+  color: white;
+  font-size: 22px;
+  border: none;
+  box-shadow: 2px 2px 6px #c1c1c1;
+}
+
+.button.gameSelect-math {
+  background-image: linear-gradient(#d4492b, #ff8b71);
+}
+
+.button.gameSelect-reading {
+  background-image: linear-gradient(#0085bd, #71afcb);
+}
+
 /* WELCOME PAGE STYLING */
 .welcomePageContainer {
   display: flex;
@@ -465,13 +482,26 @@ button {
   margin-bottom: 20px;
 }
 
+.appSelector-logoContainer > h1 {
+  font-size: 29px;
+  color: white;
+}
+
 .appSelector-logoContainer > img {
   animation: wiggle 2.5s linear infinite;
+}
+
+.appSelector-logo {
+  width: 250px;
+  margin-bottom: 18px;
 }
 
 .appSelector-flexRow {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
 
 .appSelector-contentBox {
@@ -487,14 +517,13 @@ button {
   margin: 10px;
   box-shadow: 2px 2px 7px gray;
   padding: 10px;
-  background-color: white;
+  background-color: rgba(254, 254, 254, 0.7);
 }
 
 /* NAV BAR STYLING */
-nav {
+.nav-base {
   height: 65px;
   width: 100%;
-  background-image: linear-gradient(#04628a, #7dc2e0);
   display: grid;
   grid-template-columns: [first] 25% [line2] 50% [line3] 25%;
   position: fixed;
@@ -503,6 +532,14 @@ nav {
   border-bottom: 1px solid rgb(232, 232, 232);
   box-shadow: 2px 2px 7px lightgray;
   z-index: 2;
+}
+
+.nav-reading {
+  background-image: linear-gradient(#04628a, #7dc2e0);
+}
+
+.nav-math {
+  background-image: linear-gradient(#d4492b, #ed8d77);
 }
 
 .navLogo {
@@ -667,6 +704,11 @@ nav {
   filter: grayscale(100%);
   opacity: 60%;
   z-index: 1;
+}
+
+.badgeEnabled-me {
+  color: rgb(68, 68, 179);
+  width: 55px;
 }
 
 .badgeDogDisabled {
@@ -933,10 +975,10 @@ nav {
 }
 
 .answerBox > input {
-  border: 1px solid lightgray;
+  border: 2px solid #dd6e55;
   border-radius: 9px;
   padding: 7px 10px;
-  background: #fcefec;
+  background: #fdf7f6;
   font-size: 45px;
   min-width: 150px;
   width: 170px;
@@ -949,6 +991,7 @@ nav {
   font-size: 25px;
   line-height: inherit;
   vertical-align: middle;
+  color: rgb(198, 198, 198);
 }
 
 .questionBox {
@@ -1262,11 +1305,27 @@ p {
   align-items: center;
   width: 75%;
   margin: 50px 0px 20px 0px;
-  background-color: #f5f5f5;
-  border-radius: 12px;
+  background-color: #f7f7f7;
+  border-radius: 14px;
   padding: 20px;
   gap: 5px;
   text-align: center;
+}
+
+.accountRowContainer {
+  display: flex;
+  flex-direction: row;
+  background-color: red;
+}
+
+.accountBadges {
+  display: inline-flexbox;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 10px;
+  margin: 10px;
+  width: 200px;
+  background-color: orange;
 }
 
 .accountFont {
@@ -1501,9 +1560,6 @@ ul li {
 
   .navUser {
     padding-right: 15px;
-  }
-
-  .navUser > h4 {
     font-size: 22px;
   }
 

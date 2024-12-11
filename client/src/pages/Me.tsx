@@ -3,6 +3,22 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 //import ScoreBar from "../components/";
 import Nav from "../components/Nav";
+import badge_1_1_bernese from "../assets/badges/badge_1_1_bernese.png";
+import badge_1_2_chihuahua from "../assets/badges/badge_1_2_chihuahua.png";
+import badge_1_3_waterdog from "../assets/badges/badge_1_3_waterdog.png";
+import badge_1_4_boxer from "../assets/badges/badge_1_4_boxer.png";
+import badge_1_5_husky from "../assets/badges/badge_1_5_husky.png";
+import badge_1_6_golden from "../assets/badges/badge_1_6_golden.png";
+import badge_1_7_cat from "../assets/badges/badge_1_7_cat.png";
+import badge_1_8_goldendoodle from "../assets/badges/badge_1_8_goldendoodle.png";
+import badge_2_1_borderCollie from "../assets/badges/badge_2_1_borderCollie.png";
+import badge_2_2_terrier from "../assets/badges/badge_2_2_terrier.png";
+import badge_2_3_australianShepherd from "../assets/badges/badge_2_3_australianShepherd.png";
+import badge_2_4_shibaInu from "../assets/badges/badge_2_4_shibaInu.png";
+import badge_2_5_cat from "../assets/badges/badge_2_5_cat.png";
+import badge_2_6_bernese from "../assets/badges/badge_2_6_bernese.png";
+import badge_2_7_poodle from "../assets/badges/badge_2_7_poodle.png";
+import badge_2_8_golden from "../assets/badges/badge_2_8_golden.png";
 import {
   UserInfo,
   UserReadingBadges,
@@ -21,6 +37,27 @@ type MeProps = {
   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
   currentApp: CurrentApp;
 };
+
+const badgeImages = {
+  badge_1_1_bernese: badge_1_1_bernese,
+  badge_1_2_chihuahua: badge_1_2_chihuahua,
+  badge_1_3_waterdog: badge_1_3_waterdog,
+  badge_1_4_boxer: badge_1_4_boxer,
+  badge_1_5_husky: badge_1_5_husky,
+  badge_1_6_golden: badge_1_6_golden,
+  badge_1_7_cat: badge_1_7_cat,
+  badge_1_8_goldendoodle: badge_1_8_goldendoodle,
+  badge_2_1_borderCollie: badge_2_1_borderCollie,
+  badge_2_2_terrier: badge_2_2_terrier,
+  badge_2_3_australianShepherd: badge_2_3_australianShepherd,
+  badge_2_4_shibaInu: badge_2_4_shibaInu,
+  badge_2_5_cat: badge_2_5_cat,
+  badge_2_6_bernese: badge_2_6_bernese,
+  badge_2_7_poodle: badge_2_7_poodle,
+  badge_2_8_golden: badge_2_8_golden,
+} as const;
+
+type BadgeName = keyof typeof badgeImages;
 
 function Me({
   userInfo,
@@ -98,12 +135,50 @@ function Me({
           totalScore={totalScore}
           userBadges={userBadges}
         /> */}
+        <h2>Welcome, {userInfo.username}!</h2>
 
         <div className="accountPageContainer">
+          {/* CONTAINER FOR USER PLAY DATA */}
           <div className="accountContentContainer">
-            <h2>
-              Welcome, {userInfo.username}! Here's what you've shared with us:
-            </h2>
+            <h2>Here's your progress on Woof Learning games:</h2>
+            <h3>Badges:</h3>
+            <div className="accountRowContainer">
+              <div className="accountBadges">
+                {Object.entries(userReadingBadges)
+                  .filter(([key, value]) => value === true)
+                  .map(([badgeName, value]) => (
+                    <img
+                      key={badgeName}
+                      src={badgeImages[badgeName as BadgeName]}
+                      alt=""
+                      className="badgeEnabled-me"
+                    />
+                    // <h1>{badgeName}</h1>
+                  ))}
+              </div>
+              <div className="accountBadges">
+                {Object.entries(userMathBadges)
+                  .filter(([key, value]) => value === true)
+                  .map(([badgeName, value]) => (
+                    <img
+                      key={badgeName}
+                      src={badgeImages[badgeName as BadgeName]}
+                      alt=""
+                      className="badgeEnabled-me"
+                    />
+                    // <h1>{badgeName}</h1>
+                  ))}
+              </div>
+            </div>
+            <h3>Points you've earned by level:</h3>
+            <div className="accountRowContainer">
+              <div className="accountBadges">Reading</div>
+              <div className="accountBadges">Math</div>
+            </div>
+          </div>
+
+          {/* CONTAINER FOR USER PERSONAL DATA AND USER FUNCTIONS (DELETE, CONTACT) */}
+          <div className="accountContentContainer">
             {/* <li>
               Name: <span className="accountFont">{userInfo.name}</span>
             </li> */}

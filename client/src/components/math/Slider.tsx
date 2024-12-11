@@ -41,7 +41,7 @@ export default function DiscreteSlider({
     <div className="sliderContainer">
       <h3>How hard should the questions be?</h3>
 
-      <Box sx={{ width: 300 }} className="sliderBox">
+      <Box sx={{ width: 260 }} className="sliderBox">
         <Slider
           aria-label="Custom marks"
           value={sliderValue}

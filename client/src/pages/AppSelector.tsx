@@ -3,15 +3,16 @@
 
 import { useNavigate } from "react-router-dom";
 import React, { useEffect } from "react";
-import { CurrentApp } from "../types/types";
+import { CurrentApp, UserInfo } from "../types/types";
 import woofMathLogo from "./../assets/woofmath_logo_1.png";
 
 type AppSelectorProps = {
   currentApp: CurrentApp;
   setCurrentApp: React.Dispatch<React.SetStateAction<CurrentApp>>;
+  userInfo: UserInfo;
 };
 
-function AppSelector({ setCurrentApp }: AppSelectorProps) {
+function AppSelector({ setCurrentApp, userInfo }: AppSelectorProps) {
   const navigate = useNavigate();
 
   // If a user is not signed in (no token) they are redirected to the login page.
@@ -41,20 +42,27 @@ function AppSelector({ setCurrentApp }: AppSelectorProps) {
             <img
               src={woofMathLogo}
               alt="WoofMath logo"
-              className="woofMathLogo"
+              className="appSelector-logo"
             />
-            <h1>Hey you! Which game do you want to play?</h1>
+            <h1>Hey, {userInfo.username}!</h1>
+            <h1>Which game do you want to play?</h1>
           </div>
           <div className="appSelector-flexRow">
             <div className="appSelector-contentBox">
               WOOF READING
-              <button className="button gameSelect" onClick={navReading}>
+              <button
+                className="button gameSelect-base button gameSelect-reading"
+                onClick={navReading}
+              >
                 Go play!
               </button>
             </div>
             <div className="appSelector-contentBox">
               WOOF MATH
-              <button className="button gameSelect" onClick={navMath}>
+              <button
+                className="button gameSelect-base button gameSelect-math"
+                onClick={navMath}
+              >
                 Go play!
               </button>
             </div>

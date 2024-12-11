@@ -12,7 +12,13 @@ type NavTypes = {
 function Nav({ isLoggedIn, userInfo, currentApp }: NavTypes) {
   return (
     <>
-      <nav>
+      <nav
+        className={
+          currentApp === "Woof Math"
+            ? "nav-base nav-math"
+            : "nav-base nav-reading"
+        }
+      >
         <Link to={"/"} className="navLogo">
           <img src={woofMathLogo} alt="" />
         </Link>

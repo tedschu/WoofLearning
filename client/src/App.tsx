@@ -219,6 +219,7 @@ function App() {
             <AppSelector
               currentApp={currentApp}
               setCurrentApp={setCurrentApp}
+              userInfo={userInfo}
             />
           }
         />
