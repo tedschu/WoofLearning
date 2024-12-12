@@ -245,6 +245,7 @@ function GamePlay({
     currentScore: UserScore
   ): Partial<UserScore> {
     const updatedScores: Partial<UserScore> = {};
+    console.log("updatedScores initially is: ", updatedScores);
     switch (gameSelector) {
       case "addition":
         updatedScores.addition_score = addToScore + currentScore.addition_score;
@@ -271,6 +272,8 @@ function GamePlay({
 
     // UPDATES POINTS BY LEVEL (EX. "math_L1_points") IN "SCORE_MATH" TABLE
     updatedScores[mathKey] = addToScore + currentScore[mathKey];
+
+    console.log("updatedScores finally is: ", updatedScores);
 
     return updatedScores;
   }

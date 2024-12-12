@@ -78,6 +78,9 @@ ChartJS.register(
   Legend
 );
 
+ChartJS.defaults.font.family = "Patrick Hand";
+ChartJS.defaults.font.size = "15px";
+
 function Me({
   userInfo,
   userScore,
@@ -164,8 +167,6 @@ function Me({
       // <h1>{badgeName}</h1>
     ));
 
-  console.log(userScore);
-
   const chartDataMath = {
     labels: ["Level 1", "Level 2", "Level 3", "Level 4", "Level 5"],
     datasets: [
@@ -178,7 +179,24 @@ function Me({
           userScore.math_L4_points,
           userScore.math_L5_points,
         ],
-        backgroundColor: "#f7f7f7",
+        backgroundColor: "#dd6e55",
+      },
+    ],
+  };
+
+  const chartDataReading = {
+    labels: ["Level 1", "Level 2", "Level 3", "Level 4", "Level 5"],
+    datasets: [
+      {
+        label: "Points by level",
+        data: [
+          userScore.reading_L1_points,
+          userScore.reading_L2_points,
+          userScore.reading_L3_points,
+          userScore.reading_L4_points,
+          userScore.reading_L5_points,
+        ],
+        backgroundColor: "#a6d5ea",
       },
     ],
   };
@@ -188,14 +206,42 @@ function Me({
     maintainAspectRatio: false,
     plugins: {
       legend: {
-        position: "top",
+        display: false,
       },
       title: {
-        display: true,
-        text: "Points by level",
+        display: false,
       },
     },
   };
+
+  const levelConversion = {
+    math_L1_points: "level 1",
+    math_L2_points: "level 2",
+    math_L3_points: "level 3",
+    math_L4_points: "level 4",
+    math_L5_points: "level 5",
+    reading_L1_points: "level 1",
+    reading_L2_points: "level 2",
+    reading_L3_points: "level 3",
+    reading_L4_points: "level 4",
+    reading_L5_points: "level 5",
+  };
+
+  const mathLevelArray = Object.entries(userScore)
+    .filter(([key, value]) => key.startsWith("math"))
+    .map(([key, value]) => [levelConversion[key], value]);
+
+  const highestMathLevel = mathLevelArray.reduce((max, current) =>
+    current[1] > max[1] ? current : max
+  );
+
+  const readingLevelArray = Object.entries(userScore)
+    .filter(([key, value]) => key.startsWith("reading_L"))
+    .map(([key, value]) => [levelConversion[key], value]);
+
+  const highestReadingLevel = readingLevelArray.reduce((max, current) =>
+    current[1] > max[1] ? current : max
+  );
 
   return (
     <>
@@ -237,11 +283,33 @@ function Me({
                 )}
               </div>
             </div>
-            <h3>Points you've earned by difficulty level:</h3>
+            <h3>Points you've earned:</h3>
             <div className="accountRowContainer">
-              <div className="accountBadges">Reading</div>
-              <div className="chart">
-                <Bar options={options} data={chartDataMath} />
+              <div className="chartBox">
+                <div className="chartTitle">
+                  <h3 className="reading-font">Woof Reading</h3>
+                  <p>You have {totalScore} total points</p>
+                  <p>
+                    Most of your points ({highestReadingLevel[1]}) are from{" "}
+                    {highestReadingLevel[0]}
+                  </p>
+                </div>
+                <div className="chart">
+                  <Bar options={options} data={chartDataReading}></Bar>
+                </div>
+              </div>
+              <div className="chartBox">
+                <div className="chartTitle">
+                  <h3 className="math-font">Woof Math</h3>
+                  <p>You have {totalScore} total points</p>
+                  <p>
+                    Most of your points ({highestMathLevel[1]}) are from{" "}
+                    {highestMathLevel[0]}
+                  </p>
+                </div>
+                <div className="chart">
+                  <Bar options={options} data={chartDataMath} />
+                </div>
               </div>
             </div>
           </div>

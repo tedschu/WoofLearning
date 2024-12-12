@@ -140,7 +140,6 @@ function GamePlay({
       }
 
       const data = await response.json();
-      console.log("Success data ", data);
       setCircularProgress(false);
       setStoryResponseData({
         title: data.Title,
@@ -273,18 +272,29 @@ function GamePlay({
   function calculateScore(rawScore: number) {
     let addToScore = potentialPoints * rawScore;
 
-    let updatedScore = addToScore + userScore.reading_score;
+    function getReadingLevelKey(level: number): keyof UserScore {
+      const key = `reading_L${level}_points` as keyof UserScore;
+      return key;
+    }
+
+    const readingKey = getReadingLevelKey(sliderValue);
+
+    const updatedScore: Partial<UserScore> = {};
+
+    updatedScore.reading_score = addToScore + userScore.reading_score;
+    updatedScore[readingKey] = addToScore + userScore[readingKey];
+
+    console.log("updatedScore is: ", updatedScore);
 
     postUserScore(updatedScore);
     setPointsWon(addToScore);
-    updateBadges(updatedScore);
+    updateBadges(updatedScore.reading_score);
   }
 
   // Function to pass the updated score to the database, update scores state values for gameplay
-  const postUserScore = async (updatedScore: number) => {
+  const postUserScore = async (updatedScore: Partial<UserScore>) => {
     try {
       const storedToken = localStorage.getItem("token");
-      console.log("updatedScore is:", updatedScore);
 
       const response = await fetch(`/api/users-reading/${userInfo.id}/score`, {
         method: "PUT",
@@ -292,9 +302,7 @@ function GamePlay({
           "Content-Type": "application/json",
           Authorization: `Bearer ${storedToken}`,
         },
-        body: JSON.stringify({
-          reading_score: updatedScore,
-        }),
+        body: JSON.stringify(updatedScore),
       });
 
       const data = await response.json();
@@ -304,7 +312,7 @@ function GamePlay({
       if (response.ok) {
         setUserScore((prevScores) => ({
           ...prevScores,
-          reading_score: updatedScore,
+          ...updatedScore,
         }));
       }
     } catch (error) {
