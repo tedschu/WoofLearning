@@ -67,6 +67,11 @@ p {
   font-size: 22px;
 }
 
+.grayText {
+  color: rgb(107, 106, 106);
+  font-size: 16px;
+}
+
 /* #root {
             padding-top: 70px;
           } */
@@ -199,12 +204,12 @@ button {
 .button.getBack {
   width: 200px;
   border-radius: 10px;
-  background-image: linear-gradient(#0085bd, #71afcb);
+  background-image: linear-gradient(#d4492b, #ff8b71);
   color: white;
   font-size: 22px;
   border: none;
   box-shadow: 2px 2px 6px #c1c1c1;
-  margin-top: 40px;
+  margin-top: 25px;
 }
 
 .button.accountGray {
@@ -228,20 +233,32 @@ button {
 }
 
 .button.gameSelect-base {
-  width: 200px;
+  width: 230px;
   border-radius: 10px;
+  padding: 10px;
   color: white;
-  font-size: 22px;
-  border: none;
-  box-shadow: 2px 2px 6px #c1c1c1;
+  font-size: 28px;
+  box-shadow: 2px 2px 6px #919191;
 }
 
 .button.gameSelect-math {
-  background-image: linear-gradient(#d4492b, #ff8b71);
+  /* background-image: linear-gradient(#d4492b, #ff8b71); */
+  background: #d4492b;
+  border: 2px solid #d4492b;
+}
+
+.button.gameSelect-math:hover {
+  background: #c73b1b;
 }
 
 .button.gameSelect-reading {
-  background-image: linear-gradient(#0085bd, #71afcb);
+  /* background-image: linear-gradient(#0085bd, #71afcb); */
+  background: #0085bd;
+  border: 2px solid #0085bd;
+}
+
+.button.gameSelect-reading:hover {
+  background: #0071a2;
 }
 
 /* WELCOME PAGE STYLING */
@@ -512,7 +529,6 @@ button {
   align-items: center;
   border: 1px solid rgb(190, 190, 190);
   border-radius: 12px;
-  font-family: "Darumadrop One";
   font-size: 40px;
   margin: 10px;
   box-shadow: 2px 2px 7px gray;
@@ -1299,12 +1315,13 @@ p {
   justify-content: center;
   align-items: center;
   width: 95%;
-  margin: 50px 0px 20px 0px;
+  margin: 20px 0px 20px 0px;
   background-color: #f7f7f7;
   border-radius: 14px;
   padding: 20px;
   gap: 5px;
   text-align: center;
+  border: 1px solid rgb(223, 223, 223);
 }
 
 .accountContentContainer > h3 {
@@ -1317,33 +1334,38 @@ p {
   display: flex;
   flex-direction: column;
   width: 92%;
-  border: 1px solid rgb(218, 218, 218);
-  border-radius: 8px;
+  border: 1px solid white;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 3px 3px 3px rgb(229, 229, 229);
+  padding: 10px;
 }
 
 .accountBadges {
   display: inline-flexbox;
   flex-direction: row;
   flex-wrap: wrap;
-  margin: 10px;
+  /* margin: 10px; */
 }
 
 .reading-font {
   color: #0085bd;
   font-variant: small-caps;
+  font-size: 28px;
 }
 
 .math-font {
   color: #d4492b;
   font-variant: small-caps;
+  font-size: 28px;
 }
 
 .chart {
   width: 100%;
   max-width: 800px;
-  margin: 20px auto;
+
   padding: 20px;
-  box-shadow: 1px 1px 1px lightgray;
+
   border-radius: 8px;
   /* background-color: white; */
 }
@@ -1621,12 +1643,6 @@ ul li {
   .scoreFont-math {
     font-size: 45px;
   }
-
-  .accountRowContainer {
-    display: grid;
-    grid-template-columns: [first] 50% [line2] 50%;
-    flex-direction: row;
-  }
 }
 
 /* SCREEN IS ABOVE 900px (desktop) */
@@ -1637,6 +1653,12 @@ ul li {
 
   .scoresContainer-math {
     gap: 2px;
+  }
+
+  .accountRowContainer {
+    display: grid;
+    grid-template-columns: [first] 50% [line2] 50%;
+    flex-direction: row;
   }
 
   .eachBadge > img {

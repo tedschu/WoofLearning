@@ -168,7 +168,7 @@ function Me({
     ));
 
   const chartDataMath = {
-    labels: ["Level 1", "Level 2", "Level 3", "Level 4", "Level 5"],
+    labels: ["1 (easier)", "2", "3", "4", "5 (harder)"],
     datasets: [
       {
         label: "Points by level",
@@ -185,7 +185,7 @@ function Me({
   };
 
   const chartDataReading = {
-    labels: ["Level 1", "Level 2", "Level 3", "Level 4", "Level 5"],
+    labels: ["K - 1st", "2nd", "3rd", "4th", "5th+"],
     datasets: [
       {
         label: "Points by level",
@@ -210,23 +210,51 @@ function Me({
       },
       title: {
         display: false,
+        text: "Points by level",
+      },
+      tooltip: {
+        enabled: true,
+        mode: "index",
+        intersect: false,
+        callbacks: {
+          label: function (context) {
+            return `Score: ${context.parsed.y}`; // Customize the tooltip text
+          },
+          title: function (context) {
+            return `Difficulty: ${context[0].label}`; // Customize the tooltip title
+          },
+        },
+        backgroundColor: "rgba(80, 80, 80, 0.8)",
+        padding: 12,
+        titleColor: "white",
+        titleFont: {
+          size: 14,
+          weight: "bold",
+        },
+        bodyColor: "white",
+        bodyFont: {
+          size: 16,
+        },
+        borderColor: "rgba(255, 255, 255, 0.2)",
+        borderWidth: 1,
       },
     },
   };
 
   const levelConversion = {
-    math_L1_points: "level 1",
+    math_L1_points: "level 1 (easier)",
     math_L2_points: "level 2",
     math_L3_points: "level 3",
     math_L4_points: "level 4",
-    math_L5_points: "level 5",
-    reading_L1_points: "level 1",
-    reading_L2_points: "level 2",
-    reading_L3_points: "level 3",
-    reading_L4_points: "level 4",
-    reading_L5_points: "level 5",
+    math_L5_points: "level 5 (harder)",
+    reading_L1_points: "K - 1st grade level",
+    reading_L2_points: "2nd grade level",
+    reading_L3_points: "3rd grade level",
+    reading_L4_points: "4th grade level",
+    reading_L5_points: "5th grade level",
   };
 
+  // Variables to isolate math or reading level values (ex. math_L1_points) and then return the HIGHEST of each
   const mathLevelArray = Object.entries(userScore)
     .filter(([key, value]) => key.startsWith("math"))
     .map(([key, value]) => [levelConversion[key], value]);
@@ -257,16 +285,18 @@ function Me({
           totalScore={totalScore}
           userBadges={userBadges}
         /> */}
-        <h2>Welcome, {userInfo.username}!</h2>
 
         <div className="accountPageContainer">
+          <button className="button getBack" onClick={navHome}>
+            Get back to playing!
+          </button>
           {/* CONTAINER FOR USER PLAY DATA */}
           <div className="accountContentContainer">
             <h2>Here's your progress on Woof Learning games:</h2>
             <h3>Badges you've earned:</h3>
             <div className="accountRowContainer">
               <div className="accountBadges">
-                <h3 className="reading-font">Woof Reading:</h3>
+                <h3 className="reading-font">Woof Reading</h3>
                 {readingList.length === 0 ? (
                   <span className="accountAlert">None yet!</span>
                 ) : (
@@ -275,7 +305,7 @@ function Me({
               </div>
 
               <div className="accountBadges">
-                <h3 className="math-font">Woof Math:</h3>
+                <h3 className="math-font">Woof Math</h3>
                 {mathList.length === 0 ? (
                   <span className="accountAlert">None yet!</span>
                 ) : (
@@ -287,9 +317,10 @@ function Me({
             <div className="accountRowContainer">
               <div className="chartBox">
                 <div className="chartTitle">
-                  <h3 className="reading-font">Woof Reading</h3>
-                  <p>You have {totalScore} total points</p>
-                  <p>
+                  <h3 className="reading-font">
+                    Woof Reading: {userScore.reading_score} points
+                  </h3>
+                  <p className="grayText">
                     Most of your points ({highestReadingLevel[1]}) are from{" "}
                     {highestReadingLevel[0]}
                   </p>
@@ -300,9 +331,8 @@ function Me({
               </div>
               <div className="chartBox">
                 <div className="chartTitle">
-                  <h3 className="math-font">Woof Math</h3>
-                  <p>You have {totalScore} total points</p>
-                  <p>
+                  <h3 className="math-font">Woof Math: {totalScore} points</h3>
+                  <p className="grayText">
                     Most of your points ({highestMathLevel[1]}) are from{" "}
                     {highestMathLevel[0]}
                   </p>
@@ -316,6 +346,7 @@ function Me({
 
           {/* CONTAINER FOR USER PERSONAL DATA AND USER FUNCTIONS (DELETE, CONTACT) */}
           <div className="accountContentContainer">
+            <h2>Here are your details:</h2>
             {/* <li>
               Name: <span className="accountFont">{userInfo.name}</span>
             </li> */}
@@ -345,10 +376,6 @@ function Me({
               Security answer #2:{" "}
               <span className="accountFont">{userInfo.security_answer_2}</span>
             </li>
-
-            <button className="button getBack" onClick={navHome}>
-              Get back to playing!
-            </button>
 
             <Link to={"mailto:wooflearning@gmail.com"}>
               <button className="button accountGray">

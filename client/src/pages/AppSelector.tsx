@@ -48,24 +48,36 @@ function AppSelector({ setCurrentApp, userInfo }: AppSelectorProps) {
             <h1>Which game do you want to play?</h1>
           </div>
           <div className="appSelector-flexRow">
-            <div className="appSelector-contentBox">
-              WOOF READING
+            <button
+              className="button gameSelect-base button gameSelect-reading"
+              onClick={navReading}
+            >
+              Woof Reading
+            </button>
+            <button
+              className="button gameSelect-base button gameSelect-math"
+              onClick={navMath}
+            >
+              Woof Math
+            </button>
+            {/* <div className="appSelector-contentBox">
+              Woof Reading
               <button
                 className="button gameSelect-base button gameSelect-reading"
                 onClick={navReading}
               >
-                Go play!
+                Woof Reading
               </button>
             </div>
             <div className="appSelector-contentBox">
-              WOOF MATH
+              Woof Math
               <button
                 className="button gameSelect-base button gameSelect-math"
                 onClick={navMath}
               >
-                Go play!
+                Woof Math
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

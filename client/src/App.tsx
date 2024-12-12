@@ -154,6 +154,8 @@ function App() {
 
           const data = await response.json();
 
+          console.log(data);
+
           // SET ALL STATE VALUES HERE (SCORES, BADGES, USER INFO, ETC.)
           if (response.ok) {
             setUserInfo({
