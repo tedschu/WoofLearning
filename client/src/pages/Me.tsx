@@ -3,6 +3,16 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 //import ScoreBar from "../components/";
 import Nav from "../components/Nav";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import { Bar } from "react-chartjs-2";
 import badge_1_1_bernese from "../assets/badges/badge_1_1_bernese.png";
 import badge_1_2_chihuahua from "../assets/badges/badge_1_2_chihuahua.png";
 import badge_1_3_waterdog from "../assets/badges/badge_1_3_waterdog.png";
@@ -58,6 +68,15 @@ const badgeImages = {
 } as const;
 
 type BadgeName = keyof typeof badgeImages;
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 function Me({
   userInfo,
@@ -145,6 +164,39 @@ function Me({
       // <h1>{badgeName}</h1>
     ));
 
+  console.log(userScore);
+
+  const chartDataMath = {
+    labels: ["Level 1", "Level 2", "Level 3", "Level 4", "Level 5"],
+    datasets: [
+      {
+        label: "Points by level",
+        data: [
+          userScore.math_L1_points,
+          userScore.math_L2_points,
+          userScore.math_L3_points,
+          userScore.math_L4_points,
+          userScore.math_L5_points,
+        ],
+        backgroundColor: "#f7f7f7",
+      },
+    ],
+  };
+
+  const options = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: "top",
+      },
+      title: {
+        display: true,
+        text: "Points by level",
+      },
+    },
+  };
+
   return (
     <>
       <Nav
@@ -188,7 +240,9 @@ function Me({
             <h3>Points you've earned by difficulty level:</h3>
             <div className="accountRowContainer">
               <div className="accountBadges">Reading</div>
-              <div className="accountBadges">Math</div>
+              <div className="chart">
+                <Bar options={options} data={chartDataMath} />
+              </div>
             </div>
           </div>
 

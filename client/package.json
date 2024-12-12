@@ -22,7 +22,9 @@
     "@mui/material": "^5.15.21",
     "@stripe/react-stripe-js": "^3.0.0",
     "@stripe/stripe-js": "^5.2.0",
+    "chart.js": "^4.4.7",
     "react": "^18.3.1",
+    "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.24.0",
     "stripe": "^17.4.0"

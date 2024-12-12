@@ -1337,6 +1337,16 @@ p {
   font-variant: small-caps;
 }
 
+.chart {
+  width: 500px;
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  box-shadow: 1px 1px 1px lightgray;
+  border-radius: 8px;
+  background-color: white;
+}
+
 .accountAlert {
   color: rgb(162, 162, 162);
   font-size: 20px;
