@@ -22,8 +22,8 @@ function Welcome() {
           <div className="welcomeContentContainer">
             <h1>Woof Learning</h1>
             <p>
-              Earn points + super cool animal badges as you play fun math and
-              reading games. The more you play, the more badges you get!
+              Build math and reading skills while earning points and (really
+              cool) animal badges!
             </p>
 
             <div className="welcomeButtonContainer">
@@ -39,31 +39,27 @@ function Welcome() {
 
         <div className="welcomeAboutSeparator">
           {" "}
-          <h1>Learn more about the game</h1>
+          <h1>Learn more about the games</h1>
         </div>
         <div className="welcomeAboutContainer">
           <div className="welcomeSubContainerTop">
             <div className="welcomeAboutContent">
-              <h2>Woof Math was built to make math practice fun.</h2>
+              <h2>Woof Learning was built to make math and reading fun.</h2>
               <p>
-                It's a simple game: Woof Math gives you math questions to
-                answer, and as you answer more questions, you get points. As you
-                build up your points, you can earn super cool dog badges. The
-                goldendoodle is the ultimate badge.
+                With simple and rewarding gameplay experience, Woof Learning is
+                focused on helping young learners grow, and have fun. It's all
+                about practicing math and reading skills, and getting helpful,
+                smart feedback along the way.
               </p>
 
               <br />
               <h2>It's made for kids. </h2>
               <p>
-                Woof Math is for kids in elementary school. You decide which
-                kind of math you want to play (for example, addition) and how
-                hard the questions should be. Get started by quickly creating a
-                free account. No credit cards, no gimmicks - we only ask for the
-                info we need to get the game going, and so you can keep track of
-                your scores. For more, check out{" "}
-                <Link to={"/About"} className="welcomePrivacyNotice">
-                  our privacy policy.
-                </Link>
+                Woof Learning games are intended for kids at the elementary
+                school level. You decide which kind of math you want to play
+                (for example, addition) or stories you want to read, and how
+                challenging the questions should be. Get started by quickly
+                creating a free account.
               </p>
             </div>
             <div className="imageTopContainer">
@@ -88,6 +84,24 @@ function Welcome() {
                 <li>
                   Choose your type of math (ex. addition, division) and how hard
                   the questions should be.
+                </li>
+                <li>
+                  See how you do! The more questions you get right, the more
+                  points and animal badges you earn.
+                </li>
+                <li>See if you can win the goldendoodle badge!</li>
+              </ul>
+              <Link to={"/register"}>
+                <button className="button signup welcome">SIGN UP</button>
+              </Link>
+            </div>
+            <div className="welcomeAboutContent bottom">
+              <h2>Woof Reading game play:</h2>
+              <ul>
+                <li>
+                  Pick what you want to read: a story, maybe a poem? Then, find
+                  a story topic that sounds fun. Choose how challenging the
+                  story should be, as well.
                 </li>
                 <li>
                   See how you do! The more questions you get right, the more
