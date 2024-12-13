@@ -287,9 +287,14 @@ function Me({
         /> */}
 
         <div className="accountPageContainer">
-          <button className="button getBack" onClick={navHome}>
-            Get back to playing!
-          </button>
+          <div className="accountButtonContainer">
+            <button className="button getBack" onClick={navHome}>
+              Get back to playing!
+            </button>
+            <Link to={"/"}>
+              <button className="button appSelect">Switch games</button>
+            </Link>
+          </div>
           {/* CONTAINER FOR USER PLAY DATA */}
           <div className="accountContentContainer">
             <h2>Here's your progress on Woof Learning games:</h2>

@@ -98,16 +98,25 @@ function Welcome() {
                 <button className="button signup welcome">SIGN UP</button>
               </Link>
             </div>
+          </div>
+          <div className="welcomeSubContainerBottom">
             <div className="welcomeAboutImageBottom">
               <img src={gameplayReading} alt="" />
             </div>
             <div className="welcomeAboutContent bottom">
-              <h2>Woof Reading game play:</h2>
+              <h2 className="reading-font">Woof Reading game play:</h2>
               <ul>
                 <li>
                   Pick what you want to read: a story, maybe a poem? Then, find
                   a story topic that sounds fun. Choose how challenging the
-                  story should be, as well.
+                  story should be, as well. Woof Reading uses AI to help create
+                  the stories and also to provide helpful feedback for readers.{" "}
+                  <Link
+                    style={{ color: "inherit", fontSize: "inheret" }}
+                    to={"/about"}
+                  >
+                    Learn more about our use of AI.
+                  </Link>
                 </li>
                 <li>
                   See how you do! The more questions you get right, the more

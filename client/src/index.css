@@ -99,10 +99,10 @@ button {
   width: 220px;
   border-radius: 10px;
   background-image: linear-gradient(#d4492b, #ff8b71);
-  border: 1px solid #d4492b;
+  border: 2px solid #d4492b;
   color: white;
   font-size: 25px;
-  border: none;
+  /* border: none; */
   box-shadow: 2px 2px 6px #828282;
 }
 
@@ -112,7 +112,7 @@ button {
   border-radius: 10px;
   color: white;
   font-size: 25px;
-  border: 1px solid #d4492b;
+  border: 2px solid #d4492b;
   box-shadow: 2px 2px 6px #828282;
 }
 
@@ -207,9 +207,22 @@ button {
   background-image: linear-gradient(#d4492b, #ff8b71);
   color: white;
   font-size: 22px;
-  border: none;
+  /* border: none; */
   box-shadow: 2px 2px 6px #c1c1c1;
   margin-top: 25px;
+}
+
+.button.appSelect {
+  width: 200px;
+  border-radius: 10px;
+  /* background-image: linear-gradient(#d4492b, #ff8b71); */
+  color: black;
+  font-size: 22px;
+  /* border: none; */
+  box-shadow: 2px 2px 6px #c1c1c1;
+  border: 1px solid #71afcb;
+  margin-top: 25px;
+  color: #006894;
 }
 
 .button.accountGray {
@@ -278,7 +291,8 @@ button {
   justify-content: center;
   align-items: center;
   padding: 55px 0px;
-  background-image: linear-gradient(#04628a, #7dc2e0);
+  background: linear-gradient(to bottom right, #04628a, #7dc2e0, #df6145);
+  /* background-image: linear-gradient(#04628a, #7dc2e0); */
   /* background-image: url("src/assets/woofmath_logo_1.png"),
             linear-gradient(#04628a, #7dc2e0);
           background-blend-mode: overlay; */
@@ -372,7 +386,7 @@ button {
   width: 100%;
   justify-content: center;
   align-items: center;
-  padding: 30px 30px 0px 30px;
+  padding: 50px 30px 0px 30px;
 }
 
 .welcomeAboutContent {
@@ -384,7 +398,6 @@ button {
 .divider {
   border-top: 1px solid lightgray;
   width: 70%;
-  margin-bottom: 15px;
 }
 
 .welcomeAboutContent > p {
@@ -401,13 +414,14 @@ button {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-left: 15px;
 
-  padding: 15px 15px 0px 15px;
-  width: 70%;
+  /* padding: 15px 0px 0px 15px; */
+  width: 80%;
 }
 
 .welcomeAboutContent > ul li {
-  margin: 30px 0px;
+  margin: 15px 0px;
 }
 
 .welcomeAboutImage {
@@ -1342,6 +1356,13 @@ p {
   padding: 10px;
 }
 
+.accountButtonContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
 .accountBadges {
   display: inline-flexbox;
   flex-direction: row;
@@ -1461,12 +1482,14 @@ p {
 
 .aboutHeaderImg {
   width: 130px;
+  padding-top: 5px;
 }
 
 .aboutHeaderImgContainer {
   display: flex;
   justify-content: center;
   align-items: center;
+  align-self: center;
 }
 
 .aboutContentContainer {
@@ -1718,7 +1741,6 @@ ul li {
   }
 
   .welcomeAboutContent.bottom {
-    padding-left: 15px;
     width: 90%;
   }
 
