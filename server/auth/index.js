@@ -72,12 +72,12 @@ router.post("/register", async (req, res) => {
         },
         badge_math: {
           create: {
-            level_1_1: false,
+            badge_1_1_bernese: false,
           },
         },
         score_reading: {
           create: {
-            score: 0,
+            reading_score: 0,
             reading_L1_points: 0,
             reading_L2_points: 0,
             reading_L3_points: 0,
@@ -87,7 +87,7 @@ router.post("/register", async (req, res) => {
         },
         badge_reading: {
           create: {
-            level_1_1: false,
+            badge_1_1_bernese: false,
           },
         },
       },

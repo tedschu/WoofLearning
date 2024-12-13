@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import woofMathLogo from "../assets/woofmath_logo_1.png";
-import gameplayPic from "../assets/gameplay.png";
+import gameplayMath from "../assets/gameplay-math.png";
+import gameplayReading from "../assets/gameplay-reading.png";
 import badge_bernese from "../assets/badges/badge_1_1_bernese.png";
 import badge_chihuahua from "../assets/badges/badge_1_2_chihuahua.png";
 import goldendoodle_trophy from "../assets/goldendoodle_trophy_large.png";
@@ -62,6 +63,7 @@ function Welcome() {
                 creating a free account.
               </p>
             </div>
+
             <div className="imageTopContainer">
               <div className="welcomeAboutImageTop">
                 <img src={badge_bernese} alt="" />
@@ -73,13 +75,14 @@ function Welcome() {
               </div>
             </div>
           </div>
+          <div className="divider"></div>
 
           <div className="welcomeSubContainerBottom">
             <div className="welcomeAboutImageBottom">
-              <img src={gameplayPic} alt="" />
+              <img src={gameplayMath} alt="" />
             </div>
             <div className="welcomeAboutContent bottom">
-              <h2>Woof Math game play:</h2>
+              <h2 className="math-font">Woof Math game play:</h2>
               <ul>
                 <li>
                   Choose your type of math (ex. addition, division) and how hard
@@ -94,6 +97,9 @@ function Welcome() {
               <Link to={"/register"}>
                 <button className="button signup welcome">SIGN UP</button>
               </Link>
+            </div>
+            <div className="welcomeAboutImageBottom">
+              <img src={gameplayReading} alt="" />
             </div>
             <div className="welcomeAboutContent bottom">
               <h2>Woof Reading game play:</h2>
