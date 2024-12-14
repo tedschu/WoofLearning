@@ -1140,6 +1140,13 @@ input[type="number"]::-webkit-inner-spin-button {
   color: #2d779a;
 }
 
+.link-white {
+  text-decoration: none;
+  color: white;
+  text-decoration: underline;
+  font-size: 22px;
+}
+
 .recoverButtonContainer {
   display: flex;
   flex-wrap: wrap;

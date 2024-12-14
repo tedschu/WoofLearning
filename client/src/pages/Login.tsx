@@ -141,7 +141,7 @@ function Login({ setIsLoggedIn, userInfo, setUserInfo, setToken }: LoginProps) {
 
           <h4>
             Don't have an account? No worries,{" "}
-            <Link className="link" to={"/register"}>
+            <Link className="link-white" to={"/register"}>
               sign up.{" "}
             </Link>
           </h4>
