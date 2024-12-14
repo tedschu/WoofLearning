@@ -105,9 +105,9 @@ function Me({
 
   const navHome = () => {
     if (currentApp === "Woof Reading") {
-      navigate("/game-reading");
+      navigate("/reading");
     } else if (currentApp === "Woof Math") {
-      navigate("/game-math");
+      navigate("/math");
     } else navigate("/");
   };
 
@@ -297,7 +297,7 @@ function Me({
         <div className="accountPageContainer">
           <div className="accountButtonContainer">
             <button className="button getBack" onClick={navHome}>
-              Get back to playing!
+              Go back
             </button>
             <Link to={"/"}>
               <button className="button appSelect">Switch games</button>

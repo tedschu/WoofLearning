@@ -227,7 +227,7 @@ function App() {
         />
 
         <Route
-          path="/game-math"
+          path="/math"
           element={
             <GameMath
               isLoggedIn={isLoggedIn}
@@ -251,7 +251,7 @@ function App() {
         />
 
         <Route
-          path="/game-reading"
+          path="/reading"
           element={
             <GameReading
               isLoggedIn={isLoggedIn}

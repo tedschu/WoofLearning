@@ -202,18 +202,19 @@ button {
 }
 
 .button.getBack {
-  width: 200px;
+  width: 130px;
   border-radius: 10px;
   background-image: linear-gradient(#d4492b, #ff8b71);
   color: white;
   font-size: 22px;
-  /* border: none; */
+  border: 1px solid #d4492b;
   box-shadow: 2px 2px 6px #c1c1c1;
   margin-top: 25px;
+  font-size: 20px;
 }
 
 .button.appSelect {
-  width: 200px;
+  width: 130px;
   border-radius: 10px;
   /* background-image: linear-gradient(#d4492b, #ff8b71); */
   color: black;
@@ -223,6 +224,7 @@ button {
   border: 1px solid #71afcb;
   margin-top: 25px;
   color: #006894;
+  font-size: 20px;
 }
 
 .button.accountGray {

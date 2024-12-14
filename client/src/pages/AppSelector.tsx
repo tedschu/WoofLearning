@@ -26,12 +26,12 @@ function AppSelector({ setCurrentApp, userInfo }: AppSelectorProps) {
 
   const navMath = () => {
     setCurrentApp("Woof Math");
-    navigate("/game-math");
+    navigate("/math");
   };
 
   const navReading = () => {
     setCurrentApp("Woof Reading");
-    navigate("/game-reading");
+    navigate("/reading");
   };
 
   return (
