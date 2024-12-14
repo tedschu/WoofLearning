@@ -31,7 +31,7 @@ export default function DiscreteSlider({
   setGotRight,
   setGotWrong,
 }: DiscreteSliderProps) {
-  const handleSliderChange: SliderProps["onChange"] = (event, newValue) => {
+  const handleSliderChange: SliderProps["onChange"] = (_event, newValue) => {
     setSliderValue(newValue as number);
     setGotRight(false);
     setGotWrong(false);

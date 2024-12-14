@@ -1,13 +1,7 @@
 import * as React from "react";
-import { styled } from "@mui/material/styles";
-import Box from "@mui/material/Box";
+
 import Stack from "@mui/material/Stack";
-import CircularProgress, {
-  circularProgressClasses,
-} from "@mui/material/CircularProgress";
-import LinearProgress, {
-  linearProgressClasses,
-} from "@mui/material/LinearProgress";
+import CircularProgress from "@mui/material/CircularProgress";
 
 // From https://github.com/mui/material-ui/issues/9496#issuecomment-959408221
 

@@ -45,10 +45,9 @@ export default function DiscreteSlider({
   setGotRight,
   setGotWrong,
   setStoryLength,
-  pointsToWin,
   setPointsToWin,
 }: SliderTypes) {
-  const handleSliderChange = (event: Event, newValue: number | number[]) => {
+  const handleSliderChange = (_event: Event, newValue: number | number[]) => {
     setSliderValue(newValue as number);
     setGotRight(false);
     setGotWrong(false);

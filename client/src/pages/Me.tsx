@@ -11,6 +11,8 @@ import {
   Title,
   Tooltip,
   Legend,
+  ChartOptions,
+  TooltipItem,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
 import badge_1_1_bernese from "../assets/badges/badge_1_1_bernese.png";
@@ -79,7 +81,7 @@ ChartJS.register(
 );
 
 ChartJS.defaults.font.family = "Patrick Hand";
-ChartJS.defaults.font.size = "15px";
+ChartJS.defaults.font.size = 15;
 
 function Me({
   userInfo,
@@ -144,8 +146,8 @@ function Me({
   };
 
   const readingList = Object.entries(userReadingBadges)
-    .filter(([key, value]) => value === true)
-    .map(([badgeName, value]) => (
+    .filter(([_key, value]) => value === true)
+    .map(([badgeName, _value]) => (
       <img
         key={badgeName}
         src={badgeImages[badgeName as BadgeName]}
@@ -156,8 +158,8 @@ function Me({
     ));
 
   const mathList = Object.entries(userMathBadges)
-    .filter(([key, value]) => value === true)
-    .map(([badgeName, value]) => (
+    .filter(([_key, value]) => value === true)
+    .map(([badgeName, _value]) => (
       <img
         key={badgeName}
         src={badgeImages[badgeName as BadgeName]}
@@ -201,7 +203,7 @@ function Me({
     ],
   };
 
-  const options = {
+  const options: ChartOptions<"bar"> = {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
@@ -214,13 +216,13 @@ function Me({
       },
       tooltip: {
         enabled: true,
-        mode: "index",
+        mode: "index" as const,
         intersect: false,
         callbacks: {
-          label: function (context) {
+          label: function (context: TooltipItem<"bar">) {
             return `Score: ${context.parsed.y}`; // Customize the tooltip text
           },
-          title: function (context) {
+          title: function (context: TooltipItem<"bar">[]) {
             return `Difficulty: ${context[0].label}`; // Customize the tooltip title
           },
         },
@@ -229,7 +231,7 @@ function Me({
         titleColor: "white",
         titleFont: {
           size: 14,
-          weight: "bold",
+          weight: "bold" as const,
         },
         bodyColor: "white",
         bodyFont: {
@@ -256,16 +258,22 @@ function Me({
 
   // Variables to isolate math or reading level values (ex. math_L1_points) and then return the HIGHEST of each
   const mathLevelArray = Object.entries(userScore)
-    .filter(([key, value]) => key.startsWith("math"))
-    .map(([key, value]) => [levelConversion[key], value]);
+    .filter(([key, _value]) => key.startsWith("math"))
+    .map(([key, value]) => [
+      levelConversion[key as keyof typeof levelConversion],
+      value,
+    ]);
 
   const highestMathLevel = mathLevelArray.reduce((max, current) =>
     current[1] > max[1] ? current : max
   );
 
   const readingLevelArray = Object.entries(userScore)
-    .filter(([key, value]) => key.startsWith("reading_L"))
-    .map(([key, value]) => [levelConversion[key], value]);
+    .filter(([key, _value]) => key.startsWith("reading_L"))
+    .map(([key, value]) => [
+      levelConversion[key as keyof typeof levelConversion],
+      value,
+    ]);
 
   const highestReadingLevel = readingLevelArray.reduce((max, current) =>
     current[1] > max[1] ? current : max

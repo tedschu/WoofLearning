@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, FormEvent, ChangeEvent } from "react";
+import { useState } from "react";
 import { UserInfo } from "../types/types";
 
 type ResetPassModalTypes = {

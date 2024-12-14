@@ -6,13 +6,7 @@ import Nav from "../../components/Nav";
 import BadgeModal from "../../components/BadgeModal";
 import Slider from "../../components/reading/Slider";
 import StorySelector from "../../components/reading/StorySelector";
-import {
-  GameProps,
-  StoryType,
-  StorySelectorProps,
-  CurrentApp,
-  ModalBadgeType,
-} from "../../types/types";
+import { GameProps, StoryType, ModalBadgeType } from "../../types/types";
 
 //TODO: CONVERT TO TS, ADD TYPE DECLARATIONS
 

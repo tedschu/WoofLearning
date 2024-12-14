@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import { GameSelectorType } from "../../types/types";
@@ -19,7 +19,7 @@ export default function GameSelector({
   const [alignment, setAlignment] = useState("addition");
 
   const handleChange: ToggleButtonGroupProps["onChange"] = (
-    event,
+    _event,
     newAlignment: GameSelectorType
   ) => {
     if (newAlignment != null) {

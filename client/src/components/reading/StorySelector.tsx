@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import storyPrompts from "../../utils/storyPrompts";
-import { StorySelectorProps } from "../../types/types";
+import { StorySelectorProps, StoryType } from "../../types/types";
 
 export default function StorySelector({
   storyPrompt,
@@ -27,8 +27,8 @@ export default function StorySelector({
   };
 
   // Handles the drop-down selector for story type
-  const handleChange = (event) => {
-    setStoryType(event.target.value);
+  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setStoryType(event.target.value as StoryType);
   };
 
   return (

@@ -4,7 +4,11 @@ import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 
 // TODO: UPDATE THIS TO REFLECT BOTH GAMES
 
-function About({ isLoggedIn }) {
+type AboutProps = {
+  isLoggedIn: boolean;
+};
+
+function About({ isLoggedIn }: AboutProps) {
   return (
     <>
       <div className="aboutContainer">

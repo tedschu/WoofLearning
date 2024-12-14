@@ -50,10 +50,7 @@ function GamePlay({
   setTotalScore,
   setIsModalOpen,
   setModalBadge,
-  badgeLevel,
   setBadgeLevel,
-  badgeProgress,
-  setBadgeProgress,
 }: GamePlayProps) {
   const [questionCount, setQuestionCount] = useState(1);
   const [mathOperator, setMathOperator] = useState("+");
@@ -380,7 +377,7 @@ function GamePlay({
         body: JSON.stringify(updatedBadges),
       });
 
-      const data = await response.json();
+      // const data = await response.json();
       //console.log(data);
 
       if (response.ok) {

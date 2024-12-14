@@ -13,7 +13,6 @@ import {
   UserReadingBadges,
   UserInfo,
   ModalBadgeType,
-  StorySelectorProps,
   StoryType,
   StoryResponseData,
   EvaluationData,
@@ -64,9 +63,7 @@ function GamePlay({
   setStoryPrompt,
   storyType,
   pointsToWin,
-  setPointsToWin,
   setBadgeLevel,
-  badgeLevel,
 }: GamePlayProps) {
   const [triggerNewStory, setTriggerNewStory] = useState(false);
   const [triggerNewEvaluation, setTriggerNewEvaluation] = useState(false);
@@ -429,6 +426,10 @@ function GamePlay({
       });
 
       const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Failed to update badges");
+      }
 
       // State values now being set in updateBadges
       // if (response.ok) {
