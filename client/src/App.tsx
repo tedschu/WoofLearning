@@ -17,6 +17,7 @@ import About from "./pages/About";
 import AppSelector from "./pages/AppSelector";
 import GameMath from "./pages/math/GameMath";
 import GameReading from "./pages/reading/GameReading";
+import Prompts from "./pages/reading/Prompts";
 
 function App() {
   const storedToken = localStorage.getItem("token");
@@ -313,6 +314,7 @@ function App() {
         />
         <Route path="/welcome" element={<Welcome />} />
         <Route path="/about" element={<About isLoggedIn={isLoggedIn} />} />
+        <Route path="/prompts" element={<Prompts isLoggedIn={isLoggedIn} />} />
       </Routes>
     </>
   );

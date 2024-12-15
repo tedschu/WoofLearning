@@ -1,4 +1,4 @@
-import woofMathLogo from "../assets/woofmath_logo_1.png";
+import woofMathLogo from "../../assets/woofmath_logo_1.png";
 import { Link } from "react-router-dom";
 import storyPrompts from "../../utils/storyPrompts";
 
