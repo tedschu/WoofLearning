@@ -13,11 +13,23 @@ type DiscreteSliderProps = {
 const marks = [
   {
     value: 1,
-    label: "Easier",
+    label: "1 (easier)",
+  },
+  {
+    value: 2,
+    label: "2",
+  },
+  {
+    value: 3,
+    label: "3",
+  },
+  {
+    value: 4,
+    label: "4",
   },
   {
     value: 5,
-    label: "Harder",
+    label: "5 (harder)",
   },
 ];
 
@@ -58,6 +70,7 @@ export default function DiscreteSlider({
             "& .MuiSlider-markLabel": {
               fontFamily: "Patrick Hand",
               color: "#0085bd",
+              fontSize: "18px",
             },
             "& .MuiSlider-thumb": {
               color: "#dd6e55", // This changes the color of the slider circle

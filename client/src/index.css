@@ -1426,6 +1426,72 @@ p {
   text-decoration: underline;
 }
 
+.helpPopupText {
+  font-size: 15px;
+  font-style: italic;
+  text-decoration: underline;
+  color: rgb(146, 161, 198);
+}
+
+.modalOverlay-help {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  z-index: 3;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.modalContent-help {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  /* max-width: 750px; */
+  width: 95%;
+  color: black;
+  text-align: center;
+  margin: auto;
+  max-height: min-content;
+  gap: 15px;
+}
+
+.modalContent-help > h2 {
+  color: #d4492b;
+}
+
+.modalContent-help > p {
+  font-size: 20px;
+}
+
+.helpImageContainer {
+  display: flex;
+  flex-direction: column;
+
+  gap: 15px;
+}
+
+.helpImg {
+  width: 300px;
+  box-shadow: 3px 3px 3px lightgray;
+  border-radius: 8px;
+}
+
+.helpImgChart {
+  width: 100%;
+  max-width: 350px;
+  box-shadow: 3px 3px 3px lightgray;
+  border-radius: 8px;
+}
+
 /* STYLING FOR FORGOT PASSWORD MODAL */
 .modalOverlay {
   position: fixed;
@@ -1437,6 +1503,7 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 3;
 }
 
 .modalContent {
@@ -1693,6 +1760,14 @@ ul li {
     display: grid;
     grid-template-columns: [first] 50% [line2] 50%;
     flex-direction: row;
+  }
+
+  .helpImageContainer {
+    flex-direction: row;
+  }
+
+  .modalContent-help {
+    width: 75%;
   }
 
   .eachBadge > img {

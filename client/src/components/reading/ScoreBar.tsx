@@ -149,7 +149,7 @@ function ScoreBar({ userScore, userReadingBadges, badgeLevel }: ScoreBarProps) {
           )}
 
           {/* SCORE CONTAINER */}
-          <div className="totalScore">
+          <div className="totalScore-reading">
             <h1 className="scoreFont-reading">{userScore.reading_score}</h1>
             <h5>TOTAL SCORE</h5>
           </div>

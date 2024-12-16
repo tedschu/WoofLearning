@@ -1,4 +1,4 @@
-# Woof Reading Security Practices Documentation
+# Woof Learning Security Practices Documentation
 
 ## Overview
 
