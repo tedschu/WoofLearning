@@ -45,7 +45,10 @@ function Welcome() {
         <div className="welcomeAboutContainer">
           <div className="welcomeSubContainerTop">
             <div className="welcomeAboutContent">
-              <h2>Woof Learning was built to make math and reading fun.</h2>
+              <h2>
+                Woof Learning was built to make math and reading practice fun
+                and rewarding.
+              </h2>
               <p>
                 With simple and rewarding gameplay experience, Woof Learning is
                 focused on helping young learners grow, and have fun. It's all
