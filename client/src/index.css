@@ -1464,7 +1464,18 @@ p {
   gap: 15px;
 }
 
-.modalContent-help > h2 {
+.modalContent-topLine {
+  display: grid;
+  width: 100%;
+  grid-template-columns: [first] 25% [line2] 50% [line3] 25%;
+}
+
+.grid-firstItem {
+  text-align: left;
+  color: gray;
+}
+
+.modalContent-topLine > h2 {
   color: #d4492b;
 }
 
@@ -1475,20 +1486,24 @@ p {
 .helpImageContainer {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 
-  gap: 15px;
+  gap: 18px;
 }
 
 .helpImg {
-  width: 300px;
-  box-shadow: 3px 3px 3px lightgray;
+  min-width: 300px;
+  max-width: 350px;
+  box-shadow: 3px 3px 8px lightgray;
   border-radius: 8px;
 }
 
 .helpImgChart {
   width: 100%;
   max-width: 350px;
-  box-shadow: 3px 3px 3px lightgray;
+  box-shadow: 3px 3px 8px lightgray;
   border-radius: 8px;
 }
 
