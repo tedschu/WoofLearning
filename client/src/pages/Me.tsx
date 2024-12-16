@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 //import ScoreBar from "../components/";
 import Nav from "../components/Nav";
-import HelpModal from "../components/helpModal";
+import ChartModal from "../components/ChartModal";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -96,9 +96,9 @@ function Me({
 }: MeProps) {
   const navigate = useNavigate();
   // State for help popup to explain bar charts with points by level
-  const [isHelpModalOpen, setIsHelpModalOpen] = useState(false);
+  const [isChartModalOpen, setIsChartModalOpen] = useState(false);
 
-  const openHelpModal = () => setIsHelpModalOpen(true);
+  const openChartModal = () => setIsChartModalOpen(true);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -342,7 +342,7 @@ function Me({
                     Most of your points ({highestReadingLevel[1]}) are from{" "}
                     {highestReadingLevel[0]}
                     {"  "}
-                    <Link to="#" onClick={openHelpModal}>
+                    <Link to="#" onClick={openChartModal}>
                       <span className="helpPopupText">(What's this?)</span>
                     </Link>
                   </p>
@@ -357,7 +357,7 @@ function Me({
                   <p className="grayText">
                     Most of your points ({highestMathLevel[1]}) are from{"  "}
                     {highestMathLevel[0]}{" "}
-                    <Link to="#" onClick={openHelpModal}>
+                    <Link to="#" onClick={openChartModal}>
                       <span className="helpPopupText">(What's this?)</span>
                     </Link>
                   </p>
@@ -422,9 +422,9 @@ function Me({
           <Link to={"/about"}>
             <div className="accountFooter">About us / privacy policy</div>
           </Link>
-          <HelpModal
-            isHelpModalOpen={isHelpModalOpen}
-            setIsHelpModalOpen={setIsHelpModalOpen}
+          <ChartModal
+            isChartModalOpen={isChartModalOpen}
+            setIsChartModalOpen={setIsChartModalOpen}
           />
         </div>
       </div>

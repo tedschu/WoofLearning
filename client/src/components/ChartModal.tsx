@@ -3,15 +3,18 @@ import mathImage from "./../assets/helpPopup-math.png";
 import readingImage from "./../assets/helpPopup-reading.png";
 import chartImage from "./../assets/helpPopup-chart.png";
 
-type HelpModalTypes = {
-  isHelpModalOpen: boolean;
-  setIsHelpModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+type ChartModalTypes = {
+  isChartModalOpen: boolean;
+  setIsChartModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-function HelpModal({ isHelpModalOpen, setIsHelpModalOpen }: HelpModalTypes) {
-  const closeHelpModal = () => setIsHelpModalOpen(false);
+function ChartModal({
+  isChartModalOpen,
+  setIsChartModalOpen,
+}: ChartModalTypes) {
+  const closeChartModal = () => setIsChartModalOpen(false);
 
-  if (!isHelpModalOpen) return null;
+  if (!isChartModalOpen) return null;
 
   return (
     <>
@@ -34,7 +37,7 @@ function HelpModal({ isHelpModalOpen, setIsHelpModalOpen }: HelpModalTypes) {
             <img src={mathImage} className="helpImg" alt="" />
             <img src={readingImage} className="helpImg" alt="" />
           </div>
-          <button className="modalClose" onClick={closeHelpModal}>
+          <button className="modalClose" onClick={closeChartModal}>
             Close
           </button>
         </div>
@@ -43,4 +46,4 @@ function HelpModal({ isHelpModalOpen, setIsHelpModalOpen }: HelpModalTypes) {
   );
 }
 
-export default HelpModal;
+export default ChartModal;
