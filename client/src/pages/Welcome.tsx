@@ -46,24 +46,21 @@ function Welcome() {
           <div className="welcomeSubContainerTop">
             <div className="welcomeAboutContent">
               <h2>
-                Woof Learning was built to make math and reading practice fun
-                and rewarding.
+                Woof Learning was built to make math and reading practice fun.
               </h2>
               <p>
-                With simple and rewarding gameplay experience, Woof Learning is
-                focused on helping young learners grow, and have fun. It's all
-                about practicing math and reading skills, and getting helpful,
-                smart feedback along the way.
+                Woof Learning turn math and reading skills into exciting games.
+                Through simple, engaging gameplay, students receive smart
+                feedback that helps them learn and grow while having fun.
               </p>
 
               <br />
               <h2>It's made for kids. </h2>
               <p>
-                Woof Learning games are intended for kids at the elementary
-                school level. You decide which kind of math you want to play
-                (for example, addition) or stories you want to read, and how
-                challenging the questions should be. Get started by quickly
-                creating a free account.
+                Choose your adventure - whether it's mastering addition,
+                exploring stories, or both! You control the difficulty level,
+                making it perfect for your child's learning journey. Create a
+                free account to start playing and learning today.
               </p>
             </div>
 

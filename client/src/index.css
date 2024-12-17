@@ -1494,7 +1494,7 @@ p {
 }
 
 .helpImg {
-  min-width: 300px;
+  width: 90%;
   max-width: 350px;
   box-shadow: 3px 3px 8px lightgray;
   border-radius: 8px;
@@ -1779,6 +1779,10 @@ ul li {
 
   .helpImageContainer {
     flex-direction: row;
+  }
+
+  .helpImg {
+    max-width: 300px;
   }
 
   .modalContent-help {
