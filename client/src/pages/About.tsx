@@ -45,9 +45,9 @@ function About({ isLoggedIn }: AboutProps) {
           </p>
           <p>
             The fun is in the practice itself, and the positive feedback both
-            from the points and doggy badges that you can win as you play, but
-            also in the gameplay itself. The focus isn't on "right" or "wrong,"
-            but in helping to build understanding and reinforcing learning.
+            from the points and doggy badges that you can win as you play. The
+            focus isn't on "right" or "wrong," but in helping to build
+            understanding and reinforcing learning.
           </p>
           <p>
             <b>Woof Reading</b> builds reading comprehension skills in kids from
