@@ -344,7 +344,7 @@ button {
   font-size: 62px;
   line-height: 1.1;
   padding-bottom: 20px;
-  font-family: "Ribeye";
+  /* font-family: "Ribeye"; */
   color: #ffffff;
   text-shadow: 0px 0px 1px #a6d5ea;
   /* font-family: "Schoolbell"; */
@@ -607,7 +607,7 @@ button {
   align-items: center;
   /* font-family: "Schoolbell"; */
   color: white;
-  font-family: "Ribeye";
+  /* font-family: "Ribeye"; */
 }
 
 .navUser {
