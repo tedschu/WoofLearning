@@ -1,7 +1,7 @@
 /* COLOR PALETTE: */
 /* Red / orange (dark): #d4492b 
         Red / orange (light): #dd6e55
-        Blue (dark): #7dc2e0
+        Blue (dark): #0085bd
         Blue (light): #a6d5ea */
 
 .schoolbell-regular {
@@ -108,11 +108,11 @@ button {
 
 .button.signup {
   width: 220px;
-  background: transparent;
+  background-image: linear-gradient(#0085bd, #3aa9d8);
   border-radius: 10px;
   color: white;
   font-size: 25px;
-  border: 2px solid #d4492b;
+  border: 2px solid a6d5ea;
   box-shadow: 2px 2px 6px #828282;
 }
 
@@ -185,7 +185,7 @@ button {
 }
 
 .button.login:hover {
-  background-image: linear-gradient(#006894, #006d9f);
+  background: #d4492b;
 }
 
 .button.submit:hover {
@@ -193,7 +193,7 @@ button {
 }
 
 .button.signup:hover {
-  background: #cb4527;
+  background: #006894;
 }
 
 .button.signup.welcome:hover {
