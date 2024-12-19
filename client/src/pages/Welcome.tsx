@@ -22,10 +22,7 @@ function Welcome() {
 
           <div className="welcomeContentContainer">
             <h1>Woof Learning</h1>
-            <p>
-              Build math and reading skills while earning points and (really
-              cool) animal badges!
-            </p>
+            <p>Make math and reading an adventure!</p>
 
             <div className="welcomeButtonContainer">
               <Link to={"/login"}>
