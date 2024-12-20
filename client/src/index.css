@@ -341,12 +341,12 @@ button {
 }
 
 .welcomeContentContainer > h1 {
-  font-size: 62px;
+  font-size: 68px;
   line-height: 1.1;
   padding-bottom: 20px;
   /* font-family: "Ribeye"; */
   color: #ffffff;
-  text-shadow: 0px 0px 1px #a6d5ea;
+  /* text-shadow: 0px 0px 1px #a6d5ea; */
   /* font-family: "Schoolbell"; */
 }
 
@@ -429,7 +429,7 @@ button {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-left: 15px;
+  margin-left: 20px;
 
   /* padding: 15px 0px 0px 15px; */
   width: 80%;
@@ -1843,13 +1843,6 @@ ul li {
     align-items: center;
   }
 
-  .welcomeSubContainerBottom {
-    display: grid;
-    grid-template-columns: [first] 60% [line2] 40%;
-    justify-content: center;
-    align-items: center;
-  }
-
   .welcomeAboutContent {
     display: flex;
     flex-direction: column;
@@ -1933,5 +1926,14 @@ ul li {
     display: grid;
     grid-template-columns: [first] 50% [line2] 50%;
     border-bottom: 1px solid rgb(232, 232, 232);
+  }
+
+  .welcomeSubContainerBottom {
+    width: 85%;
+    display: grid;
+    grid-template-columns: [first] 50% [line2] 50%;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
   }
 }
