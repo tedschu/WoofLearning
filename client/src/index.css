@@ -114,7 +114,7 @@ button {
 
 .button.signup {
   width: 220px;
-  background-image: linear-gradient(#0085bd, #3aa9d8);
+  background-image: linear-gradient(#d4492b, #ff8b71);
   border-radius: 10px;
   color: white;
   font-size: 25px;
@@ -290,6 +290,7 @@ button {
   justify-content: center;
   color: white;
   width: 100%;
+  background: linear-gradient(#0975a3, #7dc2e0, #fef5f3, #fec4b7);
 }
 
 .welcomeBackground {
@@ -298,12 +299,39 @@ button {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 55px 0px;
-  background: linear-gradient(to bottom right, #04628a, #7dc2e0, #df6145);
+  /* padding: 0px 0px 40px 0px; */
+  /* background: linear-gradient(#0975a3, #7dc2e0, #fef5f3); */
   /* background-image: linear-gradient(#04628a, #7dc2e0); */
   /* background-image: url("src/assets/woofmath_logo_1.png"),
             linear-gradient(#04628a, #7dc2e0);
           background-blend-mode: overlay; */
+}
+
+.welcomeNav {
+  width: 100%;
+  display: grid;
+  grid-template-columns: [first] 25% [line2] 50% [line3] 25%;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.welcomeNav-logo {
+  align-items: flex-start;
+  padding: 7px;
+}
+
+.woofBlinkLogo {
+  width: 70px;
+}
+
+.welcomeNav-links {
+  text-align: center;
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+  font-variant: small-caps;
+  font-size: 24px;
 }
 
 .welcomeLogoContainer {
@@ -311,10 +339,27 @@ button {
   margin-bottom: 10px;
 }
 
+.welcomeNav-signup {
+  display: flex;
+  justify-content: flex-end;
+  padding: 7px;
+}
+
+.welcomeNav-buttonLogin {
+  width: 100px;
+  border-radius: 10px;
+  /* background-image: linear-gradient(#d4492b, #ff8b71); */
+  border: 2px solid #d4492b;
+  color: #d4492b;
+  font-size: 22px;
+  /* border: none; */
+  box-shadow: 2px 2px 6px #828282;
+}
+
 .woofMathLogo {
   width: 350px;
-  border-radius: 50%;
-  box-shadow: 0px 0px 15px 2px #abe6ff;
+  /* border-radius: 50%;
+  box-shadow: 0px 0px 20px 10px #abe6ff; */
 }
 
 .woofMathLogo-small {
@@ -333,7 +378,7 @@ button {
 }
 
 .welcomeContentContainer > p {
-  margin-bottom: 25px;
+  /* margin-bottom: 25px; */
   font-size: 28px;
   text-shadow: 0px 0px 8px #55c2f0;
 
@@ -341,12 +386,12 @@ button {
 }
 
 .welcomeContentContainer > h1 {
-  font-size: 68px;
+  font-size: 77px;
   line-height: 1.1;
-  padding-bottom: 20px;
+  padding-bottom: 10px;
   /* font-family: "Ribeye"; */
   color: #ffffff;
-  /* text-shadow: 0px 0px 1px #a6d5ea; */
+  text-shadow: 0px 0px 3px #a6d5ea;
   /* font-family: "Schoolbell"; */
 }
 
@@ -367,17 +412,19 @@ button {
   border-radius: 9px;
   padding: 20px 0px;
   margin-bottom: 20px;
-  box-shadow: 7px 3px 7px rgb(230, 229, 229);
+  /* box-shadow: 7px 3px 7px rgb(201, 201, 201); */
 }
 
 .welcomeAboutSeparator {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 25px;
   width: 100%;
-  background-color: white;
-  color: #189fd8;
-  padding: 50px 10px 20px 10px;
+  /* background-color: white; */
+  color: white;
+  padding: 40px 10px 20px 10px;
   text-align: center;
 }
 

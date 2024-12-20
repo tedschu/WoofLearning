@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import woofMathLogo from "../assets/woofmath_logo_1.png";
+import woofMathLogo from "../assets/wooflogo_home.png";
+import woofBlinkLogo from "../assets/woof-blink.png";
 import gameplayMath from "../assets/gameplay-math.png";
 import gameplayReading from "../assets/gameplay-reading.png";
 import badge_bernese from "../assets/badges/badge_1_1_bernese.png";
@@ -12,22 +13,32 @@ function Welcome() {
     <>
       <div className="welcomePageContainer">
         <div className="welcomeBackground">
-          <div className="welcomeLogoContainer">
-            <img
-              src={woofMathLogo}
-              className="woofMathLogo"
-              alt="WoofMath logo"
-            />
+          <div className="welcomeNav">
+            <div className="welcomeNav-logo">
+              <img src={woofBlinkLogo} className="woofBlinkLogo" alt="" />
+            </div>
+            <div className="welcomeNav-links">
+              <Link to={"/About"}>About</Link> {" | "}
+              <Link to={"/About"}>Privacy</Link>
+            </div>
+            <div className="welcomeNav-signup">
+              <Link to={"/login"}>
+                <button className="welcomeNav-buttonLogin">LOGIN</button>
+              </Link>
+            </div>
           </div>
 
           <div className="welcomeContentContainer">
             <h1>Woof Learning</h1>
-            <p>Make math and reading an adventure!</p>
-
+            <p>A Math and Reading Adventure</p>
+            <div className="welcomeLogoContainer">
+              <img
+                src={woofMathLogo}
+                className="woofMathLogo"
+                alt="WoofMath logo"
+              />
+            </div>
             <div className="welcomeButtonContainer">
-              <Link to={"/login"}>
-                <button className="button login">LOGIN</button>
-              </Link>
               <Link to={"/register"}>
                 <button className="button signup">SIGN UP</button>
               </Link>
@@ -36,7 +47,8 @@ function Welcome() {
         </div>
 
         <div className="welcomeAboutSeparator">
-          {" "}
+          <div className="divider"></div>
+
           <h1>Learn more about the games</h1>
         </div>
         <div className="welcomeAboutContainer">
