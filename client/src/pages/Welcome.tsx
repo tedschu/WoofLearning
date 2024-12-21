@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import woofMathLogo from "../assets/wooflogo_home.png";
-import woofBlinkLogo from "../assets/woof-blink.png";
+import woofMathLogoNav from "../assets/wooflogo_nobackground.png";
 import gameplayMath from "../assets/gameplay-math.png";
 import gameplayReading from "../assets/gameplay-reading.png";
 import badge_bernese from "../assets/badges/badge_1_1_bernese.png";
@@ -15,7 +15,7 @@ function Welcome() {
         <div className="welcomeBackground">
           <div className="welcomeNav">
             <div className="welcomeNav-logo">
-              <img src={woofBlinkLogo} className="woofBlinkLogo" alt="" />
+              <img src={woofMathLogoNav} className="woofBlinkLogo" alt="" />
             </div>
             <div className="welcomeNav-links">
               <Link to={"/About"}>About & Privacy</Link>
@@ -29,7 +29,7 @@ function Welcome() {
 
           <div className="welcomeContentContainer">
             <h1>Woof Learning</h1>
-            <p>A Math and Reading Adventure</p>
+            <p>A math and reading adventure</p>
             <div className="welcomeLogoContainer">
               <img
                 src={woofMathLogo}
