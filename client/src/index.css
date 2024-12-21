@@ -133,6 +133,15 @@ button {
   margin-bottom: 10px;
 }
 
+.button.signup:hover {
+  background: #d4492b;
+}
+
+.button.signup.welcome:hover {
+  background: #0085bd;
+  color: white;
+}
+
 .button.nextStory {
   width: 200px;
   background: #0085bd;
@@ -196,15 +205,6 @@ button {
 
 .button.submit:hover {
   background-image: linear-gradient(#006894, #006d9f);
-}
-
-.button.signup:hover {
-  background: #006894;
-}
-
-.button.signup.welcome:hover {
-  background: #0085bd;
-  color: white;
 }
 
 .button.getBack {
@@ -290,7 +290,7 @@ button {
   justify-content: center;
   color: white;
   width: 100%;
-  background: linear-gradient(#0975a3, #7dc2e0, #fef5f3, #fec4b7);
+  background: linear-gradient(#0975a3, #7dc2e0, #fdddd5);
 }
 
 .welcomeBackground {
@@ -331,7 +331,10 @@ button {
   justify-content: center;
   align-items: center;
   font-variant: small-caps;
-  font-size: 24px;
+}
+
+.welcomeNav-links > a {
+  font-size: 18px;
 }
 
 .welcomeLogoContainer {
@@ -342,18 +345,22 @@ button {
 .welcomeNav-signup {
   display: flex;
   justify-content: flex-end;
-  padding: 7px;
+  padding: 2px;
 }
 
 .welcomeNav-buttonLogin {
-  width: 100px;
+  width: 90px;
   border-radius: 10px;
   /* background-image: linear-gradient(#d4492b, #ff8b71); */
-  border: 2px solid #d4492b;
+  /* border: 2px solid #d4492b; */
   color: #d4492b;
   font-size: 22px;
   /* border: none; */
   box-shadow: 2px 2px 6px #828282;
+}
+
+.welcomeNav-buttonLogin:hover {
+  color: #0975a3;
 }
 
 .woofMathLogo {
@@ -436,19 +443,26 @@ button {
 .welcomeSubContainerTop {
   display: flex;
   flex-direction: column;
-
+  width: 95%;
   justify-content: center;
   align-items: center;
-  padding: 30px 30px 30px 30px;
+  background-color: rgb(247, 247, 247);
+  padding: 15px;
+  border-radius: 12px;
+  margin-bottom: 25px;
+  /* padding: 30px 30px 30px 30px; */
 }
 
 .welcomeSubContainerBottom {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 95%;
   justify-content: center;
   align-items: center;
-  padding: 50px 30px 0px 30px;
+  background-color: rgb(247, 247, 247);
+  border-radius: 12px;
+  margin-bottom: 25px;
+  padding: 20px;
 }
 
 .welcomeAboutContent {
@@ -1792,6 +1806,10 @@ ul li {
     width: 55px;
   }
 
+  .welcomeNav-signup {
+    padding: 7px;
+  }
+
   .navUser {
     padding-right: 15px;
     font-size: 22px;
@@ -1883,11 +1901,14 @@ ul li {
   .welcomeSubContainerTop {
     display: grid;
     grid-template-columns: [first] 65% [line2] 35%;
-    padding: 0px 40px 30px 40px;
-    width: 100%;
+    width: 90%;
 
     justify-content: center;
     align-items: center;
+  }
+
+  .welcomeSubContainerBottom {
+    width: 90%;
   }
 
   .welcomeAboutContent {
@@ -1976,7 +1997,6 @@ ul li {
   }
 
   .welcomeSubContainerBottom {
-    width: 85%;
     display: grid;
     grid-template-columns: [first] 50% [line2] 50%;
     flex-direction: row;

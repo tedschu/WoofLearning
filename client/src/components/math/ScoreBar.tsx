@@ -86,7 +86,7 @@ function ScoreBar({
                       : "badgeDisabled"
                   }
                 />
-                <h3>500</h3>
+                <h3>250</h3>
               </div>
               <div className="eachBadge">
                 <img

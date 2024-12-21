@@ -147,10 +147,10 @@ function GamePlay({
       if (newTotalScore >= 100 && !userMathBadges.badge_1_1_bernese) {
         updatedBadges.badge_1_1_bernese = true;
         setModalBadge("badge_1_1_bernese");
-      } else if (newTotalScore >= 500 && !userMathBadges.badge_1_2_chihuahua) {
+      } else if (newTotalScore >= 250 && !userMathBadges.badge_1_2_chihuahua) {
         updatedBadges.badge_1_2_chihuahua = true;
         setModalBadge("badge_1_2_chihuahua");
-      } else if (newTotalScore >= 1000 && !userMathBadges.badge_1_3_waterdog) {
+      } else if (newTotalScore >= 500 && !userMathBadges.badge_1_3_waterdog) {
         updatedBadges.badge_1_3_waterdog = true;
         setModalBadge("badge_1_3_waterdog");
       } else if (newTotalScore >= 1000 && !userMathBadges.badge_1_4_boxer) {
