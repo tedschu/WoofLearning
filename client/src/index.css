@@ -84,14 +84,6 @@ p {
 
 /* BUTTON STYLING */
 
-button {
-  padding: 5px 5px;
-  font-size: 18px;
-  border: 1px solid lightgray;
-  border-radius: 6px;
-  margin: 10px;
-}
-
 .buttonGrayText {
   color: gray;
   width: 200px;
@@ -113,13 +105,15 @@ button {
 }
 
 .button.signup {
-  width: 220px;
-  background-image: linear-gradient(#d4492b, #ff8b71);
+  width: 190px;
+  background-image: linear-gradient(#d4492b, #d4492b, #e1684c);
   border-radius: 10px;
+  border: none;
   color: white;
-  font-size: 25px;
+  font-size: 22px;
   /* border: 2px solid #a6d5ea; */
-  box-shadow: 2px 2px 6px #828282;
+  box-shadow: 2px 2px 6px #535353;
+  padding: 3px;
 }
 
 .button.signup.welcome {
@@ -293,18 +287,52 @@ button {
   background: linear-gradient(#0975a3, #7dc2e0, #fdddd5);
 }
 
-.welcomeBackground {
+.welcomeTopContainer {
   width: 100%;
+  display: grid;
+  grid-template-columns: [first] 55% [line2] 45%;
+  align-items: center;
+  justify-content: center;
+}
+
+.welcomeLogoContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0px 30px;
+}
+
+.woofLogo-home {
+  max-width: 550px;
+  min-width: 350px;
+  /* border-radius: 50%;
+  box-shadow: 0px 23px 20px 10px #abe6ff; */
+}
+
+.welcomeContentContainer {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  /* padding: 0px 0px 40px 0px; */
-  /* background: linear-gradient(#0975a3, #7dc2e0, #fef5f3); */
-  /* background-image: linear-gradient(#04628a, #7dc2e0); */
-  /* background-image: url("src/assets/woofmath_logo_1.png"),
-            linear-gradient(#04628a, #7dc2e0);
-          background-blend-mode: overlay; */
+  color: white;
+  padding-left: 45px;
+}
+
+.welcomeContentContainer > h1 {
+  font-size: 65px;
+  line-height: 1;
+}
+
+.welcomeContentContainer > h2 {
+  font-size: 55px;
+  font-family: "Darumadrop One";
+  color: #fdddd5;
+  text-shadow: 5px 3px 3px rgb(46, 46, 46);
+}
+
+.welcomeButtonContainer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  margin-top: 40px;
 }
 
 .welcomeNav {
@@ -318,6 +346,9 @@ button {
 .welcomeNav-logo {
   align-items: flex-start;
   padding: 7px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
 }
 
 .woofBlinkLogo {
@@ -335,11 +366,6 @@ button {
 
 .welcomeNav-links > a {
   font-size: 18px;
-}
-
-.welcomeLogoContainer {
-  display: flex;
-  margin-bottom: 10px;
 }
 
 .welcomeNav-signup {
@@ -363,50 +389,8 @@ button {
   color: #0975a3;
 }
 
-.woofMathLogo {
-  width: 350px;
-  /* border-radius: 50%;
-  box-shadow: 0px 23px 20px 10px #abe6ff; */
-}
-
 .woofMathLogo-small {
   width: 250px;
-}
-
-.welcomeContentContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 73%;
-  max-width: 530px;
-  color: white;
-  text-align: center;
-}
-
-.welcomeContentContainer > p {
-  /* margin-bottom: 25px; */
-  font-size: 28px;
-  /* text-shadow: 0px 0px 8px #55c2f0; */
-
-  /* font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif; */
-}
-
-.welcomeContentContainer > h1 {
-  font-size: 77px;
-  line-height: 1.1;
-  padding-bottom: 10px;
-  /* font-family: "Ribeye"; */
-  color: #ffffff;
-  text-shadow: 0px 0px 3px #a6d5ea;
-  /* font-family: "Schoolbell"; */
-}
-
-.welcomeButtonContainer {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
 }
 
 .welcomeAboutContainer {

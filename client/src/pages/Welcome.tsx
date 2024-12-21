@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import woofMathLogo from "../assets/wooflogo_home.png";
+import woofLogo from "../assets/wooflogo_3d.png";
 import woofMathLogoNav from "../assets/wooflogo_nobackground.png";
 import gameplayMath from "../assets/gameplay-math.png";
 import gameplayReading from "../assets/gameplay-reading.png";
@@ -12,37 +12,36 @@ function Welcome() {
   return (
     <>
       <div className="welcomePageContainer">
-        <div className="welcomeBackground">
-          <div className="welcomeNav">
-            <div className="welcomeNav-logo">
-              <img src={woofMathLogoNav} className="woofBlinkLogo" alt="" />{" "}
-              Woof Learning
-            </div>
-            <div className="welcomeNav-links">
-              <Link to={"/About"}>About & Privacy</Link>
-            </div>
-            <div className="welcomeNav-signup">
-              <Link to={"/login"}>
-                <button className="welcomeNav-buttonLogin">LOGIN</button>
-              </Link>
-            </div>
+        <div className="welcomeNav">
+          <div className="welcomeNav-logo">
+            <img src={woofMathLogoNav} className="woofBlinkLogo" alt="" /> Woof
+            Learning
           </div>
-
+          <div className="welcomeNav-links">
+            <Link to={"/About"}>About & Privacy</Link>
+          </div>
+          <div className="welcomeNav-signup">
+            <Link to={"/login"}>
+              <button className="welcomeNav-buttonLogin">LOGIN</button>
+            </Link>
+          </div>
+        </div>
+        <div className="welcomeTopContainer">
           <div className="welcomeContentContainer">
-            {/* <h1>Woof Learning</h1> */}
-            <p>A math and reading adventure</p>
-            <div className="welcomeLogoContainer">
-              <img
-                src={woofMathLogo}
-                className="woofMathLogo"
-                alt="WoofMath logo"
-              />
-            </div>
+            <h1>Building math and reading skills is a journey.</h1>
+            <h2>Make it an adventure.</h2>
             <div className="welcomeButtonContainer">
               <Link to={"/register"}>
                 <button className="button signup">SIGN UP</button>
               </Link>
             </div>
+          </div>
+          <div className="welcomeLogoContainer">
+            <img
+              src={woofLogo}
+              className="woofLogo-home"
+              alt="Woof Learning logo"
+            />
           </div>
         </div>
 
