@@ -15,7 +15,8 @@ function Welcome() {
         <div className="welcomeBackground">
           <div className="welcomeNav">
             <div className="welcomeNav-logo">
-              <img src={woofMathLogoNav} className="woofBlinkLogo" alt="" />
+              <img src={woofMathLogoNav} className="woofBlinkLogo" alt="" />{" "}
+              Woof Learning
             </div>
             <div className="welcomeNav-links">
               <Link to={"/About"}>About & Privacy</Link>
@@ -28,7 +29,7 @@ function Welcome() {
           </div>
 
           <div className="welcomeContentContainer">
-            <h1>Woof Learning</h1>
+            {/* <h1>Woof Learning</h1> */}
             <p>A math and reading adventure</p>
             <div className="welcomeLogoContainer">
               <img
