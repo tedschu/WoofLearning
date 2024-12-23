@@ -11,6 +11,7 @@ import badge_poodle from "../assets/badges/badge_2_7_poodle.png";
 import badge_trophy from "../assets/badges/badge_1_8_goldendoodle.png";
 import chalkboard from "../assets/chalkboard.png";
 import book from "../assets/book.png";
+import welcomeDog from "../assets/welcome_dog_large.png";
 
 function Welcome() {
   return (
@@ -53,69 +54,47 @@ function Welcome() {
         <div className="welcomeAboutInfoContainer">
           <div className="welcomeInfoBox">
             <div className="welcomeInfoBox-img">
+              <img src={welcomeDog} className="welcomeImg-middle" alt="" />
+            </div>
+            <div className="welcomeInfoBox-text">
+              <h2>Learning-focused games, built for kids.</h2>
+              <p>
+                Practice math and reading at your level, and get helpful
+                feedback along the way.
+              </p>
+            </div>
+          </div>
+          <div className="welcomeInfoBox">
+            <div className="welcomeInfoBox-img">
+              <img src={chalkboard} className="welcomeImg-middle" alt="" />
+              <img src={book} className="welcomeImg-middle" alt="" />
+            </div>
+            <div className="welcomeInfoBox-text">
+              <h2>Become a math and reading champ!</h2>
+              <p>
+                Improve your reading comprehension and math skills in simple,
+                fun games.
+              </p>
+            </div>
+          </div>
+          <div className="welcomeInfoBox">
+            <div className="welcomeInfoBox-img">
               <img src={badge_poodle} className="welcomeImg-small" alt="" />
               <img src={badge_trophy} alt="" />
               <img src={badge_boxer} className="welcomeImg-small" alt="" />
             </div>
             <div className="welcomeInfoBox-text">
-              <h2>Rewarding gameplay, focused on learning.</h2>
-              <p>Woof Learning games blah blah</p>
-            </div>
-          </div>
-          <div className="welcomeInfoBox">
-            <div className="welcomeInfoBox-img">
-              <img src={chalkboard} className="welcomeImg-chalkboard" alt="" />
-            </div>
-            <div className="welcomeInfoBox-text">
-              <h2>Building math skills and automaticity.</h2>
-              <p>Woof Learning games blah blah</p>
-            </div>
-          </div>
-          <div className="welcomeInfoBox">
-            <div className="welcomeInfoBox-img">
-              <img src={book} className="welcomeImg-book" alt="" />
-            </div>
-            <div className="welcomeInfoBox-text">
-              <h2>Building math skills & automaticity</h2>
-              <p>Woof Learning games blah blah</p>
+              <h2>Reward yourself for your progress.</h2>
+              <p>
+                The more you practice reading and math, the more super-cool
+                badges you can earn.
+              </p>
             </div>
           </div>
         </div>
         {/* <div className="welcomeAboutContainer"> */}
-        <div className="welcomeSubContainerTop">
-          <div className="welcomeAboutContent">
-            <h2>
-              Woof Learning was built to make math and reading practice fun.
-            </h2>
-            <p>
-              Woof Learning turn math and reading skills into exciting games.
-              Through simple, engaging gameplay, students receive smart feedback
-              that helps them learn and grow while having fun.
-            </p>
 
-            <br />
-            <h2>It's made for kids. </h2>
-            <p>
-              Choose your adventure - whether it's mastering addition, exploring
-              stories, or both! You control the difficulty level, making it
-              perfect for your child's learning journey. Create a free account
-              to start playing and learning today.
-            </p>
-          </div>
-
-          <div className="imageTopContainer">
-            <div className="welcomeAboutImageTop">
-              <img src={badge_bernese} alt="" />
-              <img src={badge_chihuahua} alt="" />
-              <img src={badge_boxer} alt="" />
-            </div>
-            <div className="welcomeAboutImageTop_2">
-              <img src={goldendoodle_trophy} alt="" />
-            </div>
-          </div>
-        </div>
-        <div className="divider"></div>
-
+        {/* MATH GAMEPLAY DEMO */}
         <div className="welcomeSubContainerBottom">
           <div className="welcomeAboutImageBottom">
             <img src={gameplayMath} alt="" />

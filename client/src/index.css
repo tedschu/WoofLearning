@@ -284,8 +284,11 @@ p {
   justify-content: center;
   color: white;
   width: 100%;
-  background: linear-gradient(#0975a3, #7dc2e0, #fdddd5);
+  background: linear-gradient(#0975a3, #7dc2e0, #dd6e55);
 }
+
+/* #d4492b 
+        Red / orange (light): #dd6e55 */
 
 .welcomeTopContainer {
   width: 100%;
@@ -371,7 +374,7 @@ p {
 .welcomeNav-signup {
   display: flex;
   justify-content: flex-end;
-  padding: 2px;
+  margin-right: 10px;
 }
 
 .welcomeNav-buttonLogin {
@@ -381,7 +384,7 @@ p {
   /* border: 2px solid #d4492b; */
   color: #d4492b;
   font-size: 22px;
-  /* border: none; */
+  border: 2px solid #d4492b;
   box-shadow: 2px 2px 6px #828282;
 }
 
@@ -411,7 +414,7 @@ p {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 50px 0;
+  margin: 65px 0 40px 0;
 }
 
 .welcomeInfoBox {
@@ -421,7 +424,7 @@ p {
   height: 200px;
   /* display: flex;
   flex-direction: column; */
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.11);
   display: grid;
   grid-template-rows: [first] 50% [line2] 50%;
   gap: 10px;
@@ -430,20 +433,15 @@ p {
 .welcomeInfoBox-img {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 3px;
+  justify-content: space-evenly;
 }
 
 .welcomeImg-small {
   transform: scale(0.85);
 }
 
-.welcomeImg-chalkboard {
-  width: 100px;
-}
-
-.welcomeImg-book {
-  width: 100px;
+.welcomeImg-middle {
+  width: 85px;
 }
 
 .welcomeInfoBox-text {
@@ -452,23 +450,12 @@ p {
 
 .welcomeInfoBox-text h2 {
   font-size: 18px;
+  /* font-variant: small-caps; */
+  color: #fee4dd;
 }
 
 .welcomeInfoBox-text p {
   font-size: 16px;
-}
-
-.welcomeSubContainerTop {
-  display: flex;
-  flex-direction: column;
-  width: 95%;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(255, 255, 255, 0.1);
-  padding: 15px;
-  border-radius: 12px;
-  margin-bottom: 25px;
-  /* padding: 30px 30px 30px 30px; */
 }
 
 .welcomeSubContainerBottom {
@@ -1914,15 +1901,6 @@ ul li {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-  }
-
-  .welcomeSubContainerTop {
-    display: grid;
-    grid-template-columns: [first] 65% [line2] 35%;
-    width: 90%;
-
-    justify-content: center;
-    align-items: center;
   }
 
   .welcomeSubContainerBottom {
