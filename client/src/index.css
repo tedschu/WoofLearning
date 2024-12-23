@@ -407,19 +407,24 @@ p {
 }
 
 .welcomeAboutInfoContainer {
-  width: 100%;
+  width: 90%;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
-  margin: 30px 0;
+  margin: 50px 0;
 }
 
 .welcomeInfoBox {
   padding: 15px;
   border-radius: 12px;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0px 0px 10px rgb(59, 59, 59);
+  width: 300px;
+  height: 200px;
+  /* display: flex;
+  flex-direction: column; */
+  background-color: rgba(255, 255, 255, 0.1);
+  display: grid;
+  grid-template-rows: [first] 50% [line2] 50%;
+  gap: 10px;
 }
 
 .welcomeInfoBox-img {
@@ -429,13 +434,16 @@ p {
   gap: 3px;
 }
 
-.welcomeInfoBox-img img {
-  width: 60px;
-  height: 60px;
-}
-
 .welcomeImg-small {
   transform: scale(0.85);
+}
+
+.welcomeImg-chalkboard {
+  width: 100px;
+}
+
+.welcomeImg-book {
+  width: 100px;
 }
 
 .welcomeInfoBox-text {
@@ -456,7 +464,7 @@ p {
   width: 95%;
   justify-content: center;
   align-items: center;
-  background-color: rgb(247, 247, 247);
+  background-color: rgba(255, 255, 255, 0.1);
   padding: 15px;
   border-radius: 12px;
   margin-bottom: 25px;
@@ -469,7 +477,7 @@ p {
   width: 95%;
   justify-content: center;
   align-items: center;
-  background-color: rgb(247, 247, 247);
+  background-color: rgba(255, 255, 255, 0.1);
   border-radius: 12px;
   margin-bottom: 25px;
   padding: 20px;

@@ -9,6 +9,8 @@ import goldendoodle_trophy from "../assets/goldendoodle_trophy_large.png";
 import badge_boxer from "../assets/badges/badge_1_4_boxer.png";
 import badge_poodle from "../assets/badges/badge_2_7_poodle.png";
 import badge_trophy from "../assets/badges/badge_1_8_goldendoodle.png";
+import chalkboard from "../assets/chalkboard.png";
+import book from "../assets/book.png";
 
 function Welcome() {
   return (
@@ -61,12 +63,22 @@ function Welcome() {
             </div>
           </div>
           <div className="welcomeInfoBox">
-            <div className="welcomeInfoBox-img"></div>
-            <div className="welcomeInfoBox-text">test</div>
+            <div className="welcomeInfoBox-img">
+              <img src={chalkboard} className="welcomeImg-chalkboard" alt="" />
+            </div>
+            <div className="welcomeInfoBox-text">
+              <h2>Building math skills and automaticity.</h2>
+              <p>Woof Learning games blah blah</p>
+            </div>
           </div>
           <div className="welcomeInfoBox">
-            <div className="welcomeInfoBox-img"></div>
-            <div className="welcomeInfoBox-text">test</div>
+            <div className="welcomeInfoBox-img">
+              <img src={book} className="welcomeImg-book" alt="" />
+            </div>
+            <div className="welcomeInfoBox-text">
+              <h2>Building math skills & automaticity</h2>
+              <p>Woof Learning games blah blah</p>
+            </div>
           </div>
         </div>
         {/* <div className="welcomeAboutContainer"> */}
