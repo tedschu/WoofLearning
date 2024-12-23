@@ -7,6 +7,8 @@ import badge_bernese from "../assets/badges/badge_1_1_bernese.png";
 import badge_chihuahua from "../assets/badges/badge_1_2_chihuahua.png";
 import goldendoodle_trophy from "../assets/goldendoodle_trophy_large.png";
 import badge_boxer from "../assets/badges/badge_1_4_boxer.png";
+import badge_poodle from "../assets/badges/badge_2_7_poodle.png";
+import badge_trophy from "../assets/badges/badge_1_8_goldendoodle.png";
 
 function Welcome() {
   return (
@@ -45,10 +47,27 @@ function Welcome() {
           </div>
         </div>
 
-        <div className="welcomeAboutSeparator">
-          <div className="divider"></div>
-
-          <h1>Learn more about the games</h1>
+        {/* MIDDLE INFO BOXES */}
+        <div className="welcomeAboutInfoContainer">
+          <div className="welcomeInfoBox">
+            <div className="welcomeInfoBox-img">
+              <img src={badge_poodle} className="welcomeImg-small" alt="" />
+              <img src={badge_trophy} alt="" />
+              <img src={badge_boxer} className="welcomeImg-small" alt="" />
+            </div>
+            <div className="welcomeInfoBox-text">
+              <h2>Rewarding gameplay, focused on learning.</h2>
+              <p>Woof Learning games blah blah</p>
+            </div>
+          </div>
+          <div className="welcomeInfoBox">
+            <div className="welcomeInfoBox-img"></div>
+            <div className="welcomeInfoBox-text">test</div>
+          </div>
+          <div className="welcomeInfoBox">
+            <div className="welcomeInfoBox-img"></div>
+            <div className="welcomeInfoBox-text">test</div>
+          </div>
         </div>
         {/* <div className="welcomeAboutContainer"> */}
         <div className="welcomeSubContainerTop">
