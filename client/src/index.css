@@ -343,7 +343,7 @@ p {
   display: grid;
   grid-template-columns: [first] 25% [line2] 50% [line3] 25%;
   align-items: center;
-  margin-bottom: 15px;
+  margin-bottom: 30px;
 }
 
 .welcomeNav-logo {
@@ -466,7 +466,7 @@ p {
   align-items: center;
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 12px;
-  margin-bottom: 25px;
+  margin: 20px 0 25px 0;
   padding: 20px;
 }
 
@@ -488,6 +488,13 @@ p {
   font-size: 18px;
   font-style: italic;
   color: black;
+}
+
+.welcomeVideoDemo {
+  width: 500px;
+  box-shadow: 3px 0px 3px rgb(137, 137, 137);
+  border-radius: 12px;
+  margin: 20px 0;
 }
 
 .welcomeAboutContent.bottom {

@@ -12,6 +12,8 @@ import badge_trophy from "../assets/badges/badge_1_8_goldendoodle.png";
 import chalkboard from "../assets/chalkboard.png";
 import book from "../assets/book.png";
 import welcomeDog from "../assets/welcome_dog_large.png";
+import woofmath_demo from "../assets/WoofMath_demo.webm";
+import woofreading_demo from "../assets/WoofReading_demo.webm";
 
 function Welcome() {
   return (
@@ -22,9 +24,7 @@ function Welcome() {
             <img src={woofMathLogoNav} className="woofBlinkLogo" alt="" /> Woof
             Learning
           </div>
-          <div className="welcomeNav-links">
-            <Link to={"/About"}>About & Privacy</Link>
-          </div>
+          <div className="welcomeNav-links"></div>
           <div className="welcomeNav-signup">
             <Link to={"/login"}>
               <button className="welcomeNav-buttonLogin">LOGIN</button>
@@ -97,7 +97,10 @@ function Welcome() {
         {/* MATH GAMEPLAY DEMO */}
         <div className="welcomeSubContainerBottom">
           <div className="welcomeAboutImageBottom">
-            <img src={gameplayMath} alt="" />
+            {/* <img src={gameplayMath} alt="" /> */}
+            <video autoPlay loop muted playsInline className="welcomeVideoDemo">
+              <source src={woofmath_demo} type="video/mp4" />
+            </video>
           </div>
           <div className="welcomeAboutContent bottom">
             <h2 className="math-font">Woof Math game play:</h2>
@@ -144,7 +147,9 @@ function Welcome() {
             </Link>
           </div>
           <div className="welcomeAboutImageBottom">
-            <img src={gameplayReading} alt="" />
+            <video autoPlay loop muted playsInline className="welcomeVideoDemo">
+              <source src={woofreading_demo} type="video/mp4" />
+            </video>
           </div>
         </div>
       </div>
