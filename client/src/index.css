@@ -421,16 +421,15 @@ p {
   padding: 15px;
   border-radius: 12px;
   min-height: fit-content;
-  /* height: auto; */
-  width: 30%;
+  width: 32%;
   min-width: 290px;
-
-  /* display: flex;
-  flex-direction: column; */
+  height: fit-content;
+  min-height: 250px;
   background-color: rgba(255, 255, 255, 0.11);
   display: grid;
-  grid-template-rows: repeat(auto-fit, auto-fit);
+  grid-template-rows: [first] 45% [line2] 55%;
   gap: 10px;
+  overflow: visible;
 }
 
 .welcomeInfoBox-img {
@@ -449,6 +448,7 @@ p {
 
 .welcomeInfoBox-text {
   text-align: center;
+  /* min-height: fit-content; */
 }
 
 .welcomeInfoBox-text h2 {
