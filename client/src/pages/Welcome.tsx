@@ -1,11 +1,7 @@
 import { Link } from "react-router-dom";
 import woofLogo from "../assets/wooflogo_3d.png";
 import woofMathLogoNav from "../assets/wooflogo_nobackground.png";
-import gameplayMath from "../assets/gameplay-math.png";
-import gameplayReading from "../assets/gameplay-reading.png";
-import badge_bernese from "../assets/badges/badge_1_1_bernese.png";
-import badge_chihuahua from "../assets/badges/badge_1_2_chihuahua.png";
-import goldendoodle_trophy from "../assets/goldendoodle_trophy_large.png";
+
 import badge_boxer from "../assets/badges/badge_1_4_boxer.png";
 import badge_poodle from "../assets/badges/badge_2_7_poodle.png";
 import badge_trophy from "../assets/badges/badge_1_8_goldendoodle.png";
@@ -57,7 +53,7 @@ function Welcome() {
               <img src={welcomeDog} className="welcomeImg-middle" alt="" />
             </div>
             <div className="welcomeInfoBox-text">
-              <h2>Learning-focused games, built for kids.</h2>
+              <h2>Learning-focused games for kids.</h2>
               <p>
                 Practice math and reading at your level, and get helpful
                 feedback along the way.
@@ -103,7 +99,7 @@ function Welcome() {
             </video>
           </div>
           <div className="welcomeAboutContent bottom">
-            <h2 className="math-font">Woof Math game play:</h2>
+            <h1>Woof Math blah blah</h1>
             <ul>
               <li>
                 Choose your type of math (ex. addition, division) and how hard
@@ -122,7 +118,7 @@ function Welcome() {
         </div>
         <div className="welcomeSubContainerBottom">
           <div className="welcomeAboutContent bottom">
-            <h2 className="reading-font">Woof Reading game play:</h2>
+            <h1>Woof Reading game play</h1>
             <ul>
               <li>
                 Pick what you want to read: a story, maybe a poem? Then, find a
