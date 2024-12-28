@@ -112,7 +112,7 @@ function Welcome() {
               <li>See if you can win the goldendoodle badge!</li>
             </ul>
             <Link to={"/register"}>
-              <button className="button signup welcome">SIGN UP</button>
+              <button className="button signup">SIGN UP</button>
             </Link>
           </div>
         </div>
@@ -139,7 +139,7 @@ function Welcome() {
               <li>See if you can win the goldendoodle badge!</li>
             </ul>
             <Link to={"/register"}>
-              <button className="button signup welcome">SIGN UP</button>
+              <button className="button signup">SIGN UP</button>
             </Link>
           </div>
           <div className="welcomeAboutImageBottom">
