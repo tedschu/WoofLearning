@@ -291,16 +291,16 @@ p {
         Red / orange (light): #dd6e55 */
 
 .welcomeTopContainer {
-  width: 100%;
+  width: 90%;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
 }
 
 .welcomeLogoContainer {
   display: flex;
-  align-items: center;
+  align-self: flex-start;
   justify-content: center;
   padding: 20px 10px;
 }
@@ -315,7 +315,6 @@ p {
   display: flex;
   flex-direction: column;
   color: white;
-  padding: 15px;
   text-align: center;
   justify-content: center;
   align-items: center;
@@ -2015,25 +2014,23 @@ ul li {
   }
 
   .welcomeTopContainer {
-    width: 100%;
-    display: grid;
-    grid-template-columns: [first] 55% [line2] 45%;
-    align-items: center;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     justify-content: center;
   }
 
   .welcomeLogoContainer {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0px 30px;
+    align-self: flex-start;
+    padding: 20px 10px;
   }
 
   .welcomeContentContainer {
     display: flex;
     flex-direction: column;
     color: white;
-    padding-left: 45px;
     text-align: left;
     justify-content: left;
     align-items: flex-start;
