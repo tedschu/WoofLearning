@@ -99,48 +99,32 @@ function Welcome() {
             </video>
           </div>
           <div className="welcomeAboutContent bottom">
-            <h1>Woof Math blah blah</h1>
-            <ul>
-              <li>
-                Choose your type of math (ex. addition, division) and how hard
-                the questions should be.
-              </li>
-              <li>
-                See how you do! The more questions you get right, the more
-                points and animal badges you earn.
-              </li>
-              <li>See if you can win the goldendoodle badge!</li>
-            </ul>
-            <Link to={"/register"}>
-              <button className="button signup">SIGN UP</button>
-            </Link>
+            <div className="welcomeWoofMathBox">Woof Math</div>
+            <h1>Level up your math skills through (fun) practice</h1>
+            <p>
+              Choose your type of math (ex. addition, division) and how hard the
+              questions should be.
+            </p>
+            <div className="welcomeButtonMargin">
+              <Link to={"/register"}>
+                <button className="button signup">SIGN UP</button>
+              </Link>
+            </div>
           </div>
         </div>
         <div className="welcomeSubContainerBottom">
           <div className="welcomeAboutContent bottom">
-            <h1>Woof Reading game play</h1>
-            <ul>
-              <li>
-                Pick what you want to read: a story, maybe a poem? Then, find a
-                story topic that sounds fun. Choose how challenging the story
-                should be, as well. Woof Reading uses AI to help create the
-                stories and also to provide helpful feedback for readers.{" "}
-                <Link
-                  style={{ color: "inherit", fontSize: "inheret" }}
-                  to={"/about"}
-                >
-                  Learn more about our use of AI.
-                </Link>
-              </li>
-              <li>
-                See how you do! The more questions you get right, the more
-                points and animal badges you earn.
-              </li>
-              <li>See if you can win the goldendoodle badge!</li>
-            </ul>
-            <Link to={"/register"}>
-              <button className="button signup">SIGN UP</button>
-            </Link>
+            <div className="welcomeWoofReadingBox">Woof Reading</div>
+            <h1>Choose your own adventure, with help along the way</h1>
+            <p>
+              Pick your story style and topic - your AI guide provides real-time
+              feedback!
+            </p>
+            <div className="welcomeButtonMargin">
+              <Link to={"/register"}>
+                <button className="button signup">SIGN UP</button>
+              </Link>
+            </div>
           </div>
           <div className="welcomeAboutImageBottom">
             <video autoPlay loop muted playsInline className="welcomeVideoDemo">
