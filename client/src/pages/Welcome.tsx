@@ -91,13 +91,7 @@ function Welcome() {
         {/* <div className="welcomeAboutContainer"> */}
 
         {/* MATH GAMEPLAY DEMO */}
-        <div className="welcomeSubContainerBottom">
-          <div className="welcomeAboutImageBottom">
-            {/* <img src={gameplayMath} alt="" /> */}
-            <video autoPlay loop muted playsInline className="welcomeVideoDemo">
-              <source src={woofmath_demo} type="video/mp4" />
-            </video>
-          </div>
+        <div className="welcomeSubContainerBottom math">
           <div className="welcomeAboutContent bottom">
             <div className="welcomeWoofMathBox">Woof Math</div>
             <h1>Level up your math skills through (fun) practice</h1>
@@ -110,6 +104,12 @@ function Welcome() {
                 <button className="button signup">SIGN UP</button>
               </Link>
             </div>
+          </div>
+          <div className="welcomeAboutImageBottom">
+            {/* <img src={gameplayMath} alt="" /> */}
+            <video autoPlay loop muted playsInline className="welcomeVideoDemo">
+              <source src={woofmath_demo} type="video/mp4" />
+            </video>
           </div>
         </div>
         <div className="welcomeSubContainerBottom">
