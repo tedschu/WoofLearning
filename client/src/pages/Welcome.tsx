@@ -9,7 +9,9 @@ import chalkboard from "../assets/chalkboard.png";
 import book from "../assets/book.png";
 import welcomeDog from "../assets/welcome_dog_large.png";
 import woofmath_demo from "../assets/WoofMath_demo.webm";
+import woofmath_demo_mp4 from "../assets/WoofMath_demo.mp4";
 import woofreading_demo from "../assets/WoofReading_demo.webm";
+import woofreading_demo_mp4 from "../assets/WoofReading_demo.mp4";
 
 function Welcome() {
   return (
@@ -90,7 +92,7 @@ function Welcome() {
         </div>
         {/* <div className="welcomeAboutContainer"> */}
 
-        {/* MATH GAMEPLAY DEMO */}
+        {/* MATH GAMEPLAY VIDEO */}
         <div className="welcomeSubContainerBottom math">
           <div className="welcomeAboutContent bottom">
             <div className="welcomeWoofMathBox">Woof Math</div>
@@ -107,11 +109,20 @@ function Welcome() {
           </div>
           <div className="welcomeAboutImageBottom">
             {/* <img src={gameplayMath} alt="" /> */}
-            <video autoPlay loop muted playsInline className="welcomeVideoDemo">
-              <source src={woofmath_demo} type="video/mp4" />
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              controls
+              className="welcomeVideoDemo"
+            >
+              <source src={woofmath_demo_mp4} type="video/mp4" />
+              <source src={woofmath_demo} type="video/webm" />
             </video>
           </div>
         </div>
+        {/* READING GAMEPLAY VIDEO */}
         <div className="welcomeSubContainerBottom">
           <div className="welcomeAboutContent bottom">
             <div className="welcomeWoofReadingBox">Woof Reading</div>
@@ -127,8 +138,16 @@ function Welcome() {
             </div>
           </div>
           <div className="welcomeAboutImageBottom">
-            <video autoPlay loop muted playsInline className="welcomeVideoDemo">
-              <source src={woofreading_demo} type="video/mp4" />
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              controls
+              className="welcomeVideoDemo"
+            >
+              <source src={woofreading_demo_mp4} type="video/mp4" />
+              <source src={woofreading_demo} type="video/webm" />
             </video>
           </div>
         </div>
