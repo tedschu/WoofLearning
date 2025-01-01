@@ -151,11 +151,13 @@ function Welcome() {
             </video>
           </div>
         </div>
-
-        <Link to="/about" onClick={() => window.scrollTo(0, 0)}>
-          {" "}
-          <div className="welcomeFooter">About us / privacy policy</div>
-        </Link>
+        <div className="welcomeFooter">
+          <Link to="/about" onClick={() => window.scrollTo(0, 0)}>
+            {" "}
+            <h3>About us / privacy policy</h3>
+          </Link>
+          <h4>© 2024 Woof Learning</h4>
+        </div>
       </div>
       {/* </div> */}
     </>
