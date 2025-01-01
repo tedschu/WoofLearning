@@ -321,6 +321,7 @@ p {
   justify-content: center;
   align-items: center;
   gap: 5px;
+  max-width: 780px;
 }
 
 .welcomeContentContainer > h1 {
@@ -2090,6 +2091,10 @@ ul li {
 
   .welcomeSubContainerBottom.math .welcomeAboutImageBottom {
     order: 1;
+  }
+
+  .woofLogo-home {
+    width: 600px;
   }
 }
 
