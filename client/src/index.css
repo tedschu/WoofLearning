@@ -87,14 +87,22 @@ p {
 .buttonGrayText {
   color: gray;
   width: 200px;
+  border: 1px solid lightgray;
+  border-radius: 12px;
+  padding: 3px;
+  font-size: 18px;
 }
 
 .buttonGrayText.skip {
   width: 150px;
+  border-radius: 12px;
+  border: 1px solid lightgray;
+  font-size: 18px;
+  padding: 3px 0;
 }
 
 .button.login {
-  width: 220px;
+  width: 200px;
   border-radius: 10px;
   background-image: linear-gradient(#d4492b, #ff8b71);
   border: 2px solid #d4492b;
@@ -102,6 +110,7 @@ p {
   font-size: 25px;
   /* border: none; */
   box-shadow: 2px 2px 6px #828282;
+  margin-top: 20px;
 }
 
 .button.signup {
@@ -156,7 +165,8 @@ p {
   border-radius: 10px;
   color: black;
   font-size: 20px;
-  /* border: 1px solid #cb4527; */
+  border: none;
+  padding: 3px 0;
 }
 
 .button.submit {
@@ -167,6 +177,7 @@ p {
   font-size: 25px;
   border: none;
   box-shadow: 2px 2px 6px #c1c1c1;
+  padding: 5px 0 5px 0;
 }
 
 .button.StoryGenerate {
@@ -235,6 +246,8 @@ p {
   font-size: 20px;
   border: none;
   box-shadow: 2px 2px 6px #c1c1c1;
+  margin-bottom: 15px;
+  padding: 3px;
 }
 
 .button.gameSelect {
@@ -392,6 +405,10 @@ p {
 
 .welcomeNav-buttonLogin:hover {
   color: #0975a3;
+}
+
+.woofMathLogo {
+  width: 250px;
 }
 
 .woofMathLogo-small {
@@ -658,6 +675,7 @@ p {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  gap: 15px;
 }
 
 .appSelector-contentBox {
@@ -1102,8 +1120,8 @@ p {
   flex-direction: row;
   flex-wrap: wrap;
   /* background: lightcyan; */
-  padding: 5px;
-  margin: 5px;
+
+  margin: 7px 0 20px 0;
   font-size: 35px;
   align-items: center;
   justify-content: center;
@@ -1178,6 +1196,7 @@ p {
 .answerSubmit {
   display: flex;
   justify-content: center;
+  margin-bottom: 25px;
 }
 
 .ai-disclaimer {
@@ -1273,6 +1292,8 @@ input[type="number"]::-webkit-inner-spin-button {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  gap: 15px;
+  margin: 10px 0 20px 0;
 }
 
 .registerPageContainer {
@@ -1456,6 +1477,10 @@ p {
   align-items: center;
 }
 
+.accountList {
+  margin: 5px 0 15px 0;
+}
+
 .accountContentContainer {
   display: flex;
   flex-direction: column;
@@ -1493,6 +1518,7 @@ p {
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  gap: 20px;
 }
 
 .accountBadges {
@@ -1511,6 +1537,19 @@ p {
 .math-font {
   color: #d4492b;
   font-size: 45px;
+}
+
+.reading-font-me {
+  color: #0085bd;
+  font-variant: small-caps;
+  font-size: 28px;
+}
+
+.math-font-me {
+  color: #d4492b;
+  font-variant: small-caps;
+
+  font-size: 28px;
 }
 
 .chart {

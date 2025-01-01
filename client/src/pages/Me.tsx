@@ -314,7 +314,7 @@ function Me({
             <h3>Badges you've earned:</h3>
             <div className="accountRowContainer">
               <div className="accountBadges">
-                <h3 className="reading-font">Woof Reading</h3>
+                <h3 className="reading-font-me">Woof Reading</h3>
                 {readingList.length === 0 ? (
                   <span className="accountAlert">None yet!</span>
                 ) : (
@@ -323,7 +323,7 @@ function Me({
               </div>
 
               <div className="accountBadges">
-                <h3 className="math-font">Woof Math</h3>
+                <h3 className="math-font-me">Woof Math</h3>
                 {mathList.length === 0 ? (
                   <span className="accountAlert">None yet!</span>
                 ) : (
@@ -335,7 +335,7 @@ function Me({
             <div className="accountRowContainer">
               <div className="chartBox">
                 <div className="chartTitle">
-                  <h3 className="reading-font">
+                  <h3 className="reading-font-me">
                     Woof Reading: {userScore.reading_score} points
                   </h3>
                   <p className="grayText">
@@ -353,7 +353,9 @@ function Me({
               </div>
               <div className="chartBox">
                 <div className="chartTitle">
-                  <h3 className="math-font">Woof Math: {totalScore} points</h3>
+                  <h3 className="math-font-me">
+                    Woof Math: {totalScore} points
+                  </h3>
                   <p className="grayText">
                     Most of your points ({highestMathLevel[1]}) are from{"  "}
                     {highestMathLevel[0]}{" "}
@@ -375,32 +377,39 @@ function Me({
             {/* <li>
               Name: <span className="accountFont">{userInfo.name}</span>
             </li> */}
-            <li>
-              Email: <span className="accountFont">{userInfo.email}</span>
-            </li>
-            <li>
-              Username: <span className="accountFont">{userInfo.username}</span>
-            </li>
-            <li>
-              Security question #1:{" "}
-              <span className="accountFont">
-                {userInfo.security_question_1}
-              </span>
-            </li>
-            <li>
-              Security answer #1:{" "}
-              <span className="accountFont">{userInfo.security_answer_1}</span>
-            </li>
-            <li>
-              Security question #2:{" "}
-              <span className="accountFont">
-                {userInfo.security_question_2}
-              </span>
-            </li>
-            <li>
-              Security answer #2:{" "}
-              <span className="accountFont">{userInfo.security_answer_2}</span>
-            </li>
+            <div className="accountList">
+              <li>
+                Email: <span className="accountFont">{userInfo.email}</span>
+              </li>
+              <li>
+                Username:{" "}
+                <span className="accountFont">{userInfo.username}</span>
+              </li>
+              <li>
+                Security question #1:{" "}
+                <span className="accountFont">
+                  {userInfo.security_question_1}
+                </span>
+              </li>
+              <li>
+                Security answer #1:{" "}
+                <span className="accountFont">
+                  {userInfo.security_answer_1}
+                </span>
+              </li>
+              <li>
+                Security question #2:{" "}
+                <span className="accountFont">
+                  {userInfo.security_question_2}
+                </span>
+              </li>
+              <li>
+                Security answer #2:{" "}
+                <span className="accountFont">
+                  {userInfo.security_answer_2}
+                </span>
+              </li>
+            </div>
 
             <Link to={"mailto:wooflearning@gmail.com"}>
               <button className="button accountGray">
