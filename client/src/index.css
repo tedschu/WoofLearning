@@ -84,6 +84,11 @@ p {
 
 /* BUTTON STYLING */
 
+button {
+  border: none;
+  padding: 3px;
+}
+
 .buttonGrayText {
   color: gray;
   width: 200px;
@@ -99,6 +104,7 @@ p {
   border: 1px solid lightgray;
   font-size: 18px;
   padding: 3px 0;
+  margin-top: 20px;
 }
 
 .button.login {
@@ -110,7 +116,6 @@ p {
   font-size: 25px;
   /* border: none; */
   box-shadow: 2px 2px 6px #828282;
-  margin-top: 20px;
 }
 
 .button.signup {
@@ -289,6 +294,14 @@ p {
   background: #0071a2;
 }
 
+.buttonSpacerTop {
+  margin-top: 15px;
+}
+
+.buttonSpacerTopExtra {
+  margin-top: 50px;
+}
+
 /* WELCOME PAGE STYLING */
 .welcomePageContainer {
   display: flex;
@@ -339,7 +352,7 @@ p {
 
 .welcomeContentContainer > h1 {
   font-size: 65px;
-  line-height: 1;
+  line-height: 1.1;
 }
 
 .welcomeContentContainer > h2 {
@@ -605,6 +618,11 @@ p {
 
 .welcomeAboutImageTop > img {
   width: 33%;
+}
+
+.welcomeFooter {
+  font-size: 20px;
+  margin-bottom: 20px;
 }
 
 /* APP SELECTOR PAGE STYLING */
@@ -1196,7 +1214,6 @@ p {
 .answerSubmit {
   display: flex;
   justify-content: center;
-  margin-bottom: 25px;
 }
 
 .ai-disclaimer {
@@ -1539,6 +1556,10 @@ p {
   font-size: 45px;
 }
 
+.math-font.about {
+  font-size: 30px;
+}
+
 .reading-font-me {
   color: #0085bd;
   font-variant: small-caps;
@@ -1560,6 +1581,10 @@ p {
 
   border-radius: 8px;
   /* background-color: white; */
+}
+
+.readingButtonSpacer {
+  margin-top: 10px;
 }
 
 .accountAlert {

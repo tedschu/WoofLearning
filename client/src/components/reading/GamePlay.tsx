@@ -579,7 +579,11 @@ function GamePlay({
                   </div>
                 )}
                 {!showEvaluationChecks && (
-                  <button className="button login">SUBMIT</button>
+                  <>
+                    <div className="readingButtonSpacer">
+                      <button className="button login">SUBMIT</button>
+                    </div>
+                  </>
                 )}
               </form>
             </>

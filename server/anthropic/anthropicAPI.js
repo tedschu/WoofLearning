@@ -16,7 +16,7 @@ const anthropic = new Anthropic({
 async function callAnthropicAPI(messages, system = "") {
   try {
     const response = await anthropic.messages.create({
-      model: "claude-3-5-sonnet-20240620",
+      model: "claude-3-5-haiku-20241022",
       max_tokens: 1200,
       temperature: 0.7,
       system: system,

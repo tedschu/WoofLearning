@@ -223,6 +223,7 @@ function App() {
               currentApp={currentApp}
               setCurrentApp={setCurrentApp}
               userInfo={userInfo}
+              setIsLoggedIn={setIsLoggedIn}
             />
           }
         />

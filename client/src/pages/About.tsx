@@ -31,7 +31,7 @@ function About({ isLoggedIn }: AboutProps) {
         <h1>Welcome to Woof Learning. Here's more about us.</h1>
 
         <div className="aboutContentContainer">
-          <h2 className="math-font">The backstory</h2>
+          <h2 className="math-font about">The backstory</h2>
           <p>
             As a parent of two grade school-aged kids, we try to make sure that
             they have good habits around reading and math skills. This means
@@ -85,7 +85,7 @@ function About({ isLoggedIn }: AboutProps) {
         </div>
 
         <div className="aboutContentContainer">
-          <h2 className="math-font">
+          <h2 className="math-font about">
             Woof Reading uses AI (artificial intelligence) to generate stories{" "}
             <AutoAwesomeIcon style={{ fontSize: "22px" }} />
           </h2>

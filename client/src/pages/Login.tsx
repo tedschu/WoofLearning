@@ -109,7 +109,9 @@ function Login({ setIsLoggedIn, userInfo, setUserInfo, setToken }: LoginProps) {
               value={userInfo.password}
               onChange={setFormValues}
             />
-            <button className="button login">LOG IN</button>
+            <div className="buttonSpacerTop">
+              <button className="button login">LOG IN</button>
+            </div>
           </form>
           {loginFailed && (
             <>
