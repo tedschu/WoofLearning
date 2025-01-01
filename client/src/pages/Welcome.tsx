@@ -117,8 +117,8 @@ function Welcome() {
               controls
               className="welcomeVideoDemo"
             >
-              <source src={woofmath_demo_mp4} type="video/mp4" />
               <source src={woofmath_demo} type="video/webm" />
+              <source src={woofmath_demo_mp4} type="video/mp4" />
             </video>
           </div>
         </div>
@@ -146,8 +146,8 @@ function Welcome() {
               controls
               className="welcomeVideoDemo"
             >
-              <source src={woofreading_demo_mp4} type="video/mp4" />
               <source src={woofreading_demo} type="video/webm" />
+              <source src={woofreading_demo_mp4} type="video/mp4" />
             </video>
           </div>
         </div>

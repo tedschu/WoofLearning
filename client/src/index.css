@@ -347,7 +347,7 @@ p {
 .welcomeNav {
   width: 100%;
   display: grid;
-  grid-template-columns: [first] 25% [line2] 50% [line3] 25%;
+  grid-template-columns: [first] 60% [line2] 5% [line3] 35%;
   align-items: center;
   margin-bottom: 30px;
 }
@@ -382,12 +382,11 @@ p {
 .welcomeNav-buttonLogin {
   width: 90px;
   border-radius: 10px;
-  /* background-image: linear-gradient(#d4492b, #ff8b71); */
-  /* border: 2px solid #d4492b; */
-  color: #d4492b;
+  background-image: linear-gradient(#d4492b, #d4492b, #e1684c);
+  color: white;
   font-size: 22px;
-  border: 2px solid #d4492b;
-  box-shadow: 2px 2px 6px #828282;
+  box-shadow: 2px 2px 6px #535353;
+  border: none;
 }
 
 .welcomeNav-buttonLogin:hover {
@@ -537,7 +536,7 @@ p {
   /* padding: 15px 0px 0px 15px; */
   width: 80%;
   text-align: center;
-  margin-bottom: 20px;
+  margin: 20px 0;
 }
 
 .welcomeAboutContent.bottom h1 {
