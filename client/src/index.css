@@ -539,9 +539,10 @@ p {
   color: white;
   gap: 15px;
   /* padding: 15px 0px 0px 15px; */
-  width: 80%;
+  width: 90%;
   text-align: center;
   margin: 20px 0;
+  line-height: 1.2;
 }
 
 .welcomeAboutContent.bottom h1 {
