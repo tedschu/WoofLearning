@@ -153,12 +153,12 @@ router.post("/login", async (req, res) => {
     });
 
     if (!userMatch) {
-      res.status(401).send({ message: "Invalid login credentials" });
+      return res.status(401).send({ message: "Invalid login credentials" });
     }
 
     const passMatch = await bcrypt.compare(password, userMatch.password);
     if (!passMatch) {
-      res.status(401).send({ message: "Invalid login credentials" });
+      return res.status(401).send({ message: "Invalid login credentials" });
     }
 
     await prisma.user.update({

@@ -416,7 +416,7 @@ function GamePlay({
     try {
       const storedToken = localStorage.getItem("token");
 
-      const response = await fetch(`/api/users/${userInfo.id}/badge_reading`, {
+      const response = await fetch(`/api/users-reading/${userInfo.id}/badge`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

@@ -218,7 +218,7 @@ function ResetPassModal({
                   onChange={setFormValues}
                 />
 
-                <button>Update password</button>
+                <button className="buttonGrayText">Update password</button>
               </form>
             </>
           )}
