@@ -1027,7 +1027,7 @@ button {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 95%;
+  width: 97%;
   border-radius: 10px;
   padding: 20px 0px;
   box-shadow: 2px 2px 10px lightgray;
@@ -2078,6 +2078,7 @@ ul li {
 
   .gamePlay-math {
     width: 60%;
+    max-width: 880px;
   }
 }
 
