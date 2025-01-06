@@ -5,6 +5,7 @@ const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const jwt = require("jsonwebtoken");
 const { verifyToken } = require("../../utilities/verifyToken");
+const { connect } = require("http2");
 
 const prisma = new PrismaClient();
 
@@ -39,5 +40,43 @@ router.put("/:user_id/badge", verifyToken, async (req, res) => {
     res.sendStatus(500);
   }
 });
+
+// Adds a new data row for a user's timed challenge data in math_timed_challenge table (inc. score, timestamp, math_type, level, questions_attempted, questions_correct)
+router.post("/timed-challenge", verifyToken, async (req, res) => {
+  try {
+    const testResult = await prisma.math_timed_scores.create({
+      data: {
+        user: {
+          connect: { id: req.body.user_id },
+        },
+        timestamp: new Date().toISOString(),
+        math_type: req.body.math_type,
+        level: req.body.level,
+        points_added: req.body.points_added,
+        questions_attempted: req.body.questions_attempted,
+        questions_correct: req.body.questions_correct,
+        // ALSO PASSES THE INCORRECT EQUATIONS TO THE Incorrect_question TABLE
+        incorrect_questions: {
+          create: req.body.incorrect_questions.map((question) => ({
+            equation: question.equation,
+            user: {
+              connect: { id: req.body.user_id },
+            },
+          })),
+        },
+      },
+      include: {
+        incorrect_questions: true,
+      },
+    });
+
+    return res.status(200).send(testResult);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ error: "Failed to save challenge result" });
+  }
+});
+
+//
 
 module.exports = router;

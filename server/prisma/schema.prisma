@@ -27,7 +27,8 @@ model User {
   badge_math Badge_math?
   score_reading Score_reading?
   badge_reading Badge_reading?
-  math_timed_scores Math_timed_scores?
+  math_timed_scores Math_timed_scores[]
+  incorrect_questions Incorrect_question[]
 }
 
 model Score_math {
@@ -78,7 +79,22 @@ model Math_timed_scores {
     questions_attempted Int
     questions_correct Int
     user User @relation(fields: [user_id], references: [id])
-    user_id Int @unique
+    user_id Int
+    incorrect_questions Incorrect_question[]
+
+    @@index([user_id])
+}
+
+model Incorrect_question {
+    id Int @id @default(autoincrement())
+    equation String
+    challenge Math_timed_scores @relation(fields: [challenge_id], references: [id])
+    challenge_id Int
+    user User @relation(fields: [user_id], references: [id])
+    user_id Int
+
+    @@index([challenge_id])
+    @@index([user_id])
 }
 
 model Score_reading {
