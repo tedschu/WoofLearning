@@ -27,6 +27,7 @@ model User {
   badge_math Badge_math?
   score_reading Score_reading?
   badge_reading Badge_reading?
+  math_timed_scores Math_timed_scores?
 }
 
 model Score_math {
@@ -66,6 +67,18 @@ model Badge_math {
   badges Int @default(0)
   user User @relation(fields: [user_id], references: [id])
   user_id Int @unique
+}
+
+model Math_timed_scores {
+    id Int @id @default(autoincrement())
+    timestamp DateTime
+    math_type String 
+    level Int
+    points_added Int
+    questions_attempted Int
+    questions_correct Int
+    user User @relation(fields: [user_id], references: [id])
+    user_id Int @unique
 }
 
 model Score_reading {
