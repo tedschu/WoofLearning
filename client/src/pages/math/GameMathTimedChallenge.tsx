@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import { GameTimedChallengeProps } from "../../types/types";
-import clock from "../../assets/clock.png";
+import clock_white from "../../assets/clock_white.png";
 import Slider from "../../components/math/Slider";
 import GameSelector from "../../components/math/GameSelector";
 import { Link } from "react-router-dom";
 import woofMathLogo from "../../assets/woofmath_logo_1.png";
+import GamePlayTimedChallenge from "../../components/math/GamePlayTimedChallenge";
 
 function GameMathTimedChallenge({
   isTimedChallegeModalOpen,
@@ -22,14 +23,15 @@ function GameMathTimedChallenge({
             <div onClick={closeTimedChallengeModal}>X</div>
             <div className="modalOverlay-challengeTitle">Woof Math</div>
             <div className="modalOverlay-challengeImgContainer">
-              <img src={clock} alt="" />
+              <img src={clock_white} alt="" />
             </div>
           </div>
           <div className="modalOverlay-challengeGameplayContainer">
             {/* <img src={clock} alt="" className="modalClock" /> */}
-
             <GameSelector />
             <Slider />
+            <GamePlayTimedChallenge />
+
             <div className="buttonTopSpace">
               <button className="modalClose" onClick={closeTimedChallengeModal}>
                 Close
