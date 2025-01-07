@@ -131,6 +131,11 @@ export type GameProps = {
   setCurrentApp: React.Dispatch<React.SetStateAction<CurrentApp>>;
 };
 
+export type GameTimedChallengeProps = {
+  isTimedChallegeModalOpen: boolean;
+  setIsTimedChallengeModalOpen: React.Dispatch<SetStateAction<boolean>>;
+};
+
 export type StoryType = "story" | "poem" | "ballad";
 
 export type StorySelectorProps = {

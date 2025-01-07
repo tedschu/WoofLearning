@@ -7,6 +7,7 @@ import GamePlay from "../../components/math/GamePlay";
 import GameSelector from "../../components/math/GameSelector";
 import Nav from "../../components/Nav";
 import BadgeModal from "../../components/BadgeModal";
+import GameMathTimedChallenge from "./GameMathTimedChallenge";
 
 function GameMath({
   isLoggedIn,
@@ -35,6 +36,10 @@ function GameMath({
   // state for modal that opens when a new badge is won
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalBadge, setModalBadge] = useState<ModalBadgeType>("");
+
+  // controls Timed Challenge modal window
+  const [isTimedChallengeModalOpen, setIsTimedChallengeModalOpen] =
+    useState(false);
 
   const navigate = useNavigate();
 
@@ -104,12 +109,18 @@ function GameMath({
           setBadgeLevel={setBadgeLevel}
           badgeProgress={badgeProgress}
           setBadgeProgress={setBadgeProgress}
+          setIsTimedChallengeModalOpen={setIsTimedChallengeModalOpen}
         />
 
         <BadgeModal
           isModalOpen={isModalOpen}
           closeModal={closeModal}
           modalBadge={modalBadge}
+        />
+
+        <GameMathTimedChallenge
+          isTimedChallegeModalOpen={isTimedChallengeModalOpen}
+          setIsTimedChallengeModalOpen={setIsTimedChallengeModalOpen}
         />
       </div>
     </>

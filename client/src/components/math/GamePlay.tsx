@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import NumberGenerator from "./NumberGenerator";
+import clock from "./../../assets/clock.png";
 
 import {
   GameSelectorType,
@@ -34,6 +35,7 @@ type GamePlayProps = {
   setBadgeLevel: React.Dispatch<React.SetStateAction<BadgeLevel>>;
   badgeProgress: BadgeProgress;
   setBadgeProgress: React.Dispatch<React.SetStateAction<BadgeProgress>>;
+  setIsTimedChallengeModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 function GamePlay({
@@ -51,6 +53,7 @@ function GamePlay({
   setIsModalOpen,
   setModalBadge,
   setBadgeLevel,
+  setIsTimedChallengeModalOpen,
 }: GamePlayProps) {
   const [questionCount, setQuestionCount] = useState(1);
   const [mathOperator, setMathOperator] = useState("+");
@@ -64,6 +67,10 @@ function GamePlay({
   // passes to NumberGenerator. Will update with expected value (score) to add to userScore IF the question is answered correctly.
   const [addToScore, setAddToScore] = useState(0);
 
+  // Function to open Timed Challenge modal window
+  const openTimedChallengeModal = () => setIsTimedChallengeModalOpen(true);
+
+  // Function to open badge modal
   const openModal = () => {
     setIsModalOpen(true);
   };
@@ -460,6 +467,12 @@ function GamePlay({
           <button className="buttonGrayText skip" onClick={handleQuestionCount}>
             SKIP QUESTION
           </button>
+          <img
+            src={clock}
+            className="gamePlay-clock"
+            alt=""
+            onClick={openTimedChallengeModal}
+          />
         </div>
       </div>
     </>
