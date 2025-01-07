@@ -103,7 +103,13 @@ function BadgeModal({ isModalOpen, closeModal, modalBadge }: BadgeModalTypes) {
     <>
       <div className="badgeModalOverlay">
         <div className="badgeModalContent">
-          <h2>YESSSSS! </h2>
+          <div className="badgeModalTop">
+            <h2 className="badgeModalClose" onClick={closeModal}>
+              X
+            </h2>
+            <h2>YESSSSS! </h2>
+            <div></div>
+          </div>
           {/* TERNARY BELOW RENDERS DIFFERENT H2 TEXT IF A USER HAS BEATEN A LEVEL OR GETS A CAT BADGE. OTHERWISE, DEFAULTS TO "badgeText" */}
           {modalBadge == "badge_1_8_goldendoodle" ? (
             <>
@@ -122,7 +128,7 @@ function BadgeModal({ isModalOpen, closeModal, modalBadge }: BadgeModalTypes) {
 
           <img src={badgeImage} alt="" />
 
-          <button className="modalClose" onClick={closeModal}>
+          <button className="modalCloseButton" onClick={closeModal}>
             Close
           </button>
         </div>

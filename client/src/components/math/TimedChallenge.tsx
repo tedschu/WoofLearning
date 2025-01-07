@@ -385,8 +385,6 @@ function TimedChallenge({
     }
   };
 
-  // console.log(hasNewBadge);
-
   return (
     <>
       <div className="gamePlayContainer-math">

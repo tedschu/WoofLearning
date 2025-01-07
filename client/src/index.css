@@ -1818,7 +1818,8 @@ ul li {
 /* BADGE MODAL STYLING */
 .badgeModalOverlay {
   position: fixed;
-  top: 65px;
+  height: 100%;
+  top: 0;
   left: 0;
   right: 0;
   bottom: 0;
@@ -1827,6 +1828,7 @@ ul li {
   align-items: center;
   justify-content: center;
   z-index: 2;
+  padding: 20px;
 }
 
 .badgeModalContent {
@@ -1835,16 +1837,33 @@ ul li {
   align-items: center;
   border: 8px solid #a6d5ea;
   background-color: #f9fdff;
-  padding: 20px;
+  padding: 10px;
   border-radius: 15px;
-  max-width: 750px;
   width: 90%;
+  max-width: 750px;
+  min-height: min-content;
   color: #0085bd;
   text-align: center;
+  margin: auto;
+  overflow-y: auto;
+}
+
+.badgeModalTop {
+  width: 100%;
+  display: grid;
+  grid-template-columns: [first] 15% [line2] 70% [line3] 15%;
+}
+
+.badgeModalClose {
+  color: rgb(110, 110, 110);
+  text-align: left;
 }
 
 .badgeModalContent > img {
   width: 80%;
+  max-width: 400px;
+  /* height: 80%; */
+
   margin: 15px 0px;
   animation: wiggle 2s linear infinite;
 }
@@ -1876,7 +1895,7 @@ ul li {
   }
 }
 
-.modalClose {
+.modalCloseButton {
   float: right;
   border: 1px solid lightgray;
   background: none;
