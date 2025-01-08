@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import NumberGenerator from "./NumberGenerator";
+import Timer from "./Timer";
 
 import {
   GameSelectorType,
@@ -70,12 +71,15 @@ function GamePlayTimedChallenge({
   const [addToScore, setAddToScore] = useState(0); // passes to NumberGenerator. Will update with expected value (score) to add to userScore IF the question is answered correctly.
 
   // NEW STATE VALUES SPECIFIC TO TIMED CHALLENGE COMPONENT
-  const [challengePoints, setChallengePoints] = useState(0); // Aggregates 'addToScore' to capture all points won in a given challenge
-  const [questionsAttempted, setQuestionsAttempted] = useState(1); // Aggregates the number of questions attempted in a given challenge
-  const [questionsCorrect, setQuestionsCorrect] = useState(0); // Aggregates the number of questions the user answered correctly in a given challenge
+  const [challengePoints, setChallengePoints] = useState<number>(0); // Aggregates 'addToScore' to capture all points won in a given challenge
+  const [questionsAttempted, setQuestionsAttempted] = useState<number>(1); // Aggregates the number of questions attempted in a given challenge
+  const [questionsCorrect, setQuestionsCorrect] = useState<number>(0); // Aggregates the number of questions the user answered correctly in a given challenge
   const [incorrectEquations, setIncorrectEquations] = useState<
     IncorrectEquation[]
   >([]); // Stores all equations that the user answered incorrectly in an array of objects to eventually pass to Anthropic API for analysis
+  const [isTimedChallengeRunning, setIsTimedChallengeRunning] =
+    useState<boolean>(false); // manages state for the 60 second timed challenge
+  const [timer, setTimer] = useState<number>(60);
 
   // Function to open badge modal
   const openModal = () => {
@@ -177,8 +181,7 @@ function GamePlayTimedChallenge({
           " = " +
           userAnswer;
 
-        console.log(equationBuilder);
-        const newObject = { equation: "test" };
+        const newObject = { equation: equationBuilder };
 
         return [...prevEquations, newObject];
       });
@@ -429,16 +432,18 @@ function GamePlayTimedChallenge({
       console.error("Error fetching user data:", error);
     }
   };
-
+  console.log("test");
   // TIED TO "START GAME" BUTTON
   function handleStartGame() {
+    setIsTimedChallengeRunning(true);
     setQuestionsAttempted(0);
     setQuestionsCorrect(0);
+    setIncorrectEquations([]);
   }
 
   // console.log("This is questions attempted:", questionsAttempted);
   // console.log("This is questions correct: ", questionsCorrect);
-  // console.log("This is incorrectEquations:", incorrectEquations);
+  console.log("This is incorrectEquations:", incorrectEquations);
 
   return (
     <>
@@ -448,60 +453,73 @@ function GamePlayTimedChallenge({
             <button className="button-challengeStart" onClick={handleStartGame}>
               START GAME
             </button>
-            <h1 className="timerBox">:60</h1>
-          </div>
-          <h3>
-            Question #{questionsAttempted + 1} (for
-            <span className="pointsHighlight"> {addToScore} points</span>):
-          </h3>
-
-          <form onSubmit={handleSubmit}>
-            <div className="questionContainer">
-              <NumberGenerator
-                sliderValue={sliderValue}
-                gameSelector={gameSelector}
-                setFirstNumber={setFirstNumber}
-                setSecondNumber={setSecondNumber}
-                setThirdNumber={setThirdNumber}
-                setMathOperator={setMathOperator}
-                firstNumber={firstNumber}
-                secondNumber={secondNumber}
-                thirdNumber={thirdNumber}
-                mathOperator={mathOperator}
-                questionCount={questionCount}
-                setAddToScore={setAddToScore}
+            <h1 className="timerBox">
+              <Timer
+                isTimedChallengeRunning={isTimedChallengeRunning}
+                timer={timer}
+                setTimer={setTimer}
+                setIsTimedChallengeRunning={setIsTimedChallengeRunning}
               />
-              <div className="equalSpace">=</div>
-              <div className="answerBox">
-                <input
-                  type="number"
-                  placeholder="Your answer..."
-                  value={userAnswer}
-                  onChange={setAnswer}
-                  onWheel={(e) => (e.target as HTMLInputElement).blur()}
-                  className="answer-input"
-                  // style={{
-                  //   border: "1px solid #ccc",
-                  //   outline: "none",
-                  //   "&:focus": {
-                  //     border: "2px solid #7dc2e0",
-                  //     // boxShadow: "0 0 5px rgba(166, 213, 234, 0.5)",
-                  //   },
-                  // }}
-                />
-              </div>
-            </div>
-            {/* SUBMIT BUTTON */}
-            <div className="answerSubmit">
-              <button
-                className="button submit"
-                type="submit"
-                // autoFocus
-              >
-                SUBMIT
-              </button>
-            </div>
-          </form>
+            </h1>
+          </div>
+
+          {isTimedChallengeRunning && (
+            <>
+              <h3>
+                Question #{questionsAttempted + 1} (for
+                <span className="pointsHighlight"> {addToScore} points</span>):
+              </h3>
+
+              <form onSubmit={handleSubmit}>
+                <div className="questionContainer">
+                  <NumberGenerator
+                    sliderValue={sliderValue}
+                    gameSelector={gameSelector}
+                    setFirstNumber={setFirstNumber}
+                    setSecondNumber={setSecondNumber}
+                    setThirdNumber={setThirdNumber}
+                    setMathOperator={setMathOperator}
+                    firstNumber={firstNumber}
+                    secondNumber={secondNumber}
+                    thirdNumber={thirdNumber}
+                    mathOperator={mathOperator}
+                    questionCount={questionCount}
+                    setAddToScore={setAddToScore}
+                  />
+                  <div className="equalSpace">=</div>
+                  <div className="answerBox">
+                    <input
+                      type="number"
+                      placeholder="Your answer..."
+                      value={userAnswer}
+                      onChange={setAnswer}
+                      onWheel={(e) => (e.target as HTMLInputElement).blur()}
+                      className="answer-input"
+                      // style={{
+                      //   border: "1px solid #ccc",
+                      //   outline: "none",
+                      //   "&:focus": {
+                      //     border: "2px solid #7dc2e0",
+                      //     // boxShadow: "0 0 5px rgba(166, 213, 234, 0.5)",
+                      //   },
+                      // }}
+                    />
+                    console.log(userAnswer)
+                  </div>
+                </div>
+                {/* SUBMIT BUTTON */}
+                <div className="answerSubmit">
+                  <button
+                    className="button submit"
+                    type="submit"
+                    // autoFocus
+                  >
+                    SUBMIT
+                  </button>
+                </div>
+              </form>
+            </>
+          )}
 
           {/* Prompt based on response goes here (e.g. "yay, you got it right") see MUI components */}
           <div className="answerAlert"></div>
