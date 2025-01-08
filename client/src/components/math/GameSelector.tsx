@@ -38,7 +38,7 @@ export default function GameSelector({
   return (
     <>
       <div className="gameSelectContainer-math">
-        <h3>What kind of math do you want to play?</h3>
+        <h3>What kind of math do you want to practice?</h3>
 
         <ToggleButtonGroup
           color="primary"

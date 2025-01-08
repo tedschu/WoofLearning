@@ -1,7 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import NumberGenerator from "./NumberGenerator";
-import clock from "./../../assets/clock.png";
 
 import {
   GameSelectorType,
@@ -38,6 +37,10 @@ type GamePlayProps = {
   setIsTimedChallengeModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
+type IncorrectEquation = {
+  equation: string;
+};
+
 function GamePlayTimedChallenge({
   sliderValue,
   gameSelector,
@@ -64,13 +67,26 @@ function GamePlayTimedChallenge({
   const [questionResult, setQuestionResult] = useState<number | null>(null);
   const [submitted, setSubmitted] = useState(false);
 
-  // passes to NumberGenerator. Will update with expected value (score) to add to userScore IF the question is answered correctly.
-  const [addToScore, setAddToScore] = useState(0);
+  const [addToScore, setAddToScore] = useState(0); // passes to NumberGenerator. Will update with expected value (score) to add to userScore IF the question is answered correctly.
+
+  // NEW STATE VALUES SPECIFIC TO TIMED CHALLENGE COMPONENT
+  const [challengePoints, setChallengePoints] = useState(0); // Aggregates 'addToScore' to capture all points won in a given challenge
+  const [questionsAttempted, setQuestionsAttempted] = useState(1); // Aggregates the number of questions attempted in a given challenge
+  const [questionsCorrect, setQuestionsCorrect] = useState(0); // Aggregates the number of questions the user answered correctly in a given challenge
+  const [incorrectEquations, setIncorrectEquations] = useState<
+    IncorrectEquation[]
+  >([]); // Stores all equations that the user answered incorrectly in an array of objects to eventually pass to Anthropic API for analysis
 
   // Function to open badge modal
   const openModal = () => {
     setIsModalOpen(true);
   };
+
+  // ON PAGE LOAD, RESETS GAME COUNTS (QUESTION COUNT, ETC.)
+  useEffect(() => {
+    setQuestionsAttempted(0);
+    setQuestionsCorrect(0);
+  }, []);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -125,6 +141,9 @@ function GamePlayTimedChallenge({
           prevScore
         );
 
+        setChallengePoints((prevPoints) => prevPoints + addToScore); // Aggregates points for a given timed challenge when the user answers questions correctly
+        setQuestionsCorrect((prevNum) => prevNum + 1);
+
         const newTotalScore = getTotalScore(updatedScores, prevScore);
         const newUserScore = { ...prevScore, ...updatedScores };
         updateBadges(newTotalScore, newUserScore);
@@ -141,6 +160,28 @@ function GamePlayTimedChallenge({
     } else {
       setGotWrong(true);
       setGotRight(false);
+      handleQuestionCount(); // ensures next question loads automatically upon rightAnswer
+
+      // BUILDS THE incorrectQuestions STATE (ARRAY OF OBJECTS THAT REPRESENT AN EQUATION THAT THE USER ANSWERED INCORRECTLY)
+
+      setIncorrectEquations((prevEquations) => {
+        const equationBuilder =
+          firstNumber?.toString() +
+          " " +
+          mathOperator +
+          " " +
+          secondNumber?.toString() +
+          (thirdNumber && sliderValue == 5
+            ? " " + mathOperator + " " + thirdNumber?.toString()
+            : "") +
+          " = " +
+          userAnswer;
+
+        console.log(equationBuilder);
+        const newObject = { equation: "test" };
+
+        return [...prevEquations, newObject];
+      });
     }
   }
 
@@ -226,8 +267,6 @@ function GamePlayTimedChallenge({
         updatedBadges.badge_2_8_golden = true;
         setModalBadge("badge_2_8_golden");
       }
-
-      console.log(updatedBadges);
 
       if (Object.keys(updatedBadges).length > 0) {
         const newBadges = { ...prevBadges, ...updatedBadges };
@@ -345,21 +384,23 @@ function GamePlayTimedChallenge({
   // Use functional updates when your new state depends on the previous state
   function handleQuestionCount() {
     setQuestionCount((prevCount) => prevCount + 1);
+    setQuestionsAttempted((prevCount) => prevCount + 1);
     setUserAnswer("");
-    setGotRight(false);
-    setGotWrong(false);
+    // setGotRight(false);
+    // setGotWrong(false);
   }
 
   // Controls alert when question was right. Visible for 3 seconds.
   useEffect(() => {
     let timer: NodeJS.Timeout;
-    if (gotRight) {
+    if (gotRight || gotWrong) {
       timer = setTimeout(() => {
         setGotRight(false);
+        setGotWrong(false);
       }, 3000);
     }
     return () => clearTimeout(timer);
-  }, [gotRight]);
+  }, [gotRight, gotWrong]);
 
   // Function to pass the updated score to the database, update scores state values for gameplay
   const postUserMathBadges = async (
@@ -389,18 +430,28 @@ function GamePlayTimedChallenge({
     }
   };
 
-  // console.log(hasNewBadge);
+  // TIED TO "START GAME" BUTTON
+  function handleStartGame() {
+    setQuestionsAttempted(0);
+    setQuestionsCorrect(0);
+  }
+
+  // console.log("This is questions attempted:", questionsAttempted);
+  // console.log("This is questions correct: ", questionsCorrect);
+  // console.log("This is incorrectEquations:", incorrectEquations);
 
   return (
     <>
       <div className="gamePlayContainer-challenge">
         <div className="gamePlay-challenge">
           <div className="gamePlay-challengeTimer">
-            <button className="button-challengeStart">START GAME</button>
+            <button className="button-challengeStart" onClick={handleStartGame}>
+              START GAME
+            </button>
             <h1 className="timerBox">:60</h1>
           </div>
           <h3>
-            Question #{questionCount} (for
+            Question #{questionsAttempted + 1} (for
             <span className="pointsHighlight"> {addToScore} points</span>):
           </h3>
 
@@ -461,7 +512,7 @@ function GamePlayTimedChallenge({
           )}
           {gotWrong && (
             <div className="wrongAnswerAlert">
-              <h4>Oops. Try again!</h4>
+              <h4>Incorrect. Keep going!</h4>
             </div>
           )}
         </div>

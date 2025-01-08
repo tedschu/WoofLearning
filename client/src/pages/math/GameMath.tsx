@@ -118,9 +118,33 @@ function GameMath({
           modalBadge={modalBadge}
         />
 
+        {/* MODAL WINDOW FOR TIMED CHALLENGE - PRIMARILY A COPY OF GamePlay COMPONENT */}
         <GameMathTimedChallenge
           isTimedChallegeModalOpen={isTimedChallengeModalOpen}
           setIsTimedChallengeModalOpen={setIsTimedChallengeModalOpen}
+          setGameSelector={setGameSelector}
+          setGotRight={setGotRight}
+          setGotWrong={setGotWrong}
+          setSliderValue={setSliderValue}
+          sliderValue={sliderValue}
+          userScore={userScore}
+          setUserScore={setUserScore}
+          userInfo={userInfo}
+          setTotalScore={setTotalScore}
+          totalScore={totalScore}
+          gotRight={gotRight}
+          gotWrong={gotWrong}
+          userMathBadges={userMathBadges}
+          setUserMathBadges={setUserMathBadges}
+          isModalOpen={isModalOpen}
+          setIsModalOpen={setIsModalOpen}
+          modalBadge={modalBadge}
+          setModalBadge={setModalBadge}
+          badgeLevel={badgeLevel}
+          setBadgeLevel={setBadgeLevel}
+          badgeProgress={badgeProgress}
+          setBadgeProgress={setBadgeProgress}
+          gameSelector={gameSelector}
         />
       </div>
     </>

@@ -134,6 +134,29 @@ export type GameProps = {
 export type GameTimedChallengeProps = {
   isTimedChallegeModalOpen: boolean;
   setIsTimedChallengeModalOpen: React.Dispatch<SetStateAction<boolean>>;
+  setGameSelector: React.Dispatch<React.SetStateAction<GameSelectorType>>;
+  setGotRight: React.Dispatch<React.SetStateAction<boolean>>;
+  setGotWrong: React.Dispatch<React.SetStateAction<boolean>>;
+  setSliderValue: React.Dispatch<React.SetStateAction<number>>;
+  sliderValue: number;
+  userScore: UserScore;
+  setUserScore: React.Dispatch<React.SetStateAction<UserScore>>;
+  userInfo: UserInfo;
+  totalScore: number;
+  setTotalScore: React.Dispatch<React.SetStateAction<number>>;
+  gotRight: boolean;
+  gotWrong: boolean;
+  userMathBadges: UserMathBadges;
+  setUserMathBadges: React.Dispatch<React.SetStateAction<UserMathBadges>>;
+  isModalOpen: boolean;
+  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  modalBadge: ModalBadgeType;
+  setModalBadge: React.Dispatch<React.SetStateAction<ModalBadgeType>>;
+  badgeLevel: BadgeLevel;
+  setBadgeLevel: React.Dispatch<React.SetStateAction<BadgeLevel>>;
+  badgeProgress: BadgeProgress;
+  setBadgeProgress: React.Dispatch<React.SetStateAction<BadgeProgress>>;
+  gameSelector: GameSelectorType;
 };
 
 export type StoryType = "story" | "poem" | "ballad";

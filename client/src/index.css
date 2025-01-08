@@ -1007,7 +1007,7 @@ button {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 7px 0 5px 0;
+  padding: 7px 0 15px 0;
 }
 
 .sliderBox {
@@ -1306,7 +1306,7 @@ input[type="number"]::-webkit-inner-spin-button {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 15px 0;
+  margin: 10px 0 15px 0;
 }
 
 .modalOverlay-challengeImgContainer {
@@ -1864,10 +1864,11 @@ p {
 .modalClose {
   float: right;
   border: 1px solid lightgray;
-  background: none;
+  background: rgb(231, 231, 231);
   font-size: 18px;
   cursor: pointer;
   width: 100px;
+  border-radius: 7px;
 }
 
 .login_returnedUsers > ul {
