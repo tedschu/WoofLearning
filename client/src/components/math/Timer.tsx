@@ -3,21 +3,22 @@ import { useState, useEffect } from "react";
 
 type TimerTypes = {
   isTimedChallengeRunning: boolean;
-  timer: number;
-  setTimer: React.Dispatch<React.SetStateAction<number>>;
   setIsTimedChallengeRunning: React.Dispatch<React.SetStateAction<boolean>>;
+  onTimeUp: () => void;
 };
 
 function Timer({
   isTimedChallengeRunning,
-  timer,
-  setTimer,
   setIsTimedChallengeRunning,
+  onTimeUp,
 }: TimerTypes) {
+  const [timer, setTimer] = useState<number>(10);
+
   useEffect(() => {
     if (!isTimedChallengeRunning || timer <= 0) {
       setIsTimedChallengeRunning(false);
-      setTimer(60);
+      setTimer(10);
+      if (timer <= 10) onTimeUp();
       return;
     }
 

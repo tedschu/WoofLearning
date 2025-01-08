@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useState, useEffect } from "react";
 import NumberGenerator from "./NumberGenerator";
 import Timer from "./Timer";
@@ -79,7 +79,7 @@ function GamePlayTimedChallenge({
   >([]); // Stores all equations that the user answered incorrectly in an array of objects to eventually pass to Anthropic API for analysis
   const [isTimedChallengeRunning, setIsTimedChallengeRunning] =
     useState<boolean>(false); // manages state for the 60 second timed challenge
-  const [timer, setTimer] = useState<number>(60);
+  const [hasAnswer, setHasAnswer] = useState(false);
 
   // Function to open badge modal
   const openModal = () => {
@@ -432,7 +432,7 @@ function GamePlayTimedChallenge({
       console.error("Error fetching user data:", error);
     }
   };
-  console.log("test");
+
   // TIED TO "START GAME" BUTTON
   function handleStartGame() {
     setIsTimedChallengeRunning(true);
@@ -441,9 +441,16 @@ function GamePlayTimedChallenge({
     setIncorrectEquations([]);
   }
 
+  // Callback function that is passed to the Timer component, and is called when timer state === 0 (e.g. game is over)
+  const handleTimeUp = useCallback(() => {
+    setIsTimedChallengeRunning(false);
+
+    // TODO: ADD API CALL IN HERE TO PUSH TO DATABASE *****
+  }, []);
+
   // console.log("This is questions attempted:", questionsAttempted);
   // console.log("This is questions correct: ", questionsCorrect);
-  console.log("This is incorrectEquations:", incorrectEquations);
+  // console.log("This is incorrectEquations:", incorrectEquations);
 
   return (
     <>
@@ -456,9 +463,8 @@ function GamePlayTimedChallenge({
             <h1 className="timerBox">
               <Timer
                 isTimedChallengeRunning={isTimedChallengeRunning}
-                timer={timer}
-                setTimer={setTimer}
                 setIsTimedChallengeRunning={setIsTimedChallengeRunning}
+                onTimeUp={handleTimeUp}
               />
             </h1>
           </div>
@@ -504,7 +510,6 @@ function GamePlayTimedChallenge({
                       //   },
                       // }}
                     />
-                    console.log(userAnswer)
                   </div>
                 </div>
                 {/* SUBMIT BUTTON */}
