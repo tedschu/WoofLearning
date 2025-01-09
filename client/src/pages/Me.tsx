@@ -310,7 +310,7 @@ function Me({
           </div>
           {/* CONTAINER FOR USER PLAY DATA */}
           <div className="accountContentContainer">
-            <h2>Here's your progress on Woof Learning games:</h2>
+            <h2>Your overall progress on Woof Learning games:</h2>
             <h3>Badges you've earned:</h3>
             <div className="accountRowContainer">
               <div className="accountBadges">
@@ -369,6 +369,27 @@ function Me({
                 </div>
               </div>
             </div>
+          </div>
+
+          {/* CONTAINER FOR MATH TIMED CHALLENGE RESULTS AND AI RESPONSE */}
+          <div className="accountContentContainer">
+            <h2>
+              Your timed challenge results:
+              <span className="math-font-me"> Woof Math </span>
+            </h2>
+            <h3>Overall:</h3>
+            <div className="resultsChallenge SummaryContainer">
+              <div className="resultsChallenge SummaryData-split">
+                <div className="resultsChallenge SummaryData">test</div>
+                <div className="resultsChallenge SummaryData">test</div>
+              </div>
+              <div className="resultsChallenge SummaryData-split">
+                <div className="resultsChallenge SummaryData">test</div>
+                <div className="resultsChallenge SummaryData">test</div>
+              </div>
+            </div>
+            <div className="resultsChallenge AIContainer">ai stuff</div>
+            <div className="resultsChallenge ChartContainer">ai stuff</div>
           </div>
 
           {/* CONTAINER FOR USER PERSONAL DATA AND USER FUNCTIONS (DELETE, CONTACT) */}

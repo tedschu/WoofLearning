@@ -301,7 +301,7 @@ button {
 .buttonSpacerTopExtra {
   margin-top: 50px;
 }
-
+/* ************************************************************ */
 /* WELCOME PAGE STYLING */
 .welcomePageContainer {
   display: flex;
@@ -625,7 +625,7 @@ button {
   font-size: 20px;
   margin-bottom: 20px;
 }
-
+/* ************************************************************ */
 /* APP SELECTOR PAGE STYLING */
 .appSelector-Wrapper {
   display: flex;
@@ -711,7 +711,7 @@ button {
   padding: 10px;
   background-color: rgba(254, 254, 254, 0.7);
 }
-
+/* ************************************************************ */
 /* NAV BAR STYLING */
 .nav-base {
   height: 65px;
@@ -766,7 +766,7 @@ button {
 .navUser > h4 {
   font-size: 17px;
 }
-
+/* ************************************************************ */
 /* SCOREBAR STYLING */
 
 .scoreBarContainer {
@@ -925,7 +925,7 @@ button {
 .eachBadge > img {
   width: 55px;
 }
-
+/* ************************************************************ */
 /* GAME SELECTION and SLIDER STYLING */
 .gameSelectContainer-math {
   display: flex;
@@ -1013,7 +1013,7 @@ button {
 .sliderBox {
   font-family: "Patrick Hand";
 }
-
+/* ************************************************************ */
 /* GAME PLAY CONTAINER and BOX STYLING */
 .gamePlayContainer-math {
   display: flex;
@@ -1257,7 +1257,7 @@ input[type="number"]::-webkit-inner-spin-button {
   background-color: #006d9f;
   color: white;
 }
-
+/* ************************************************************ */
 /* TIMED CHALLENGE GAMEPLAY MODAL STYLING */
 
 .modalOverlay-challenge {
@@ -1277,6 +1277,7 @@ input[type="number"]::-webkit-inner-spin-button {
 
 .modalOverlay-challengeContentContainer {
   width: 100%;
+  max-width: 1200px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1367,10 +1368,15 @@ input[type="number"]::-webkit-inner-spin-button {
   background-color: white;
   text-align: center;
   font-size: 60px;
-  border: 1px solid #d4492b;
+  border: 1px solid #c0bfbe;
   border-radius: 12px;
   margin: 0 0 15px 0;
   width: 100px;
+  color: #2f8cb4;
+}
+
+.timerBox.inactive {
+  color: black;
 }
 
 .button-challengeStart {
@@ -1443,7 +1449,7 @@ input[type="number"]::-webkit-inner-spin-button {
   font-size: 30px;
   color: green;
 }
-
+/* ************************************************************ */
 /* LOGIN AND REGISTER STYLING */
 
 .loginPageContainer {
@@ -1687,7 +1693,7 @@ p {
   color: rgb(140, 140, 140);
   font-style: italic;
 }
-
+/* ************************************************************ */
 /* ACCOUNT PAGE STYLING */
 .accountPageContainer {
   display: flex;
@@ -1894,6 +1900,57 @@ p {
   border-radius: 8px;
 }
 
+/* Base container for common styling (spacing, shadow) */
+.resultsChallenge {
+  margin: 10px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 3px 3px 3px rgb(229, 229, 229);
+}
+.resultsChallenge.SummaryContainer {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: none;
+}
+
+.resultsChallenge.SummaryData-split {
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+  box-shadow: none;
+  margin: 0 0 15px 0;
+}
+
+.resultsChallenge.SummaryData {
+  background: orange;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  width: 100px;
+  height: 100px;
+  margin: 0;
+}
+
+.resultsChallenge.AIContainer {
+  width: 92%;
+  height: 100px;
+  background: blue;
+  border-radius: 8px;
+  color: gray;
+}
+
+.resultsChallenge.ChartContainer {
+  width: 92%;
+  height: 100px;
+  background: blue;
+  border-radius: 8px;
+  color: gray;
+}
+
+/* ************************************************************ */
 /* STYLING FOR FORGOT PASSWORD MODAL */
 .modalOverlay {
   position: fixed;
@@ -1934,6 +1991,7 @@ p {
   list-style-type: none;
 }
 
+/* ************************************************************ */
 /* ABOUT PAGE STYLING */
 .aboutContainer {
   display: flex;
@@ -2017,6 +2075,7 @@ ul li {
   font-size: 20px;
 }
 
+/* ************************************************************ */
 /* BADGE MODAL STYLING */
 .badgeModalOverlay {
   position: fixed;
@@ -2180,7 +2239,7 @@ ul li {
   }
 
   .challengeResults-text {
-    width: 60%;
+    width: 70%;
   }
 
   .challengeResults-text h3 {
@@ -2325,6 +2384,10 @@ ul li {
 
   .modalOverlay-challenge {
     padding: 20px 40px;
+  }
+
+  .resultsChallenge.SummaryContainer {
+    flex-direction: row;
   }
 }
 

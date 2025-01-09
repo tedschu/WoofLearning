@@ -509,7 +509,11 @@ function GamePlayTimedChallenge({
       <div className="gamePlayContainer-challenge">
         <div className="gamePlay-challenge">
           <div className="gamePlay-challengeTimer">
-            <h1 className="timerBox">
+            <h1
+              className={`timerBox ${
+                isTimedChallengeRunning ? "" : "inactive"
+              }`}
+            >
               <Timer
                 isTimedChallengeRunning={isTimedChallengeRunning}
                 setIsTimedChallengeRunning={setIsTimedChallengeRunning}
