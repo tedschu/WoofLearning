@@ -99,6 +99,7 @@ function GamePlayTimedChallenge({
     setQuestionsAttempted(0);
     setQuestionsCorrect(0);
     setShowChallengeResults(false);
+    setHasAnswer(true);
   }, []);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -508,9 +509,6 @@ function GamePlayTimedChallenge({
       <div className="gamePlayContainer-challenge">
         <div className="gamePlay-challenge">
           <div className="gamePlay-challengeTimer">
-            <button className="button-challengeStart" onClick={handleStartGame}>
-              START GAME
-            </button>
             <h1 className="timerBox">
               <Timer
                 isTimedChallengeRunning={isTimedChallengeRunning}
@@ -519,6 +517,9 @@ function GamePlayTimedChallenge({
               />
             </h1>
           </div>
+          <button className="button-challengeStart" onClick={handleStartGame}>
+            START GAME
+          </button>
 
           {isTimedChallengeRunning && (
             <>
@@ -606,11 +607,11 @@ function GamePlayTimedChallenge({
                   />
                 </div>
                 <div className="challengeResults-text">
-                  <h3>Good job! For this challenge, here's how you did:</h3>
+                  <h3>Good job! Here's how you did:</h3>
                   <ul>
                     <li> {challengePoints} points added</li>
                     <li>
-                      {questionsCorrect} out of {questionsAttempted} questions
+                      {questionsCorrect} of {questionsAttempted} questions
                       correct (that's{" "}
                       {questionsAttempted === 0 ? (
                         <>0%</>

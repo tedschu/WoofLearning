@@ -1276,7 +1276,7 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .modalOverlay-challengeContentContainer {
-  width: 95%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1341,6 +1341,7 @@ input[type="number"]::-webkit-inner-spin-button {
   align-items: center;
   margin-bottom: 20px;
   width: 95%;
+  max-width: 800px;
 }
 
 .gamePlay-challenge {
@@ -1368,8 +1369,8 @@ input[type="number"]::-webkit-inner-spin-button {
   font-size: 60px;
   border: 1px solid #d4492b;
   border-radius: 12px;
-  margin: 10px 0 20px 0;
-  padding: 5px 0;
+  margin: 0 0 15px 0;
+  width: 100px;
 }
 
 .button-challengeStart {
@@ -1381,50 +1382,66 @@ input[type="number"]::-webkit-inner-spin-button {
   font-size: 22px;
   border: 1px solid #d4492b;
   box-shadow: 2px 2px 6px #c1c1c1;
-
+  margin-bottom: 20px;
   font-size: 20px;
 }
 
 .challengeResults {
   width: 90%;
+  max-width: 800px;
   height: auto;
   background: rgb(203, 247, 203);
   display: flex;
-  flex: row;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   border-radius: 12px;
   border: 2px solid rgb(116, 230, 116);
 }
 
 .challengeResults-logoContainer {
-  width: 20%;
+  width: 40%;
   padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .challengeResults-woofLogo {
   width: 100%;
+  max-width: 180px;
 }
 
 .challengeResults-text {
-  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 90%;
   padding: 10px;
 }
 
 .challengeResults-text h3 {
-  font-size: 20px;
+  font-size: 22px;
+  text-align: center;
 }
 
 .challengeResults-link {
-  color: rgb(92, 92, 92);
-  font-style: italic;
+  color: rgb(145, 145, 145);
+  text-align: center;
 }
 
 .challengeResults-link h4 {
   margin-top: 10px;
-  font-size: 18px;
+  font-size: 20px;
 }
 
 .challengeResults-text > ul {
-  padding-left: 20px;
+  padding-left: 25px;
+}
+
+.challengeResults-text li {
+  font-size: 30px;
+  color: green;
 }
 
 /* LOGIN AND REGISTER STYLING */
@@ -2157,6 +2174,22 @@ ul li {
   .gamePlay-clock {
     transform: translate(35%, 25%);
   }
+
+  .challengeResults {
+    flex-direction: row;
+  }
+
+  .challengeResults-text {
+    width: 60%;
+  }
+
+  .challengeResults-text h3 {
+    text-align: left;
+  }
+
+  .challengeResults-link {
+    text-align: left;
+  }
 }
 
 /* SCREEN IS ABOVE 900px (desktop) */
@@ -2288,6 +2321,10 @@ ul li {
   .gamePlay-math {
     width: 60%;
     max-width: 880px;
+  }
+
+  .modalOverlay-challenge {
+    padding: 20px 40px;
   }
 }
 
