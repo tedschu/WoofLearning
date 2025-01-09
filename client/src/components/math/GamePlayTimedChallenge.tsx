@@ -79,7 +79,7 @@ function GamePlayTimedChallenge({
   >([]); // Stores all equations that the user answered incorrectly in an array of objects to eventually pass to Anthropic API for analysis
   const [isTimedChallengeRunning, setIsTimedChallengeRunning] =
     useState<boolean>(false); // manages state for the 60 second timed challenge
-  const [hasAnswer, setHasAnswer] = useState(false);
+  const [hasAnswer, setHasAnswer] = useState(true);
 
   // Function to open badge modal
   const openModal = () => {
@@ -94,8 +94,14 @@ function GamePlayTimedChallenge({
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (userAnswer === "") {
+      setHasAnswer(false);
+      return;
+    }
+
     findAnswer();
     setSubmitted(true);
+    setHasAnswer(true);
   };
 
   // Determines the correct answer to the generated question AND stores value in questionResult
@@ -536,6 +542,11 @@ function GamePlayTimedChallenge({
           {gotWrong && (
             <div className="wrongAnswerAlert">
               <h4>Incorrect. Keep going!</h4>
+            </div>
+          )}
+          {!hasAnswer && (
+            <div className="wrongAnswerAlert">
+              <h4>Make sure you answer!</h4>
             </div>
           )}
         </div>
