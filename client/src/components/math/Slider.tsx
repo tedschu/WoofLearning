@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 import { SliderProps } from "@mui/material/Slider";
@@ -8,6 +8,7 @@ type DiscreteSliderProps = {
   sliderValue: number;
   setGotRight: React.Dispatch<React.SetStateAction<boolean>>;
   setGotWrong: React.Dispatch<React.SetStateAction<boolean>>;
+  isTimedChallengeRunning: boolean;
 };
 
 const marks = [
@@ -42,6 +43,7 @@ export default function DiscreteSlider({
   sliderValue,
   setGotRight,
   setGotWrong,
+  isTimedChallengeRunning,
 }: DiscreteSliderProps) {
   const handleSliderChange: SliderProps["onChange"] = (_event, newValue) => {
     setSliderValue(newValue as number);
@@ -63,6 +65,7 @@ export default function DiscreteSlider({
           valueLabelDisplay="auto"
           shiftStep={1}
           step={1}
+          disabled={isTimedChallengeRunning}
           marks={marks}
           min={1}
           max={5}

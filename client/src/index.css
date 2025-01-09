@@ -1385,6 +1385,48 @@ input[type="number"]::-webkit-inner-spin-button {
   font-size: 20px;
 }
 
+.challengeResults {
+  width: 90%;
+  height: auto;
+  background: rgb(203, 247, 203);
+  display: flex;
+  flex: row;
+  border-radius: 12px;
+  border: 2px solid rgb(116, 230, 116);
+}
+
+.challengeResults-logoContainer {
+  width: 20%;
+  padding: 10px;
+}
+
+.challengeResults-woofLogo {
+  width: 100%;
+}
+
+.challengeResults-text {
+  width: 80%;
+  padding: 10px;
+}
+
+.challengeResults-text h3 {
+  font-size: 20px;
+}
+
+.challengeResults-link {
+  color: rgb(92, 92, 92);
+  font-style: italic;
+}
+
+.challengeResults-link h4 {
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+.challengeResults-text > ul {
+  padding-left: 20px;
+}
+
 /* LOGIN AND REGISTER STYLING */
 
 .loginPageContainer {

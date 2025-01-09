@@ -35,6 +35,9 @@ function GameMathTimedChallenge({
 }: GameTimedChallengeProps) {
   if (!isTimedChallegeModalOpen) return null;
 
+  const [isTimedChallengeRunning, setIsTimedChallengeRunning] =
+    useState<boolean>(false); // manages state for the 60 second timed challenge
+
   const closeTimedChallengeModal = () => setIsTimedChallengeModalOpen(false);
 
   return (
@@ -54,12 +57,14 @@ function GameMathTimedChallenge({
               setGameSelector={setGameSelector}
               setGotRight={setGotRight}
               setGotWrong={setGotWrong}
+              isTimedChallengeRunning={isTimedChallengeRunning}
             />
             <Slider
               setSliderValue={setSliderValue}
               sliderValue={sliderValue}
               setGotRight={setGotRight}
               setGotWrong={setGotWrong}
+              isTimedChallengeRunning={isTimedChallengeRunning}
             />
             <GamePlayTimedChallenge
               sliderValue={sliderValue}
@@ -84,6 +89,8 @@ function GameMathTimedChallenge({
               badgeProgress={badgeProgress}
               setBadgeProgress={setBadgeProgress}
               setIsTimedChallengeModalOpen={setIsTimedChallengeModalOpen}
+              isTimedChallengeRunning={isTimedChallengeRunning}
+              setIsTimedChallengeRunning={setIsTimedChallengeRunning}
             />
 
             <div className="buttonTopSpace">

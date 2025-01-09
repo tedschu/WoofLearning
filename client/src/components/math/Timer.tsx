@@ -18,7 +18,7 @@ function Timer({
     if (!isTimedChallengeRunning || timer <= 0) {
       setIsTimedChallengeRunning(false);
       setTimer(10);
-      if (timer <= 10) onTimeUp();
+      if (timer === 0) onTimeUp();
       return;
     }
 

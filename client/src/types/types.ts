@@ -83,6 +83,20 @@ export type UserInfo = {
   [key: string]: string | undefined; // Index signature
 };
 
+export type UserChallengeResults = {
+  user_id: number;
+  math_type: GameSelectorType;
+  level: number;
+  points_added: number;
+  questions_attempted: number;
+  questions_correct: number;
+  incorrect_question: IncorrectQuestion[];
+};
+
+export type IncorrectQuestion = {
+  equation: string;
+};
+
 export type CurrentApp = "Woof Math" | "Woof Reading" | "Woof Learning" | "";
 
 // in Game.tsx

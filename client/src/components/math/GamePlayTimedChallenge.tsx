@@ -2,6 +2,8 @@ import React, { useCallback } from "react";
 import { useState, useEffect } from "react";
 import NumberGenerator from "./NumberGenerator";
 import Timer from "./Timer";
+import woofLogo from "../../assets/woofmath_logo_1.png";
+import { Link } from "react-router-dom";
 
 import {
   GameSelectorType,
@@ -11,6 +13,7 @@ import {
   ModalBadgeType,
   BadgeLevel,
   BadgeProgress,
+  UserChallengeResults,
 } from "../../types/types";
 
 type GamePlayProps = {
@@ -36,6 +39,8 @@ type GamePlayProps = {
   badgeProgress: BadgeProgress;
   setBadgeProgress: React.Dispatch<React.SetStateAction<BadgeProgress>>;
   setIsTimedChallengeModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  isTimedChallengeRunning: boolean;
+  setIsTimedChallengeRunning: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 type IncorrectEquation = {
@@ -58,6 +63,8 @@ function GamePlayTimedChallenge({
   setModalBadge,
   setBadgeLevel,
   setIsTimedChallengeModalOpen,
+  isTimedChallengeRunning,
+  setIsTimedChallengeRunning,
 }: GamePlayProps) {
   const [questionCount, setQuestionCount] = useState(1);
   const [mathOperator, setMathOperator] = useState("+");
@@ -77,9 +84,10 @@ function GamePlayTimedChallenge({
   const [incorrectEquations, setIncorrectEquations] = useState<
     IncorrectEquation[]
   >([]); // Stores all equations that the user answered incorrectly in an array of objects to eventually pass to Anthropic API for analysis
-  const [isTimedChallengeRunning, setIsTimedChallengeRunning] =
-    useState<boolean>(false); // manages state for the 60 second timed challenge
+  // const [isTimedChallengeRunning, setIsTimedChallengeRunning] =
+  //   useState<boolean>(false); // manages state for the 60 second timed challenge
   const [hasAnswer, setHasAnswer] = useState(true);
+  const [showChallengeResults, setShowChallengeResults] = useState(false); // Controls box showing results of each challenge
 
   // Function to open badge modal
   const openModal = () => {
@@ -90,6 +98,7 @@ function GamePlayTimedChallenge({
   useEffect(() => {
     setQuestionsAttempted(0);
     setQuestionsCorrect(0);
+    setShowChallengeResults(false);
   }, []);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -445,18 +454,54 @@ function GamePlayTimedChallenge({
     setQuestionsAttempted(0);
     setQuestionsCorrect(0);
     setIncorrectEquations([]);
+    setChallengePoints(0);
+    setShowChallengeResults(false);
   }
 
   // Callback function that is passed to the Timer component, and is called when timer state === 0 (e.g. game is over)
   const handleTimeUp = useCallback(() => {
     setIsTimedChallengeRunning(false);
+    setShowChallengeResults(true);
 
-    // TODO: ADD API CALL IN HERE TO PUSH TO DATABASE *****
-  }, []);
+    // Function to pass the challenge score and data to the database
+    const postUserChallengeResults = async (): Promise<void> => {
+      try {
+        const storedToken = localStorage.getItem("token");
+        const response = await fetch(`/api/users-math/timed-challenge`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${storedToken}`,
+          },
+          body: JSON.stringify({
+            user_id: userInfo.id,
+            math_type: gameSelector,
+            level: sliderValue,
+            points_added: challengePoints,
+            questions_attempted: questionsAttempted,
+            questions_correct: questionsCorrect,
+            incorrect_questions: incorrectEquations,
+          }),
+        });
+        if (response.ok) {
+          return;
+        }
+      } catch (error) {
+        console.error("Error passing challenge data:", error);
+      }
+    };
 
-  // console.log("This is questions attempted:", questionsAttempted);
-  // console.log("This is questions correct: ", questionsCorrect);
-  // console.log("This is incorrectEquations:", incorrectEquations);
+    // Only makes API call if the user actually attempted to answer questions
+    if (questionsAttempted > 0) postUserChallengeResults();
+  }, [
+    userInfo.id,
+    gameSelector,
+    sliderValue,
+    challengePoints,
+    questionsAttempted,
+    questionsCorrect,
+    incorrectEquations,
+  ]);
 
   return (
     <>
@@ -548,6 +593,44 @@ function GamePlayTimedChallenge({
             <div className="wrongAnswerAlert">
               <h4>Make sure you answer!</h4>
             </div>
+          )}
+          {/* Displays a container showing challenge results at the end of the challenge */}
+          {showChallengeResults && (
+            <>
+              <div className="challengeResults">
+                <div className="challengeResults-logoContainer">
+                  <img
+                    src={woofLogo}
+                    className="challengeResults-woofLogo"
+                    alt=""
+                  />
+                </div>
+                <div className="challengeResults-text">
+                  <h3>Good job! For this challenge, here's how you did:</h3>
+                  <ul>
+                    <li> {challengePoints} points added</li>
+                    <li>
+                      {questionsCorrect} out of {questionsAttempted} questions
+                      correct (that's{" "}
+                      {questionsAttempted === 0 ? (
+                        <>0%</>
+                      ) : (
+                        <>
+                          {Math.round(
+                            (questionsCorrect / questionsAttempted) * 100
+                          )}
+                          %
+                        </>
+                      )}
+                      )
+                    </li>
+                  </ul>
+                  <Link to={"/me"} className="challengeResults-link">
+                    <h4>See more about your progress</h4>
+                  </Link>
+                </div>
+              </div>
+            </>
           )}
         </div>
       </div>
