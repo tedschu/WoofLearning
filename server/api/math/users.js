@@ -77,6 +77,45 @@ router.post("/timed-challenge", verifyToken, async (req, res) => {
   }
 });
 
-//
+// Route to pull results summary data for timed challenges (on account / results screen)
+router.get(
+  "/timed-challenge/:user_id/summary-results",
+  verifyToken,
+  async (req, res) => {
+    try {
+      // Pulls count of total challenges taken for a given user
+      const totalChallenges = await prisma.math_timed_scores.count({
+        where: {
+          user_id: parseInt(req.user), // pulls user_id from middleware verifyToken
+        },
+      });
+
+      // Pulls count of the type of challenge (math_type) that the user has completed most frequently
+      const mostFrequentChallenge = await prisma.math_timed_scores.groupBy({
+        by: ["math_type"],
+        where: {
+          user_id: parseInt(req.user),
+        },
+        _count: {
+          math_type: true,
+        },
+        orderBy: {
+          _count: {
+            math_type: "desc",
+          },
+        },
+        take: 1,
+      });
+
+      res.status(200).send({
+        totalChallenges,
+        mostFrequentChallenge: mostFrequentChallenge[0] || null,
+      });
+    } catch (error) {
+      console.log(error);
+      res.sendStatus(500);
+    }
+  }
+);
 
 module.exports = router;

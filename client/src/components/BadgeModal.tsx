@@ -15,6 +15,8 @@ import poodle from "../assets/img_2_7_poodle.png";
 import goldendoodleTrophy2 from "../assets/img_2_8_golden.png";
 import goldendoodleTrophy from "../assets/goldendoodle_trophy_large.png";
 import { ModalBadgeType } from "../types/types";
+import wow from "../assets/wow_2.png";
+import mega from "../assets/mega.png";
 
 type BadgeModalTypes = {
   isModalOpen: boolean;
@@ -107,7 +109,8 @@ function BadgeModal({ isModalOpen, closeModal, modalBadge }: BadgeModalTypes) {
             <h2 className="badgeModalClose" onClick={closeModal}>
               X
             </h2>
-            <h2>YESSSSS! </h2>
+            {/* <h2>YESSSSS! </h2> */}
+            <img src={mega} alt="" />
             <div></div>
           </div>
           {/* TERNARY BELOW RENDERS DIFFERENT H2 TEXT IF A USER HAS BEATEN A LEVEL OR GETS A CAT BADGE. OTHERWISE, DEFAULTS TO "badgeText" */}

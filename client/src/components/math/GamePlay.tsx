@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import NumberGenerator from "./NumberGenerator";
 import clock from "./../../assets/clock.png";
+import clock_try from "./../../assets/clock_try.png";
 
 import {
   GameSelectorType,
@@ -468,7 +469,7 @@ function GamePlay({
             SKIP QUESTION
           </button>
           <img
-            src={clock}
+            src={clock_try}
             className="gamePlay-clock"
             alt=""
             onClick={openTimedChallengeModal}

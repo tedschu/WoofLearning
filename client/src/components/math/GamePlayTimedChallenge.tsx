@@ -4,6 +4,12 @@ import NumberGenerator from "./NumberGenerator";
 import Timer from "./Timer";
 import woofLogo from "../../assets/woofmath_logo_1.png";
 import { Link } from "react-router-dom";
+import wow1 from "../../assets/wow_1.png";
+
+import wow2 from "../../assets/wow_2.png";
+import wow3 from "../../assets/wow_3.png";
+
+import mega from "../../assets/mega.png";
 
 import {
   GameSelectorType,
@@ -88,6 +94,9 @@ function GamePlayTimedChallenge({
   //   useState<boolean>(false); // manages state for the 60 second timed challenge
   const [hasAnswer, setHasAnswer] = useState(true);
   const [showChallengeResults, setShowChallengeResults] = useState(false); // Controls box showing results of each challenge
+
+  const images = [wow1, wow2, wow3, mega];
+  const [randomLogo, setRandomLogo] = useState<string>(images[0]);
 
   // Function to open badge modal
   const openModal = () => {
@@ -457,6 +466,7 @@ function GamePlayTimedChallenge({
     setIncorrectEquations([]);
     setChallengePoints(0);
     setShowChallengeResults(false);
+    randomImage();
   }
 
   // Callback function that is passed to the Timer component, and is called when timer state === 0 (e.g. game is over)
@@ -504,6 +514,12 @@ function GamePlayTimedChallenge({
     incorrectEquations,
   ]);
 
+  function randomImage() {
+    const random = Math.floor(Math.random() * 3) + 1;
+    console.log(random);
+    setRandomLogo(images[random]);
+  }
+
   return (
     <>
       <div className="gamePlayContainer-challenge">
@@ -521,9 +537,16 @@ function GamePlayTimedChallenge({
               />
             </h1>
           </div>
-          <button className="button-challengeStart" onClick={handleStartGame}>
-            START GAME
-          </button>
+          {!isTimedChallengeRunning && (
+            <>
+              <button
+                className="button-challengeStart"
+                onClick={handleStartGame}
+              >
+                START NEW GAME
+              </button>
+            </>
+          )}
 
           {isTimedChallengeRunning && (
             <>
@@ -605,13 +628,13 @@ function GamePlayTimedChallenge({
               <div className="challengeResults">
                 <div className="challengeResults-logoContainer">
                   <img
-                    src={woofLogo}
+                    src={randomLogo}
                     className="challengeResults-woofLogo"
                     alt=""
                   />
                 </div>
                 <div className="challengeResults-text">
-                  <h3>Good job! Here's how you did:</h3>
+                  <h3>Here's how you did:</h3>
                   <ul>
                     <li> {challengePoints} points added</li>
                     <li>
