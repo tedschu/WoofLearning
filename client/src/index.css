@@ -1020,7 +1020,7 @@ button {
   justify-content: center;
   align-items: center;
   padding: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .gamePlay-math {
@@ -1910,7 +1910,7 @@ p {
   box-shadow: 3px 3px 3px rgb(229, 229, 229);
 }
 .resultsChallenge.SummaryContainer {
-  width: 80%;
+  width: 88%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1926,13 +1926,19 @@ p {
 }
 
 .resultsChallenge.SummaryData {
-  background: orange;
+  background: white;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
-  width: 100px;
+  width: 170px;
   height: 100px;
   margin: 0;
+  padding: 5px;
+}
+
+.resultsChallenge.resultsChallenge.SummaryData h4 {
+  color: #d4492b;
+  font-size: 35px;
 }
 
 .resultsChallenge.AIContainer {
@@ -1949,6 +1955,13 @@ p {
   background: blue;
   border-radius: 8px;
   color: gray;
+}
+
+.results-alert {
+  background-color: rgb(226, 254, 111);
+  border: 1px solid lightgray;
+  border-radius: 9px;
+  padding: 3px 8px;
 }
 
 /* ************************************************************ */

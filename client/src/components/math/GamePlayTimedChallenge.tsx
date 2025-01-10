@@ -425,7 +425,7 @@ function GamePlayTimedChallenge({
       timer = setTimeout(() => {
         setGotRight(false);
         setGotWrong(false);
-      }, 3000);
+      }, 1000);
     }
     return () => clearTimeout(timer);
   }, [gotRight, gotWrong]);

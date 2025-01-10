@@ -79,7 +79,7 @@ router.post("/timed-challenge", verifyToken, async (req, res) => {
 
 // Route to pull results summary data for timed challenges (on account / results screen)
 router.get(
-  "/timed-challenge/:user_id/summary-results",
+  "/timed-challenge/summary-results",
   verifyToken,
   async (req, res) => {
     try {
@@ -107,9 +107,38 @@ router.get(
         take: 1,
       });
 
+      // Pulls data to show overall % score (average) for all challenges
+      const questionScores = await prisma.math_timed_scores.aggregate({
+        where: {
+          user_id: parseInt(req.user),
+        },
+        _sum: {
+          questions_attempted: true,
+          questions_correct: true,
+        },
+      });
+
+      const percentScore = Math.round(
+        (questionScores._sum.questions_correct /
+          questionScores._sum.questions_attempted) *
+          100
+      );
+
+      // Pulls summed scores (points_added) from all challenges to show an aggregate total
+      const totalPoints = await prisma.math_timed_scores.aggregate({
+        where: {
+          user_id: parseInt(req.user),
+        },
+        _sum: {
+          points_added: true,
+        },
+      });
+
       res.status(200).send({
         totalChallenges,
         mostFrequentChallenge: mostFrequentChallenge[0] || null,
+        percentScore,
+        totalPoints,
       });
     } catch (error) {
       console.log(error);

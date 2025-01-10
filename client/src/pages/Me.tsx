@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 //import ScoreBar from "../components/";
@@ -72,6 +72,13 @@ const badgeImages = {
 
 type BadgeName = keyof typeof badgeImages;
 
+type ChallengeSummaryData = {
+  totalChallenges: number;
+  mostFrequentChallenge: string | null;
+  percentScore: number;
+  totalPoints: number;
+};
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -97,8 +104,22 @@ function Me({
   const navigate = useNavigate();
   // State for help popup to explain bar charts with points by level
   const [isChartModalOpen, setIsChartModalOpen] = useState(false);
+  const [challengeSummaryData, setChallengeSummaryData] =
+    useState<ChallengeSummaryData>({
+      totalChallenges: 0,
+      mostFrequentChallenge: "",
+      percentScore: 0,
+      totalPoints: 0,
+    });
+
+  const storedToken = localStorage.getItem("token");
 
   const openChartModal = () => setIsChartModalOpen(true);
+
+  // RUns on page load to pull timed challenge data
+  useEffect(() => {
+    getChallengeSummaryData();
+  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -284,6 +305,35 @@ function Me({
     current[1] > max[1] ? current : max
   );
 
+  // API call to GET summary stats for the timed challenge container - runs on page load
+  const getChallengeSummaryData = async () => {
+    try {
+      const response = await fetch(
+        "/api/users-math/timed-challenge/summary-results",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${storedToken}`,
+          },
+        }
+      );
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setChallengeSummaryData({
+          totalChallenges: data.totalChallenges,
+          mostFrequentChallenge: data.mostFrequentChallenge.math_type,
+          percentScore: data.percentScore,
+          totalPoints: data.totalPoints._sum.points_added,
+        });
+      }
+    } catch (error) {
+      console.error("Error fetching user score data:", error);
+    }
+  };
+
   return (
     <>
       <Nav
@@ -372,23 +422,47 @@ function Me({
           </div>
 
           {/* CONTAINER FOR MATH TIMED CHALLENGE RESULTS AND AI RESPONSE */}
+
           <div className="accountContentContainer">
             <h2>
               Your timed challenge results:
               <span className="math-font-me"> Woof Math </span>
             </h2>
+            {challengeSummaryData.totalChallenges === 0 && (
+              <h3 className="results-alert">
+                ** As you play Woof Math timed challenges, you'll see your
+                results and helpful tips below.{" "}
+              </h3>
+            )}
             <h3>Overall:</h3>
             <div className="resultsChallenge SummaryContainer">
               <div className="resultsChallenge SummaryData-split">
-                <div className="resultsChallenge SummaryData">test</div>
-                <div className="resultsChallenge SummaryData">test</div>
+                <div className="resultsChallenge SummaryData">
+                  <h4>{challengeSummaryData.totalChallenges}</h4>
+                  <p>total challenges</p>
+                </div>
+                <div className="resultsChallenge SummaryData">
+                  <p> You've mostly done </p>
+                  <h4>{challengeSummaryData.mostFrequentChallenge}</h4>
+                </div>
               </div>
               <div className="resultsChallenge SummaryData-split">
-                <div className="resultsChallenge SummaryData">test</div>
-                <div className="resultsChallenge SummaryData">test</div>
+                <div className="resultsChallenge SummaryData">
+                  <h4>{challengeSummaryData.percentScore}%</h4>{" "}
+                  <p>correct answers</p>
+                </div>
+                <div className="resultsChallenge SummaryData">
+                  <h4>{challengeSummaryData.totalPoints} </h4>
+                  <p>challenge points</p>
+                </div>
               </div>
             </div>
+            <h3>Feedback from your last 10 challenges:</h3>
+
             <div className="resultsChallenge AIContainer">ai stuff</div>
+
+            <h3>See how you're progressing:</h3>
+
             <div className="resultsChallenge ChartContainer">ai stuff</div>
           </div>
 
