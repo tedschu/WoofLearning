@@ -123,7 +123,10 @@ function Me({
       percentScoreLastTen: 0,
     });
   const [incorrectEquationsData, setIncorrectEquationsData] =
-    useState<incorrectEquationsData>();
+    useState<incorrectEquationsData>({
+      incorrectEquationsLastTen: [],
+      percentScoreLastTen: "",
+    });
   const [equationFeedback, setEquationFeedback] = useState<equationFeedback>({
     feedback: "",
   });
@@ -419,8 +422,6 @@ function Me({
       throw error;
     }
   };
-
-  console.log(equationFeedback);
 
   return (
     <>
