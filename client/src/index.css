@@ -1943,10 +1943,13 @@ p {
 
 .resultsChallenge.AIContainer {
   width: 92%;
-  height: 100px;
-  background: blue;
+  padding: 20px;
+  background: white;
   border-radius: 8px;
-  color: gray;
+  color: black;
+  white-space: pre-wrap;
+  text-align: left;
+  font-size: 20px;
 }
 
 .resultsChallenge.ChartContainer {

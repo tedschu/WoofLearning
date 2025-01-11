@@ -80,6 +80,15 @@ type ChallengeSummaryData = {
   percentScoreLastTen: number;
 };
 
+type incorrectEquationsData = {
+  incorrectEquationsLastTen: [];
+  percentScoreLastTen: string;
+};
+
+type equationFeedback = {
+  feedback: string;
+};
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -113,15 +122,34 @@ function Me({
       totalPoints: 0,
       percentScoreLastTen: 0,
     });
+  const [incorrectEquationsData, setIncorrectEquationsData] =
+    useState<incorrectEquationsData>();
+  const [equationFeedback, setEquationFeedback] = useState<equationFeedback>({
+    feedback: "",
+  });
+
+  const [hasEvaluated, setHasEvaluated] = useState<boolean>(false);
 
   const storedToken = localStorage.getItem("token");
 
   const openChartModal = () => setIsChartModalOpen(true);
 
-  // RUns on page load to pull timed challenge data
+  // RUNS ON PAGE LOAD TO GET CHALLENGE SUMMARY AND ANTHROPIC DATA
   useEffect(() => {
     getChallengeSummaryData();
+    getLastTenChallengeIncorrectResponses();
   }, []);
+
+  // RUNS AFTER getLastTenChallengeIncorrectResposes RETURNS (hits Anthropic API)
+  useEffect(() => {
+    if (
+      incorrectEquationsData?.incorrectEquationsLastTen?.length > 0 &&
+      !hasEvaluated
+    ) {
+      evaluateEquations();
+      setHasEvaluated(true);
+    }
+  }, [incorrectEquationsData]);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -337,7 +365,62 @@ function Me({
     }
   };
 
-  console.log(challengeSummaryData);
+  // API call to get incorrect responses from last 10 timed challenges
+  const getLastTenChallengeIncorrectResponses = async () => {
+    try {
+      const response = await fetch(
+        "/api/users-math/timed-challenge/incorrect-equations",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${storedToken}`,
+          },
+        }
+      );
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setIncorrectEquationsData(data);
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  // API call to Anthropic endpoint to return feedback on incorrect responses
+  const evaluateEquations = async () => {
+    try {
+      const response = await fetch("/anthropic/evaluate_incorrect_responses", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(incorrectEquationsData),
+      });
+
+      if (!response.ok) {
+        const textResponse = await response.text();
+        console.error("Server response:", textResponse);
+        throw new Error("Failed to evalaute the equations");
+      }
+
+      const data = await response.json();
+      // console.log(data);
+
+      // Sets API response data into equationFeedback state
+      setEquationFeedback(data);
+
+      //return await response.json();
+    } catch (error) {
+      console.error("Error evaluating answers:", error);
+
+      throw error;
+    }
+  };
+
+  console.log(equationFeedback);
 
   return (
     <>
@@ -474,11 +557,13 @@ function Me({
               :
             </h3>
 
-            <div className="resultsChallenge AIContainer">ai stuff</div>
+            <div className="resultsChallenge AIContainer">
+              {equationFeedback.feedback}
+            </div>
 
-            <h3>See how you're progressing:</h3>
+            {/* <h3>See how you're progressing:</h3>
 
-            <div className="resultsChallenge ChartContainer">ai stuff</div>
+            <div className="resultsChallenge ChartContainer">ai stuff</div> */}
           </div>
 
           {/* CONTAINER FOR USER PERSONAL DATA AND USER FUNCTIONS (DELETE, CONTACT) */}

@@ -175,9 +175,6 @@ router.get(
   verifyToken,
   async (req, res) => {
     try {
-      // ** TODO: First, groupBy to get a list of the last 10 (highest, desc) challenge_ids stored in a variable.
-      // Second, to use findMany to pull all records associated with the challenge_ids in teh stored variable
-
       // Pulls the last (most recent) 10 challenge_ids for a given user
       const lastTenChallengeIds = await prisma.incorrect_question.groupBy({
         by: ["challenge_id"],
@@ -202,11 +199,38 @@ router.get(
           orderBy: {
             challenge_id: "desc",
           },
+          select: {
+            equation: true,
+          },
         });
 
+      // TODO: Overall score from the last 10 timed challenges, passing as "overall_score" = XX%
+      // Pulls data to show overall % score (average) for last 10 challenges (to pass to Anthropic)
+      const questionScoresLastTen = await prisma.math_timed_scores.aggregate({
+        where: {
+          user_id: parseInt(req.user),
+        },
+        orderBy: {
+          id: "desc",
+        },
+        _sum: {
+          questions_attempted: true,
+          questions_correct: true,
+        },
+        take: 10,
+      });
+
+      const percentScoreLastTen =
+        Math.round(
+          (questionScoresLastTen._sum.questions_correct /
+            questionScoresLastTen._sum.questions_attempted) *
+            100
+        ) + "%".toString();
       res.status(200).send({
         //lastTenChallengeIds,
         incorrectEquationsLastTen,
+
+        percentScoreLastTen,
       });
     } catch (error) {
       console.log(error);
