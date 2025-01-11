@@ -15,7 +15,6 @@ import poodle from "../assets/img_2_7_poodle.png";
 import goldendoodleTrophy2 from "../assets/img_2_8_golden.png";
 import goldendoodleTrophy from "../assets/goldendoodle_trophy_large.png";
 import { ModalBadgeType } from "../types/types";
-import wow from "../assets/wow_2.png";
 import mega from "../assets/mega.png";
 
 type BadgeModalTypes = {
