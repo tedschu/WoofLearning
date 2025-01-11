@@ -1910,7 +1910,8 @@ p {
   box-shadow: 3px 3px 3px rgb(229, 229, 229);
 }
 .resultsChallenge.SummaryContainer {
-  width: 88%;
+  width: 100%;
+  max-width: 850px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1930,7 +1931,7 @@ p {
   border-radius: 8px;
   display: flex;
   flex-direction: column;
-  width: 170px;
+  width: 140px;
   height: 100px;
   margin: 0;
   padding: 5px;
@@ -1938,11 +1939,12 @@ p {
 
 .resultsChallenge.resultsChallenge.SummaryData h4 {
   color: #d4492b;
-  font-size: 35px;
+  font-size: 30px;
 }
 
 .resultsChallenge.AIContainer {
   width: 92%;
+  max-width: 1200px;
   padding: 20px;
   background: white;
   border-radius: 8px;
@@ -2270,6 +2272,10 @@ ul li {
 
   .challengeResults-link {
     text-align: left;
+  }
+
+  .resultsChallenge.SummaryData {
+    width: 170px;
   }
 }
 
