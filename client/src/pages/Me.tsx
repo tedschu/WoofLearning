@@ -77,6 +77,7 @@ type ChallengeSummaryData = {
   mostFrequentChallenge: string | null;
   percentScore: number;
   totalPoints: number;
+  percentScoreLastTen: number;
 };
 
 ChartJS.register(
@@ -110,6 +111,7 @@ function Me({
       mostFrequentChallenge: "",
       percentScore: 0,
       totalPoints: 0,
+      percentScoreLastTen: 0,
     });
 
   const storedToken = localStorage.getItem("token");
@@ -327,12 +329,15 @@ function Me({
           mostFrequentChallenge: data.mostFrequentChallenge.math_type,
           percentScore: data.percentScore,
           totalPoints: data.totalPoints._sum.points_added,
+          percentScoreLastTen: data.percentScoreLastTen,
         });
       }
     } catch (error) {
       console.error("Error fetching user score data:", error);
     }
   };
+
+  console.log(challengeSummaryData);
 
   return (
     <>
@@ -457,7 +462,17 @@ function Me({
                 </div>
               </div>
             </div>
-            <h3>Feedback from your last 10 challenges:</h3>
+            <h3>
+              Feedback from your last{" "}
+              {challengeSummaryData.totalChallenges >= 10
+                ? 10
+                : challengeSummaryData.totalChallenges}{" "}
+              challenges{" "}
+              {challengeSummaryData.totalChallenges < 10 && (
+                <>(keep doing challenges for more helpful tips!)</>
+              )}
+              :
+            </h3>
 
             <div className="resultsChallenge AIContainer">ai stuff</div>
 

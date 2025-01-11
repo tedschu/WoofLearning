@@ -204,4 +204,46 @@ router.post("/evaluate_answers", async (req, res) => {
   }
 });
 
+// Route to evaluate (POST) a user's incorrect equations and respond with feedback
+router.post("/evaluate_incorrect_responses", async (req, res) => {
+  try {
+    // Pulls in incorrect equations data
+    const incorrectEquations = req.body;
+
+    // Need to "stringify" (e.g. convert JSON object to a string) the equations data
+    const incorrectEquationsString = JSON.stringify(incorrectEquations);
+
+    // // Building "messages" and "system" inputs below which are then passed to the API
+    const messages = [
+      {
+        role: "user",
+        content: [
+          {
+            type: "text",
+            text: `${incorrectEquationsString}`,
+          },
+        ],
+      },
+    ];
+
+    const system =
+      "You will receive a set of math equations that a user answered incorrectly, followed by an 'overall_score.' These incorrect answers come from a program that grade school-aged kids are using to practice building their math skills. You will be providing insights back to the user on trends that you're seeing so they can improve their math skills. Be very brief, and in simple yet encouraging language, summarize your responses to focus on the types of questions they tend to get wrong, and also any tips to approach these problems. Be very positive, particularly if the 'overall score' is 80% or higher. If it's lower than 80%, you can acknowledge that the user may be having some challenges, and that you'll help them with advice. Don't repeat the number back to the user. For instance, if you see that most of the equations relate to multiplying by 9, clearly let the user know.";
+
+    // Uses messages and system variables to call "callAnthropicAPI" function
+    const response = await callAnthropicAPI(messages, system);
+
+    console.log("Raw response:", response);
+
+    res.json({
+      feedback: response,
+    });
+  } catch (error) {
+    console.error("Error evaluating data:", error);
+    res.status(500).json({
+      error: "Failed to evaluate answers.",
+      details: error.message,
+    });
+  }
+});
+
 module.exports = router;

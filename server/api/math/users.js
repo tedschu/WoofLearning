@@ -134,11 +134,79 @@ router.get(
         },
       });
 
+      // Pulls data to show overall % score (average) for last 10 challenges (to pass to Anthropic)
+      const questionScoresLastTen = await prisma.math_timed_scores.aggregate({
+        where: {
+          user_id: parseInt(req.user),
+        },
+        orderBy: {
+          id: "desc",
+        },
+        _sum: {
+          questions_attempted: true,
+          questions_correct: true,
+        },
+        take: 10,
+      });
+
+      const percentScoreLastTen = Math.round(
+        (questionScoresLastTen._sum.questions_correct /
+          questionScoresLastTen._sum.questions_attempted) *
+          100
+      );
+
       res.status(200).send({
         totalChallenges,
         mostFrequentChallenge: mostFrequentChallenge[0] || null,
         percentScore,
         totalPoints,
+        percentScoreLastTen,
+      });
+    } catch (error) {
+      console.log(error);
+      res.sendStatus(500);
+    }
+  }
+);
+
+// Route to pull incorrect equations for the last 10 timed challenges - passes to Anthropic API
+router.get(
+  "/timed-challenge/incorrect-equations",
+  verifyToken,
+  async (req, res) => {
+    try {
+      // ** TODO: First, groupBy to get a list of the last 10 (highest, desc) challenge_ids stored in a variable.
+      // Second, to use findMany to pull all records associated with the challenge_ids in teh stored variable
+
+      // Pulls the last (most recent) 10 challenge_ids for a given user
+      const lastTenChallengeIds = await prisma.incorrect_question.groupBy({
+        by: ["challenge_id"],
+        where: {
+          user_id: parseInt(req.user),
+        },
+        orderBy: {
+          challenge_id: "desc",
+        },
+        take: 10,
+      });
+
+      // Pulls all incorrect equations for a given user for the last 10 challenges (by challenge_ids specified in lastTenChallengeIds above)
+      const incorrectEquationsLastTen =
+        await prisma.incorrect_question.findMany({
+          where: {
+            user_id: parseInt(req.user),
+            challenge_id: {
+              in: lastTenChallengeIds.map((id) => id.challenge_id),
+            },
+          },
+          orderBy: {
+            challenge_id: "desc",
+          },
+        });
+
+      res.status(200).send({
+        //lastTenChallengeIds,
+        incorrectEquationsLastTen,
       });
     } catch (error) {
       console.log(error);
