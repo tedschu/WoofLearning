@@ -1,4 +1,3 @@
-import { BackdropProps } from "@mui/material";
 import { useState, useEffect } from "react";
 
 type TimerTypes = {

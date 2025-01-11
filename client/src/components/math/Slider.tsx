@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 import { SliderProps } from "@mui/material/Slider";
@@ -8,7 +8,7 @@ type DiscreteSliderProps = {
   sliderValue: number;
   setGotRight: React.Dispatch<React.SetStateAction<boolean>>;
   setGotWrong: React.Dispatch<React.SetStateAction<boolean>>;
-  isTimedChallengeRunning: boolean;
+  isTimedChallengeRunning?: boolean;
 };
 
 const marks = [

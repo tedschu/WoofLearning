@@ -1,8 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import clock_white from "../../assets/clock_white.png";
 import Slider from "../../components/math/Slider";
 import GameSelector from "../../components/math/GameSelector";
-import { Link } from "react-router-dom";
 import GamePlayTimedChallenge from "../../components/math/GamePlayTimedChallenge";
 import { GameTimedChallengeProps } from "../../types/types";
 

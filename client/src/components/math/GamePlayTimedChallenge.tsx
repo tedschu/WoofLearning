@@ -2,7 +2,6 @@ import React, { useCallback } from "react";
 import { useState, useEffect } from "react";
 import NumberGenerator from "./NumberGenerator";
 import Timer from "./Timer";
-import woofLogo from "../../assets/woofmath_logo_1.png";
 import { Link } from "react-router-dom";
 import wow1 from "../../assets/wow_1.png";
 
@@ -19,7 +18,6 @@ import {
   ModalBadgeType,
   BadgeLevel,
   BadgeProgress,
-  UserChallengeResults,
 } from "../../types/types";
 
 type GamePlayProps = {
@@ -68,7 +66,6 @@ function GamePlayTimedChallenge({
   setIsModalOpen,
   setModalBadge,
   setBadgeLevel,
-  setIsTimedChallengeModalOpen,
   isTimedChallengeRunning,
   setIsTimedChallengeRunning,
 }: GamePlayProps) {

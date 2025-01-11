@@ -9,7 +9,7 @@ type GameSelectorComponentTypes = {
   setGameSelector: React.Dispatch<React.SetStateAction<GameSelectorType>>;
   setGotRight: React.Dispatch<React.SetStateAction<boolean>>;
   setGotWrong: React.Dispatch<React.SetStateAction<boolean>>;
-  isTimedChallengeRunning: boolean;
+  isTimedChallengeRunning?: boolean;
 };
 
 export default function GameSelector({
