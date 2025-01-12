@@ -4,11 +4,11 @@ import NumberGenerator from "./NumberGenerator";
 import Timer from "./Timer";
 import { Link } from "react-router-dom";
 import wow1 from "../../assets/wow_1.png";
-
 import wow2 from "../../assets/wow_2.png";
 import wow3 from "../../assets/wow_3.png";
-
 import mega from "../../assets/mega.png";
+import check from "../../assets/check.png";
+import xMark from "../../assets/x-mark.png";
 
 import {
   GameSelectorType,
@@ -422,7 +422,7 @@ function GamePlayTimedChallenge({
       timer = setTimeout(() => {
         setGotRight(false);
         setGotWrong(false);
-      }, 1000);
+      }, 900);
     }
     return () => clearTimeout(timer);
   }, [gotRight, gotWrong]);
@@ -513,7 +513,7 @@ function GamePlayTimedChallenge({
 
   function randomImage() {
     const random = Math.floor(Math.random() * 3) + 1;
-    console.log(random);
+
     setRandomLogo(images[random]);
   }
 
@@ -552,7 +552,7 @@ function GamePlayTimedChallenge({
                 <span className="pointsHighlight"> {addToScore} points</span>):
               </h3>
 
-              <form onSubmit={handleSubmit}>
+              <form className="formContainer" onSubmit={handleSubmit}>
                 <div className="questionContainer">
                   <NumberGenerator
                     sliderValue={sliderValue}
@@ -589,7 +589,8 @@ function GamePlayTimedChallenge({
                   </div>
                 </div>
                 {/* SUBMIT BUTTON */}
-                <div className="answerSubmit">
+                <div className="answerSubmitChallenge">
+                  <div></div>
                   <button
                     className="button submit"
                     type="submit"
@@ -597,14 +598,18 @@ function GamePlayTimedChallenge({
                   >
                     SUBMIT
                   </button>
+                  <div className="answerSubmit-gridRight">
+                    {gotRight && <img src={check} alt="" />}
+                    {gotWrong && <img src={xMark} alt="" />}
+                  </div>
                 </div>
               </form>
             </>
           )}
 
           {/* Prompt based on response goes here (e.g. "yay, you got it right") see MUI components */}
-          <div className="answerAlert"></div>
-          {gotRight && (
+          {/* <div className="answerAlert"></div> */}
+          {/* {gotRight && (
             <div className="rightAnswerAlert">
               <h4>Yay! You got it right! That's +{addToScore} points!</h4>
             </div>
@@ -613,7 +618,7 @@ function GamePlayTimedChallenge({
             <div className="wrongAnswerAlert">
               <h4>Incorrect. Keep going!</h4>
             </div>
-          )}
+          )} */}
           {!hasAnswer && (
             <div className="wrongAnswerAlert">
               <h4>Make sure you answer!</h4>

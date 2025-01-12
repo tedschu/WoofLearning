@@ -2,6 +2,8 @@ import React from "react";
 import { useState, useEffect } from "react";
 import NumberGenerator from "./NumberGenerator";
 import clock_try from "./../../assets/clock_try.png";
+import check from "../../assets/check.png";
+import xMark from "../../assets/x-mark.png";
 
 import {
   GameSelectorType,
@@ -356,13 +358,14 @@ function GamePlay({
   // Controls alert when question was right. Visible for 3 seconds.
   useEffect(() => {
     let timer: NodeJS.Timeout;
-    if (gotRight) {
+    if (gotRight || gotWrong) {
       timer = setTimeout(() => {
         setGotRight(false);
-      }, 3000);
+        setGotWrong(false);
+      }, 1000);
     }
     return () => clearTimeout(timer);
-  }, [gotRight]);
+  }, [gotRight, gotWrong]);
 
   // Function to pass the updated score to the database, update scores state values for gameplay
   const postUserMathBadges = async (
@@ -391,8 +394,6 @@ function GamePlay({
       console.error("Error fetching user data:", error);
     }
   };
-
-  // console.log(hasNewBadge);
 
   return (
     <>
@@ -440,7 +441,8 @@ function GamePlay({
               </div>
             </div>
             {/* SUBMIT BUTTON */}
-            <div className="answerSubmit">
+            <div className="answerSubmitChallenge">
+              <div></div>
               <button
                 className="button submit"
                 type="submit"
@@ -448,16 +450,15 @@ function GamePlay({
               >
                 SUBMIT
               </button>
+              <div className="answerSubmit-gridRight">
+                {gotRight && <img src={check} alt="" />}
+                {gotWrong && <img src={xMark} alt="" />}
+              </div>
             </div>
           </form>
 
           {/* Prompt based on response goes here (e.g. "yay, you got it right") see MUI components */}
-          <div className="answerAlert"></div>
-          {gotRight && (
-            <div className="rightAnswerAlert">
-              <h4>Yay! You got it right! That's +{addToScore} points!</h4>
-            </div>
-          )}
+
           {gotWrong && (
             <div className="wrongAnswerAlert">
               <h4>Oops. Try again!</h4>
