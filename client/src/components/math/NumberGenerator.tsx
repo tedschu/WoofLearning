@@ -151,12 +151,12 @@ function NumberGenerator({
           case 2:
             // randomly determines whether first or second number is double digit
             if (getRandomNumber(0, 1) === 0) {
-              setFirstNumber(getRandomNumber(10, 20));
-              setSecondNumber(getRandomNumber(1, 9));
+              setFirstNumber(getRandomNumber(3, 12));
+              setSecondNumber(getRandomNumber(2, 9));
               setAddToScore(9);
             } else {
-              setFirstNumber(getRandomNumber(1, 9));
-              setSecondNumber(getRandomNumber(10, 20));
+              setFirstNumber(getRandomNumber(2, 9));
+              setSecondNumber(getRandomNumber(3, 12));
               setAddToScore(9);
             }
             break;
