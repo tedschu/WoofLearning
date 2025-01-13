@@ -39,6 +39,9 @@ import {
   UserScore,
   CurrentApp,
 } from "../types/types";
+import { CircularProgress } from "@mui/material";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import TipsAndUpdatesIcon from "@mui/icons-material/TipsAndUpdates";
 
 type MeProps = {
   userInfo: UserInfo;
@@ -132,6 +135,8 @@ function Me({
   });
 
   const [hasEvaluated, setHasEvaluated] = useState<boolean>(false);
+  const [isAPICallInProgress, setIsAPICallInProgress] =
+    useState<boolean>(false);
 
   const storedToken = localStorage.getItem("token");
 
@@ -141,6 +146,7 @@ function Me({
   useEffect(() => {
     getChallengeSummaryData();
     getLastTenChallengeIncorrectResponses();
+    setIsAPICallInProgress(true);
   }, []);
 
   // RUNS AFTER getLastTenChallengeIncorrectResposes RETURNS (hits Anthropic API)
@@ -413,6 +419,7 @@ function Me({
       // console.log(data);
 
       // Sets API response data into equationFeedback state
+      setIsAPICallInProgress(false);
       setEquationFeedback(data);
 
       //return await response.json();
@@ -422,6 +429,8 @@ function Me({
       throw error;
     }
   };
+
+  // console.log(currentApp);
 
   return (
     <>
@@ -559,6 +568,8 @@ function Me({
             </h3>
 
             <div className="resultsChallenge AIContainer">
+              {isAPICallInProgress && <CircularProgress />}
+
               {equationFeedback.feedback}
             </div>
 

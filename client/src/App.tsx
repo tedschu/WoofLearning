@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import {
   UserScore,
   UserMathBadges,
@@ -18,6 +19,8 @@ import AppSelector from "./pages/AppSelector";
 import GameMath from "./pages/math/GameMath";
 import GameReading from "./pages/reading/GameReading";
 import Prompts from "./pages/reading/Prompts";
+
+const theme = createTheme();
 
 function App() {
   const storedToken = localStorage.getItem("token");
@@ -214,109 +217,113 @@ function App() {
   return (
     <>
       {/* <Nav isLoggedIn={isLoggedIn} userInfo={userInfo} /> */}
+      <ThemeProvider theme={theme}>
+        <Routes>
+          <Route
+            index
+            element={
+              <AppSelector
+                currentApp={currentApp}
+                setCurrentApp={setCurrentApp}
+                userInfo={userInfo}
+                setIsLoggedIn={setIsLoggedIn}
+              />
+            }
+          />
 
-      <Routes>
-        <Route
-          index
-          element={
-            <AppSelector
-              currentApp={currentApp}
-              setCurrentApp={setCurrentApp}
-              userInfo={userInfo}
-              setIsLoggedIn={setIsLoggedIn}
-            />
-          }
-        />
+          <Route
+            path="/math"
+            element={
+              <GameMath
+                isLoggedIn={isLoggedIn}
+                userInfo={userInfo}
+                userScore={userScore}
+                setUserScore={setUserScore}
+                userMathBadges={userMathBadges}
+                setUserMathBadges={setUserMathBadges}
+                totalScore={totalMathScore}
+                setTotalScore={setTotalMathScore}
+                badgeLevel={badgeLevel}
+                setBadgeLevel={setBadgeLevel}
+                userReadingBadges={userReadingBadges}
+                setUserReadingBadges={setUserReadingBadges}
+                badgeProgress={badgeProgress}
+                setBadgeProgress={setBadgeProgress}
+                currentApp={currentApp}
+                setCurrentApp={setCurrentApp}
+              />
+            }
+          />
 
-        <Route
-          path="/math"
-          element={
-            <GameMath
-              isLoggedIn={isLoggedIn}
-              userInfo={userInfo}
-              userScore={userScore}
-              setUserScore={setUserScore}
-              userMathBadges={userMathBadges}
-              setUserMathBadges={setUserMathBadges}
-              totalScore={totalMathScore}
-              setTotalScore={setTotalMathScore}
-              badgeLevel={badgeLevel}
-              setBadgeLevel={setBadgeLevel}
-              userReadingBadges={userReadingBadges}
-              setUserReadingBadges={setUserReadingBadges}
-              badgeProgress={badgeProgress}
-              setBadgeProgress={setBadgeProgress}
-              currentApp={currentApp}
-              setCurrentApp={setCurrentApp}
-            />
-          }
-        />
+          <Route
+            path="/reading"
+            element={
+              <GameReading
+                isLoggedIn={isLoggedIn}
+                userInfo={userInfo}
+                userScore={userScore}
+                setUserScore={setUserScore}
+                userReadingBadges={userReadingBadges}
+                setUserReadingBadges={setUserReadingBadges}
+                userMathBadges={userMathBadges}
+                setUserMathBadges={setUserMathBadges}
+                totalScore={totalMathScore}
+                setTotalScore={setTotalMathScore}
+                badgeLevel={badgeLevel}
+                badgeProgress={badgeProgress}
+                setBadgeProgress={setBadgeProgress}
+                currentApp={currentApp}
+                setCurrentApp={setCurrentApp}
+                setBadgeLevel={setBadgeLevel}
+              />
+            }
+          />
 
-        <Route
-          path="/reading"
-          element={
-            <GameReading
-              isLoggedIn={isLoggedIn}
-              userInfo={userInfo}
-              userScore={userScore}
-              setUserScore={setUserScore}
-              userReadingBadges={userReadingBadges}
-              setUserReadingBadges={setUserReadingBadges}
-              userMathBadges={userMathBadges}
-              setUserMathBadges={setUserMathBadges}
-              totalScore={totalMathScore}
-              setTotalScore={setTotalMathScore}
-              badgeLevel={badgeLevel}
-              badgeProgress={badgeProgress}
-              setBadgeProgress={setBadgeProgress}
-              currentApp={currentApp}
-              setCurrentApp={setCurrentApp}
-              setBadgeLevel={setBadgeLevel}
-            />
-          }
-        />
-
-        <Route
-          path="/me"
-          element={
-            <Me
-              isLoggedIn={isLoggedIn}
-              userInfo={userInfo}
-              userScore={userScore}
-              totalScore={totalMathScore}
-              userMathBadges={userMathBadges}
-              userReadingBadges={userReadingBadges}
-              setIsLoggedIn={setIsLoggedIn}
-              currentApp={currentApp}
-            />
-          }
-        />
-        <Route
-          path="/register"
-          element={
-            <Register
-              setIsLoggedIn={setIsLoggedIn}
-              isLoggedIn={isLoggedIn}
-              userInfo={userInfo}
-              setUserInfo={setUserInfo}
-            />
-          }
-        />
-        <Route
-          path="/login"
-          element={
-            <Login
-              setIsLoggedIn={setIsLoggedIn}
-              userInfo={userInfo}
-              setUserInfo={setUserInfo}
-              setToken={setToken}
-            />
-          }
-        />
-        <Route path="/welcome" element={<Welcome />} />
-        <Route path="/about" element={<About isLoggedIn={isLoggedIn} />} />
-        <Route path="/prompts" element={<Prompts isLoggedIn={isLoggedIn} />} />
-      </Routes>
+          <Route
+            path="/me"
+            element={
+              <Me
+                isLoggedIn={isLoggedIn}
+                userInfo={userInfo}
+                userScore={userScore}
+                totalScore={totalMathScore}
+                userMathBadges={userMathBadges}
+                userReadingBadges={userReadingBadges}
+                setIsLoggedIn={setIsLoggedIn}
+                currentApp={currentApp}
+              />
+            }
+          />
+          <Route
+            path="/register"
+            element={
+              <Register
+                setIsLoggedIn={setIsLoggedIn}
+                isLoggedIn={isLoggedIn}
+                userInfo={userInfo}
+                setUserInfo={setUserInfo}
+              />
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <Login
+                setIsLoggedIn={setIsLoggedIn}
+                userInfo={userInfo}
+                setUserInfo={setUserInfo}
+                setToken={setToken}
+              />
+            }
+          />
+          <Route path="/welcome" element={<Welcome />} />
+          <Route path="/about" element={<About isLoggedIn={isLoggedIn} />} />
+          <Route
+            path="/prompts"
+            element={<Prompts isLoggedIn={isLoggedIn} />}
+          />
+        </Routes>
+      </ThemeProvider>
     </>
   );
 }

@@ -47,7 +47,7 @@ router.get("/generate_story", async (req, res) => {
         content: [
           {
             type: "text",
-            text: `Generate approximately a ${story_length}-word ${story_type} about ${story_topic}, followed by 3 questions about the ${story_type}. The ${story_type} should have a difficulty level of ${difficulty} (out of 5) - for example, a "1" should use simple language at a first or second-grade reading level, whereas a "5" should be at a fifth or sixth-grade level. Return the result as a valid JSON object with the following structure:
+            text: `Generate approximately a ${story_length}-word ${story_type} about ${story_topic}, followed by 3 questions about the ${story_type}. The ${story_type} should have a difficulty level of ${difficulty} (out of 5) - for example, a "1" should use very simple language at a first or second-grade reading level, whereas a "5" should be at a fifth or sixth-grade level. Return the result as a valid JSON object with the following structure:
 
             {
               "Title": "Your ${story_type} title",
@@ -71,7 +71,7 @@ router.get("/generate_story", async (req, res) => {
       },
     ];
 
-    const system = `You are a reading tutor for students in grade school, and will be generating a ${story_type} to test reading comprehension. Everything needs to be age-appropriate, with no offensive language or themes.`;
+    const system = `You are a reading tutor for students in grade school, and will be generating a ${story_type} to test reading comprehension. Use simple language - no complex words. Everything needs to be age-appropriate, with no offensive language or themes.`;
 
     // Uses messages and system variables to call "callAnthropicAPI" function
     const response = await callAnthropicAPI(messages, system);
@@ -227,7 +227,7 @@ router.post("/evaluate_incorrect_responses", async (req, res) => {
     ];
 
     const system =
-      "You will receive a set of math equations that a user answered incorrectly, followed by an 'overall_score.' These incorrect answers come from a program that grade school-aged kids are using to practice building their math skills. You will be providing insights back to the user on trends that you're seeing so they can improve their math skills. Be very brief, and in simple yet encouraging language, summarize your responses to focus on the types of questions they tend to get wrong, and also any tips to approach these problems. Be very positive, particularly if the 'overall score' is 85% or higher. If it's lower than 85%, you can acknowledge that the user may be having some challenges, and that you'll help them with advice. Don't repeat the number back to the user. For instance, if you see that most of the equations relate to multiplying by 9, clearly let the user know.";
+      "You will receive a set of math equations that a user answered incorrectly, followed by an 'overall_score.' These incorrect answers come from a program that grade school-aged kids are using to practice building their math skills. You will be providing insights back to the user on trends that you're seeing so they can improve their math skills. Be very brief in your response, and in simple yet encouraging language, provide a summary of the types of questions they tend to get wrong (if there are any clear trends), and also any tips to approach these problems. Be very positive, particularly if the 'overall score' is 85% or higher. If it's lower than 85%, you can acknowledge that the user may be having some challenges, and that you'll help them with advice. Don't repeat the number back to the user. For instance, if you see that most of the equations relate to multiplying by 9, clearly let the user know.";
 
     // Uses messages and system variables to call "callAnthropicAPI" function
     const response = await callAnthropicAPI(messages, system);
