@@ -2410,6 +2410,10 @@ ul li {
   .resultsChallenge.SummaryData {
     width: 170px;
   }
+
+  .modalOverlay-challenge {
+    align-items: center;
+  }
 }
 
 /* SCREEN IS ABOVE 900px (desktop) */
@@ -2541,10 +2545,6 @@ ul li {
   .gamePlay-math {
     width: 60%;
     max-width: 880px;
-  }
-
-  .modalOverlay-challenge {
-    padding: 20px 40px;
   }
 
   .resultsChallenge.SummaryContainer {
