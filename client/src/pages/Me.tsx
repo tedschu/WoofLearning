@@ -40,8 +40,6 @@ import {
   CurrentApp,
 } from "../types/types";
 import { CircularProgress } from "@mui/material";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import TipsAndUpdatesIcon from "@mui/icons-material/TipsAndUpdates";
 
 type MeProps = {
   userInfo: UserInfo;
