@@ -8,6 +8,7 @@ import GameSelector from "../../components/math/GameSelector";
 import Nav from "../../components/Nav";
 import BadgeModal from "../../components/BadgeModal";
 import GameMathTimedChallenge from "./GameMathTimedChallenge";
+import LevelHelpModal from "../../components/LevelHelpModal";
 
 function GameMath({
   isLoggedIn,
@@ -24,6 +25,9 @@ function GameMath({
   setBadgeProgress,
   currentApp,
   setCurrentApp,
+  isLevelHelpModalOpen,
+  setIsLevelHelpModalOpen,
+  closeLevelHelpModal,
 }: GameProps) {
   // Establishing state values for gameplay functionality that will be passed to multiple child components
   const [sliderValue, setSliderValue] = useState(1);
@@ -85,6 +89,8 @@ function GameMath({
           sliderValue={sliderValue}
           setGotRight={setGotRight}
           setGotWrong={setGotWrong}
+          isLevelHelpModalOpen={isLevelHelpModalOpen}
+          setIsLevelHelpModalOpen={setIsLevelHelpModalOpen}
         />
 
         <GamePlay
@@ -145,6 +151,14 @@ function GameMath({
           badgeProgress={badgeProgress}
           setBadgeProgress={setBadgeProgress}
           gameSelector={gameSelector}
+          isLevelHelpModalOpen={isLevelHelpModalOpen}
+          setIsLevelHelpModalOpen={setIsLevelHelpModalOpen}
+          closeLevelHelpModal={closeLevelHelpModal}
+        />
+
+        <LevelHelpModal
+          isLevelHelpModalOpen={isLevelHelpModalOpen}
+          closeLevelHelpModal={closeLevelHelpModal}
         />
       </div>
     </>

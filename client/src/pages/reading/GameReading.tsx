@@ -7,6 +7,7 @@ import BadgeModal from "../../components/BadgeModal";
 import Slider from "../../components/reading/Slider";
 import StorySelector from "../../components/reading/StorySelector";
 import { GameProps, StoryType, ModalBadgeType } from "../../types/types";
+import LevelHelpModal from "../../components/LevelHelpModal";
 
 //TODO: CONVERT TO TS, ADD TYPE DECLARATIONS
 
@@ -23,6 +24,9 @@ function GameReading({
   currentApp,
   setCurrentApp,
   setBadgeLevel,
+  isLevelHelpModalOpen,
+  setIsLevelHelpModalOpen,
+  closeLevelHelpModal,
 }: GameProps) {
   const [sliderValue, setSliderValue] = useState(1);
   const [storyType, setStoryType] = useState<StoryType>("story");
@@ -83,6 +87,8 @@ function GameReading({
           setStoryLength={setStoryLength}
           setPointsToWin={setPointsToWin}
           pointsToWin={pointsToWin}
+          isLevelHelpModalOpen={isLevelHelpModalOpen}
+          setIsLevelHelpModalOpen={setIsLevelHelpModalOpen}
         />
 
         <GamePlay
@@ -116,6 +122,11 @@ function GameReading({
           isModalOpen={isModalOpen}
           closeModal={closeModal}
           modalBadge={modalBadge}
+        />
+
+        <LevelHelpModal
+          isLevelHelpModalOpen={isLevelHelpModalOpen}
+          closeLevelHelpModal={closeLevelHelpModal}
         />
       </div>
     </>

@@ -1,6 +1,7 @@
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 import React from "react";
+import InfoIcon from "@mui/icons-material/Info";
 
 type SliderTypes = {
   setSliderValue: React.Dispatch<React.SetStateAction<number>>;
@@ -10,6 +11,8 @@ type SliderTypes = {
   setStoryLength: React.Dispatch<React.SetStateAction<number>>;
   pointsToWin: number;
   setPointsToWin: React.Dispatch<React.SetStateAction<number>>;
+  isLevelHelpModalOpen: boolean;
+  setIsLevelHelpModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const marks = [
@@ -46,6 +49,7 @@ export default function DiscreteSlider({
   setGotWrong,
   setStoryLength,
   setPointsToWin,
+  setIsLevelHelpModalOpen,
 }: SliderTypes) {
   const handleSliderChange = (_event: Event, newValue: number | number[]) => {
     setSliderValue(newValue as number);
@@ -55,6 +59,9 @@ export default function DiscreteSlider({
     assignPoints(newValue as number);
   };
 
+  const openLevelHelpModal = () => {
+    setIsLevelHelpModalOpen(true);
+  };
   // Sets the length of the story (ex. 500 words) in prompt based on the difficulty slider value
   function storyLength(sliderValue: number) {
     switch (sliderValue) {
@@ -106,43 +113,51 @@ export default function DiscreteSlider({
 
   return (
     <div className="sliderContainer">
-      <h3>What reading level should the story be at?</h3>
+      <div className="sliderContainer-gridBox">
+        <div></div>
+        <div className="slider">
+          <h3>Choose a reading level for the story:</h3>
 
-      <Box sx={{ width: 300 }} className="sliderBox">
-        <Slider
-          aria-label="Custom marks"
-          value={sliderValue}
-          onChange={handleSliderChange}
-          defaultValue={1}
-          getAriaValueText={valuetext}
-          valueLabelDisplay="auto"
-          shiftStep={1}
-          step={1}
-          marks={marks}
-          min={1}
-          max={5}
-          sx={{
-            "& .MuiSlider-markLabel": {
-              fontFamily: "Patrick Hand",
-              color: "#0085bd",
-            },
-            "& .MuiSlider-thumb": {
-              color: "#dd6e55", // This changes the color of the slider circle
-            },
-            "& .MuiSlider-track": {
-              color: "#7dc2e0", // Track color behind slider
-            },
-            "& .MuiSlider-rail": {
-              color: "#a6d5ea", // Track color ahead of slider
-            },
-            "& .MuiSlider-valueLabel": {
-              backgroundColor: "#dd6e55", // This changes the background color of the pop-up indicator
-              color: "white", // This changes the text color in the pop-up indicator
-              fontFamily: "Patrick Hand", // Optional: to match the font of mark labels
-            },
-          }}
-        />
-      </Box>
+          <Box sx={{ width: 300 }} className="sliderBox">
+            <Slider
+              aria-label="Custom marks"
+              value={sliderValue}
+              onChange={handleSliderChange}
+              defaultValue={1}
+              getAriaValueText={valuetext}
+              valueLabelDisplay="auto"
+              shiftStep={1}
+              step={1}
+              marks={marks}
+              min={1}
+              max={5}
+              sx={{
+                "& .MuiSlider-markLabel": {
+                  fontFamily: "Patrick Hand",
+                  color: "#0085bd",
+                },
+                "& .MuiSlider-thumb": {
+                  color: "#dd6e55", // This changes the color of the slider circle
+                },
+                "& .MuiSlider-track": {
+                  color: "#7dc2e0", // Track color behind slider
+                },
+                "& .MuiSlider-rail": {
+                  color: "#a6d5ea", // Track color ahead of slider
+                },
+                "& .MuiSlider-valueLabel": {
+                  backgroundColor: "#dd6e55", // This changes the background color of the pop-up indicator
+                  color: "white", // This changes the text color in the pop-up indicator
+                  fontFamily: "Patrick Hand", // Optional: to match the font of mark labels
+                },
+              }}
+            />
+          </Box>
+        </div>
+        <div className="slider-infoIcon">
+          <InfoIcon onClick={openLevelHelpModal} sx={{ fontSize: "22px" }} />
+        </div>
+      </div>
     </div>
   );
 }

@@ -1012,6 +1012,24 @@ button {
   padding: 7px 0 15px 0;
 }
 
+.slider {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.sliderContainer-gridBox {
+  display: grid;
+  grid-template-columns: [first] 40px [line2] 300px [line3] 40px;
+}
+
+.slider-infoIcon {
+  color: rgb(146, 146, 146);
+  padding-top: 5px;
+}
+
 .sliderBox {
   font-family: "Patrick Hand";
 }
@@ -2185,6 +2203,89 @@ ul li {
   animation: wiggle 2s linear infinite;
 }
 
+/* ************************************************************ */
+/* LEVEL HELP MODAL STYLING */
+.levelHelpModalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  z-index: 3;
+  overflow-y: auto;
+  padding: 25px 12px 12px 12px;
+}
+
+.levelHelpModalContainer {
+  width: 95%;
+  max-width: 950px;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border-radius: 8px;
+  border: 3px solid lightgray;
+  padding: 15px 0;
+  gap: 20px;
+}
+
+.levelHelpModalContent {
+  display: flex;
+  width: 90%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.levelHelpModalContent > ul {
+  margin-bottom: 20px;
+  padding-left: 20px;
+}
+
+.levelHelpModalContent > ul > ul {
+  padding-left: 15px;
+}
+
+.levelHelp-TopBar {
+  width: 100%;
+  display: grid;
+  grid-template-columns: [first] 25% [line2] 50% [line3] 25%;
+  border-radius: 8px;
+  align-items: center;
+  padding: 0 10px;
+  color: gray;
+}
+
+.levelHelp-centerBox {
+  text-align: center;
+}
+
+.levelHelp-fontMath {
+  font-size: 24px;
+  color: #d4492b;
+}
+
+.levelHelp-fontReading {
+  font-size: 24px;
+  color: #0085bd;
+}
+
+.levelHelpModalContent > p {
+  color: gray;
+  font-size: 20px;
+  font-style: italic;
+}
+
+.blueLink {
+  color: #0085bd;
+}
+
 /* Keyframes */
 @keyframes wiggle {
   0%,
@@ -2448,6 +2549,10 @@ ul li {
 
   .resultsChallenge.SummaryContainer {
     flex-direction: row;
+  }
+
+  .levelHelpModalOverlay {
+    align-items: center;
   }
 }
 

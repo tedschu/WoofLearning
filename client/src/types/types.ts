@@ -143,6 +143,9 @@ export type GameProps = {
   setBadgeProgress: React.Dispatch<React.SetStateAction<BadgeProgress>>;
   currentApp: CurrentApp;
   setCurrentApp: React.Dispatch<React.SetStateAction<CurrentApp>>;
+  isLevelHelpModalOpen: boolean;
+  setIsLevelHelpModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  closeLevelHelpModal: () => void;
 };
 
 export type GameTimedChallengeProps = {
@@ -171,6 +174,9 @@ export type GameTimedChallengeProps = {
   badgeProgress: BadgeProgress;
   setBadgeProgress: React.Dispatch<React.SetStateAction<BadgeProgress>>;
   gameSelector: GameSelectorType;
+  isLevelHelpModalOpen: boolean;
+  setIsLevelHelpModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  closeLevelHelpModal: () => void;
 };
 
 export type StoryType = "story" | "poem" | "ballad";

@@ -102,6 +102,12 @@ function App() {
       badge_level: 1,
     }
   );
+
+  // controls level selector ("how hard should the challenge be?") help modal
+  // setter applied in Slider components (math and reading)
+  const [isLevelHelpModalOpen, setIsLevelHelpModalOpen] = useState(false);
+  const closeLevelHelpModal = () => setIsLevelHelpModalOpen(false);
+
   const [currentApp, setCurrentApp] = useState<CurrentApp>("");
   const [token, setToken] = useState(storedToken || "");
 
@@ -251,6 +257,9 @@ function App() {
                 setBadgeProgress={setBadgeProgress}
                 currentApp={currentApp}
                 setCurrentApp={setCurrentApp}
+                isLevelHelpModalOpen={isLevelHelpModalOpen}
+                setIsLevelHelpModalOpen={setIsLevelHelpModalOpen}
+                closeLevelHelpModal={closeLevelHelpModal}
               />
             }
           />
@@ -275,6 +284,9 @@ function App() {
                 currentApp={currentApp}
                 setCurrentApp={setCurrentApp}
                 setBadgeLevel={setBadgeLevel}
+                isLevelHelpModalOpen={isLevelHelpModalOpen}
+                setIsLevelHelpModalOpen={setIsLevelHelpModalOpen}
+                closeLevelHelpModal={closeLevelHelpModal}
               />
             }
           />

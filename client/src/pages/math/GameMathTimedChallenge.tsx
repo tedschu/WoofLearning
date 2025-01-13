@@ -4,6 +4,7 @@ import Slider from "../../components/math/Slider";
 import GameSelector from "../../components/math/GameSelector";
 import GamePlayTimedChallenge from "../../components/math/GamePlayTimedChallenge";
 import { GameTimedChallengeProps } from "../../types/types";
+import LevelHelpModal from "../../components/LevelHelpModal";
 
 function GameMathTimedChallenge({
   isTimedChallegeModalOpen,
@@ -31,6 +32,9 @@ function GameMathTimedChallenge({
   badgeProgress,
   setBadgeProgress,
   gameSelector,
+  isLevelHelpModalOpen,
+  setIsLevelHelpModalOpen,
+  closeLevelHelpModal,
 }: GameTimedChallengeProps) {
   if (!isTimedChallegeModalOpen) return null;
 
@@ -64,6 +68,8 @@ function GameMathTimedChallenge({
               setGotRight={setGotRight}
               setGotWrong={setGotWrong}
               isTimedChallengeRunning={isTimedChallengeRunning}
+              isLevelHelpModalOpen={isLevelHelpModalOpen}
+              setIsLevelHelpModalOpen={setIsLevelHelpModalOpen}
             />
             <GamePlayTimedChallenge
               sliderValue={sliderValue}
@@ -90,6 +96,11 @@ function GameMathTimedChallenge({
               setIsTimedChallengeModalOpen={setIsTimedChallengeModalOpen}
               isTimedChallengeRunning={isTimedChallengeRunning}
               setIsTimedChallengeRunning={setIsTimedChallengeRunning}
+            />
+
+            <LevelHelpModal
+              isLevelHelpModalOpen={isLevelHelpModalOpen}
+              closeLevelHelpModal={closeLevelHelpModal}
             />
 
             <div className="buttonTopSpace">
