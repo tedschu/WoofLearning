@@ -99,7 +99,7 @@ function Welcome() {
             <h1>Level up your math skills through (fun) practice</h1>
             <p>
               Choose your type of math (ex. addition, division) and how hard the
-              questions should be.
+              questions should be. Play freely or in timed challenges!
             </p>
             <div className="welcomeButtonMargin">
               <Link to={"/register"}>

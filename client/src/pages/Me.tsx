@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 //import ScoreBar from "../components/";
 import Nav from "../components/Nav";
 import ChartModal from "../components/ChartModal";
+import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -558,11 +559,11 @@ function Me({
               {challengeSummaryData.totalChallenges >= 10
                 ? 10
                 : challengeSummaryData.totalChallenges}{" "}
-              challenges{" "}
+              challenges
               {challengeSummaryData.totalChallenges < 10 && (
                 <>(keep doing challenges for more helpful tips!)</>
-              )}
-              :
+              )}{" "}
+              <AutoAwesomeIcon style={{ fontSize: "22px", color: "#dd6e55" }} />
             </h3>
 
             <div className="resultsChallenge AIContainer">
@@ -640,6 +641,18 @@ function Me({
             isChartModalOpen={isChartModalOpen}
             setIsChartModalOpen={setIsChartModalOpen}
           />
+          <p className="ai-disclaimer me">
+            {" "}
+            <AutoAwesomeIcon
+              style={{ fontSize: "16px", color: "#d4492b" }}
+            />{" "}
+            Woof Learning uses AI to help provide feedback on your progress.
+            Learn more{" "}
+            <Link to={"/About"} className="ai-link">
+              here
+            </Link>
+            .
+          </p>
         </div>
       </div>
     </>

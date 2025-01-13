@@ -86,18 +86,24 @@ function About({ isLoggedIn }: AboutProps) {
 
         <div className="aboutContentContainer">
           <h2 className="math-font about">
-            Woof Reading uses AI (artificial intelligence) to generate stories{" "}
-            <AutoAwesomeIcon style={{ fontSize: "22px" }} />
+            Woof Learning uses AI (artificial intelligence) to enhance your
+            experience <AutoAwesomeIcon style={{ fontSize: "22px" }} />
           </h2>
           <p>
-            Woof Reading uses an AI assistant called{" "}
+            Woof Learning uses an AI assistant called{" "}
             <Link className="promptsLinks" to={"http://claude.ai"}>
               Claude
             </Link>{" "}
-            from Anthropic to (1) generate story ideas and questions about those
-            stories, and (2) to evaluate the answers to those questions. The
-            "evaluations" do not just say "right" or "wrong," but also provide
-            contextual feedback to help the reader's understanding.
+            from Anthropic in three ways: (1) In Woof Reading, to generate story
+            ideas and questions about those stories, and (2) to evaluate the
+            answers to those questions, and finally, (3) in the "me" page where
+            you can see your personal progress and account details (see the
+            "Feedback from your last 10 challenges" section). Here, we share
+            information on the Woof Math timed challenge questions you didn't
+            answer correctly so that Anthropic can help to provide helpful
+            feedback on areas to focus continued learning. The "evaluations" in
+            the "reading" and "me" pages do not just say "right" or "wrong," but
+            also provide contextual feedback to help to build understanding.
           </p>
           <h3>Why are you using AI?</h3>
           <p>
@@ -105,10 +111,12 @@ function About({ isLoggedIn }: AboutProps) {
             example, "write a poem about my dog Charlie," and then constructing
             stories that are not just legible, but also quite interesting.
             Similarly, if you're asking about real-world information ("write a
-            story about Abraham Lincoln") - you'll also find the responses to be
-            reliably accurate. The technology also does an impressive job of
-            making sense of information and providing feedback that is easy to
-            understand, and conversational in tone.
+            story about Abraham Lincoln") - the responses are reliably accurate.
+            The technology also does an impressive job of making sense of
+            information and providing feedback that is easy to understand, and
+            conversational in tone. If a student is, for instance, having some
+            trouble with multiplying by 9's, Woof Learning can provide this
+            feedback along with helpful suggestions.
           </p>
           <p>
             Woof Reading is NOT intended to replace live instruction, or reading
@@ -152,7 +160,7 @@ function About({ isLoggedIn }: AboutProps) {
           </p>
           <p>
             If you have any feedback on the prompts, or further questions on the
-            use of AI in Woof Reading, please contact us at
+            use of AI in Woof Learning, please contact us at
             WoofLearning@gmail.com.
           </p>
         </div>

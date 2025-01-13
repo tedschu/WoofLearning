@@ -1267,6 +1267,10 @@ button {
   text-align: center;
 }
 
+.ai-disclaimer.me {
+  margin: 0 0 15px 0;
+}
+
 .ai-link {
   font-style: italic;
   color: inherit;
