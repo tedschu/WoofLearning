@@ -81,12 +81,12 @@ function NumberGenerator({
               setFirstNumber(getRandomNumber(1, 9));
               setSecondNumber(getRandomNumber(10, 99));
             }
-            setAddToScore(7);
+            setAddToScore(5);
             break;
           case 3:
             setFirstNumber(getRandomNumber(10, 99));
             setSecondNumber(getRandomNumber(10, 99));
-            setAddToScore(12);
+            setAddToScore(9);
             break;
           case 4:
             // randomly determines whether first or second number is triple digit
@@ -95,15 +95,15 @@ function NumberGenerator({
               setSecondNumber(getRandomNumber(100, 999));
             } else {
               setFirstNumber(getRandomNumber(100, 999));
-              setSecondNumber(getRandomNumber(10, 99));
+              setSecondNumber(getRandomNumber(10, 150));
             }
-            setAddToScore(18);
+            setAddToScore(13);
             break;
           case 5:
             setFirstNumber(getRandomNumber(1, 999));
             setSecondNumber(getRandomNumber(1, 999));
             setThirdNumber(getRandomNumber(1, 999));
-            setAddToScore(28);
+            setAddToScore(20);
             break;
         }
         break;
@@ -119,23 +119,23 @@ function NumberGenerator({
           case 2:
             setFirstNumber(getRandomNumber(10, 99));
             setSecondNumber(getRandomNumber(1, 9));
-            setAddToScore(8);
+            setAddToScore(6);
             break;
           case 3:
             setFirstNumber(getRandomNumber(50, 99));
             setSecondNumber(getRandomNumber(1, 49));
-            setAddToScore(13);
+            setAddToScore(10);
             break;
           case 4:
             setFirstNumber(getRandomNumber(100, 999));
             setSecondNumber(getRandomNumber(1, 99));
-            setAddToScore(19);
+            setAddToScore(14);
             break;
           case 5:
             setFirstNumber(getRandomNumber(500, 999));
             setSecondNumber(getRandomNumber(1, 300));
             setThirdNumber(getRandomNumber(1, 200));
-            setAddToScore(29);
+            setAddToScore(21);
             break;
         }
         break;
@@ -153,42 +153,42 @@ function NumberGenerator({
             if (getRandomNumber(0, 1) === 0) {
               setFirstNumber(getRandomNumber(3, 12));
               setSecondNumber(getRandomNumber(2, 9));
-              setAddToScore(9);
+              setAddToScore(7);
             } else {
               setFirstNumber(getRandomNumber(2, 9));
               setSecondNumber(getRandomNumber(3, 12));
-              setAddToScore(9);
+              setAddToScore(7);
             }
             break;
           case 3:
             setFirstNumber(getRandomNumber(2, 50));
-            setSecondNumber(getRandomNumber(2, 50));
-            setAddToScore(14);
+            setSecondNumber(getRandomNumber(3, 20));
+            setAddToScore(12);
             break;
           case 4:
             // randomly determines whether first or second number is triple digit
             if (getRandomNumber(0, 1) === 0) {
-              setFirstNumber(getRandomNumber(100, 200));
-              setSecondNumber(getRandomNumber(10, 99));
-              setAddToScore(20);
+              setFirstNumber(getRandomNumber(10, 200));
+              setSecondNumber(getRandomNumber(10, 50));
+              setAddToScore(17);
             } else {
-              setFirstNumber(getRandomNumber(10, 99));
-              setSecondNumber(getRandomNumber(100, 200));
-              setAddToScore(20);
+              setFirstNumber(getRandomNumber(10, 50));
+              setSecondNumber(getRandomNumber(10, 200));
+              setAddToScore(17);
             }
             break;
           case 5:
             // randomly determines whether first or second number is triple digit
             if (getRandomNumber(0, 1) === 0) {
-              setFirstNumber(getRandomNumber(1, 100));
+              setFirstNumber(getRandomNumber(2, 10));
               setSecondNumber(getRandomNumber(10, 50));
-              setThirdNumber(getRandomNumber(1, 150));
-              setAddToScore(30);
+              setThirdNumber(getRandomNumber(3, 50));
+              setAddToScore(23);
             } else {
-              setFirstNumber(getRandomNumber(2, 20));
-              setSecondNumber(getRandomNumber(10, 200));
-              setThirdNumber(getRandomNumber(1, 50));
-              setAddToScore(30);
+              setFirstNumber(getRandomNumber(2, 10));
+              setSecondNumber(getRandomNumber(4, 200));
+              setThirdNumber(getRandomNumber(2, 25));
+              setAddToScore(23);
             }
             break;
         }
@@ -203,34 +203,34 @@ function NumberGenerator({
         setMathOperator("/");
         switch (sliderValue) {
           case 1:
-            setDivNumberAnswer(getRandomNumber(1, 3));
+            setDivNumberAnswer(getRandomNumber(1, 4));
             setDivNumberMultiple(getRandomNumber(2, 5));
             getDivisionEquation(divNumberAnswer, divNumberMultiple);
-            setAddToScore(6);
+            setAddToScore(5);
             break;
           case 2:
-            setDivNumberAnswer(getRandomNumber(2, 5));
+            setDivNumberAnswer(getRandomNumber(2, 6));
             setDivNumberMultiple(getRandomNumber(2, 10));
             getDivisionEquation(divNumberAnswer, divNumberMultiple);
-            setAddToScore(10);
+            setAddToScore(7);
             break;
           case 3:
             setDivNumberAnswer(getRandomNumber(5, 12));
-            setDivNumberMultiple(getRandomNumber(2, 10));
+            setDivNumberMultiple(getRandomNumber(4, 12));
             getDivisionEquation(divNumberAnswer, divNumberMultiple);
-            setAddToScore(15);
+            setAddToScore(11);
             break;
           case 4:
-            setDivNumberAnswer(getRandomNumber(5, 15));
-            setDivNumberMultiple(getRandomNumber(10, 20));
+            setDivNumberAnswer(getRandomNumber(6, 15));
+            setDivNumberMultiple(getRandomNumber(7, 20));
             getDivisionEquation(divNumberAnswer, divNumberMultiple);
-            setAddToScore(21);
+            setAddToScore(16);
             break;
           case 5:
-            setDivNumberAnswer(getRandomNumber(5, 15));
+            setDivNumberAnswer(getRandomNumber(5, 20));
             setDivNumberMultiple(getRandomNumber(20, 50));
             getDivisionEquation(divNumberAnswer, divNumberMultiple);
-            setAddToScore(31);
+            setAddToScore(22);
             break;
         }
         break;

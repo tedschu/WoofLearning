@@ -267,28 +267,28 @@ function GamePlayTimedChallenge({
       ) {
         updatedBadges.badge_2_1_borderCollie = true;
         setModalBadge("badge_2_1_borderCollie");
-      } else if (newTotalScore >= 3500 && !userMathBadges.badge_2_2_terrier) {
+      } else if (newTotalScore >= 4000 && !userMathBadges.badge_2_2_terrier) {
         updatedBadges.badge_2_2_terrier = true;
         setModalBadge("badge_2_2_terrier");
       } else if (
-        newTotalScore >= 3750 &&
+        newTotalScore >= 5000 &&
         !userMathBadges.badge_2_3_australianShepherd
       ) {
         updatedBadges.badge_2_3_australianShepherd = true;
         setModalBadge("badge_2_3_australianShepherd");
-      } else if (newTotalScore >= 4000 && !userMathBadges.badge_2_4_shibaInu) {
+      } else if (newTotalScore >= 6000 && !userMathBadges.badge_2_4_shibaInu) {
         updatedBadges.badge_2_4_shibaInu = true;
         setModalBadge("badge_2_4_shibaInu");
-      } else if (newTotalScore >= 4500 && !userMathBadges.badge_2_5_cat) {
+      } else if (newTotalScore >= 7000 && !userMathBadges.badge_2_5_cat) {
         updatedBadges.badge_2_5_cat = true;
         setModalBadge("badge_2_5_cat");
-      } else if (newTotalScore >= 5000 && !userMathBadges.badge_2_6_bernese) {
+      } else if (newTotalScore >= 8000 && !userMathBadges.badge_2_6_bernese) {
         updatedBadges.badge_2_6_bernese = true;
         setModalBadge("badge_2_6_bernese");
-      } else if (newTotalScore >= 6000 && !userMathBadges.badge_2_7_poodle) {
+      } else if (newTotalScore >= 10000 && !userMathBadges.badge_2_7_poodle) {
         updatedBadges.badge_2_7_poodle = true;
         setModalBadge("badge_2_7_poodle");
-      } else if (newTotalScore >= 7500 && !userMathBadges.badge_2_8_golden) {
+      } else if (newTotalScore >= 15000 && !userMathBadges.badge_2_8_golden) {
         updatedBadges.badge_2_8_golden = true;
         setModalBadge("badge_2_8_golden");
       }
@@ -534,6 +534,44 @@ function GamePlayTimedChallenge({
               />
             </h1>
           </div>
+          {/* Displays a container showing challenge results at the end of the challenge */}
+          {showChallengeResults && (
+            <>
+              <div className="challengeResults">
+                <div className="challengeResults-logoContainer">
+                  <img
+                    src={randomLogo}
+                    className="challengeResults-woofLogo"
+                    alt=""
+                  />
+                </div>
+                <div className="challengeResults-text">
+                  <h3>Here's how you did:</h3>
+                  <ul>
+                    <li> {challengePoints} points added</li>
+                    <li>
+                      {questionsCorrect} of {questionsAttempted} questions
+                      correct (that's{" "}
+                      {questionsAttempted === 0 ? (
+                        <>0%</>
+                      ) : (
+                        <>
+                          {Math.round(
+                            (questionsCorrect / questionsAttempted) * 100
+                          )}
+                          %
+                        </>
+                      )}
+                      )
+                    </li>
+                  </ul>
+                  <Link to={"/me"} className="challengeResults-link">
+                    <h4>See more about your progress</h4>
+                  </Link>
+                </div>
+              </div>
+            </>
+          )}
           {!isTimedChallengeRunning && (
             <>
               <button
@@ -623,44 +661,6 @@ function GamePlayTimedChallenge({
             <div className="wrongAnswerAlert">
               <h4>Make sure you answer!</h4>
             </div>
-          )}
-          {/* Displays a container showing challenge results at the end of the challenge */}
-          {showChallengeResults && (
-            <>
-              <div className="challengeResults">
-                <div className="challengeResults-logoContainer">
-                  <img
-                    src={randomLogo}
-                    className="challengeResults-woofLogo"
-                    alt=""
-                  />
-                </div>
-                <div className="challengeResults-text">
-                  <h3>Here's how you did:</h3>
-                  <ul>
-                    <li> {challengePoints} points added</li>
-                    <li>
-                      {questionsCorrect} of {questionsAttempted} questions
-                      correct (that's{" "}
-                      {questionsAttempted === 0 ? (
-                        <>0%</>
-                      ) : (
-                        <>
-                          {Math.round(
-                            (questionsCorrect / questionsAttempted) * 100
-                          )}
-                          %
-                        </>
-                      )}
-                      )
-                    </li>
-                  </ul>
-                  <Link to={"/me"} className="challengeResults-link">
-                    <h4>See more about your progress</h4>
-                  </Link>
-                </div>
-              </div>
-            </>
           )}
         </div>
       </div>

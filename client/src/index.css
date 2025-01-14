@@ -1439,7 +1439,7 @@ input[type="number"]::-webkit-inner-spin-button {
   font-size: 22px;
   border: 1px solid lightgray;
   box-shadow: 2px 2px 6px #c1c1c1;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   font-size: 20px;
 }
 
@@ -1454,6 +1454,7 @@ input[type="number"]::-webkit-inner-spin-button {
   justify-content: center;
   border-radius: 12px;
   border: 2px solid rgb(116, 230, 116);
+  margin-bottom: 25px;
 }
 
 .challengeResults-logoContainer {
@@ -1483,8 +1484,8 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .challengeResults-link {
-  color: rgb(145, 145, 145);
   text-align: center;
+  color: black;
 }
 
 .challengeResults-link h4 {
@@ -1989,7 +1990,7 @@ p {
 
 .resultsChallenge.resultsChallenge.SummaryData h4 {
   color: #d4492b;
-  font-size: 30px;
+  font-size: 25px;
 }
 
 .resultsChallenge.AIContainer {
@@ -2413,6 +2414,10 @@ ul li {
 
   .modalOverlay-challenge {
     align-items: center;
+  }
+
+  .resultsChallenge.resultsChallenge.SummaryData h4 {
+    font-size: 30px;
   }
 }
 

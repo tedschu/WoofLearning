@@ -56,21 +56,26 @@ function GameMathTimedChallenge({
           </div>
           <div className="modalOverlay-challengeGameplayContainer">
             {/* <img src={clock} alt="" className="modalClock" /> */}
-            <GameSelector
-              setGameSelector={setGameSelector}
-              setGotRight={setGotRight}
-              setGotWrong={setGotWrong}
-              isTimedChallengeRunning={isTimedChallengeRunning}
-            />
-            <Slider
-              setSliderValue={setSliderValue}
-              sliderValue={sliderValue}
-              setGotRight={setGotRight}
-              setGotWrong={setGotWrong}
-              isTimedChallengeRunning={isTimedChallengeRunning}
-              isLevelHelpModalOpen={isLevelHelpModalOpen}
-              setIsLevelHelpModalOpen={setIsLevelHelpModalOpen}
-            />
+
+            {!isTimedChallengeRunning && (
+              <>
+                <GameSelector
+                  setGameSelector={setGameSelector}
+                  setGotRight={setGotRight}
+                  setGotWrong={setGotWrong}
+                  isTimedChallengeRunning={isTimedChallengeRunning}
+                />
+                <Slider
+                  setSliderValue={setSliderValue}
+                  sliderValue={sliderValue}
+                  setGotRight={setGotRight}
+                  setGotWrong={setGotWrong}
+                  isTimedChallengeRunning={isTimedChallengeRunning}
+                  isLevelHelpModalOpen={isLevelHelpModalOpen}
+                  setIsLevelHelpModalOpen={setIsLevelHelpModalOpen}
+                />
+              </>
+            )}
             <GamePlayTimedChallenge
               sliderValue={sliderValue}
               gameSelector={gameSelector}

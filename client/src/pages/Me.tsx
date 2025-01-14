@@ -124,6 +124,7 @@ function Me({
       totalPoints: 0,
       percentScoreLastTen: 0,
     });
+
   const [incorrectEquationsData, setIncorrectEquationsData] =
     useState<incorrectEquationsData>({
       incorrectEquationsLastTen: [],
@@ -520,7 +521,7 @@ function Me({
 
           {/* CONTAINER FOR MATH TIMED CHALLENGE RESULTS AND AI RESPONSE */}
 
-          <div className="accountContentContainer">
+          <div className="accountContentContainer" id="challengeResultsId">
             <h2>
               Your timed challenge results:
               <span className="math-font-me"> Woof Math </span>
