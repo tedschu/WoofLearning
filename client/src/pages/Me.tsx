@@ -142,6 +142,9 @@ function Me({
 
   const openChartModal = () => setIsChartModalOpen(true);
 
+  // ****** TESTING FOR PAGE LOAD VALUE THAT WILL PERSIST
+  // const [pageLoadCount, setPageLoadCount]  // will need to set this in App.tsx
+
   // RUNS ON PAGE LOAD TO GET CHALLENGE SUMMARY AND ANTHROPIC DATA
   useEffect(() => {
     getChallengeSummaryData();

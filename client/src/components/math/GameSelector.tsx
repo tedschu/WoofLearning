@@ -9,15 +9,15 @@ type GameSelectorComponentTypes = {
   setGameSelector: React.Dispatch<React.SetStateAction<GameSelectorType>>;
   setGotRight: React.Dispatch<React.SetStateAction<boolean>>;
   setGotWrong: React.Dispatch<React.SetStateAction<boolean>>;
-  isTimedChallengeRunning?: boolean;
+  // isTimedChallengeRunning?: boolean;
 };
 
 export default function GameSelector({
   setGameSelector,
   setGotRight,
   setGotWrong,
-  isTimedChallengeRunning,
-}: GameSelectorComponentTypes) {
+}: // isTimedChallengeRunning,
+GameSelectorComponentTypes) {
   const [alignment, setAlignment] = useState("addition");
 
   const handleChange: ToggleButtonGroupProps["onChange"] = (
@@ -48,7 +48,7 @@ export default function GameSelector({
           exclusive
           onChange={handleChange}
           aria-label="Platform"
-          disabled={isTimedChallengeRunning}
+          // disabled={isTimedChallengeRunning}
           sx={{
             "& .MuiToggleButton-root": {
               ...buttonStyle,

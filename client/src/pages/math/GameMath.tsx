@@ -10,6 +10,12 @@ import BadgeModal from "../../components/BadgeModal";
 import GameMathTimedChallenge from "./GameMathTimedChallenge";
 import LevelHelpModal from "../../components/LevelHelpModal";
 
+type ChallengeTopScores = {
+  math_type: string;
+  level: number;
+  points_added: number;
+};
+
 function GameMath({
   isLoggedIn,
   userScore,
@@ -45,12 +51,16 @@ function GameMath({
   const [isTimedChallengeModalOpen, setIsTimedChallengeModalOpen] =
     useState(false);
 
+  // state for top scores by math_type and level. Will populate on page load and then update via setter if userScore is > existing value
+  const [challengeTopScores, setChallengeTopScores] = useState<
+    ChallengeTopScores[]
+  >([]);
+
   const navigate = useNavigate();
+  const token = localStorage.getItem("token");
 
   // If a user is not signed in (no token) they are redirected to the login page.
   useEffect(() => {
-    const token = localStorage.getItem("token");
-
     if (!token) {
       navigate("/welcome");
     }
@@ -58,9 +68,30 @@ function GameMath({
     if (!currentApp) {
       setCurrentApp("Woof Math");
     }
+
+    getTopChallengeScores();
   }, []);
 
   const closeModal = () => setIsModalOpen(false);
+
+  const getTopChallengeScores = async () => {
+    try {
+      const response = await fetch(
+        "/api/users-math/timed-challenge/top-scores",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const data = await response.json();
+
+      setChallengeTopScores(data);
+    } catch (error) {}
+  };
 
   return (
     <>
@@ -154,6 +185,8 @@ function GameMath({
           isLevelHelpModalOpen={isLevelHelpModalOpen}
           setIsLevelHelpModalOpen={setIsLevelHelpModalOpen}
           closeLevelHelpModal={closeLevelHelpModal}
+          challengeTopScores={challengeTopScores}
+          setChallengeTopScores={setChallengeTopScores}
         />
 
         <LevelHelpModal

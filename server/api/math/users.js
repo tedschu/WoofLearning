@@ -6,6 +6,7 @@ const saltRounds = 10;
 const jwt = require("jsonwebtoken");
 const { verifyToken } = require("../../utilities/verifyToken");
 const { connect } = require("http2");
+const { format } = require("path");
 
 const prisma = new PrismaClient();
 
@@ -238,5 +239,30 @@ router.get(
     }
   }
 );
+
+router.get("/timed-challenge/top-scores", verifyToken, async (req, res) => {
+  try {
+    const topScores = await prisma.math_timed_scores.groupBy({
+      by: ["math_type", "level"],
+      where: {
+        user_id: parseInt(req.user),
+      },
+      _max: {
+        points_added: true,
+      },
+    });
+
+    // maps through the topScores object to output a cleaner array of objects
+    const formattedScores = topScores.map((score) => ({
+      math_type: score.math_type,
+      level: score.level,
+      points_added: score._max.points_added,
+    }));
+
+    res.status(200).send({
+      formattedScores,
+    });
+  } catch (error) {}
+});
 
 module.exports = router;

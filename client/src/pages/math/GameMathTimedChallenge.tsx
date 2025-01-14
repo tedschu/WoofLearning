@@ -35,6 +35,8 @@ function GameMathTimedChallenge({
   isLevelHelpModalOpen,
   setIsLevelHelpModalOpen,
   closeLevelHelpModal,
+  challengeTopScores,
+  setChallengeTopScores,
 }: GameTimedChallengeProps) {
   if (!isTimedChallegeModalOpen) return null;
 
@@ -57,25 +59,25 @@ function GameMathTimedChallenge({
           <div className="modalOverlay-challengeGameplayContainer">
             {/* <img src={clock} alt="" className="modalClock" /> */}
 
-            {!isTimedChallengeRunning && (
-              <>
-                <GameSelector
-                  setGameSelector={setGameSelector}
-                  setGotRight={setGotRight}
-                  setGotWrong={setGotWrong}
-                  isTimedChallengeRunning={isTimedChallengeRunning}
-                />
-                <Slider
-                  setSliderValue={setSliderValue}
-                  sliderValue={sliderValue}
-                  setGotRight={setGotRight}
-                  setGotWrong={setGotWrong}
-                  isTimedChallengeRunning={isTimedChallengeRunning}
-                  isLevelHelpModalOpen={isLevelHelpModalOpen}
-                  setIsLevelHelpModalOpen={setIsLevelHelpModalOpen}
-                />
-              </>
-            )}
+            {/* {!isTimedChallengeRunning && (
+              <> */}
+            <GameSelector
+              setGameSelector={setGameSelector}
+              setGotRight={setGotRight}
+              setGotWrong={setGotWrong}
+              // isTimedChallengeRunning={isTimedChallengeRunning}
+            />
+            <Slider
+              setSliderValue={setSliderValue}
+              sliderValue={sliderValue}
+              setGotRight={setGotRight}
+              setGotWrong={setGotWrong}
+              isTimedChallengeRunning={isTimedChallengeRunning}
+              isLevelHelpModalOpen={isLevelHelpModalOpen}
+              setIsLevelHelpModalOpen={setIsLevelHelpModalOpen}
+            />
+            {/* </>
+            )} */}
             <GamePlayTimedChallenge
               sliderValue={sliderValue}
               gameSelector={gameSelector}
@@ -101,6 +103,8 @@ function GameMathTimedChallenge({
               setIsTimedChallengeModalOpen={setIsTimedChallengeModalOpen}
               isTimedChallengeRunning={isTimedChallengeRunning}
               setIsTimedChallengeRunning={setIsTimedChallengeRunning}
+              challengeTopScores={challengeTopScores}
+              setChallengeTopScores={setChallengeTopScores}
             />
 
             <LevelHelpModal

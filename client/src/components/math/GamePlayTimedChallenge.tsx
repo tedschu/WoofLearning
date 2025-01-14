@@ -68,6 +68,8 @@ function GamePlayTimedChallenge({
   setBadgeLevel,
   isTimedChallengeRunning,
   setIsTimedChallengeRunning,
+  challengeTopScores,
+  setChallengeTopScores,
 }: GamePlayProps) {
   const [questionCount, setQuestionCount] = useState(1);
   const [mathOperator, setMathOperator] = useState("+");
@@ -501,6 +503,8 @@ function GamePlayTimedChallenge({
 
     // Only makes API call if the user actually attempted to answer questions
     if (questionsAttempted > 0) postUserChallengeResults();
+
+    //
   }, [
     userInfo.id,
     gameSelector,
@@ -516,6 +520,25 @@ function GamePlayTimedChallenge({
 
     setRandomLogo(images[random]);
   }
+
+  // ****
+  // TODO: WRITE FUNCTION THAT OUTPUTS TOP SCORE FOR LEVEL + MATH TYPE
+  function topScore() {
+    // sliderValue
+    // gameSelector
+
+    const mathType = challengeTopScores.formattedScores.filter(
+      (score) => score.math_type === gameSelector
+    );
+
+    const finalTopScore = mathType.filter(
+      (score) => score.level === sliderValue
+    );
+
+    console.log(finalTopScore);
+  }
+
+  console.log(gameSelector);
 
   return (
     <>
