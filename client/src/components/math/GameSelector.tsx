@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React from "react";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import { GameSelectorType } from "../../types/types";
 import { ToggleButtonGroupProps } from "@mui/material/ToggleButtonGroup";
+// import { alignProperty } from "@mui/material/styles/cssUtils";
 
 type GameSelectorComponentTypes = {
   setGameSelector: React.Dispatch<React.SetStateAction<GameSelectorType>>;
