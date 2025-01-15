@@ -20,17 +20,13 @@ export default function GameSelector({
   gameSelector,
   isTimedChallengeRunning,
 }: GameSelectorComponentTypes) {
-  const [alignment, setAlignment] = useState<GameSelectorType>("addition");
-
-  console.log("gameSelector: ", gameSelector);
-  console.log("alignment: ", alignment);
+  //const [alignment, setAlignment] = useState<GameSelectorType>("addition");
 
   const handleChange: ToggleButtonGroupProps["onChange"] = (
     _event,
     newAlignment: GameSelectorType
   ) => {
     if (newAlignment != null) {
-      setAlignment(newAlignment);
       setGameSelector(newAlignment);
       setGotRight(false);
       setGotWrong(false);
@@ -42,10 +38,6 @@ export default function GameSelector({
     textTransform: "none",
   };
 
-  useEffect(() => {
-    setGameSelector(alignment);
-  }, [alignment]);
-
   return (
     <>
       <div className="gameSelectContainer-math">
@@ -53,7 +45,7 @@ export default function GameSelector({
 
         <ToggleButtonGroup
           color="primary"
-          value={alignment}
+          value={gameSelector}
           exclusive
           onChange={handleChange}
           aria-label="Platform"
