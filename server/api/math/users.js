@@ -262,7 +262,37 @@ router.get("/timed-challenge/top-scores", verifyToken, async (req, res) => {
     res.status(200).send({
       formattedScores,
     });
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+});
+
+// Gets the challenge score data from the last 20 challenges for a given user (grouped by math_type and level)
+// Use query (URL params) to specify which math_type and level to pull
+router.get("/timed-challenge/score-trending", verifyToken, async (req, res) => {
+  try {
+    const { math_type, level } = req.query;
+
+    const last20Scores = await prisma.math_timed_scores.findMany({
+      where: {
+        user_id: parseInt(req.user),
+        math_type: math_type,
+        level: parseInt(level),
+      },
+      orderBy: {
+        id: "desc",
+      },
+      take: 20,
+    });
+
+    res.status(200).send({
+      last20Scores,
+    });
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
 });
 
 module.exports = router;

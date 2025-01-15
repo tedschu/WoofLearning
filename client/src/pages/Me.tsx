@@ -576,9 +576,9 @@ function Me({
               {equationFeedback.feedback}
             </div>
 
-            {/* <h3>See how you're progressing:</h3>
+            <h3>See how you're progressing:</h3>
 
-            <div className="resultsChallenge ChartContainer">ai stuff</div> */}
+            <div className="resultsChallenge ChartContainer">ai stuff</div>
           </div>
 
           {/* CONTAINER FOR USER PERSONAL DATA AND USER FUNCTIONS (DELETE, CONTACT) */}
