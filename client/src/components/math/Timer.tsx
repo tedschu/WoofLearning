@@ -11,12 +11,12 @@ function Timer({
   setIsTimedChallengeRunning,
   onTimeUp,
 }: TimerTypes) {
-  const [timer, setTimer] = useState<number>(10);
+  const [timer, setTimer] = useState<number>(20);
 
   useEffect(() => {
     if (!isTimedChallengeRunning || timer <= 0) {
       setIsTimedChallengeRunning(false);
-      setTimer(10);
+      setTimer(20);
       if (timer === 0) onTimeUp();
       return;
     }

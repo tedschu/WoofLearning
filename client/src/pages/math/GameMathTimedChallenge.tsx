@@ -65,7 +65,7 @@ function GameMathTimedChallenge({
               setGameSelector={setGameSelector}
               setGotRight={setGotRight}
               setGotWrong={setGotWrong}
-              // isTimedChallengeRunning={isTimedChallengeRunning}
+              isTimedChallengeRunning={isTimedChallengeRunning}
             />
             <Slider
               setSliderValue={setSliderValue}

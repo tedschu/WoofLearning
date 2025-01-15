@@ -177,6 +177,16 @@ export type GameTimedChallengeProps = {
   isLevelHelpModalOpen: boolean;
   setIsLevelHelpModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   closeLevelHelpModal: () => void;
+  challengeTopScores: ChallengeTopScore[];
+  setChallengeTopScores: React.Dispatch<
+    React.SetStateAction<ChallengeTopScore[]>
+  >;
+};
+
+type ChallengeTopScore = {
+  math_type: string;
+  level: number;
+  points_added: number;
 };
 
 export type StoryType = "story" | "poem" | "ballad";

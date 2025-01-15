@@ -45,10 +45,20 @@ type GamePlayProps = {
   setIsTimedChallengeModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   isTimedChallengeRunning: boolean;
   setIsTimedChallengeRunning: React.Dispatch<React.SetStateAction<boolean>>;
+  challengeTopScores: ChallengeTopScore[];
+  setChallengeTopScores: React.Dispatch<
+    React.SetStateAction<ChallengeTopScore[]>
+  >;
 };
 
 type IncorrectEquation = {
   equation: string;
+};
+
+type ChallengeTopScore = {
+  math_type: string;
+  level: number;
+  points_added: number;
 };
 
 function GamePlayTimedChallenge({
@@ -96,6 +106,11 @@ function GamePlayTimedChallenge({
 
   const images = [wow1, wow2, wow3, mega];
   const [randomLogo, setRandomLogo] = useState<string>(images[0]);
+  const [topScore, setTopScore] = useState<number>(0);
+  const [beatTopScore, setBeatTopScore] = useState<boolean>(false);
+
+  // const updatedScores = getUpdatedScores(gameSelector, addToScore);
+  const storedToken = localStorage.getItem("token");
 
   // Function to open badge modal
   const openModal = () => {
@@ -369,9 +384,6 @@ function GamePlayTimedChallenge({
     updatedScores: Partial<UserScore>
   ): Promise<void> => {
     try {
-      // const updatedScores = getUpdatedScores(gameSelector, addToScore);
-      const storedToken = localStorage.getItem("token");
-
       const response = await fetch(`/api/users-math/${userInfo.id}/score`, {
         method: "PUT",
         headers: {
@@ -466,12 +478,21 @@ function GamePlayTimedChallenge({
     setChallengePoints(0);
     setShowChallengeResults(false);
     randomImage();
+    getTopChallengeScores();
+    setBeatTopScore(false);
   }
+
+  // once getTopChallengeScores runs and updates challangeTopScores state, run this function
+  useEffect(() => {
+    getTopScore();
+  }, [challengeTopScores]);
 
   // Callback function that is passed to the Timer component, and is called when timer state === 0 (e.g. game is over)
   const handleTimeUp = useCallback(() => {
     setIsTimedChallengeRunning(false);
     setShowChallengeResults(true);
+
+    if (challengePoints > topScore) setBeatTopScore(true);
 
     // Function to pass the challenge score and data to the database
     const postUserChallengeResults = async (): Promise<void> => {
@@ -521,13 +542,41 @@ function GamePlayTimedChallenge({
     setRandomLogo(images[random]);
   }
 
+  // Calls API to get top scores for each math_type + level combination
+  const getTopChallengeScores = async () => {
+    try {
+      const response = await fetch(
+        "/api/users-math/timed-challenge/top-scores",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${storedToken}`,
+          },
+        }
+      );
+
+      const data = await response.json();
+
+      setChallengeTopScores(data.formattedScores);
+    } catch (error) {
+      console.error("Error passing challenge data:", error);
+    }
+  };
+
   // ****
   // TODO: WRITE FUNCTION THAT OUTPUTS TOP SCORE FOR LEVEL + MATH TYPE
-  function topScore() {
+  const getTopScore = () => {
     // sliderValue
     // gameSelector
 
-    const mathType = challengeTopScores.formattedScores.filter(
+    if (!challengeTopScores || !challengeTopScores.length) {
+      setTopScore(0);
+
+      return;
+    }
+
+    const mathType = challengeTopScores.filter(
       (score) => score.math_type === gameSelector
     );
 
@@ -535,8 +584,12 @@ function GamePlayTimedChallenge({
       (score) => score.level === sliderValue
     );
 
-    console.log(finalTopScore);
-  }
+    if (finalTopScore.length > 0) {
+      setTopScore(finalTopScore[0].points_added);
+    } else {
+      setTopScore(0);
+    }
+  };
 
   console.log(gameSelector);
 
@@ -587,6 +640,13 @@ function GamePlayTimedChallenge({
                       )}
                       )
                     </li>
+                    {beatTopScore ? (
+                      <li>You beat your top score! </li>
+                    ) : (
+                      <li>
+                        Your level {sliderValue} top score: {topScore}
+                      </li>
+                    )}
                   </ul>
                   <Link to={"/me"} className="challengeResults-link">
                     <h4>See more about your progress</h4>
