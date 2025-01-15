@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
@@ -9,6 +9,7 @@ type GameSelectorComponentTypes = {
   setGameSelector: React.Dispatch<React.SetStateAction<GameSelectorType>>;
   setGotRight: React.Dispatch<React.SetStateAction<boolean>>;
   setGotWrong: React.Dispatch<React.SetStateAction<boolean>>;
+  gameSelector: string;
   isTimedChallengeRunning?: boolean;
 };
 
@@ -16,9 +17,13 @@ export default function GameSelector({
   setGameSelector,
   setGotRight,
   setGotWrong,
+  gameSelector,
   isTimedChallengeRunning,
 }: GameSelectorComponentTypes) {
-  const [alignment, setAlignment] = useState("addition");
+  const [alignment, setAlignment] = useState<GameSelectorType>("addition");
+
+  console.log("gameSelector: ", gameSelector);
+  console.log("alignment: ", alignment);
 
   const handleChange: ToggleButtonGroupProps["onChange"] = (
     _event,
@@ -36,6 +41,10 @@ export default function GameSelector({
     fontFamily: "Patrick Hand",
     textTransform: "none",
   };
+
+  useEffect(() => {
+    setGameSelector(alignment);
+  }, [alignment]);
 
   return (
     <>

@@ -92,6 +92,7 @@ function GameMath({
           setGameSelector={setGameSelector}
           setGotRight={setGotRight}
           setGotWrong={setGotWrong}
+          gameSelector={gameSelector}
         />
 
         <Slider

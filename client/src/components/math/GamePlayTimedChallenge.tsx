@@ -591,8 +591,6 @@ function GamePlayTimedChallenge({
     }
   };
 
-  console.log(gameSelector);
-
   return (
     <>
       <div className="gamePlayContainer-challenge">
