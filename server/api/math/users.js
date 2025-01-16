@@ -281,13 +281,13 @@ router.get("/timed-challenge/score-trending", verifyToken, async (req, res) => {
         level: parseInt(level),
       },
       orderBy: {
-        id: "desc",
+        id: "asc",
       },
       select: {
         timestamp: true,
         points_added: true,
       },
-      take: 20,
+      take: -20,
     });
 
     const formattedDates = last20Scores.map((date) => ({

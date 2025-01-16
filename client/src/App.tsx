@@ -20,7 +20,12 @@ import GameMath from "./pages/math/GameMath";
 import GameReading from "./pages/reading/GameReading";
 import Prompts from "./pages/reading/Prompts";
 
-const theme = createTheme();
+const theme = createTheme({
+  typography: {
+    fontFamily: "Patrick Hand",
+    fontSize: 13,
+  },
+});
 
 function App() {
   const storedToken = localStorage.getItem("token");

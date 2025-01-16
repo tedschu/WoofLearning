@@ -15,8 +15,10 @@ import {
   Legend,
   ChartOptions,
   TooltipItem,
+  LineElement,
+  PointElement,
 } from "chart.js";
-import { Bar } from "react-chartjs-2";
+import { Bar, Line } from "react-chartjs-2";
 import badge_1_1_bernese from "../assets/badges/badge_1_1_bernese.png";
 import badge_1_2_chihuahua from "../assets/badges/badge_1_2_chihuahua.png";
 import badge_1_3_waterdog from "../assets/badges/badge_1_3_waterdog.png";
@@ -41,6 +43,11 @@ import {
   CurrentApp,
 } from "../types/types";
 import { CircularProgress } from "@mui/material";
+import Box from "@mui/material/Box";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
 
 type MeProps = {
   userInfo: UserInfo;
@@ -91,10 +98,17 @@ type equationFeedback = {
   feedback: string;
 };
 
+type Last20ChallengeScores = {
+  dateTime: string;
+  points_added: number;
+};
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
   BarElement,
+  LineElement,
+  PointElement,
   Title,
   Tooltip,
   Legend
@@ -137,6 +151,15 @@ function Me({
   const [hasEvaluated, setHasEvaluated] = useState<boolean>(false);
   const [isAPICallInProgress, setIsAPICallInProgress] =
     useState<boolean>(false);
+
+  // State for MUI selectors (trend chart)
+  const [mathTypeSelector, setMathTypeSelector] = useState<string>("addition");
+  const [levelSelector, setLevelSelector] = useState<string>("1");
+
+  // state for last 20 challenge scores for trending charts
+  const [last20ChallengeScores, setLast20ChallengeScores] = useState<
+    Last20ChallengeScores[]
+  >([]);
 
   const storedToken = localStorage.getItem("token");
 
@@ -431,11 +454,12 @@ function Me({
     }
   };
 
+  // GETS DATA FROM LAST 20 CHALLENGES FOR A GIVEN USER (POPULATES THE LINE CHART)
   const getLast20Challenges = async () => {
     try {
       const queryParams = new URLSearchParams({
-        math_type: "addition",
-        level: "1",
+        math_type: mathTypeSelector,
+        level: levelSelector,
       });
 
       const response = await fetch(
@@ -458,10 +482,104 @@ function Me({
 
       const data = await response.json();
 
-      console.log(data);
+      setLast20ChallengeScores(data.formattedDates);
     } catch (error) {
       console.error("Error generating story:", error);
     }
+  };
+
+  // EVENT HANDLERS FOR math_type and level MUI SELECTORS (TRENDING CHART)
+  const handleChangeMathType = (event: SelectChangeEvent) => {
+    setMathTypeSelector(event.target.value as string);
+  };
+
+  const handleChangeMathLevel = (event: SelectChangeEvent) => {
+    setLevelSelector(event.target.value as string);
+  };
+
+  // useEffect to run "getLast20Challenges" every time a selector state value is changed (mathTypeSelector, levelSelector)
+  useEffect(() => {
+    getLast20Challenges();
+  }, [mathTypeSelector, levelSelector]);
+
+  const trendingChartData = {
+    labels: last20ChallengeScores.map((item) =>
+      new Date(item.dateTime).toLocaleDateString("en-US", {
+        dateStyle: "short",
+      })
+    ),
+    datasets: [
+      {
+        label: "Points",
+        data: last20ChallengeScores.map((item) => item.points_added),
+        borderColor: "#dd6e55",
+        borderWidth: 2,
+        pointRadius: 3,
+        tension: 0.4,
+        fill: false,
+        backgroundColor: "#dd6e55",
+      },
+    ],
+  };
+
+  const trendingChartOptions: ChartOptions<"line"> = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        display: true,
+      },
+      title: {
+        display: false,
+      },
+      tooltip: {
+        enabled: true,
+        mode: "index",
+        intersect: false,
+        callbacks: {
+          label: function (context: TooltipItem<"line">) {
+            return `Points: ${context.parsed.y}`;
+          },
+          title: function (context: TooltipItem<"line">[]) {
+            return `Date: ${context[0].label}`;
+          },
+        },
+        backgroundColor: "rgba(80, 80, 80, 0.8)",
+        padding: 12,
+        titleColor: "white",
+        titleFont: {
+          size: 14,
+          weight: "bold",
+        },
+        bodyColor: "white",
+        bodyFont: {
+          size: 16,
+        },
+        borderColor: "rgba(255, 255, 255, 0.2)",
+        borderWidth: 1,
+      },
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        title: {
+          display: false,
+          text: "Points",
+          font: {
+            size: 20,
+          },
+        },
+      },
+      x: {
+        title: {
+          display: true,
+          text: "Challenge date",
+          font: {
+            size: 20,
+          },
+        },
+      },
+    },
   };
 
   return (
@@ -527,7 +645,7 @@ function Me({
                     </Link>
                   </p>
                 </div>
-                <div className="chart">
+                <div className="barChart">
                   <Bar options={options} data={chartDataReading}></Bar>
                 </div>
               </div>
@@ -544,7 +662,7 @@ function Me({
                     </Link>
                   </p>
                 </div>
-                <div className="chart">
+                <div className="barChart">
                   <Bar options={options} data={chartDataMath} />
                 </div>
               </div>
@@ -605,9 +723,68 @@ function Me({
               {equationFeedback.feedback}
             </div>
 
-            <h3>See how you're progressing:</h3>
+            {last20ChallengeScores.length === 0 ? (
+              <>
+                <h3>Try a challenge at this level to see your progress</h3>
+              </>
+            ) : (
+              <>
+                <h3>
+                  See how you're progressing for the last{" "}
+                  {last20ChallengeScores.length} challenge(s):
+                </h3>
+              </>
+            )}
 
-            <div className="resultsChallenge ChartContainer">ai stuff</div>
+            <div className="resultsChallenge ChartContainer">
+              <div className="resultsChallenge-selectorContainer">
+                {/* MUI SELECTORS  */}
+                <Box sx={{ minWidth: 120 }}>
+                  <FormControl fullWidth>
+                    <InputLabel id="demo-simple-select-label">
+                      Kind of math
+                    </InputLabel>
+                    <Select
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      value={mathTypeSelector}
+                      label="Math operation"
+                      onChange={handleChangeMathType}
+                    >
+                      <MenuItem value={"addition"}>Addition</MenuItem>
+                      <MenuItem value={"subtraction"}>Subtraction</MenuItem>
+                      <MenuItem value={"multiplication"}>
+                        Multiplication
+                      </MenuItem>
+                      <MenuItem value={"division"}>Division</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Box>
+
+                <Box sx={{ minWidth: 120 }}>
+                  <FormControl fullWidth>
+                    <InputLabel id="demo-simple-select-label">Level</InputLabel>
+                    <Select
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      value={levelSelector}
+                      label="Math level"
+                      onChange={handleChangeMathLevel}
+                    >
+                      <MenuItem value={1}>Level 1</MenuItem>
+                      <MenuItem value={2}>Level 2</MenuItem>
+                      <MenuItem value={3}>Level 3</MenuItem>
+                      <MenuItem value={4}>Level 4</MenuItem>
+                      <MenuItem value={5}>Level 5</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Box>
+              </div>
+
+              <div className="lineChart">
+                <Line data={trendingChartData} options={trendingChartOptions} />
+              </div>
+            </div>
           </div>
 
           {/* CONTAINER FOR USER PERSONAL DATA AND USER FUNCTIONS (DELETE, CONTACT) */}

@@ -1783,6 +1783,7 @@ p {
   display: flex;
   flex-direction: column;
   width: 92%;
+  max-width: 1500px;
   border: 1px solid white;
   border-radius: 10px;
   background-color: white;
@@ -1833,7 +1834,7 @@ p {
   font-size: 28px;
 }
 
-.chart {
+.barChart {
   width: 100%;
   max-width: 800px;
 
@@ -2006,11 +2007,15 @@ p {
 }
 
 .resultsChallenge.ChartContainer {
-  width: 92%;
-  height: 100px;
-  background: blue;
+  width: 100%;
+  max-width: 1500px;
+  background-color: white;
   border-radius: 8px;
   color: gray;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .results-alert {
@@ -2018,6 +2023,21 @@ p {
   border: 1px solid lightgray;
   border-radius: 9px;
   padding: 3px 8px;
+}
+
+.resultsChallenge-selectorContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+  padding: 20px;
+}
+
+.lineChart {
+  width: 100%;
+  min-height: 350px;
+  padding: 5px;
+  border-radius: 8px;
 }
 
 /* ************************************************************ */
@@ -2418,6 +2438,10 @@ ul li {
 
   .resultsChallenge.resultsChallenge.SummaryData h4 {
     font-size: 30px;
+  }
+
+  .lineChart {
+    padding: 5px 20px 20px 20px;
   }
 }
 
