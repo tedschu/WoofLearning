@@ -283,11 +283,20 @@ router.get("/timed-challenge/score-trending", verifyToken, async (req, res) => {
       orderBy: {
         id: "desc",
       },
+      select: {
+        timestamp: true,
+        points_added: true,
+      },
       take: 20,
     });
 
+    const formattedDates = last20Scores.map((date) => ({
+      dateTime: date.timestamp.toLocaleString(),
+      points_added: date.points_added,
+    }));
+
     res.status(200).send({
-      last20Scores,
+      formattedDates,
     });
   } catch (error) {
     console.log(error);

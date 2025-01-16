@@ -142,14 +142,12 @@ function Me({
 
   const openChartModal = () => setIsChartModalOpen(true);
 
-  // ****** TESTING FOR PAGE LOAD VALUE THAT WILL PERSIST
-  // const [pageLoadCount, setPageLoadCount]  // will need to set this in App.tsx
-
   // RUNS ON PAGE LOAD TO GET CHALLENGE SUMMARY AND ANTHROPIC DATA
   useEffect(() => {
     getChallengeSummaryData();
     getLastTenChallengeIncorrectResponses();
     setIsAPICallInProgress(true);
+    getLast20Challenges();
   }, []);
 
   // RUNS AFTER getLastTenChallengeIncorrectResposes RETURNS (hits Anthropic API)
@@ -433,7 +431,38 @@ function Me({
     }
   };
 
-  // console.log(currentApp);
+  const getLast20Challenges = async () => {
+    try {
+      const queryParams = new URLSearchParams({
+        math_type: "addition",
+        level: "1",
+      });
+
+      const response = await fetch(
+        `/api/users-math/timed-challenge/score-trending?${queryParams.toString()}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${storedToken}`,
+          },
+        }
+      );
+
+      if (!response.ok) {
+        const textResponse = await response.text();
+        console.error("Server response:", textResponse);
+        console.log("Status:", response.status);
+        throw new Error("Failed grab the data");
+      }
+
+      const data = await response.json();
+
+      console.log(data);
+    } catch (error) {
+      console.error("Error generating story:", error);
+    }
+  };
 
   return (
     <>
