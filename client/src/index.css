@@ -2443,6 +2443,10 @@ ul li {
   .lineChart {
     padding: 5px 20px 20px 20px;
   }
+
+  .resultsChallenge.ChartContainer {
+    width: 92%;
+  }
 }
 
 /* SCREEN IS ABOVE 900px (desktop) */
