@@ -148,8 +148,6 @@ function App() {
   // IF token exists: update setters (isLoggedIn, badges, userscore, userId)
   // IF token doesn't exist, navigate to /login
 
-  // TODO: UPDATE FUNCTION TO LOAD STATE VALUES FOR MATH AND READING SCORES / BADGES / LEVELS (FOR EACH)
-
   useEffect(() => {
     if (storedToken) {
       setIsLoggedIn(true);

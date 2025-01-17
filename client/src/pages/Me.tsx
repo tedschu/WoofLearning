@@ -167,20 +167,27 @@ function Me({
 
   // RUNS ON PAGE LOAD TO GET CHALLENGE SUMMARY AND ANTHROPIC DATA
   useEffect(() => {
+    setIsAPICallInProgress(true);
+
     getChallengeSummaryData();
     getLastTenChallengeIncorrectResponses();
-    setIsAPICallInProgress(true);
+
     getLast20Challenges();
   }, []);
 
   // RUNS AFTER getLastTenChallengeIncorrectResposes RETURNS (hits Anthropic API)
   useEffect(() => {
-    if (
-      incorrectEquationsData?.incorrectEquationsLastTen?.length > 0 &&
-      !hasEvaluated
-    ) {
-      evaluateEquations();
-      setHasEvaluated(true);
+    if (incorrectEquationsData) {
+      // Data has returned, so API call is complete
+      setIsAPICallInProgress(false);
+
+      if (
+        incorrectEquationsData.incorrectEquationsLastTen?.length > 0 &&
+        !hasEvaluated
+      ) {
+        evaluateEquations();
+        setHasEvaluated(true);
+      }
     }
   }, [incorrectEquationsData]);
 
@@ -383,8 +390,9 @@ function Me({
       );
 
       const data = await response.json();
+      // console.log(data.totalChallenges);
 
-      if (response.ok) {
+      if (response.ok && data.totalChallenges > 0) {
         setChallengeSummaryData({
           totalChallenges: data.totalChallenges,
           mostFrequentChallenge: data.mostFrequentChallenge.math_type,
@@ -424,6 +432,7 @@ function Me({
 
   // API call to Anthropic endpoint to return feedback on incorrect responses
   const evaluateEquations = async () => {
+    console.log(isAPICallInProgress);
     try {
       const response = await fetch("/anthropic/evaluate_incorrect_responses", {
         method: "POST",
@@ -440,11 +449,11 @@ function Me({
       }
 
       const data = await response.json();
-      // console.log(data);
-
       // Sets API response data into equationFeedback state
-      setIsAPICallInProgress(false);
-      setEquationFeedback(data);
+      if (response.ok) {
+        setEquationFeedback(data);
+        setIsAPICallInProgress(false);
+      }
 
       //return await response.json();
     } catch (error) {
@@ -692,6 +701,9 @@ function Me({
                 <div className="resultsChallenge SummaryData">
                   <p> You've mostly done </p>
                   <h4>{challengeSummaryData.mostFrequentChallenge}</h4>
+                  {challengeSummaryData.totalChallenges === 0 && (
+                    <p>(...this might say, "addition")</p>
+                  )}
                 </div>
               </div>
               <div className="resultsChallenge SummaryData-split">
