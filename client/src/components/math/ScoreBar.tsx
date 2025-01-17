@@ -74,7 +74,7 @@ function ScoreBar({
                       : "badgeDisabled"
                   }
                 />
-                <h3>100</h3>
+                <h3>250</h3>
               </div>
               <div className="eachBadge">
                 <img
@@ -86,7 +86,7 @@ function ScoreBar({
                       : "badgeDisabled"
                   }
                 />
-                <h3>250</h3>
+                <h3>500</h3>
               </div>
               <div className="eachBadge">
                 <img
@@ -98,7 +98,7 @@ function ScoreBar({
                       : "badgeDisabled"
                   }
                 />
-                <h3>500</h3>
+                <h3>1000</h3>
               </div>
               <div className="eachBadge">
                 <img
@@ -110,7 +110,7 @@ function ScoreBar({
                       : "badgeDisabled"
                   }
                 />
-                <h3>1,000</h3>
+                <h3>2,000</h3>
               </div>
               <div className="eachBadge">
                 <img
@@ -122,7 +122,7 @@ function ScoreBar({
                       : "badgeDisabled"
                   }
                 />
-                <h3>250 each</h3>
+                <h3>500 each</h3>
               </div>
               <div className="eachBadge">
                 <img
@@ -134,7 +134,7 @@ function ScoreBar({
                       : "badgeDisabled"
                   }
                 />
-                <h3>2,000</h3>
+                <h3>3,000</h3>
               </div>
               <div className="eachBadge">
                 <img
@@ -146,7 +146,7 @@ function ScoreBar({
                       : "badgeDisabled"
                   }
                 />
-                <h3>500 each</h3>
+                <h3>1,000 each</h3>
               </div>
               <div className="eachBadge">
                 <img
@@ -158,7 +158,7 @@ function ScoreBar({
                       : "badgeDisabled"
                   }
                 />
-                <h3>3,000</h3>
+                <h3>6,000</h3>
               </div>
             </>
           ) : (
@@ -174,7 +174,7 @@ function ScoreBar({
                       : "badgeDisabled"
                   }
                 />
-                <h3>3,250</h3>
+                <h3>6,250</h3>
               </div>
               <div className="eachBadge">
                 <img
@@ -186,7 +186,7 @@ function ScoreBar({
                       : "badgeDisabled"
                   }
                 />
-                <h3>4,000</h3>
+                <h3>7,000</h3>
               </div>
               <div className="eachBadge">
                 <img
@@ -198,7 +198,7 @@ function ScoreBar({
                       : "badgeDisabled"
                   }
                 />
-                <h3>5,000</h3>
+                <h3>8,000</h3>
               </div>
               <div className="eachBadge">
                 <img
@@ -210,7 +210,7 @@ function ScoreBar({
                       : "badgeDisabled"
                   }
                 />
-                <h3>6,000</h3>
+                <h3>10,000</h3>
               </div>
               <div className="eachBadge">
                 <img
@@ -222,7 +222,7 @@ function ScoreBar({
                       : "badgeDisabled"
                   }
                 />
-                <h3>7,000</h3>
+                <h3>12,000</h3>
               </div>
               <div className="eachBadge">
                 <img
@@ -234,7 +234,7 @@ function ScoreBar({
                       : "badgeDisabled"
                   }
                 />
-                <h3>8,000</h3>
+                <h3>15,000</h3>
               </div>
               <div className="eachBadge">
                 <img
@@ -246,7 +246,7 @@ function ScoreBar({
                       : "badgeDisabled"
                   }
                 />
-                <h3>10,000</h3>
+                <h3>20,000</h3>
               </div>
               <div className="eachBadge">
                 <img
@@ -258,7 +258,7 @@ function ScoreBar({
                       : "badgeDisabled"
                   }
                 />
-                <h3>15,000</h3>
+                <h3>25,000</h3>
               </div>
             </>
           )}

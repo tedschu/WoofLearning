@@ -153,43 +153,43 @@ function GamePlay({
     setUserMathBadges((prevBadges) => {
       const updatedBadges: Partial<UserMathBadges> = {};
 
-      if (newTotalScore >= 100 && !userMathBadges.badge_1_1_bernese) {
+      if (newTotalScore >= 250 && !userMathBadges.badge_1_1_bernese) {
         updatedBadges.badge_1_1_bernese = true;
         setModalBadge("badge_1_1_bernese");
-      } else if (newTotalScore >= 250 && !userMathBadges.badge_1_2_chihuahua) {
+      } else if (newTotalScore >= 500 && !userMathBadges.badge_1_2_chihuahua) {
         updatedBadges.badge_1_2_chihuahua = true;
         setModalBadge("badge_1_2_chihuahua");
-      } else if (newTotalScore >= 500 && !userMathBadges.badge_1_3_waterdog) {
+      } else if (newTotalScore >= 1000 && !userMathBadges.badge_1_3_waterdog) {
         updatedBadges.badge_1_3_waterdog = true;
         setModalBadge("badge_1_3_waterdog");
-      } else if (newTotalScore >= 1000 && !userMathBadges.badge_1_4_boxer) {
+      } else if (newTotalScore >= 2000 && !userMathBadges.badge_1_4_boxer) {
         updatedBadges.badge_1_4_boxer = true;
         setModalBadge("badge_1_4_boxer");
-      } else if (
-        newTotalScore >= 1000 &&
-        newUserScore.addition_score >= 250 &&
-        newUserScore.subtraction_score >= 250 &&
-        newUserScore.multiplication_score >= 250 &&
-        newUserScore.division_score >= 250 &&
-        !userMathBadges.badge_1_5_husky
-      ) {
-        updatedBadges.badge_1_5_husky = true;
-        setModalBadge("badge_1_5_husky");
-      } else if (newTotalScore >= 2000 && !userMathBadges.badge_1_6_golden) {
-        updatedBadges.badge_1_6_golden = true;
-        setModalBadge("badge_1_6_golden");
       } else if (
         newTotalScore >= 2000 &&
         newUserScore.addition_score >= 500 &&
         newUserScore.subtraction_score >= 500 &&
         newUserScore.multiplication_score >= 500 &&
         newUserScore.division_score >= 500 &&
+        !userMathBadges.badge_1_5_husky
+      ) {
+        updatedBadges.badge_1_5_husky = true;
+        setModalBadge("badge_1_5_husky");
+      } else if (newTotalScore >= 3000 && !userMathBadges.badge_1_6_golden) {
+        updatedBadges.badge_1_6_golden = true;
+        setModalBadge("badge_1_6_golden");
+      } else if (
+        newTotalScore >= 4000 &&
+        newUserScore.addition_score >= 1000 &&
+        newUserScore.subtraction_score >= 1000 &&
+        newUserScore.multiplication_score >= 1000 &&
+        newUserScore.division_score >= 1000 &&
         !userMathBadges.badge_1_7_cat
       ) {
         updatedBadges.badge_1_7_cat = true;
         setModalBadge("badge_1_7_cat");
       } else if (
-        newTotalScore >= 3000 &&
+        newTotalScore >= 6000 &&
         !userMathBadges.badge_1_8_goldendoodle
       ) {
         updatedBadges.badge_1_8_goldendoodle = true;
@@ -201,33 +201,33 @@ function GamePlay({
           math_level: 2,
         }));
       } else if (
-        newTotalScore >= 3250 &&
+        newTotalScore >= 6250 &&
         !userMathBadges.badge_2_1_borderCollie
       ) {
         updatedBadges.badge_2_1_borderCollie = true;
         setModalBadge("badge_2_1_borderCollie");
-      } else if (newTotalScore >= 4000 && !userMathBadges.badge_2_2_terrier) {
+      } else if (newTotalScore >= 7000 && !userMathBadges.badge_2_2_terrier) {
         updatedBadges.badge_2_2_terrier = true;
         setModalBadge("badge_2_2_terrier");
       } else if (
-        newTotalScore >= 5000 &&
+        newTotalScore >= 8000 &&
         !userMathBadges.badge_2_3_australianShepherd
       ) {
         updatedBadges.badge_2_3_australianShepherd = true;
         setModalBadge("badge_2_3_australianShepherd");
-      } else if (newTotalScore >= 6000 && !userMathBadges.badge_2_4_shibaInu) {
+      } else if (newTotalScore >= 10000 && !userMathBadges.badge_2_4_shibaInu) {
         updatedBadges.badge_2_4_shibaInu = true;
         setModalBadge("badge_2_4_shibaInu");
-      } else if (newTotalScore >= 7000 && !userMathBadges.badge_2_5_cat) {
+      } else if (newTotalScore >= 12000 && !userMathBadges.badge_2_5_cat) {
         updatedBadges.badge_2_5_cat = true;
         setModalBadge("badge_2_5_cat");
-      } else if (newTotalScore >= 8000 && !userMathBadges.badge_2_6_bernese) {
+      } else if (newTotalScore >= 15000 && !userMathBadges.badge_2_6_bernese) {
         updatedBadges.badge_2_6_bernese = true;
         setModalBadge("badge_2_6_bernese");
-      } else if (newTotalScore >= 10000 && !userMathBadges.badge_2_7_poodle) {
+      } else if (newTotalScore >= 20000 && !userMathBadges.badge_2_7_poodle) {
         updatedBadges.badge_2_7_poodle = true;
         setModalBadge("badge_2_7_poodle");
-      } else if (newTotalScore >= 15000 && !userMathBadges.badge_2_8_golden) {
+      } else if (newTotalScore >= 25000 && !userMathBadges.badge_2_8_golden) {
         updatedBadges.badge_2_8_golden = true;
         setModalBadge("badge_2_8_golden");
       }
