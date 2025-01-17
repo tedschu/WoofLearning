@@ -432,7 +432,6 @@ function Me({
 
   // API call to Anthropic endpoint to return feedback on incorrect responses
   const evaluateEquations = async () => {
-    console.log(isAPICallInProgress);
     try {
       const response = await fetch("/anthropic/evaluate_incorrect_responses", {
         method: "POST",
