@@ -175,14 +175,14 @@ function About({ isLoggedIn }: AboutProps) {
           <p>
             Woof Learning does ask for a reasonable amount of personal
             information during the sign up (account creation) process, which is
-            detailed below, in order to operate the Woof Reading game. Note that
-            none of this data is shared with Anthropic ("Claude").
+            detailed below, in order to operate the Woof Learning games. Note
+            that none of this data is shared with Anthropic ("Claude").
           </p>
           <p>
             You may both review all information that you've shared with Woof
             Reading at any time (in the Account page), and you may also delete
             your Woof Reading account at any time, which will permanently remove
-            all information shared with Woof Reading as well as other data such
+            all information shared with Woof Learning as well as other data such
             as your scores.
           </p>
 
