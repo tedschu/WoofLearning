@@ -676,9 +676,7 @@ function Me({
               </div>
             </div>
           </div>
-
           {/* CONTAINER FOR MATH TIMED CHALLENGE RESULTS AND AI RESPONSE */}
-
           <div className="accountContentContainer" id="challengeResultsId">
             <h2>
               Your timed challenge results:
@@ -797,7 +795,6 @@ function Me({
               </div>
             </div>
           </div>
-
           {/* CONTAINER FOR USER PERSONAL DATA AND USER FUNCTIONS (DELETE, CONTACT) */}
           <div className="accountContentContainer">
             <h2>Here are your details:</h2>
@@ -874,6 +871,10 @@ function Me({
             </Link>
             .
           </p>
+
+          <Link to={"/Connect"} className="connectLink">
+            4
+          </Link>
         </div>
       </div>
     </>

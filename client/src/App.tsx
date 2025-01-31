@@ -19,6 +19,7 @@ import AppSelector from "./pages/AppSelector";
 import GameMath from "./pages/math/GameMath";
 import GameReading from "./pages/reading/GameReading";
 import Prompts from "./pages/reading/Prompts";
+import Connect from "./pages/Connect";
 
 const theme = createTheme({
   typography: {
@@ -337,6 +338,7 @@ function App() {
             path="/prompts"
             element={<Prompts isLoggedIn={isLoggedIn} />}
           />
+          <Route path="/connect" element={<Connect />} />
         </Routes>
       </ThemeProvider>
     </>

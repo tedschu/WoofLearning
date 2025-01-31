@@ -2307,6 +2307,119 @@ ul li {
   color: #0085bd;
 }
 
+/* *************************************************** */
+/* Keyframes */
+
+.connectContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  gap: 25px;
+
+  background-image: linear-gradient(
+    #d4492b,
+    #d4492b,
+    #e1684c,
+    #169dd6,
+    #0085bd,
+    #006e9e
+  );
+}
+
+.connectGameBoard {
+  display: grid;
+  grid-template-columns: repeat(10, 33px);
+  border: 5px solid black;
+  border-top: none;
+  box-shadow: 0 3px 8px gray;
+  background-color: white;
+}
+
+.connectSquare {
+  aspect-ratio: 1;
+  border: 1px solid rgb(213, 213, 213);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.connectBlue {
+  font-size: 20px;
+  color: blue;
+}
+
+.connectRed {
+  font-size: 20px;
+  color: red;
+}
+
+.connectGreen {
+  color: green;
+}
+
+.connectAlertBlue {
+  width: 250px;
+  font-size: 35px;
+  background-color: blue;
+  text-align: center;
+  padding: 5px;
+  border-radius: 6px;
+  color: white;
+  border: 1px solid rgb(56, 66, 180);
+}
+
+.connectAlertRed {
+  width: 250px;
+  font-size: 35px;
+  background-color: red;
+  text-align: center;
+  padding: 5px;
+  border-radius: 6px;
+  color: white;
+  border: 1px solid rgb(229, 148, 148);
+}
+
+.connectNewGameButton {
+  border: none;
+  padding: 10px;
+  color: white;
+  background: green;
+  border: 3px solid darkgreen;
+  border-radius: 7px;
+  font-size: 18px;
+}
+
+.connectScoreboard {
+  display: flex;
+  width: 300px;
+  justify-content: space-around;
+  border-radius: 6px;
+  /* background-color: #0085bd; */
+  box-shadow: 0 3px 8px rgb(177, 177, 177);
+  padding: 10px 0;
+  background-color: white;
+}
+
+.connectScore {
+  font-size: 30px;
+}
+
+.connectLink {
+  color: rgb(110, 110, 249);
+}
+
+.connectLinkBack {
+  color: white;
+  background-color: #d4492b;
+  width: 100%;
+  display: flex;
+  padding-left: 10px;
+  font-size: 18px;
+}
+
+/* *************************************************** */
 /* Keyframes */
 @keyframes wiggle {
   0%,
@@ -2446,6 +2559,18 @@ ul li {
 
   .resultsChallenge.ChartContainer {
     width: 92%;
+  }
+
+  .connectGameBoard {
+    grid-template-columns: repeat(10, 50px);
+  }
+
+  .connectBlue {
+    font-size: 35px;
+  }
+
+  .connectRed {
+    font-size: 35px;
   }
 }
 
