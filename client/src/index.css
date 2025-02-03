@@ -722,10 +722,9 @@ button {
 }
 
 .catSecretLink {
-  position: absolute;
-  bottom: 0;
-  left: 5px;
+  margin-top: 20px;
 }
+
 .catLink {
   width: 35px;
 }
@@ -2611,6 +2610,13 @@ ul li {
 /* ********** */
 /* MEDIA QUERIES FOR DESKTOP SIZING */
 
+@media screen and (min-height: 650px) {
+  .catSecretLink {
+    position: absolute;
+    bottom: 0;
+  }
+}
+
 /* SCREEN IS ABOVE 550px (e.g. tablet) */
 @media screen and (min-width: 550px) {
   .eachBadge > img {
@@ -2721,12 +2727,6 @@ ul li {
 
   .connectRed {
     font-size: 35px;
-  }
-
-  .catSecretLink {
-    position: absolute;
-    bottom: 0;
-    left: auto;
   }
 }
 
