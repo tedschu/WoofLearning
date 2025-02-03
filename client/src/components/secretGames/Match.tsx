@@ -46,10 +46,12 @@ function Match() {
     setRandomArray(tempNewArray);
   }
 
+  console.log(hasClickedArray[1]);
+
   // Update gameBoardArray with the value / index from randomArray when a user clicks
   // Check for a match. IF a match, increment state value
   const handleCardClick = (cardNumber, index) => {
-    if (isProcessing) return;
+    if (isProcessing || hasClickedArray[index]) return;
 
     setClickCount((prevCount) => prevCount + 1);
     // Updates the index values of the cards that have been clicked (used in checkMatch function)
