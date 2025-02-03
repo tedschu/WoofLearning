@@ -2610,7 +2610,7 @@ ul li {
 /* ********** */
 /* MEDIA QUERIES FOR DESKTOP SIZING */
 
-@media screen and (min-height: 650px) {
+@media screen and (min-height: 950px) {
   .catSecretLink {
     position: absolute;
     bottom: 0;
