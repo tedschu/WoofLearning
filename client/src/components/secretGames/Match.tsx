@@ -108,10 +108,10 @@ function Match() {
 
   return (
     <>
-      <Link to={"/secretGames"} className="connectLinkBack">
-        Back
-      </Link>
       <div className="matchContainer">
+        <Link to={"/secretGames"} className="connectLinkBack">
+          Back
+        </Link>
         {gameInProgress && (
           <div className="matchGameBoard">
             {randomArray.map((number, index) => {

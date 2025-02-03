@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import React, { useEffect } from "react";
 import { CurrentApp, UserInfo } from "../types/types";
 import woofMathLogo from "./../assets/woofmath_logo_1.png";
+import cat from "../assets/badges/badge_2_5_cat.png";
+import { Link } from "react-router-dom";
 
 type AppSelectorProps = {
   currentApp: CurrentApp;
@@ -98,6 +100,11 @@ function AppSelector({
               Log out
             </button>
           </div>
+        </div>
+        <div className="catSecretLink">
+          <Link to={"/secretGames"}>
+            <img src={cat} alt="" className="catLink" />
+          </Link>
         </div>
       </div>
     </>
