@@ -103,11 +103,9 @@ function Connect() {
     }
   }
 
-  console.log(winningLineArray);
-
   return (
     <>
-      <Link to={"/me"} className="connectLinkBack">
+      <Link to={"/secretGames"} className="connectLinkBack">
         Back
       </Link>
       <div className="connectContainer">

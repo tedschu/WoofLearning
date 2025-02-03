@@ -2317,15 +2317,6 @@ ul li {
   align-items: center;
   min-height: 100vh;
   gap: 25px;
-
-  background-image: linear-gradient(
-    #d4492b,
-    #d4492b,
-    #e1684c,
-    #169dd6,
-    #0085bd,
-    #006e9e
-  );
 }
 
 .connectGameBoard {
@@ -2406,17 +2397,23 @@ ul li {
   font-size: 30px;
 }
 
+.secretLink {
+  font-size: 20px;
+  color: purple;
+}
+
 .connectLink {
-  color: rgb(110, 110, 249);
+  color: white;
+  font-size: 35px;
 }
 
 .connectLinkBack {
-  color: white;
-  background-color: #d4492b;
+  color: black;
   width: 100%;
   display: flex;
   padding-left: 10px;
   font-size: 18px;
+  padding: 10px 0 0 10px;
 }
 
 /* *************************************************** */
@@ -2455,6 +2452,86 @@ ul li {
   cursor: pointer;
   width: 100px;
   box-shadow: 2px 2px 8px rgb(220, 220, 220);
+}
+
+/* ************************************* */
+/* MATCH GAME STYLING */
+
+.matchContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.matchGameBoard {
+  display: grid;
+  border: 1px solid lightgray;
+  width: 70%;
+  min-width: 300px;
+  max-width: 700px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 10px;
+  padding: 10px;
+  box-sizing: border-box;
+  box-shadow: 0px 3px 8px lightgray;
+}
+
+.matchCard {
+  border: 1px solid rgb(37, 110, 178);
+  aspect-ratio: 1;
+  background-color: rgb(94, 159, 220);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 50px;
+}
+
+.matchPickedCard {
+  background-color: white;
+}
+
+.matchWinner {
+  background-color: green;
+  border-radius: 8px;
+  padding: 20px 40px;
+  color: white;
+  font-size: 30px;
+}
+
+.matchStartGameButton {
+  padding: 10px;
+  border-radius: 5px;
+  border: 2px solid rgb(94, 159, 220);
+  background-color: rgb(37, 110, 178);
+  color: white;
+  font-size: 20px;
+}
+
+/* *************************************** */
+/* SECRET GAMES PAGE STYLING */
+.secretGamesContainer {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+}
+
+.secretGameBox {
+  width: 200px;
+  background-color: yellow;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: #0085bd;
+  border: 2px solid #36aee1;
+  border-radius: 7px;
 }
 
 /* ***************** */

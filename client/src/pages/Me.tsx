@@ -872,7 +872,7 @@ function Me({
             .
           </p>
 
-          <Link to={"/Connect"} className="connectLink">
+          <Link to={"/secretGames"} className="secretLink">
             4
           </Link>
         </div>

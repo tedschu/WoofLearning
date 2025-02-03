@@ -19,7 +19,10 @@ import AppSelector from "./pages/AppSelector";
 import GameMath from "./pages/math/GameMath";
 import GameReading from "./pages/reading/GameReading";
 import Prompts from "./pages/reading/Prompts";
-import Connect from "./pages/Connect";
+
+import SecretGames from "./pages/SecretGames";
+import Match from "./components/secretGames/Match";
+import Connect from "./components/secretGames/Connect";
 
 const theme = createTheme({
   typography: {
@@ -339,6 +342,8 @@ function App() {
             element={<Prompts isLoggedIn={isLoggedIn} />}
           />
           <Route path="/connect" element={<Connect />} />
+          <Route path="/match" element={<Match />} />
+          <Route path="/secretGames" element={<SecretGames />} />
         </Routes>
       </ThemeProvider>
     </>
