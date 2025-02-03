@@ -2521,7 +2521,7 @@ ul li {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 50px;
+  font-size: 40px;
   border-radius: 5px;
 }
 
@@ -2875,6 +2875,10 @@ ul li {
 
   .levelHelpModalOverlay {
     align-items: center;
+  }
+
+  .matchCard {
+    font-size: 50px;
   }
 }
 
