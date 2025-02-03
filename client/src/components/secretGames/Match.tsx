@@ -28,6 +28,7 @@ function Match() {
   const [matches, setMatches] = useState(0); // IF matches === 8, the user wins
   const [hasWinner, setHasWinner] = useState(false);
   const [guesses, setGuesses] = useState(0);
+  const [isProcessing, setIsProcessing] = useState(false);
 
   const gameArray = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8];
 
@@ -48,6 +49,8 @@ function Match() {
   // Update gameBoardArray with the value / index from randomArray when a user clicks
   // Check for a match. IF a match, increment state value
   const handleCardClick = (cardNumber, index) => {
+    if (isProcessing) return;
+
     setClickCount((prevCount) => prevCount + 1);
     // Updates the index values of the cards that have been clicked (used in checkMatch function)
     const tempIndexArray = [...clickedIndex];
@@ -61,6 +64,7 @@ function Match() {
 
     // when clickCount === 1 (second click), we want to: run checkMatch function, IF a match keep cards "true", if not set to "false" after 1 second
     if (clickCount === 1) {
+      setIsProcessing(true);
       checkMatch(tempIndexArray);
 
       setClickCount(0);
@@ -74,6 +78,7 @@ function Match() {
 
     if (randomArray[clickedIndexes[0]] === randomArray[clickedIndexes[1]]) {
       setMatches((prev) => prev + 1);
+      setIsProcessing(false);
     } else {
       // IF not a match, make sure that setHasClickedArray sets both indexes back to "false" so that they aren't visible anymore
 
@@ -82,6 +87,7 @@ function Match() {
         tempArray[clickedIndexes[0]] = false;
         tempArray[clickedIndexes[1]] = false;
         setHasClickedArray(tempArray);
+        setIsProcessing(false);
       }, 1000);
     }
   }
