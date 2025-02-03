@@ -138,14 +138,17 @@ function Match() {
           </div>
         )}
         {!gameInProgress && (
-          <div className="matchStartGameButtonContainer">
-            <button
-              className="matchStartGameButton"
-              onClick={() => handleGameClick()}
-            >
-              Start new game
-            </button>
-          </div>
+          <>
+            <h2 className="matchHeader">Find all the matching pairs to win!</h2>
+            <div className="matchStartGameButtonContainer">
+              <button
+                className="matchStartGameButton"
+                onClick={() => handleGameClick()}
+              >
+                Start new game
+              </button>
+            </div>
+          </>
         )}
         {hasWinner && (
           <div className="matchWinner">You won in {guesses} guesses!</div>

@@ -2341,6 +2341,10 @@ ul li {
   font-family: "Chicle";
 }
 
+.connectHeader {
+  color: white;
+}
+
 .connectGameBoard {
   display: grid;
   grid-template-columns: repeat(10, 33px);
@@ -2540,6 +2544,10 @@ ul li {
   background-color: rgb(37, 110, 178);
   color: white;
   font-size: 20px;
+}
+
+.matchHeader {
+  color: white;
 }
 
 /* *************************************** */
