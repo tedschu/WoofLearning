@@ -2333,7 +2333,6 @@ ul li {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  gap: 25px;
   background: linear-gradient(to bottom, #642a9a, #ec1b77, #309eb6);
 }
 
@@ -2343,6 +2342,11 @@ ul li {
 
 .connectHeader {
   color: white;
+}
+
+.connectContainer > p {
+  color: white;
+  font-size: 15px;
 }
 
 .connectGameBoard {
@@ -2385,6 +2389,7 @@ ul li {
   border-radius: 6px;
   color: white;
   border: 1px solid rgb(56, 66, 180);
+  margin: 10px 0;
 }
 
 .connectAlertRed {
@@ -2396,6 +2401,7 @@ ul li {
   border-radius: 6px;
   color: white;
   border: 1px solid rgb(229, 148, 148);
+  margin: 10px 0;
 }
 
 .connectNewGameButton {
@@ -2417,6 +2423,7 @@ ul li {
   box-shadow: 0 3px 8px rgb(177, 177, 177);
   padding: 10px 0;
   background-color: white;
+  margin: 20px 0;
 }
 
 .connectScore {
