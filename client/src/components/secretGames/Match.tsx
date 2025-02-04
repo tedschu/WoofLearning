@@ -107,6 +107,7 @@ function Match() {
     setHasClickedArray(Array(16).fill(false));
     randomizeArray(gameArray); // This should instead run on page load AND when user hits "start new game"
     setHasWinner(false);
+    setGuesses(0);
   };
 
   // Start new game button creates randomArray
