@@ -109,7 +109,9 @@ function Connect() {
         Back
       </Link>
       <div className="connectContainer">
-        <h2 className="connectHeader">Get four in a row, and win!</h2>
+        <h2 className="connectHeader">
+          Get four in a row, and win! (2 player game)
+        </h2>
         <div className="connectScoreboard">
           <div className="connectScore connectBlue">
             Blue: {playerWins.Player1}

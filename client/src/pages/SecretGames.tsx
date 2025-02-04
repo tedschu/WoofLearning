@@ -19,7 +19,7 @@ function SecretGames() {
         <p>Choose a game below:</p>
         <div className="secretGameBox">
           <Link to={"/connect"} className="connectLink">
-            Connect 4
+            Connect
           </Link>
         </div>
         <div className="secretGameBox">
