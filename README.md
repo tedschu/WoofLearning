@@ -25,3 +25,7 @@ Woof Learning (woof-learning.com) is a full-stack learning application for kids 
 - [Database schema] (docs/schema.md)
 - [Game logic] (docs/gameLogic.md)
 - [Security practices] (docs/security.md)
+
+# Demo and technical overview
+[![Woof Learning Demo & Technical Overview](https://i9.ytimg.com/vi_webp/Toayn-lV-c4/mq1.webp?sqp=CIzgjb0G-oaymwEmCMACELQB8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGB4gXihyMA8=&rs=AOn4CLBHTjGOcRBZi7FQlPcTYEIFYEiS8A)](https://youtu.be/Toayn-lV-c4)
+
