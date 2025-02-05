@@ -1,6 +1,6 @@
 # Woof Learning
 
-Woof Learning ([woof-learning.com](woof-learning.com)) is a full-stack learning application for kids with math and reading games, built using the PERN (PostreSQL, Express, React, Node.js) stack and Typescript. Other domains (woofreading.com, woofmath.com) are also forwarded to woof-learning.com.
+Woof Learning ([woof-learning.com](http://woof-learning.com)) is a full-stack learning application for kids with math and reading games, built using the PERN (PostreSQL, Express, React, Node.js) stack and Typescript. Other domains (woofreading.com, woofmath.com) are also forwarded to woof-learning.com.
 
 # Features
 
