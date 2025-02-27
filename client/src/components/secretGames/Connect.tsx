@@ -23,6 +23,7 @@ function Connect() {
   // Component structure:
   // reversed array(100) representing boxes
   // CSS grid structure 10x10
+  //
 
   const [playerTurn, setPlayerTurn] = useState(1);
   const [gameInProgress, setGameInProgress] = useState(true);
@@ -46,7 +47,16 @@ function Connect() {
     [-11, -22, -33],
     [-1, -2, -3],
     [9, 18, 27],
+    [-1, 1, 2],
+    [-2, -1, 1],
+    [9, 18, -9],
+    [9, -9, -18],
+    [11, 22, -11],
+    [11, -11, -22],
   ];
+
+  // Needs to account for winningLines when the last piece added is in the middle (the lines above assume the winning piece is at the end or front)
+  //
 
   function handleClick(index) {
     // Save the value of the player (1 or 2) into moves array / state value
