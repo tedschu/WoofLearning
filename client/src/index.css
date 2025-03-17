@@ -781,6 +781,10 @@ button {
   text-align: right;
 }
 
+.navUser img {
+  width: 55px;
+}
+
 .navUser > h4 {
   font-size: 17px;
 }

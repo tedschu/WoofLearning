@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import woofMathLogo from "../assets/woofmath_logo_1.png";
 import { CurrentApp, UserInfo } from "../types/types";
+import MenuIcon from "@mui/icons-material/Menu";
 
 type NavTypes = {
   isLoggedIn: boolean;
@@ -19,15 +20,16 @@ function Nav({ isLoggedIn, userInfo, currentApp }: NavTypes) {
             : "nav-base nav-reading"
         }
       >
-        <Link to={"/"} className="navLogo">
-          <img src={woofMathLogo} alt="" />
-        </Link>
+        <div className="navLogo">
+          {" "}
+          <img src={`../../avatars/${userInfo.avatar_name}.png`} alt="" />
+        </div>
 
         <div className="navTitle">{currentApp}</div>
 
         {isLoggedIn && userInfo && userInfo.username && (
           <Link to={"/me"} className="navUser">
-            <h4>Hello, {userInfo.username}!</h4>
+            <MenuIcon />
           </Link>
         )}
       </nav>
