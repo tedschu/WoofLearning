@@ -1777,6 +1777,14 @@ p {
 
 .avatarContainer img {
   width: 150px;
+  cursor: pointer;
+}
+
+.avatarSelected {
+}
+
+.avatarNotSelected img {
+  background-color: black;
 }
 
 /* ************************************************************ */
