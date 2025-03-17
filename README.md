@@ -9,6 +9,7 @@ Woof Learning ([woof-learning.com](http://woof-learning.com)) is a full-stack le
 - Reading game: AI-generated short stories + questions testing reading comprehension; AI-powered evaluation of user answers with conversational feedback to user
 - Ability to track in-game progress through points and badges
 - Responsive design for all devices
+- Avatar selection (coming soon)
 
 # Quick start to run locally
 
