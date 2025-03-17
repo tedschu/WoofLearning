@@ -23,8 +23,6 @@ type BadgeModalTypes = {
   modalBadge: ModalBadgeType;
 };
 
-// TODO: UPDATE SWITCH TO INCLUDE NEW BADGES
-
 function BadgeModal({ isModalOpen, closeModal, modalBadge }: BadgeModalTypes) {
   if (!isModalOpen) return null;
 

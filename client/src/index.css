@@ -1762,6 +1762,23 @@ p {
   color: rgb(140, 140, 140);
   font-style: italic;
 }
+
+/* ************************************************************ */
+/* AVATAR PAGE STYLING */
+
+.avatarContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatarContainer img {
+  width: 150px;
+}
+
 /* ************************************************************ */
 /* ACCOUNT PAGE STYLING */
 .accountPageContainer {
