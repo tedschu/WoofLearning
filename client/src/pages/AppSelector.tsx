@@ -4,7 +4,6 @@
 import { useNavigate } from "react-router-dom";
 import React, { useEffect } from "react";
 import { CurrentApp, UserInfo } from "../types/types";
-import woofMathLogo from "./../assets/woofmath_logo_1.png";
 import cat from "../assets/badges/badge_2_5_cat.png";
 import { Link } from "react-router-dom";
 
@@ -55,7 +54,7 @@ function AppSelector({
         <div className="appSelector-ContentContainer">
           <div className="appSelector-logoContainer">
             <img
-              src={woofMathLogo}
+              src={`../../avatars/${userInfo.avatar_name}.png`}
               alt="WoofMath logo"
               className="appSelector-logo"
             />
@@ -75,24 +74,6 @@ function AppSelector({
             >
               Woof Math
             </button>
-            {/* <div className="appSelector-contentBox">
-              Woof Reading
-              <button
-                className="button gameSelect-base button gameSelect-reading"
-                onClick={navReading}
-              >
-                Woof Reading
-              </button>
-            </div>
-            <div className="appSelector-contentBox">
-              Woof Math
-              <button
-                className="button gameSelect-base button gameSelect-math"
-                onClick={navMath}
-              >
-                Woof Math
-              </button>
-            </div> */}
           </div>
 
           <div className="buttonSpacerTopExtra">

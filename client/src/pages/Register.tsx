@@ -50,7 +50,8 @@ function Register({ setIsLoggedIn, userInfo, setUserInfo }: RegisterProps) {
       userInfo.security_answer_1 ||
       userInfo.security_answer_2 ||
       userInfo.security_question_1 ||
-      userInfo.security_question_2
+      userInfo.security_question_2 ||
+      userInfo.avatar_name
     ) {
       registerUser(userInfo);
       setRegisterError(false);
@@ -85,6 +86,7 @@ function Register({ setIsLoggedIn, userInfo, setUserInfo }: RegisterProps) {
             security_answer_1: userInfo.security_answer_1,
             security_question_2: userInfo.security_question_2,
             security_answer_2: userInfo.security_answer_2,
+            avatar_name: userInfo.avatar_name,
           }),
         }
       );
@@ -226,7 +228,7 @@ function Register({ setIsLoggedIn, userInfo, setUserInfo }: RegisterProps) {
 
             {registerStep === 2 && (
               <>
-                <Avatar />
+                <Avatar userInfo={userInfo} setUserInfo={setUserInfo} />
 
                 <button onClick={() => setRegisterStep(1)}>Back</button>
                 <button className="button login">Create account</button>

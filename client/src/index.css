@@ -1781,10 +1781,12 @@ p {
 }
 
 .avatarSelected {
+  animation: wiggle 3s linear;
 }
 
-.avatarNotSelected img {
-  background-color: black;
+.avatarNotSelected {
+  filter: grayscale(50%);
+  opacity: 40%;
 }
 
 /* ************************************************************ */

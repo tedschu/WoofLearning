@@ -44,6 +44,7 @@ function App() {
     security_answer_1: "",
     security_question_2: "",
     security_answer_2: "",
+    avatar_name: "",
   });
   const [userScore, setUserScore] = useState<UserScore>({
     addition_score: 0,
@@ -183,6 +184,7 @@ function App() {
               security_answer_1: data.security_answer_1,
               security_question_2: data.security_question_2,
               security_answer_2: data.security_answer_2,
+              avatar_name: data.avatar_name,
             });
             setUserScore({
               addition_score: data.score_math.addition_score,

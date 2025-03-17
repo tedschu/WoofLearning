@@ -1,9 +1,12 @@
-import { ImageList } from "@mui/material";
 import { useState } from "react";
+import { UserInfo } from "../types/types";
 
-function Avatar() {
-  const [avatar, setAvatar] = useState("pineapple");
+type AvatarProps = {
+  userInfo: UserInfo;
+  setUserInfo: React.Dispatch<React.SetStateAction<UserInfo>>;
+};
 
+function Avatar({ userInfo, setUserInfo }: AvatarProps) {
   const avatarNames = [
     "axolotl",
     "banana",
@@ -27,9 +30,14 @@ function Avatar() {
     "wizard_mac",
   ];
 
+  function handleAvatar(imageName: string) {
+    const tempInfo = { ...userInfo };
+    tempInfo.avatar_name = imageName;
+    setUserInfo(tempInfo);
+  }
+
   return (
     <>
-      <img src={`../../avatars/${avatar}.png`} alt="" />
       <div className="avatarContainer">
         {avatarNames.map((imageName) => (
           <img
@@ -37,9 +45,11 @@ function Avatar() {
             src={`../../avatars/${imageName}.png`}
             alt=""
             className={
-              avatar === imageName ? "avatarSelected" : "avatarNotSelected"
+              userInfo.avatar_name === imageName
+                ? "avatarSelected"
+                : "avatarNotSelected"
             }
-            onClick={() => setAvatar(imageName)}
+            onClick={() => handleAvatar(imageName)}
           />
         ))}
       </div>

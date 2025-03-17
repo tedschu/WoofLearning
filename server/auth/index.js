@@ -18,6 +18,7 @@ router.post("/register", async (req, res) => {
       security_answer_1,
       security_question_2,
       security_answer_2,
+      avatar_name,
     } = req.body;
 
     // Checks to see if username already exists
@@ -38,11 +39,12 @@ router.post("/register", async (req, res) => {
       !security_question_1 ||
       !security_answer_1 ||
       !security_question_2 ||
-      !security_answer_2
+      !security_answer_2 ||
+      !avatar_name
     ) {
       return res
         .status(400)
-        .json({ error: "Make sure you've filled out all fields." });
+        .json({ error: "Make sure you've completed all fields." });
     }
 
     const hashPassword = await bcrypt.hash(req.body.password, saltRounds);
@@ -57,6 +59,7 @@ router.post("/register", async (req, res) => {
         security_answer_2: req.body.security_answer_2,
         total_logins: 1,
         last_login: new Date().toISOString(),
+        avatar_name: req.body.avatar_name,
         score_math: {
           create: {
             addition_score: 0,
@@ -115,6 +118,7 @@ router.post("/register", async (req, res) => {
         email: newUser.email,
         total_logins: newUser.total_logins,
         last_login: newUser.last_login,
+        avatar_name: newUser.avatar_name,
       },
     });
   } catch (error) {
