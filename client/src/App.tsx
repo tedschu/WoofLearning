@@ -19,6 +19,7 @@ import AppSelector from "./pages/AppSelector";
 import GameMath from "./pages/math/GameMath";
 import GameReading from "./pages/reading/GameReading";
 import Prompts from "./pages/reading/Prompts";
+import Progress from "./pages/Progress";
 
 import SecretGames from "./pages/SecretGames";
 import Match from "./components/secretGames/Match";
@@ -251,6 +252,7 @@ function App() {
             element={
               <GameMath
                 isLoggedIn={isLoggedIn}
+                setIsLoggedIn={setIsLoggedIn}
                 userInfo={userInfo}
                 userScore={userScore}
                 setUserScore={setUserScore}
@@ -278,6 +280,7 @@ function App() {
             element={
               <GameReading
                 isLoggedIn={isLoggedIn}
+                setIsLoggedIn={setIsLoggedIn}
                 userInfo={userInfo}
                 userScore={userScore}
                 setUserScore={setUserScore}
@@ -306,6 +309,7 @@ function App() {
               <Me
                 isLoggedIn={isLoggedIn}
                 userInfo={userInfo}
+                setUserInfo={setUserInfo}
                 userScore={userScore}
                 totalScore={totalMathScore}
                 userMathBadges={userMathBadges}
@@ -334,6 +338,21 @@ function App() {
                 userInfo={userInfo}
                 setUserInfo={setUserInfo}
                 setToken={setToken}
+              />
+            }
+          />
+          <Route
+            path="/progress"
+            element={
+              <Progress
+                isLoggedIn={isLoggedIn}
+                userInfo={userInfo}
+                userScore={userScore}
+                totalScore={totalMathScore}
+                userMathBadges={userMathBadges}
+                userReadingBadges={userReadingBadges}
+                setIsLoggedIn={setIsLoggedIn}
+                currentApp={currentApp}
               />
             }
           />

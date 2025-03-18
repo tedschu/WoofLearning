@@ -129,6 +129,7 @@ export type ModalBadgeType =
 
 export type GameProps = {
   isLoggedIn: boolean;
+  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
   userScore: UserScore;
   setUserScore: React.Dispatch<React.SetStateAction<UserScore>>;
   userMathBadges: UserMathBadges;

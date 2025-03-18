@@ -13,6 +13,7 @@ import LevelHelpModal from "../../components/LevelHelpModal";
 
 function GameReading({
   isLoggedIn,
+  setIsLoggedIn,
   userScore,
   setUserScore,
   userInfo,
@@ -61,6 +62,7 @@ function GameReading({
     <>
       <Nav
         isLoggedIn={isLoggedIn}
+        setIsLoggedIn={setIsLoggedIn}
         userInfo={userInfo}
         currentApp={currentApp}
       />
