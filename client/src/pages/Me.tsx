@@ -13,6 +13,7 @@ import {
   UserScore,
   CurrentApp,
 } from "../types/types";
+import AvatarModal from "../components/AvatarModal";
 
 type MeProps = {
   userInfo: UserInfo;
@@ -41,7 +42,7 @@ function Me({
 
   const [isAPICallInProgress, setIsAPICallInProgress] =
     useState<boolean>(false);
-  const [openAvatarEdit, setOpenAvatarEdit] = useState<boolean>(false);
+  const [isAvatarModalOpen, setIsAvatarModalOpen] = useState<boolean>(false);
 
   const storedToken = localStorage.getItem("token");
 
@@ -104,34 +105,31 @@ function Me({
         /> */}
 
         <div className="accountPageContainer">
-          <div className="accountAvatarContainer">
-            <h2>Hey, {userInfo.username}</h2>
-            {!openAvatarEdit && (
-              <>
-                <img
-                  src={`../../avatars/${userInfo.avatar_name}.png`}
-                  className="accountUserAvatar"
-                  alt=""
-                />
-                <button onClick={() => setOpenAvatarEdit(true)}>
-                  Change avatar
-                </button>
-              </>
-            )}
-            {/* TODO: SET TO CONDITIONALLY LOAD ON "UPDATE" BUTTON CLICK */}
-            {openAvatarEdit && (
-              <>
-                <Avatar userInfo={userInfo} setUserInfo={setUserInfo} />
-                <button onClick={() => setOpenAvatarEdit(false)}>
-                  Set avatar
-                </button>
-              </>
-            )}
-          </div>
-
           {/* CONTAINER FOR USER PERSONAL DATA AND USER FUNCTIONS (DELETE, CONTACT) */}
           <div className="accountContentContainer">
-            <h2>Here are your details:</h2>
+            <h2>Hey, {userInfo.username}!</h2>
+
+            <img
+              src={`../../avatars/${userInfo.avatar_name}.png`}
+              className="accountUserAvatar"
+              alt=""
+            />
+            <button
+              onClick={() => setIsAvatarModalOpen(true)}
+              className="avatarButton"
+            >
+              Change avatar
+            </button>
+
+            {isAvatarModalOpen && (
+              <AvatarModal
+                isAvatarModalOpen={isAvatarModalOpen}
+                setIsAvatarModalOpen={setIsAvatarModalOpen}
+                userInfo={userInfo}
+                setUserInfo={setUserInfo}
+              />
+            )}
+
             {/* <li>
               Name: <span className="accountFont">{userInfo.name}</span>
             </li> */}
