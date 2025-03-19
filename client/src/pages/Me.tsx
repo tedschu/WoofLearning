@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 //import ScoreBar from "../components/";
 import Nav from "../components/Nav";
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
-import Avatar from "../components/Avatar";
 
 import {
   UserInfo,
@@ -30,21 +29,13 @@ type MeProps = {
 function Me({
   userInfo,
   setUserInfo,
-  userScore,
-  totalScore,
-  userReadingBadges,
-  userMathBadges,
   isLoggedIn,
   setIsLoggedIn,
   currentApp,
 }: MeProps) {
   const navigate = useNavigate();
 
-  const [isAPICallInProgress, setIsAPICallInProgress] =
-    useState<boolean>(false);
   const [isAvatarModalOpen, setIsAvatarModalOpen] = useState<boolean>(false);
-
-  const storedToken = localStorage.getItem("token");
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -130,9 +121,6 @@ function Me({
               />
             )}
 
-            {/* <li>
-              Name: <span className="accountFont">{userInfo.name}</span>
-            </li> */}
             <div className="accountList">
               <li>
                 Email: <span className="accountFont">{userInfo.email}</span>

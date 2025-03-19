@@ -230,8 +230,15 @@ function Register({ setIsLoggedIn, userInfo, setUserInfo }: RegisterProps) {
               <>
                 <Avatar userInfo={userInfo} setUserInfo={setUserInfo} />
 
-                <button onClick={() => setRegisterStep(1)}>Back</button>
-                <button className="button login">Create account</button>
+                <div className="registerButtonContainer">
+                  <button
+                    onClick={() => setRegisterStep(1)}
+                    className="button back"
+                  >
+                    Back
+                  </button>
+                  <button className="button login">Create account</button>
+                </div>
               </>
             )}
           </form>

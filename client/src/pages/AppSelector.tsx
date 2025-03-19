@@ -14,11 +14,7 @@ type AppSelectorProps = {
   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-function AppSelector({
-  setCurrentApp,
-  userInfo,
-  setIsLoggedIn,
-}: AppSelectorProps) {
+function AppSelector({ setCurrentApp, userInfo }: AppSelectorProps) {
   const navigate = useNavigate();
 
   // If a user is not signed in (no token) they are redirected to the login page.
@@ -38,14 +34,6 @@ function AppSelector({
   const navReading = () => {
     setCurrentApp("Woof Reading");
     navigate("/reading");
-  };
-
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("userId");
-    // window.location.reload();
-    setIsLoggedIn(false);
-    navigate("/welcome");
   };
 
   return (
@@ -73,12 +61,6 @@ function AppSelector({
               onClick={navMath}
             >
               Woof Math
-            </button>
-          </div>
-
-          <div className="buttonSpacerTopExtra">
-            <button className="button accountGray" onClick={handleLogout}>
-              Log out
             </button>
           </div>
         </div>

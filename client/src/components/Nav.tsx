@@ -3,6 +3,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import * as React from "react";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import { IconButton } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 type NavTypes = {
@@ -61,13 +62,19 @@ function Nav({ isLoggedIn, setIsLoggedIn, userInfo, currentApp }: NavTypes) {
         {isLoggedIn && userInfo && userInfo.username && (
           // <Link to={"/me"} className="navUser">
           <div className="navMenu">
-            <MenuIcon
+            <IconButton
               id="basic-button"
               aria-controls={open ? "basic-menu" : undefined}
               aria-haspopup="true"
               aria-expanded={open ? "true" : undefined}
               onClick={handleClick}
-            />
+            >
+              <MenuIcon
+                sx={{
+                  color: "white",
+                }}
+              />
+            </IconButton>
             <Menu
               id="basic-menu"
               anchorEl={anchorEl}
@@ -77,7 +84,7 @@ function Nav({ isLoggedIn, setIsLoggedIn, userInfo, currentApp }: NavTypes) {
                 "aria-labelledby": "basic-button",
               }}
             >
-              <MenuItem onClick={() => navigate("/me")}>My account</MenuItem>
+              <MenuItem onClick={() => navigate("/me")}>My profile</MenuItem>
               <MenuItem onClick={() => navigate("/progress")}>
                 Progress dashboard
               </MenuItem>

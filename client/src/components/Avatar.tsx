@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { UserInfo } from "../types/types";
 
 type AvatarProps = {

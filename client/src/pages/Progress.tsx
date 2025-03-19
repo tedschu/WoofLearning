@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 //import ScoreBar from "../components/";
 import Nav from "../components/Nav";
 import ChartModal from "../components/ChartModal";
@@ -127,7 +126,6 @@ function Progress({
   setIsLoggedIn,
   currentApp,
 }: ProgressProps) {
-  const navigate = useNavigate();
   // State for help popup to explain bar charts with points by level
   const [isChartModalOpen, setIsChartModalOpen] = useState(false);
   const [challengeSummaryData, setChallengeSummaryData] =
@@ -177,35 +175,22 @@ function Progress({
 
   // RUNS AFTER getLastTenChallengeIncorrectResposes RETURNS (hits Anthropic API)
   useEffect(() => {
-    if (incorrectEquationsData) {
+    if (
+      incorrectEquationsData.incorrectEquationsLastTen?.length === 0 &&
+      !hasEvaluated
+    ) {
       // Data has returned, so API call is complete
-      setIsAPICallInProgress(false);
+      setIsAPICallInProgress(true);
+    }
 
-      if (
-        incorrectEquationsData.incorrectEquationsLastTen?.length > 0 &&
-        !hasEvaluated
-      ) {
-        evaluateEquations();
-        setHasEvaluated(true);
-      }
+    if (
+      incorrectEquationsData.incorrectEquationsLastTen?.length > 0 &&
+      !hasEvaluated
+    ) {
+      evaluateEquations();
+      setHasEvaluated(true);
     }
   }, [incorrectEquationsData]);
-
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("userId");
-    // window.location.reload();
-    setIsLoggedIn(false);
-    navigate("/welcome");
-  };
-
-  const navHome = () => {
-    if (currentApp === "Woof Reading") {
-      navigate("/reading");
-    } else if (currentApp === "Woof Math") {
-      navigate("/math");
-    } else navigate("/");
-  };
 
   const readingList = Object.entries(userReadingBadges)
     .filter(([_key, value]) => value === true)
@@ -367,6 +352,8 @@ function Progress({
           percentScoreLastTen: data.percentScoreLastTen,
         });
       }
+
+      if (data.totalChallenges === 0) setIsAPICallInProgress(false);
     } catch (error) {
       console.error("Error fetching user score data:", error);
     }
