@@ -781,6 +781,7 @@ button {
   align-items: center;
   /* font-family: "Schoolbell"; */
   color: white;
+  cursor: pointer;
   /* font-family: "Ribeye"; */
 }
 

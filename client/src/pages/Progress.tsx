@@ -169,20 +169,11 @@ function Progress({
 
     getChallengeSummaryData();
     getLastTenChallengeIncorrectResponses();
-
     getLast20Challenges();
   }, []);
 
   // RUNS AFTER getLastTenChallengeIncorrectResposes RETURNS (hits Anthropic API)
   useEffect(() => {
-    if (
-      incorrectEquationsData.incorrectEquationsLastTen?.length === 0 &&
-      !hasEvaluated
-    ) {
-      // Data has returned, so API call is complete
-      setIsAPICallInProgress(true);
-    }
-
     if (
       incorrectEquationsData.incorrectEquationsLastTen?.length > 0 &&
       !hasEvaluated
