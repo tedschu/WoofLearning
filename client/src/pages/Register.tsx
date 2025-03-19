@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import woofMathLogo from "../assets/woofmath_logo_1.png";
 import { UserInfo } from "../types/types";
+import Avatar from "../components/Avatar";
 
 type RegisterProps = {
   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
@@ -15,6 +16,7 @@ type RegisterProps = {
 function Register({ setIsLoggedIn, userInfo, setUserInfo }: RegisterProps) {
   const [registerError, setRegisterError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [registerStep, setRegisterStep] = useState(1);
 
   const navigate = useNavigate();
 
@@ -48,7 +50,8 @@ function Register({ setIsLoggedIn, userInfo, setUserInfo }: RegisterProps) {
       userInfo.security_answer_1 ||
       userInfo.security_answer_2 ||
       userInfo.security_question_1 ||
-      userInfo.security_question_2
+      userInfo.security_question_2 ||
+      userInfo.avatar_name
     ) {
       registerUser(userInfo);
       setRegisterError(false);
@@ -83,6 +86,7 @@ function Register({ setIsLoggedIn, userInfo, setUserInfo }: RegisterProps) {
             security_answer_1: userInfo.security_answer_1,
             security_question_2: userInfo.security_question_2,
             security_answer_2: userInfo.security_answer_2,
+            avatar_name: userInfo.avatar_name,
           }),
         }
       );
@@ -110,119 +114,135 @@ function Register({ setIsLoggedIn, userInfo, setUserInfo }: RegisterProps) {
     <>
       <div className="registerPageContainer">
         <div className="registerContentContainer">
-          <Link to={"/welcome"}>
-            <img src={woofMathLogo} alt="" className="registerLogo" />
-          </Link>
-          <h1>Hey, you!</h1>
-          <h2>
-            With your parent's permission, create a free account below to begin
-            playing.{" "}
-          </h2>
-          <Link to={"/about"}>
-            <h4 className="registerPrivacyNotice">
-              Why are we asking for this information?
-            </h4>{" "}
-          </Link>
+          {registerStep === 1 && (
+            <>
+              <Link to={"/welcome"}>
+                <img src={woofMathLogo} alt="" className="registerLogo" />
+              </Link>
+              <h1>Hey, you!</h1>
+              <h2>
+                With your parent's permission, create a free account below to
+                begin playing.{" "}
+              </h2>
+              <Link to={"/about"}>
+                <h4 className="registerPrivacyNotice">
+                  Why are we asking for this information?
+                </h4>{" "}
+              </Link>
+            </>
+          )}
 
           <form action="" className="registerForm" onSubmit={submit}>
-            {/* <label htmlFor="name">Your first name:</label>
-            <input
-              type="text"
-              placeholder="example: Charlie"
-              name="name"
-              value={userInfo.name}
-              onChange={setFormValues}
-            /> */}
-            {/* <label htmlFor="birth_year">The year you were born:</label>
-            <input
-              type="text"
-              placeholder="example: 2014"
-              name="birth_year"
-              value={userInfo.birth_year}
-              onChange={setFormValues}
-            /> */}
-            <label htmlFor="email">Your parent's email:</label>
-            <input
-              type="text"
-              placeholder="name@example.com"
-              name="email"
-              value={userInfo.email}
-              onChange={setFormValues}
-            />
-            <label htmlFor="username">Username (what shall we call you):</label>
-            <input
-              type="text"
-              placeholder="example: Count Woofula"
-              name="username"
-              value={userInfo.username}
-              onChange={setFormValues}
-            />
-            <label htmlFor="password">Password:</label>
-            <input
-              type="password"
-              placeholder="(...something you can remember)"
-              name="password"
-              value={userInfo.password}
-              onChange={setFormValues}
-            />
-            <br />
-            <h2>Please also answer a few security questions.</h2>
-            <p>
-              Why? If you ever forget your password, you can reset it by
-              answering these questions.{" "}
-            </p>
+            {registerStep === 1 && (
+              <>
+                <label htmlFor="email">Your parent's email:</label>
+                <input
+                  type="text"
+                  placeholder="name@example.com"
+                  name="email"
+                  value={userInfo.email}
+                  onChange={setFormValues}
+                />
+                <label htmlFor="username">
+                  Username (what shall we call you):
+                </label>
+                <input
+                  type="text"
+                  placeholder="example: Count Woofula"
+                  name="username"
+                  value={userInfo.username}
+                  onChange={setFormValues}
+                />
+                <label htmlFor="password">Password:</label>
+                <input
+                  type="password"
+                  placeholder="(...something you can remember)"
+                  name="password"
+                  value={userInfo.password}
+                  onChange={setFormValues}
+                />
+                <br />
+                <h2>Please also answer a few security questions.</h2>
+                <p>
+                  Why? If you ever forget your password, you can reset it by
+                  answering these questions.{" "}
+                </p>
 
-            <div className="securityQuestionsContainer">
-              <select
-                name="security_question_1"
-                value={userInfo.security_question_1 || ""}
-                onChange={setFormValues}
-                className="securitySelect"
-              >
-                <option value="" disabled>
-                  Choose a security question...
-                </option>
-                {securityQuestions.map((question, index) => (
-                  <option key={index} value={question}>
-                    {question}
-                  </option>
-                ))}
-              </select>
+                <div className="securityQuestionsContainer">
+                  <select
+                    name="security_question_1"
+                    value={userInfo.security_question_1 || ""}
+                    onChange={setFormValues}
+                    className="securitySelect"
+                  >
+                    <option value="" disabled>
+                      Choose a security question...
+                    </option>
+                    {securityQuestions.map((question, index) => (
+                      <option key={index} value={question}>
+                        {question}
+                      </option>
+                    ))}
+                  </select>
 
-              <input
-                type="text"
-                placeholder="Answer to question #1..."
-                name="security_answer_1"
-                value={userInfo.security_answer_1}
-                onChange={setFormValues}
-              />
-            </div>
-            <div className="securityQuestionsContainer">
-              <select
-                name="security_question_2"
-                value={userInfo.security_question_2 || ""}
-                onChange={setFormValues}
-                className="securitySelect"
-              >
-                <option value="" disabled>
-                  Choose a security question...
-                </option>
-                {securityQuestions.map((question, index) => (
-                  <option key={index} value={question}>
-                    {question}
-                  </option>
-                ))}
-              </select>
-              <input
-                type="text"
-                placeholder="Answer to question 2..."
-                name="security_answer_2"
-                value={userInfo.security_answer_2}
-                onChange={setFormValues}
-              />
-            </div>
-            <button className="button login">Create account</button>
+                  <input
+                    type="text"
+                    placeholder="Answer to question #1..."
+                    name="security_answer_1"
+                    value={userInfo.security_answer_1}
+                    onChange={setFormValues}
+                  />
+                </div>
+                <div className="securityQuestionsContainer">
+                  <select
+                    name="security_question_2"
+                    value={userInfo.security_question_2 || ""}
+                    onChange={setFormValues}
+                    className="securitySelect"
+                  >
+                    <option value="" disabled>
+                      Choose a security question...
+                    </option>
+                    {securityQuestions.map((question, index) => (
+                      <option key={index} value={question}>
+                        {question}
+                      </option>
+                    ))}
+                  </select>
+                  <input
+                    type="text"
+                    placeholder="Answer to question 2..."
+                    name="security_answer_2"
+                    value={userInfo.security_answer_2}
+                    onChange={setFormValues}
+                  />
+                </div>
+                <button
+                  className="button login"
+                  onClick={() => setRegisterStep(2)}
+                >
+                  Next Step: Set Your Avatar
+                </button>
+              </>
+            )}
+
+            {registerStep === 2 && (
+              <>
+                <Avatar userInfo={userInfo} setUserInfo={setUserInfo} />
+
+                <div className="registerButtonContainer">
+                  <button
+                    onClick={() => setRegisterStep(1)}
+                    className="button back"
+                  >
+                    Back
+                  </button>
+                  <button className="button login">Create account</button>
+                </div>
+              </>
+            )}
           </form>
+
           {registerError && (
             <h3 className="registerFail">
               Oops. There was a problem with your registration.

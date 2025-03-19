@@ -80,6 +80,7 @@ export type UserInfo = {
   security_answer_1: string;
   security_question_2: string;
   security_answer_2: string;
+  avatar_name: string;
   [key: string]: string | undefined; // Index signature
 };
 
@@ -128,6 +129,7 @@ export type ModalBadgeType =
 
 export type GameProps = {
   isLoggedIn: boolean;
+  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
   userScore: UserScore;
   setUserScore: React.Dispatch<React.SetStateAction<UserScore>>;
   userMathBadges: UserMathBadges;

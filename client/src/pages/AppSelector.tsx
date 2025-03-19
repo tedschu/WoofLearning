@@ -4,7 +4,6 @@
 import { useNavigate } from "react-router-dom";
 import React, { useEffect } from "react";
 import { CurrentApp, UserInfo } from "../types/types";
-import woofMathLogo from "./../assets/woofmath_logo_1.png";
 import cat from "../assets/badges/badge_2_5_cat.png";
 import { Link } from "react-router-dom";
 
@@ -15,11 +14,7 @@ type AppSelectorProps = {
   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-function AppSelector({
-  setCurrentApp,
-  userInfo,
-  setIsLoggedIn,
-}: AppSelectorProps) {
+function AppSelector({ setCurrentApp, userInfo }: AppSelectorProps) {
   const navigate = useNavigate();
 
   // If a user is not signed in (no token) they are redirected to the login page.
@@ -41,21 +36,13 @@ function AppSelector({
     navigate("/reading");
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("userId");
-    // window.location.reload();
-    setIsLoggedIn(false);
-    navigate("/welcome");
-  };
-
   return (
     <>
       <div className="appSelector-Wrapper">
         <div className="appSelector-ContentContainer">
           <div className="appSelector-logoContainer">
             <img
-              src={woofMathLogo}
+              src={`../../avatars/${userInfo.avatar_name}.png`}
               alt="WoofMath logo"
               className="appSelector-logo"
             />
@@ -74,30 +61,6 @@ function AppSelector({
               onClick={navMath}
             >
               Woof Math
-            </button>
-            {/* <div className="appSelector-contentBox">
-              Woof Reading
-              <button
-                className="button gameSelect-base button gameSelect-reading"
-                onClick={navReading}
-              >
-                Woof Reading
-              </button>
-            </div>
-            <div className="appSelector-contentBox">
-              Woof Math
-              <button
-                className="button gameSelect-base button gameSelect-math"
-                onClick={navMath}
-              >
-                Woof Math
-              </button>
-            </div> */}
-          </div>
-
-          <div className="buttonSpacerTopExtra">
-            <button className="button accountGray" onClick={handleLogout}>
-              Log out
             </button>
           </div>
         </div>

@@ -86,4 +86,20 @@ router.put("/:id", verifyToken, async (req, res) => {
   }
 });
 
+// Updates a user's avatar
+router.put("/:id/avatar", verifyToken, async (req, res) => {
+  try {
+    const avatarName = await prisma.user.update({
+      where: {
+        id: parseInt(req.user),
+      },
+      data: req.body,
+    });
+    res.send(avatarName);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+});
+
 module.exports = router;

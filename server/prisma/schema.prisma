@@ -23,6 +23,7 @@ model User {
   security_answer_2 String
   total_logins Int
   last_login DateTime
+  avatar_name String @default("axolotl")
   score_math Score_math?
   badge_math Badge_math?
   score_reading Score_reading?

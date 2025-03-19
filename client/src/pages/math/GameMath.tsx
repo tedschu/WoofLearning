@@ -18,6 +18,7 @@ type ChallengeTopScores = {
 
 function GameMath({
   isLoggedIn,
+  setIsLoggedIn,
   userScore,
   setUserScore,
   userMathBadges,
@@ -76,6 +77,7 @@ function GameMath({
     <>
       <Nav
         isLoggedIn={isLoggedIn}
+        setIsLoggedIn={setIsLoggedIn}
         userInfo={userInfo}
         currentApp={currentApp}
       />
