@@ -646,7 +646,7 @@ function GamePlayTimedChallenge({
                       </li>
                     )}
                   </ul>
-                  <Link to={"/me"} className="challengeResults-link">
+                  <Link to={"/progress"} className="challengeResults-link">
                     <h4>See more about your progress</h4>
                   </Link>
                 </div>

@@ -582,11 +582,10 @@ function Progress({
                     Woof Reading: {userScore.reading_score} points
                   </h3>
                   <p className="grayText">
-                    Most of your points ({highestReadingLevel[1]}) are from{" "}
-                    {highestReadingLevel[0]}
+                    Most of your points are from {highestReadingLevel[0]}
                     {"  "}
                     <Link to="#" onClick={openChartModal}>
-                      <span className="helpPopupText">(What's this?)</span>
+                      <span className="helpPopupText">(?)</span>
                     </Link>
                   </p>
                 </div>
@@ -600,10 +599,10 @@ function Progress({
                     Woof Math: {totalScore} points
                   </h3>
                   <p className="grayText">
-                    Most of your points ({highestMathLevel[1]}) are from{"  "}
+                    Most of your points are from{"  "}
                     {highestMathLevel[0]}{" "}
                     <Link to="#" onClick={openChartModal}>
-                      <span className="helpPopupText">(What's this?)</span>
+                      <span className="helpPopupText">(?)</span>
                     </Link>
                   </p>
                 </div>

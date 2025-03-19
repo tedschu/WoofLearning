@@ -151,29 +151,29 @@ function NumberGenerator({
           case 2:
             // randomly determines whether first or second number is double digit
             if (getRandomNumber(0, 1) === 0) {
-              setFirstNumber(getRandomNumber(3, 12));
+              setFirstNumber(getRandomNumber(3, 11));
               setSecondNumber(getRandomNumber(2, 9));
               setAddToScore(7);
             } else {
               setFirstNumber(getRandomNumber(2, 9));
-              setSecondNumber(getRandomNumber(3, 12));
+              setSecondNumber(getRandomNumber(3, 11));
               setAddToScore(7);
             }
             break;
           case 3:
-            setFirstNumber(getRandomNumber(2, 50));
+            setFirstNumber(getRandomNumber(2, 12));
             setSecondNumber(getRandomNumber(3, 20));
             setAddToScore(12);
             break;
           case 4:
             // randomly determines whether first or second number is triple digit
             if (getRandomNumber(0, 1) === 0) {
-              setFirstNumber(getRandomNumber(10, 200));
-              setSecondNumber(getRandomNumber(10, 50));
+              setFirstNumber(getRandomNumber(10, 70));
+              setSecondNumber(getRandomNumber(10, 40));
               setAddToScore(17);
             } else {
-              setFirstNumber(getRandomNumber(10, 50));
-              setSecondNumber(getRandomNumber(10, 200));
+              setFirstNumber(getRandomNumber(10, 25));
+              setSecondNumber(getRandomNumber(7, 200));
               setAddToScore(17);
             }
             break;
@@ -186,7 +186,7 @@ function NumberGenerator({
               setAddToScore(23);
             } else {
               setFirstNumber(getRandomNumber(2, 10));
-              setSecondNumber(getRandomNumber(4, 200));
+              setSecondNumber(getRandomNumber(4, 100));
               setThirdNumber(getRandomNumber(2, 25));
               setAddToScore(23);
             }
