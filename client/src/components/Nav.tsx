@@ -4,7 +4,7 @@ import * as React from "react";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { IconButton } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 type NavTypes = {
   isLoggedIn: boolean;
@@ -51,8 +51,9 @@ function Nav({ isLoggedIn, setIsLoggedIn, userInfo, currentApp }: NavTypes) {
         }
       >
         <div className="navLogo">
-          {" "}
-          <img src={`../../avatars/${userInfo.avatar_name}.png`} alt="" />
+          <Link to="/me" style={{ display: "block", lineHeight: 0 }}>
+            <img src={`../../avatars/${userInfo.avatar_name}.png`} alt="" />
+          </Link>
         </div>
 
         <div className="navTitle" onClick={navHome}>
