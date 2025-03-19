@@ -1622,7 +1622,7 @@ input[type="number"]::-webkit-inner-spin-button {
 .registerContentContainer {
   display: flex;
   flex-direction: column;
-  width: 70%;
+  width: 90%;
   padding: 40px 0px;
   justify-content: center;
   align-items: center;
@@ -1712,10 +1712,11 @@ p {
 
 .registerButtonContainer {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: 15px 0;
-  gap: 25px;
+  gap: 20px;
 }
 
 .securityQuestionsContainer {
@@ -1804,7 +1805,7 @@ p {
 }
 
 .avatarContainer img {
-  width: 150px;
+  width: 110px;
   cursor: pointer;
 }
 
@@ -2849,6 +2850,14 @@ ul li {
 
   .connectRed {
     font-size: 35px;
+  }
+
+  .registerButtonContainer {
+    flex-direction: row;
+  }
+
+  .avatarContainer img {
+    width: 150px;
   }
 }
 
