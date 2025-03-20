@@ -8,12 +8,12 @@ type AvatarProps = {
 function Avatar({ userInfo, setUserInfo }: AvatarProps) {
   const avatarNames = [
     "axolotl",
+    "alligator",
     "banana",
-    "boy_2",
     "cat_space",
     "cinnamon_roll",
     "donkey_suss",
-    "girl_1",
+    "penguin",
     "lion_cards",
     "panda",
     "cat_suss",
@@ -21,11 +21,11 @@ function Avatar({ userInfo, setUserInfo }: AvatarProps) {
     "potato_dance",
     "monkey",
     "shark_tophat",
-    "girl_2",
+    "red_panda",
     "snake_golf",
     "superpizza",
     "tiger_dunk",
-    "boy_1",
+    "capybara",
     "wizard_mac",
   ];
 
