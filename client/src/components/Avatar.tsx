@@ -37,6 +37,7 @@ function Avatar({ userInfo, setUserInfo }: AvatarProps) {
 
   return (
     <>
+      <h2 className="avatarHeader">Choose your avatar:</h2>
       <div className="avatarContainer">
         {avatarNames.map((imageName) => (
           <img
