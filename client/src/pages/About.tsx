@@ -75,7 +75,7 @@ function About({ isLoggedIn }: AboutProps) {
             Finally, what about the "woof" in Woof Math? Well, candidly, it's a
             bit of an homage to our dog Charlie. You may even notice a cat
             sneaking in there (our cat Eli). But really, it was just a way to
-            make it more of a game, and keep it loose.
+            make it more of a game, and keep it loose. Enjoy!
           </p>
 
           <p>Ted Schuster</p>
