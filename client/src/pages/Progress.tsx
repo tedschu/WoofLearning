@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 //import ScoreBar from "../components/";
 import Nav from "../components/Nav";
 import ChartModal from "../components/ChartModal";
@@ -158,6 +158,8 @@ function Progress({
   const [last20ChallengeScores, setLast20ChallengeScores] = useState<
     Last20ChallengeScores[]
   >([]);
+
+  const navigate = useNavigate();
 
   const storedToken = localStorage.getItem("token");
 
@@ -534,6 +536,14 @@ function Progress({
     },
   };
 
+  const navHome = () => {
+    if (currentApp === "Woof Reading") {
+      navigate("/reading");
+    } else if (currentApp === "Woof Math") {
+      navigate("/math");
+    } else navigate("/");
+  };
+
   return (
     <>
       <Nav
@@ -551,6 +561,14 @@ function Progress({
         /> */}
 
         <div className="accountPageContainer">
+          <button
+            className="button accountBack"
+            onClick={() => {
+              navHome();
+            }}
+          >
+            Go back to game
+          </button>
           {/* CONTAINER FOR USER PLAY DATA */}
           <div className="accountContentContainer">
             <h2>Your overall progress on Woof Learning games:</h2>

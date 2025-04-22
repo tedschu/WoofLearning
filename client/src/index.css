@@ -276,6 +276,16 @@ button {
   border: 1px solid rgb(224, 222, 222);
 }
 
+.button.accountBack {
+  width: 130px;
+  border-radius: 10px;
+  font-size: 16px;
+  box-shadow: 2px 2px 6px #c1c1c1;
+  border: 1px solid #71afcb;
+  margin-top: 10px;
+  color: #006894;
+}
+
 .button.gameSelect {
   width: 200px;
   border-radius: 10px;
