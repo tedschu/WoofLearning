@@ -30,6 +30,7 @@ function ResetPassModal({
     });
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [resetAnswerAttempts, setResetAnswerAttempts] = useState(1);
 
   // Handles form values AND updates loginForm state
   const setFormValues = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -86,10 +87,15 @@ function ResetPassModal({
           username: userInfo.username,
           security_answer_1: userInfo.security_answer_1,
           security_answer_2: userInfo.security_answer_2,
+          answer_attempts: resetAnswerAttempts,
         }),
       });
 
       const data = await response.json();
+
+      if (response.ok) {
+        setResetAnswerAttempts((previous) => previous + 1);
+      }
 
       if (!response.ok) {
         setErrorMessage(data.message);

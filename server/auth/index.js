@@ -246,14 +246,15 @@ router.get("/get-questions/:username", async (req, res) => {
 });
 
 const maxAnswerAttempts = 4;
-let answerAttempts = 0;
+// let answerAttempts = 0;
 
 // Takes in a user's security answer inputs and verifies if they match
 router.post("/check-answers", async (req, res) => {
   try {
     console.log("Request body: ", req.body);
     //gets username and security answers
-    const { username, security_answer_1, security_answer_2 } = req.body;
+    const { username, security_answer_1, security_answer_2, answerAttempts } =
+      req.body;
 
     if (answerAttempts >= maxAnswerAttempts) {
       return res.status(400).json({
