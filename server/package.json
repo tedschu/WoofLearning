@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.32.1",
+    "@google/generative-ai": "^0.24.1",
     "@prisma/client": "^6.0.1",
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",

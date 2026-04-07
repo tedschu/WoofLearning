@@ -1,30 +1,26 @@
 const express = require("express");
 const router = express.Router();
-const Anthropic = require("@anthropic-ai/sdk");
+const { GoogleGenerativeAI } = require("@google/generative-ai");
 const dotenv = require("dotenv");
 const path = require("path");
 
 // this will point to the .env file and then load the env variables (namely the API key)
 dotenv.config({ path: path.join(__dirname, "..", ".env") });
 
-// Instantiates Anthropic SDK
-const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY,
-});
+// Instantiates Google Generative AI SDK
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
-// Function to establish connection to the Anthropic API
-async function callAnthropicAPI(messages, system = "") {
+// Function to establish connection to the Gemini API
+async function callGeminiAPI(prompt, system = "") {
   try {
-    const response = await anthropic.messages.create({
-      model: "claude-3-5-haiku-20241022",
-      max_tokens: 1200,
-      temperature: 0.7,
-      system: system,
-      messages: messages,
+    const model = genAI.getGenerativeModel({
+      model: "gemini-2.5-flash",
+      systemInstruction: system,
     });
-    return response.content[0].text;
+    const result = await model.generateContent(prompt);
+    return result.response.text();
   } catch (error) {
-    console.error("Error calling Anthropic API:", error);
+    console.error("Error calling Gemini API:", error);
     throw error;
   }
 }
@@ -41,13 +37,7 @@ router.get("/generate_story", async (req, res) => {
       return res.status(400).json({ error: "Missing required parameters" });
     }
 
-    const messages = [
-      {
-        role: "user",
-        content: [
-          {
-            type: "text",
-            text: `Generate approximately a ${story_length}-word ${story_type} about ${story_topic}, followed by 3 questions about the ${story_type}. The ${story_type} should have a difficulty level of ${difficulty} (out of 5) - for example, a "1" should use very simple language at a first or second-grade reading level, whereas a "5" should be at a fifth or sixth-grade level. Return the result as a valid JSON object with the following structure:
+    const prompt = `Generate approximately a ${story_length}-word ${story_type} about ${story_topic}, followed by 3 questions about the ${story_type}. The ${story_type} should have a difficulty level of ${difficulty} (out of 5) - for example, a "1" should use very simple language at a first or second-grade reading level, whereas a "5" should be at a fifth or sixth-grade level. Return the result as a valid JSON object with the following structure:
 
             {
               "Title": "Your ${story_type} title",
@@ -56,7 +46,7 @@ router.get("/generate_story", async (req, res) => {
               "Question_2": "Second question",
               "Question_3": "Third question"
             }
-            
+
             Important:
             1. Ensure all JSON keys are in double quotes.
             2. The "Body" value should be a single string with paragraphs separated by "\\n\\n" (two backslashes followed by two 'n's).
@@ -65,29 +55,21 @@ router.get("/generate_story", async (req, res) => {
             5. Use a single backslash () to escape apostrophes and quotation marks.
             6. The entire JSON object should be on a single line, with no line breaks between properties.
             7. If the difficulty level is 1, you should use simple words that are easy to read and understand for children. As the difficulty number increases (to 5), you can use more complex words.
-            8. Try to keep the story length at around the word count specified.`,
-          },
-        ],
-      },
-    ];
+            8. Try to keep the story length at around the word count specified.`;
 
     const system = `You are a reading tutor for students in grade school, and will be generating a ${story_type} to test reading comprehension. Use simple language - no complex words. Everything needs to be age-appropriate, with no offensive language or themes.`;
 
-    // Uses messages and system variables to call "callAnthropicAPI" function
-    const response = await callAnthropicAPI(messages, system);
+    // Uses prompt and system variables to call "callGeminiAPI" function
+    const response = await callGeminiAPI(prompt, system);
 
     console.log("Raw response:", response);
 
     // Parse the response, replacing all \n breaks and "\" with empty strings, and convert it to readable JSON (storyData)
     const cleanedResponse = response
-      // .replace(/(?<!\\)\n/g, "\\\\n");
+      .replace(/^```json\n?/, "")
+      .replace(/\n?```$/, "")
       .replace(/\\\'/g, "'") // Replace \\' with just '
       .replace(/\\'/g, "'"); // Replace \' with just '
-    //.replace(/\\"/g, '"'); // Replace \' with just '   // This was causing parsing errors by unescaping " " in the stories
-    // .replace(/'/g, "\\'") // Then replace all ' with \'
-    // .replace(/\n/g, "\\n") // Replace newlines with \n
-    // .replace(/[\u0000-\u0019]+/g, "");
-    // .replace(/[^\x20-\x7E]/g, "");
 
     console.log("Cleaned response:", cleanedResponse);
 
@@ -143,19 +125,12 @@ router.post("/evaluate_answers", async (req, res) => {
       answer_3: answer_3,
     });
 
-    // Building "messages" and "system" inputs below which are then passed to the API
-    const messages = [
-      {
-        role: "user",
-        content: [
-          {
-            type: "text",
-            text: `Using the JSON object below, review the answers to the three questions and evaluate whether the answers were correct. If the user has small spelling or punctuation errors, you can still evaluate it as "correct" and provide feedback where applicable.
+    const prompt = `Using the JSON object below, review the answers to the three questions and evaluate whether the answers were correct. If the user has small spelling or punctuation errors, you can still evaluate it as "correct" and provide feedback where applicable.
 
             ${storyResponseData}
-            
+
             Return the result as valid JSON with the following structure:
-            
+
             {
             "evaluations" = [
             {
@@ -168,27 +143,24 @@ router.post("/evaluate_answers", async (req, res) => {
         ],
             "overall_score": "0, 1, 2, or 3 based on the number of true values for is_correct"
             }
-            
+
             Important:
             1. Ensure all JSON keys are in double quotes.
             2. Do not use actual line breaks within the JSON string values. Use "\\n" for necessary line breaks.
             3. Escape any double quotes within the text values with a backslash.
-            4. The entire JSON object should be on a single line, with no line breaks between properties.`,
-          },
-        ],
-      },
-    ];
+            4. The entire JSON object should be on a single line, with no line breaks between properties.`;
 
     const system =
       "You are a reading tutor for students in grade school, and will be reviewing the user's answers to the provided questions and providing feedback. ";
 
-    // Uses messages and system variables to call "callAnthropicAPI" function
-    const response = await callAnthropicAPI(messages, system);
+    // Uses prompt and system variables to call "callGeminiAPI" function
+    const response = await callGeminiAPI(prompt, system);
 
-    //console.log("Raw response:", response);
-
-    // // Parse the response, replacing all \n breaks and "\" with empty strings, and convert it to readable JSON (storyData)
-    const cleanedResponse = response.replace(/\\'/g, "'"); // Replace \' with just '
+    // Parse the response, stripping any markdown code fences Gemini may add
+    const cleanedResponse = response
+      .replace(/^```json\n?/, "")
+      .replace(/\n?```$/, "")
+      .replace(/\\'/g, "'"); // Replace \' with just '
     console.log(JSON.stringify(response));
 
     const evaluationData = JSON.parse(cleanedResponse);
@@ -213,24 +185,11 @@ router.post("/evaluate_incorrect_responses", async (req, res) => {
     // Need to "stringify" (e.g. convert JSON object to a string) the equations data
     const incorrectEquationsString = JSON.stringify(incorrectEquations);
 
-    // // Building "messages" and "system" inputs below which are then passed to the API
-    const messages = [
-      {
-        role: "user",
-        content: [
-          {
-            type: "text",
-            text: `${incorrectEquationsString}`,
-          },
-        ],
-      },
-    ];
-
     const system =
       "You will receive a set of math equations that a user answered incorrectly, followed by an 'overall_score.' These incorrect answers come from a program that grade school-aged kids are using to practice building their math skills. You will be providing insights back to the user on trends that you're seeing so they can improve their math skills. Be very brief in your response, and in simple yet encouraging language, provide a summary of the types of questions they tend to get wrong (if there are any clear trends), tips to approach these problems, and an example of a question that they got wrong. Be very positive, particularly if the 'overall score' is 85% or higher. If it's lower than 85%, you can acknowledge that the user may be having some challenges, and that you'll help them with advice. Don't repeat the number back to the user. For instance, if you see that most of the equations relate to multiplying by 9, clearly let the user know.";
 
-    // Uses messages and system variables to call "callAnthropicAPI" function
-    const response = await callAnthropicAPI(messages, system);
+    // Uses prompt and system variables to call "callGeminiAPI" function
+    const response = await callGeminiAPI(incorrectEquationsString, system);
 
     console.log("Raw response:", response);
 
