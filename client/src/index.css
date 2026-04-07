@@ -2568,6 +2568,11 @@ ul li {
   font-size: 35px;
 }
 
+.connectLinkSmall {
+  color: white;
+  font-size: 24px;
+}
+
 .connectLinkBack {
   position: fixed;
   top: 0;
@@ -3126,4 +3131,202 @@ ul li {
   .welcomeSubContainerBottom {
     padding: 50px;
   }
+}
+
+/* ========================================
+   WORD SCRAMBLE
+   ======================================== */
+
+.wordScrambleContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #642a9a, #ec1b77, #309eb6);
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.wordScrambleContainer * {
+  font-family: "Chicle";
+}
+
+.wordScrambleCard {
+  background-color: white;
+  border-radius: 16px;
+  padding: 36px 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+  max-width: 480px;
+  width: 100%;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.wordScrambleTitle {
+  font-size: 36px;
+  color: #642a9a;
+  margin: 0;
+}
+
+.wordScrambleSubtext {
+  font-size: 18px;
+  color: #555;
+  margin: 0;
+}
+
+.wordScrambleLabelText {
+  font-size: 18px;
+  color: #0085bd;
+  margin: 0;
+}
+
+.wordScrambleButton {
+  background-image: linear-gradient(#d4492b, #dd6e55);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 22px;
+  font-family: "Chicle";
+  padding: 8px 28px;
+  cursor: pointer;
+  box-shadow: 2px 2px 6px #828282;
+  margin-top: 6px;
+}
+
+.wordScrambleButton:hover {
+  background-image: linear-gradient(#c03d22, #d4492b);
+}
+
+.wordScrambleButtonSecondary {
+  background: none;
+  border: 2px solid #bbb;
+  border-radius: 10px;
+  color: #777;
+  font-size: 20px;
+  font-family: "Chicle";
+  padding: 8px 28px;
+  cursor: pointer;
+}
+
+.wordScramblePlayerHeader {
+  font-size: 32px;
+  color: #642a9a;
+  margin: 0;
+}
+
+.wordScrambleRoundHeader {
+  font-size: 18px;
+  color: #0085bd;
+  margin: 0;
+}
+
+.wordScramblePrompt {
+  font-size: 18px;
+  color: #555;
+  margin: 0;
+}
+
+.wordScrambleScrambledWord {
+  font-size: 52px;
+  color: #d4492b;
+  letter-spacing: 6px;
+  margin: 4px 0;
+}
+
+.wordScrambleTimer {
+  font-size: 36px;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.wordScrambleInput {
+  border: 2px solid #a6d5ea;
+  border-radius: 8px;
+  font-size: 22px;
+  font-family: "Chicle";
+  padding: 8px 16px;
+  text-align: center;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.wordScrambleInput:focus {
+  border-color: #0085bd;
+}
+
+.wordScrambleResultIcon {
+  font-size: 64px;
+  line-height: 1;
+}
+
+.wordScrambleResultText {
+  font-size: 30px;
+  color: #642a9a;
+  margin: 0;
+}
+
+.wordScrambleCorrectWord {
+  font-size: 18px;
+  color: #555;
+  margin: 0;
+}
+
+.wordScramblePoints {
+  font-size: 28px;
+  color: #0085bd;
+  margin: 0;
+}
+
+.wordScrambleScores {
+  display: flex;
+  gap: 28px;
+  font-size: 20px;
+  color: #555;
+  background-color: #f0f8ff;
+  padding: 10px 24px;
+  border-radius: 10px;
+}
+
+.wordScrambleFinalScores {
+  display: flex;
+  gap: 48px;
+  margin: 8px 0;
+}
+
+.wordScrambleFinalScore {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.wordScrambleFinalScoreLabel {
+  font-size: 20px;
+  color: #777;
+}
+
+.wordScrambleFinalScoreValue {
+  font-size: 56px;
+  color: #0085bd;
+  line-height: 1;
+}
+
+.wordScrambleWinner {
+  font-size: 28px;
+  color: #d4492b;
+  margin: 0;
+}
+
+.wordScrambleGameOverButtons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
 }

@@ -27,6 +27,11 @@ function SecretGames() {
             Card Match
           </Link>
         </div>
+        <div className="secretGameBox">
+          <Link to={"/wordscramble"} className="connectLinkSmall">
+            Word Scramble
+          </Link>
+        </div>
         <div>
           <Link to={"/"}>
             <button className="secretBackButton">...Or, go back</button>

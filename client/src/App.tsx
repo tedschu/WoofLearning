@@ -24,6 +24,7 @@ import Progress from "./pages/Progress";
 import SecretGames from "./pages/SecretGames";
 import Match from "./components/secretGames/Match";
 import Connect from "./components/secretGames/Connect";
+import WordScramble from "./components/secretGames/WordScramble";
 
 const theme = createTheme({
   typography: {
@@ -364,6 +365,7 @@ function App() {
           />
           <Route path="/connect" element={<Connect />} />
           <Route path="/match" element={<Match />} />
+          <Route path="/wordscramble" element={<WordScramble />} />
           <Route path="/secretGames" element={<SecretGames />} />
         </Routes>
       </ThemeProvider>
