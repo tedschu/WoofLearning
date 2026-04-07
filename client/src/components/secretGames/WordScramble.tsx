@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 import wordScrambleBank from "./wordScrambleBank";
+import englishWords from "an-array-of-english-words";
 
 function getRandomWord(difficulty, usedWords) {
   const bank = wordScrambleBank[`level${difficulty}`];
@@ -24,10 +25,16 @@ function scrambleWord(word) {
   return scrambled;
 }
 
-// Accept any anagram of the original word (same letters, any order)
+const englishWordSet = new Set(englishWords);
+
+// Accept any real English word that uses the same letters as the current word
 function isValidAnswer(userInput, currentWord) {
-  const normalize = (s) => s.trim().toLowerCase().split("").sort().join("");
-  return normalize(userInput) === normalize(currentWord);
+  const input = userInput.trim().toLowerCase();
+  const sortLetters = (s) => s.split("").sort().join("");
+  return (
+    sortLetters(input) === sortLetters(currentWord) &&
+    englishWordSet.has(input)
+  );
 }
 
 function calculatePoints(timeLeft, correct) {
