@@ -39,7 +39,7 @@ function isValidAnswer(userInput, currentWord) {
 
 function calculatePoints(timeLeft, correct) {
   if (!correct) return 0;
-  if (timeLeft >= 12) return 15;
+  if (timeLeft >= 12) return 17;
   if (timeLeft >= 8) return 12;
   if (timeLeft >= 4) return 10;
   return 8;
@@ -63,7 +63,7 @@ function WordScramble() {
   const [currentWord, setCurrentWord] = useState("");
   const [scrambledWord, setScrambledWord] = useState("");
   const [userInput, setUserInput] = useState("");
-  const [timeLeft, setTimeLeft] = useState(15);
+  const [timeLeft, setTimeLeft] = useState(17);
   const [usedWords, setUsedWords] = useState([]);
   const [lastResult, setLastResult] = useState(null);
 
@@ -101,7 +101,7 @@ function WordScramble() {
     setCurrentWord(word);
     setScrambledWord(scrambleWord(word));
     setUserInput("");
-    setTimeLeft(15);
+    setTimeLeft(17);
     setUsedWords((prev) => [...prev, word]);
     setGamePhase("playing");
   }
@@ -143,7 +143,7 @@ function WordScramble() {
     setCurrentWord("");
     setScrambledWord("");
     setUserInput("");
-    setTimeLeft(15);
+    setTimeLeft(17);
     setUsedWords([]);
     setLastResult(null);
   }
