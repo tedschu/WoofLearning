@@ -106,6 +106,7 @@ model Score_reading {
   reading_L3_points Int? @default(0)
   reading_L4_points Int? @default(0)
   reading_L5_points Int? @default(0)
+  reading_perfect_streak Int @default(0)
   user User @relation(fields: [user_id], references: [id])
   user_id Int @unique
 }

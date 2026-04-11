@@ -44,7 +44,10 @@ router.get("/generate_story", async (req, res) => {
               "Body": "Your ${story_type}",
               "Question_1": "First question",
               "Question_2": "Second question",
-              "Question_3": "Third question"
+              "Question_3": "Third question",
+              "Hint_1": "A hint for Question 1",
+              "Hint_2": "A hint for Question 2",
+              "Hint_3": "A hint for Question 3"
             }
 
             Important:
@@ -55,7 +58,8 @@ router.get("/generate_story", async (req, res) => {
             5. Use a single backslash () to escape apostrophes and quotation marks.
             6. The entire JSON object should be on a single line, with no line breaks between properties.
             7. If the difficulty level is 1, you should use simple words that are easy to read and understand for children. As the difficulty number increases (to 5), you can use more complex words.
-            8. Try to keep the story length at around the word count specified.`;
+            8. Try to keep the story length at around the word count specified.
+            9. Each hint should be a short, helpful clue that does NOT give away the answer. Use either a location clue (e.g. "Look near the beginning of the story") or a context clue (e.g. "Think about what the character did after they arrived at the cave"). Never state the answer directly.`;
 
     const system = `You are a reading tutor for students in grade school, and will be generating a ${story_type} to test reading comprehension. Use simple language - no complex words. Everything needs to be age-appropriate, with no offensive language or themes.`;
 

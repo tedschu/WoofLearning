@@ -64,6 +64,7 @@ function App() {
     reading_L3_points: 0,
     reading_L4_points: 0,
     reading_L5_points: 0,
+    reading_perfect_streak: 0,
   });
   const [badgeLevel, setBadgeLevel] = useState<BadgeLevel>({
     math_level: 1,
@@ -204,6 +205,7 @@ function App() {
               reading_L3_points: data.score_reading.reading_L3_points,
               reading_L4_points: data.score_reading.reading_L4_points,
               reading_L5_points: data.score_reading.reading_L5_points,
+              reading_perfect_streak: data.score_reading.reading_perfect_streak ?? 0,
             });
             setUserMathBadges(data.badge_math);
             setUserReadingBadges(data.badge_reading);

@@ -19,6 +19,7 @@ export type UserScore = {
   reading_L3_points: number;
   reading_L4_points: number;
   reading_L5_points: number;
+  reading_perfect_streak: number;
 };
 
 export type BadgeLevel = {
@@ -210,6 +211,9 @@ export type StoryResponseData = {
   answer_1: string;
   answer_2: string;
   answer_3: string;
+  hint_1: string;
+  hint_2: string;
+  hint_3: string;
 };
 
 export type EvaluationData = {

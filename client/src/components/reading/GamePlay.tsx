@@ -77,6 +77,9 @@ function GamePlay({
       answer_1: "",
       answer_2: "",
       answer_3: "",
+      hint_1: "",
+      hint_2: "",
+      hint_3: "",
     }
   );
   const [evaluationData, setEvaluationData] = useState<EvaluationData>({
@@ -95,19 +98,28 @@ function GamePlay({
   const [errorText, setErrorText] = useState("");
   const [potentialPoints, setPotentialPoints] = useState(0);
 
+  // Staggered reveal: how many question results are currently visible (0–3)
+  const [revealedCount, setRevealedCount] = useState(0);
+
+  // Hints: tracks which hints have been revealed per question
+  const [hintsShown, setHintsShown] = useState([false, false, false]);
+  // Tracks which questions had a hint used (affects points)
+  const [hintsUsed, setHintsUsed] = useState([false, false, false]);
+
   // ***** STORY GENERATION *****
 
-  // Handles button click "write story," setting TriggerNewStory = true which also triggers the useEffect above
   const handleClick = () => {
     setCircularProgress(true);
     setTriggerNewStory(true);
     setShowEvaluationChecks(false);
+    setRevealedCount(0);
     setGotWrong(false);
     setErrorText("");
     setPotentialPoints(pointsToWin);
+    setHintsShown([false, false, false]);
+    setHintsUsed([false, false, false]);
   };
 
-  // Triggers the getStory function but only after all input values (slider, prompt, storylength, storyType) have been updated
   useEffect(() => {
     if (triggerNewStory) {
       getStory();
@@ -115,7 +127,6 @@ function GamePlay({
     }
   }, [triggerNewStory, storyLength, sliderValue, storyPrompt, storyType]);
 
-  // Function to hit generate_story endpoint (e.g. Anthropic API) to get a story based on values passed in
   const getStory = async () => {
     try {
       const queryParams = new URLSearchParams({
@@ -147,9 +158,10 @@ function GamePlay({
         answer_1: "",
         answer_2: "",
         answer_3: "",
+        hint_1: data.Hint_1 ?? "",
+        hint_2: data.Hint_2 ?? "",
+        hint_3: data.Hint_3 ?? "",
       });
-
-      //return await response.json();
     } catch (error) {
       console.error("Error generating story:", error);
       setCircularProgress(false);
@@ -158,7 +170,7 @@ function GamePlay({
   };
 
   // ***** USER ANSWERS AND EVALUATION *****
-  // Handles user input values in "answer" boxes
+
   const setFormValues = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newObj = { ...storyResponseData };
     const inputName = event.target.name as keyof StoryResponseData;
@@ -166,8 +178,6 @@ function GamePlay({
     setStoryResponseData(newObj);
   };
 
-  // Submit button that calls "evaluateAnswers" function / API call
-  // Only calls evaluateAnswers IF there are no user responses (answers) that are "bad words", from the badWords list.
   const submit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (checkBadWords() === true) {
@@ -179,25 +189,21 @@ function GamePlay({
     }
   };
 
-  // Stores user responses (answers) into a separate array so that checkBadWords function can iterate through
   const userResponsesArray = [
     storyResponseData.answer_1,
     storyResponseData.answer_2,
     storyResponseData.answer_3,
   ];
 
-  // Checks userResponsesArray for "bad words" and returns "true" to the submit function, which will throw an error message to the user.
   const checkBadWords = () => {
     const lowerCaseBadWords = userResponsesArray.map((word) =>
       word.toLowerCase()
     );
-
     for (let i = 0; i < lowerCaseBadWords.length; i++) {
       if (badWords.includes(lowerCaseBadWords[i])) return true;
     }
   };
 
-  // Triggers the evaluateAnswers function but only after all input values (storyResponseData) have been updated
   useEffect(() => {
     if (triggerNewEvaluation) {
       evaluateAnswers(storyResponseData);
@@ -205,7 +211,6 @@ function GamePlay({
     }
   }, [triggerNewEvaluation, storyResponseData]);
 
-  // Function to hit evaluate_answers endpoint (e.g. Anthropic API) to get a story based on values passed in
   const evaluateAnswers = async (storyResponseData: StoryResponseData) => {
     try {
       const response = await fetch("/anthropic/evaluate_answers", {
@@ -228,14 +233,13 @@ function GamePlay({
         const textResponse = await response.text();
         console.error("Server response:", textResponse);
         setErrorText("Make sure you've answered all the questions.");
-        throw new Error("Failed to evalaute the answers");
         setCircularProgressSubmit(false);
+        throw new Error("Failed to evaluate the answers");
       }
 
       const data = await response.json();
       console.log(data);
 
-      // Sets API response data into evaluationData state
       setCircularProgressSubmit(false);
       setEvaluationData({
         is_correct_1: data.evaluations[0].is_correct,
@@ -248,15 +252,20 @@ function GamePlay({
       });
 
       setShowEvaluationChecks(true);
-      // Only calculate updated score if the user got at least 1 question correct (e.g. at least 1 point)
+
+      // Staggered reveal: show one result every 700ms
+      setRevealedCount(0);
+      setTimeout(() => setRevealedCount(1), 300);
+      setTimeout(() => setRevealedCount(2), 1000);
+      setTimeout(() => setRevealedCount(3), 1700);
+
       if (data.overall_score > 0) {
         calculateScore(data.overall_score);
-        setGotRight(true);
-      } else if (data.overall_score == 0) {
-        setGotWrong(true);
+        // Delay the success alert until all three are revealed
+        setTimeout(() => setGotRight(true), 2000);
+      } else {
+        setTimeout(() => setGotWrong(true), 2000);
       }
-
-      //return await response.json();
     } catch (error) {
       console.error("Error evaluating answers:", error);
       setCircularProgressSubmit(false);
@@ -264,32 +273,42 @@ function GamePlay({
     }
   };
 
-  // Takes in raw evaluation score (0 - 3 questions correct) and adds multipliers to create point system.
-  // Multiplier increases as the difficulty slider increases
   function calculateScore(rawScore: number) {
-    let addToScore = potentialPoints * rawScore;
+    // Apply 1.5x multiplier if this round completes a streak of 3+ perfect scores
+    const currentStreak = userScore.reading_perfect_streak ?? 0;
+    const isStreakBonus = rawScore === 3 && currentStreak >= 2;
+    const basePoints = potentialPoints * rawScore;
+    const addToScore = isStreakBonus ? Math.round(basePoints * 1.5) : basePoints;
+
+    // Deduct half points for each correct answer where a hint was used
+    const hintPenalty = [0, 1, 2].reduce((total, i) => {
+      const isCorrect = [
+        evaluationData.is_correct_1,
+        evaluationData.is_correct_2,
+        evaluationData.is_correct_3,
+      ][i];
+      return total + (hintsUsed[i] && isCorrect ? Math.round(potentialPoints / 2) : 0);
+    }, 0);
+
+    const finalPoints = Math.max(0, addToScore - hintPenalty);
 
     function getReadingLevelKey(level: number): keyof UserScore {
-      const key = `reading_L${level}_points` as keyof UserScore;
-      return key;
+      return `reading_L${level}_points` as keyof UserScore;
     }
 
     const readingKey = getReadingLevelKey(sliderValue);
-
     const updatedScore: Partial<UserScore> = {};
-
-    updatedScore.reading_score = addToScore + userScore.reading_score;
-    updatedScore[readingKey] = addToScore + userScore[readingKey];
+    updatedScore.reading_score = finalPoints + userScore.reading_score;
+    updatedScore[readingKey] = finalPoints + userScore[readingKey];
 
     console.log("updatedScore is: ", updatedScore);
 
-    postUserScore(updatedScore);
-    setPointsWon(addToScore);
+    postUserScore(updatedScore, rawScore);
+    setPointsWon(finalPoints);
     updateBadges(updatedScore.reading_score);
   }
 
-  // Function to pass the updated score to the database, update scores state values for gameplay
-  const postUserScore = async (updatedScore: Partial<UserScore>) => {
+  const postUserScore = async (updatedScore: Partial<UserScore>, rawScore: number) => {
     try {
       const storedToken = localStorage.getItem("token");
 
@@ -299,17 +318,17 @@ function GamePlay({
           "Content-Type": "application/json",
           Authorization: `Bearer ${storedToken}`,
         },
-        body: JSON.stringify(updatedScore),
+        body: JSON.stringify({ ...updatedScore, overall_score: rawScore }),
       });
 
       const data = await response.json();
       console.log(data);
 
-      // SET ALL STATE VALUES HERE (SCORES, BADGES, USER INFO, ETC.)
       if (response.ok) {
         setUserScore((prevScores) => ({
           ...prevScores,
           ...updatedScore,
+          reading_perfect_streak: data.reading_perfect_streak ?? prevScores.reading_perfect_streak,
         }));
       }
     } catch (error) {
@@ -317,7 +336,6 @@ function GamePlay({
     }
   };
 
-  // Function setting the logic on updating badges (true / false) based on point totals
   function updateBadges(newTotalScore: number) {
     setUserReadingBadges((prevBadges) => {
       const updatedBadges: Partial<UserReadingBadges> = {};
@@ -325,16 +343,10 @@ function GamePlay({
       if (newTotalScore >= 100 && !userReadingBadges.badge_1_1_bernese) {
         updatedBadges.badge_1_1_bernese = true;
         setModalBadge("badge_1_1_bernese");
-      } else if (
-        newTotalScore >= 250 &&
-        !userReadingBadges.badge_1_2_chihuahua
-      ) {
+      } else if (newTotalScore >= 250 && !userReadingBadges.badge_1_2_chihuahua) {
         updatedBadges.badge_1_2_chihuahua = true;
         setModalBadge("badge_1_2_chihuahua");
-      } else if (
-        newTotalScore >= 500 &&
-        !userReadingBadges.badge_1_3_waterdog
-      ) {
+      } else if (newTotalScore >= 500 && !userReadingBadges.badge_1_3_waterdog) {
         updatedBadges.badge_1_3_waterdog = true;
         setModalBadge("badge_1_3_waterdog");
       } else if (newTotalScore >= 1000 && !userReadingBadges.badge_1_4_boxer) {
@@ -349,48 +361,26 @@ function GamePlay({
       } else if (newTotalScore >= 2500 && !userReadingBadges.badge_1_7_cat) {
         updatedBadges.badge_1_7_cat = true;
         setModalBadge("badge_1_7_cat");
-      } else if (
-        newTotalScore >= 3000 &&
-        !userReadingBadges.badge_1_8_goldendoodle
-      ) {
+      } else if (newTotalScore >= 3000 && !userReadingBadges.badge_1_8_goldendoodle) {
         updatedBadges.badge_1_8_goldendoodle = true;
         setModalBadge("badge_1_8_goldendoodle");
-        // SETS badgeLevel to "2" WHICH WILL RENDER THE SECOND SET (LEVEL) OF BADGES
-        setBadgeLevel((prev) => ({
-          ...prev,
-          reading_level: 2,
-        }));
-      } else if (
-        newTotalScore >= 3250 &&
-        !userReadingBadges.badge_2_1_borderCollie
-      ) {
+        setBadgeLevel((prev) => ({ ...prev, reading_level: 2 }));
+      } else if (newTotalScore >= 3250 && !userReadingBadges.badge_2_1_borderCollie) {
         updatedBadges.badge_2_1_borderCollie = true;
         setModalBadge("badge_2_1_borderCollie");
-      } else if (
-        newTotalScore >= 3500 &&
-        !userReadingBadges.badge_2_2_terrier
-      ) {
+      } else if (newTotalScore >= 3500 && !userReadingBadges.badge_2_2_terrier) {
         updatedBadges.badge_2_2_terrier = true;
         setModalBadge("badge_2_2_terrier");
-      } else if (
-        newTotalScore >= 3750 &&
-        !userReadingBadges.badge_2_3_australianShepherd
-      ) {
+      } else if (newTotalScore >= 3750 && !userReadingBadges.badge_2_3_australianShepherd) {
         updatedBadges.badge_2_3_australianShepherd = true;
         setModalBadge("badge_2_3_australianShepherd");
-      } else if (
-        newTotalScore >= 4000 &&
-        !userReadingBadges.badge_2_4_shibaInu
-      ) {
+      } else if (newTotalScore >= 4000 && !userReadingBadges.badge_2_4_shibaInu) {
         updatedBadges.badge_2_4_shibaInu = true;
         setModalBadge("badge_2_4_shibaInu");
       } else if (newTotalScore >= 4500 && !userReadingBadges.badge_2_5_cat) {
         updatedBadges.badge_2_5_cat = true;
         setModalBadge("badge_2_5_cat");
-      } else if (
-        newTotalScore >= 5000 &&
-        !userReadingBadges.badge_2_6_bernese
-      ) {
+      } else if (newTotalScore >= 5000 && !userReadingBadges.badge_2_6_bernese) {
         updatedBadges.badge_2_6_bernese = true;
         setModalBadge("badge_2_6_bernese");
       } else if (newTotalScore >= 6000 && !userReadingBadges.badge_2_7_poodle) {
@@ -411,7 +401,6 @@ function GamePlay({
     });
   }
 
-  // Function to pass the updated badges to the database
   const postUserBadges = async (updatedBadges: Partial<UserReadingBadges>) => {
     try {
       const storedToken = localStorage.getItem("token");
@@ -430,17 +419,11 @@ function GamePlay({
       if (!response.ok) {
         throw new Error(data.message || "Failed to update badges");
       }
-
-      // State values now being set in updateBadges
-      // if (response.ok) {
-      //   //setUserBadges(data.badge);
-      // }
     } catch (error) {
       console.error("Error fetching user data:", error);
     }
   };
 
-  // Controls alert to user after submitting their answers, showing how many questions they got right and points accrued. Visible for 3.5 seconds.
   useEffect(() => {
     let timer: NodeJS.Timeout;
     if (gotRight) {
@@ -451,22 +434,24 @@ function GamePlay({
     return () => clearTimeout(timer);
   }, [gotRight]);
 
-  // On "find another story" button. Finds a random value in the storyPrompt array and sets it in state (storyPrompt)
   const selectPrompt = () => {
     const randomIndex = Math.floor(Math.random() * storyPrompts.length);
     const prompt = storyPrompts[randomIndex];
     setStoryPrompt(prompt);
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth", // for smooth scrolling
-    });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // Opens modal window showing new badge
   const openModal = () => {
-    // console.log("Inside openModal: ", modalBadge);
     setIsModalOpen(true);
   };
+
+  const hints = [storyResponseData.hint_1, storyResponseData.hint_2, storyResponseData.hint_3];
+  const questions = [storyResponseData.question_1, storyResponseData.question_2, storyResponseData.question_3];
+  const answerKeys = ["answer_1", "answer_2", "answer_3"] as const;
+  const isCorrects = [evaluationData.is_correct_1, evaluationData.is_correct_2, evaluationData.is_correct_3];
+  const feedbacks = [evaluationData.feedback_1, evaluationData.feedback_2, evaluationData.feedback_3];
+
+  const currentStreak = userScore.reading_perfect_streak ?? 0;
 
   return (
     <>
@@ -485,105 +470,99 @@ function GamePlay({
               <h3 className="gamePlayHeaders">
                 Answer these to win up to {potentialPoints * 3} points!
               </h3>
+
+              {/* Streak display */}
+              {currentStreak >= 1 && (
+                <div className="streakBadge">
+                  🔥 {currentStreak} perfect {currentStreak === 1 ? "round" : "rounds"} in a row!
+                  {currentStreak >= 2 && (
+                    <span className="streakBonus"> Next perfect round = 1.5× points!</span>
+                  )}
+                </div>
+              )}
+
               <form action="" className="answerForm" onSubmit={submit}>
-                <p>{storyResponseData.question_1}</p>
-                <div className="answerInputBox">
-                  <div className="empty"></div>
-                  <input
-                    type="text"
-                    placeholder="Your answer..."
-                    name="answer_1"
-                    autoComplete="off"
-                    value={storyResponseData.answer_1}
-                    onChange={setFormValues}
-                  />
-                  {showEvaluationChecks && (
-                    <div className="rightWrongIcon">
-                      {evaluationData.is_correct_1 ? (
-                        <CheckCircleIcon className="checkIcon" />
-                      ) : (
-                        <TipsAndUpdatesIcon className="bulbIcon" />
+                {questions.map((question, i) => (
+                  <div key={i}>
+                    <p>{question}</p>
+
+                    {/* Hint button — only shown before submission */}
+                    {!showEvaluationChecks && hints[i] && (
+                      <div className="hintContainer">
+                        {hintsShown[i] ? (
+                          <p className="hintText">💡 {hints[i]}</p>
+                        ) : (
+                          <button
+                            type="button"
+                            className="hintButton"
+                            onClick={() => {
+                              const updated = [...hintsShown];
+                              updated[i] = true;
+                              setHintsShown(updated);
+                              const usedUpdated = [...hintsUsed];
+                              usedUpdated[i] = true;
+                              setHintsUsed(usedUpdated);
+                            }}
+                          >
+                            Need a hint?
+                          </button>
+                        )}
+                      </div>
+                    )}
+
+                    <div className="answerInputBox">
+                      <div className="empty"></div>
+                      <input
+                        type="text"
+                        placeholder="Your answer..."
+                        name={answerKeys[i]}
+                        autoComplete="off"
+                        value={storyResponseData[answerKeys[i]]}
+                        onChange={setFormValues}
+                      />
+                      {/* Staggered reveal: only show icon when this question's index < revealedCount */}
+                      {showEvaluationChecks && revealedCount > i && (
+                        <div className={`rightWrongIcon resultReveal`}>
+                          {isCorrects[i] ? (
+                            <CheckCircleIcon className="checkIcon" />
+                          ) : (
+                            <TipsAndUpdatesIcon className="bulbIcon" />
+                          )}
+                        </div>
                       )}
                     </div>
-                  )}
-                </div>
-                {showEvaluationChecks && (
-                  <div className="feedback">
-                    {!evaluationData.is_correct_1 && evaluationData.feedback_1}
+
+                    {showEvaluationChecks && revealedCount > i && (
+                      <div className="feedback resultReveal">
+                        {!isCorrects[i] && feedbacks[i]}
+                        {isCorrects[i] && hintsUsed[i] && (
+                          <span className="hintPenaltyNote"> (half points — hint used)</span>
+                        )}
+                      </div>
+                    )}
                   </div>
-                )}
-                <p>{storyResponseData.question_2}</p>
-                <div className="answerInputBox">
-                  <div className="empty"></div>
-                  <input
-                    type="text"
-                    placeholder="Your answer..."
-                    name="answer_2"
-                    autoComplete="off"
-                    value={storyResponseData.answer_2}
-                    onChange={setFormValues}
-                  />
-                  {showEvaluationChecks && (
-                    <div className="rightWrongIcon">
-                      {evaluationData.is_correct_2 ? (
-                        <CheckCircleIcon className="checkIcon" />
-                      ) : (
-                        <TipsAndUpdatesIcon className="bulbIcon" />
-                      )}
-                    </div>
-                  )}
-                </div>
-                {showEvaluationChecks && (
-                  <div className="feedback">
-                    {!evaluationData.is_correct_2 && evaluationData.feedback_2}
-                  </div>
-                )}
-                <p>{storyResponseData.question_3}</p>
-                <div className="answerInputBox">
-                  <div className="empty"></div>
-                  <input
-                    type="text"
-                    placeholder="Your answer..."
-                    name="answer_3"
-                    autoComplete="off"
-                    value={storyResponseData.answer_3}
-                    onChange={setFormValues}
-                  />
-                  {showEvaluationChecks && (
-                    <div className="rightWrongIcon">
-                      {evaluationData.is_correct_3 ? (
-                        <CheckCircleIcon className="checkIcon" />
-                      ) : (
-                        <TipsAndUpdatesIcon className="bulbIcon" />
-                      )}
-                    </div>
-                  )}
-                </div>
-                {showEvaluationChecks && (
-                  <div className="feedback">
-                    {!evaluationData.is_correct_3 && evaluationData.feedback_3}
-                  </div>
-                )}
+                ))}
+
                 {circularProgressSubmit && <CircularColor />}
-                {gotRight && (
+                {gotRight && revealedCount >= 3 && (
                   <div className="rightAnswerAlert">
                     <h4>
-                      Yay! You got {evaluationData.score} correct, for +
-                      {pointsWon} points!
+                      Yay! You got {evaluationData.score} correct, for +{pointsWon} points!
+                      {currentStreak >= 3 && (
+                        <span> 🔥 Streak bonus applied!</span>
+                      )}
                     </h4>
                   </div>
                 )}
-                {gotWrong && (
+                {gotWrong && revealedCount >= 3 && (
                   <div className="wrongAnswerAlert">
                     <h4>Good effort. Keep trying!</h4>
                   </div>
                 )}
                 {!showEvaluationChecks && (
-                  <>
-                    <div className="readingButtonSpacer">
-                      <button className="button login">SUBMIT</button>
-                    </div>
-                  </>
+                  <div className="readingButtonSpacer">
+                    <button className="button login">SUBMIT</button>
+                  </div>
                 )}
               </form>
             </>
