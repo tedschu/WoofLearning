@@ -4,7 +4,7 @@
 import { useNavigate } from "react-router-dom";
 import React, { useEffect } from "react";
 import { CurrentApp, UserInfo } from "../types/types";
-import cat from "../assets/badges/badge_2_5_cat.png";
+import catsinoImg from "../assets/catsino.png";
 import { Link } from "react-router-dom";
 
 type AppSelectorProps = {
@@ -63,11 +63,13 @@ function AppSelector({ setCurrentApp, userInfo }: AppSelectorProps) {
               Woof Math
             </button>
           </div>
-        </div>
-        <div className="catSecretLink">
-          <Link to={"/secretGames"}>
-            <img src={cat} alt="" className="catLink" />
-          </Link>
+          <div className="appSelector-catsino-row">
+            <Link to="/secretGames" className="button gameSelect-base gameSelect-catsino">
+              <span className="gameSelect-new-badge">NEW</span>
+              Catsino Royale
+              <img src={catsinoImg} alt="" className="gameSelect-cat-img" />
+            </Link>
+          </div>
         </div>
       </div>
     </>

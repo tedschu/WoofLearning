@@ -32,6 +32,11 @@ function SecretGames() {
             Word Scramble
           </Link>
         </div>
+        <div className="secretGameBox">
+          <Link to={"/basketball"} className="connectLink">
+            Math Basketball
+          </Link>
+        </div>
         <div>
           <Link to={"/"}>
             <button className="secretBackButton">...Or, go back</button>

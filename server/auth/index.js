@@ -142,13 +142,6 @@ router.post("/login", async (req, res) => {
           mode: "insensitive",
         },
       },
-    });
-
-    //checks if the user exists
-    const userMatch = await prisma.user.findUnique({
-      where: {
-        id: user.id,
-      },
       select: {
         id: true,
         username: true,
@@ -156,13 +149,13 @@ router.post("/login", async (req, res) => {
       },
     });
 
-    if (!userMatch) {
-      return res.status(401).send({ message: "Invalid login credentials" });
+    if (!user) {
+      return res.status(401).json({ message: "Invalid login credentials" });
     }
 
-    const passMatch = await bcrypt.compare(password, userMatch.password);
+    const passMatch = await bcrypt.compare(password, user.password);
     if (!passMatch) {
-      return res.status(401).send({ message: "Invalid login credentials" });
+      return res.status(401).json({ message: "Invalid login credentials" });
     }
 
     await prisma.user.update({
@@ -178,14 +171,14 @@ router.post("/login", async (req, res) => {
     const token = jwt.sign(
       {
         exp: Math.floor(Date.now() / 1000) + 60 * 60 * 48,
-        data: { id: userMatch.id, username: userMatch.username },
+        data: { id: user.id, username: user.username },
       },
       process.env.JWT_SECRET
     );
-    res.status(200).send({ token: token, id: userMatch.id });
+    res.status(200).json({ token: token, id: user.id });
   } catch (error) {
     console.log(error);
-    res.sendStatus(500);
+    res.status(500).json({ error: "Login failed" });
   }
 });
 

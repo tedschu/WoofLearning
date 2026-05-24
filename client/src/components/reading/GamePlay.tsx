@@ -105,6 +105,8 @@ function GamePlay({
   const [hintsShown, setHintsShown] = useState([false, false, false]);
   // Tracks which questions had a hint used (affects points)
   const [hintsUsed, setHintsUsed] = useState([false, false, false]);
+  // Modal shown when user tries to use a second hint
+  const [showHintLimitModal, setShowHintLimitModal] = useState(false);
 
   // ***** STORY GENERATION *****
 
@@ -118,6 +120,7 @@ function GamePlay({
     setPotentialPoints(pointsToWin);
     setHintsShown([false, false, false]);
     setHintsUsed([false, false, false]);
+    setShowHintLimitModal(false);
   };
 
   useEffect(() => {
@@ -447,6 +450,7 @@ function GamePlay({
 
   const hints = [storyResponseData.hint_1, storyResponseData.hint_2, storyResponseData.hint_3];
   const questions = [storyResponseData.question_1, storyResponseData.question_2, storyResponseData.question_3];
+  const anyHintUsed = hintsUsed.some((h) => h);
   const answerKeys = ["answer_1", "answer_2", "answer_3"] as const;
   const isCorrects = [evaluationData.is_correct_1, evaluationData.is_correct_2, evaluationData.is_correct_3];
   const feedbacks = [evaluationData.feedback_1, evaluationData.feedback_2, evaluationData.feedback_3];
@@ -490,7 +494,18 @@ function GamePlay({
                     {!showEvaluationChecks && hints[i] && (
                       <div className="hintContainer">
                         {hintsShown[i] ? (
-                          <p className="hintText">💡 {hints[i]}</p>
+                          <p className="hintText">
+                            💡 {hints[i]}
+                            <span className="hintPointsWarning"> (using a hint takes away half the points)</span>
+                          </p>
+                        ) : anyHintUsed ? (
+                          <button
+                            type="button"
+                            className="hintButton hintButtonDisabled"
+                            onClick={() => setShowHintLimitModal(true)}
+                          >
+                            Need a hint?
+                          </button>
                         ) : (
                           <button
                             type="button"
@@ -575,6 +590,21 @@ function GamePlay({
           )}
           {errorText && <h3 style={{ color: "red" }}>{errorText}</h3>}
         </div>
+        {showHintLimitModal && (
+          <div className="hintLimitOverlay" onClick={() => setShowHintLimitModal(false)}>
+            <div className="hintLimitModal" onClick={(e) => e.stopPropagation()}>
+              <p>You can only use <strong>1 hint per story</strong>. Choose wisely!</p>
+              <button
+                type="button"
+                className="button login"
+                onClick={() => setShowHintLimitModal(false)}
+              >
+                Got it
+              </button>
+            </div>
+          </div>
+        )}
+
         <p className="ai-disclaimer">
           {" "}
           <AutoAwesomeIcon
