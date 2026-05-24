@@ -34,7 +34,7 @@ function SecretGames() {
         </div>
         <div className="secretGameBox">
           <Link to={"/basketball"} className="connectLink">
-            Math Basketball
+            Math-sketball
           </Link>
         </div>
         <div>

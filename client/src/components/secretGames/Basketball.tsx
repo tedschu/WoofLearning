@@ -55,13 +55,13 @@ const BOARD_CY = 106;
 const CLEAN_TOL = 17;       // ball clears rim cleanly: HOOP_RX(30) - ball_r_at_hoop(~13)
 const RIM_OUTER = 44;       // outer rim clip: HOOP_RX(30) + ball_r_at_hoop(~13) + 1
 const BACKBOARD_PWR = 0.82;
-const ATTEMPTS_PER_PLAYER = 5;  // questions each player faces per round
+const TOTAL_ROUNDS = 5;
 
-// Hoop movement grows with shots taken in the current round
-function hoopConfig(shotCount) {
-  const c = Math.min(shotCount, 6);
-  const amp = c * 16;
-  const period = Math.max(4.2 - c * 0.38, 1.8);
+// Hoop movement grows each round: round 1 = static, round 5 = fastest
+function hoopConfig(roundNum) {
+  const c = Math.max(0, roundNum - 1); // 0..4
+  const amp = c * 22;
+  const period = Math.max(4.0 - c * 0.48, 2.0);
   return { amp, omega: c > 0 ? (2 * Math.PI) / period : 0 };
 }
 
@@ -246,7 +246,7 @@ function drawScene(ctx, hoopOffset, bx, by, br, aimTarget, hitFlash) {
 
 // ─── Scoreboard component (defined outside to avoid recreation on re-render) ──
 
-function Scoreboard({ names, roundPoints, playerAttempts, roundWins, totalRound, currentPlayer }) {
+function Scoreboard({ names, roundPoints, totalRound, currentPlayer }) {
   return (
     <div className="bball-scoreboard">
       <div className={`bball-sb-team ${currentPlayer === 0 ? "active-team" : ""}`}>
@@ -254,20 +254,15 @@ function Scoreboard({ names, roundPoints, playerAttempts, roundWins, totalRound,
         <div className="bball-sb-digit-box">
           <span className="bball-sb-digit">{roundPoints[0]}</span>
         </div>
-        <div className="bball-sb-attempts">{playerAttempts[0]}/{ATTEMPTS_PER_PLAYER}</div>
-        <div className="bball-sb-wins">{roundWins[0]} {roundWins[0] === 1 ? "Win" : "Wins"}</div>
       </div>
       <div className="bball-sb-center">
-        <div className="bball-sb-rd">RD {totalRound}</div>
-        <div className="bball-sb-to5">5 SHOTS</div>
+        <div className="bball-sb-rd">Round {totalRound} / {TOTAL_ROUNDS}</div>
       </div>
       <div className={`bball-sb-team ${currentPlayer === 1 ? "active-team" : ""}`}>
         <div className="bball-sb-name">{names[1].toUpperCase()}</div>
         <div className="bball-sb-digit-box">
           <span className="bball-sb-digit">{roundPoints[1]}</span>
         </div>
-        <div className="bball-sb-attempts">{playerAttempts[1]}/{ATTEMPTS_PER_PLAYER}</div>
-        <div className="bball-sb-wins">{roundWins[1]} {roundWins[1] === 1 ? "Win" : "Wins"}</div>
       </div>
     </div>
   );
@@ -280,11 +275,9 @@ export default function Basketball() {
   const [names, setNames] = useState(["Player 1", "Player 2"]);
   const [phase, setPhase] = useState("setup");
   const [currentPlayer, setCurrentPlayer] = useState(0);
-  const [roundPoints, setRoundPoints] = useState([0, 0]);   // baskets made this round
-  const [playerAttempts, setPlayerAttempts] = useState([0, 0]); // questions faced this round
-  const [roundWins, setRoundWins] = useState([0, 0]);
+  const [roundPoints, setRoundPoints] = useState([0, 0]);   // cumulative baskets across all rounds
   const [totalRound, setTotalRound] = useState(1);
-  const [roundWinner, setRoundWinner] = useState(0);
+  const [gameWinner, setGameWinner] = useState(-1);
   const [currentQ, setCurrentQ] = useState({ q: "", a: 0 });
   const [userAnswer, setUserAnswer] = useState("");
   const [answeredCorrect, setAnsweredCorrect] = useState(null);
@@ -304,8 +297,7 @@ export default function Basketball() {
 
   // Mutable refs for synchronous reads in advanceTurn (avoid stale closures)
   const roundPointsRef = useRef([0, 0]);
-  const playerAttemptsRef = useRef([0, 0]);
-  const roundShotCountRef = useRef(0); // drives hoop movement within round
+  const totalRoundRef = useRef(1); // drives hoop oscillation speed
 
   // Stable refs
   const phaseRef = useRef(phase);
@@ -327,8 +319,8 @@ export default function Basketball() {
       const dt = Math.min((now - last) / 1000, 0.1);
       last = now;
 
-      // Hoop oscillation — grows with each shot attempt this round
-      const { amp, omega } = hoopConfig(roundShotCountRef.current);
+      // Hoop oscillation — grows each round (round 1 = static, round 5 = fastest)
+      const { amp, omega } = hoopConfig(totalRoundRef.current);
       if (omega > 0) {
         hoopTimeRef.current += dt;
         hoopOffsetRef.current = amp * Math.sin(hoopTimeRef.current * omega);
@@ -532,7 +524,7 @@ export default function Basketball() {
     const player = currentPlayerRef.current;
     const made = shotMade;
     const timer = setTimeout(() => {
-      advanceTurn(player, made, true);
+      advanceTurn(player, made);
       setShotMade(null);
     }, 1600);
     return () => clearTimeout(timer);
@@ -540,71 +532,45 @@ export default function Basketball() {
 
   // ── Game logic ──────────────────────────────────────────────────────────
 
-  // wasShot: true when the player took a shot (drives hoop speed; wrong answers don't count)
-  function advanceTurn(player, scored, wasShot = false) {
-    if (wasShot) roundShotCountRef.current += 1;
-
-    // Synchronous mutation of refs for immediate reads in this call
+  // Each round: P1 goes, then P2 goes (1 question each). After both go, next round or game over.
+  function advanceTurn(player, scored) {
     if (scored) roundPointsRef.current[player]++;
-    playerAttemptsRef.current[player]++;
-
-    const pts = [roundPointsRef.current[0], roundPointsRef.current[1]];
-    const atts = [playerAttemptsRef.current[0], playerAttemptsRef.current[1]];
-
+    const pts = [...roundPointsRef.current];
     setRoundPoints([...pts]);
-    setPlayerAttempts([...atts]);
 
-    const bothDone = atts[0] >= ATTEMPTS_PER_PLAYER && atts[1] >= ATTEMPTS_PER_PLAYER;
-
-    if (bothDone) {
-      if (pts[0] !== pts[1]) {
-        // Clear winner
-        const winner = pts[0] > pts[1] ? 0 : 1;
-        setRoundWins((w) => { const nw = [w[0], w[1]]; nw[winner]++; return nw; });
-        setTotalRound((r) => r + 1);
-        roundShotCountRef.current = 0;
-        setRoundWinner(winner);
-        setCurrentPlayer(winner);
-        setPhase("roundOver");
-      } else {
-        // Tie → sudden death: each gets one more question
-        playerAttemptsRef.current[0] = ATTEMPTS_PER_PLAYER - 1;
-        playerAttemptsRef.current[1] = ATTEMPTS_PER_PLAYER - 1;
-        setPlayerAttempts([ATTEMPTS_PER_PLAYER - 1, ATTEMPTS_PER_PLAYER - 1]);
-        const nextPlayer = player === 0 ? 1 : 0;
-        setCurrentPlayer(nextPlayer);
-        setCurrentQ(makeQuestion(difficultyRef.current));
-        setUserAnswer("");
-        setAnsweredCorrect(null);
-        setPhase("question");
-      }
-    } else {
-      // Alternate, but skip a player who has used all their attempts
-      const other = player === 0 ? 1 : 0;
-      const nextPlayer = atts[other] < ATTEMPTS_PER_PLAYER ? other : player;
-      setCurrentPlayer(nextPlayer);
+    if (player === 0) {
+      // P1 done — P2's turn in the same round
+      setCurrentPlayer(1);
       setCurrentQ(makeQuestion(difficultyRef.current));
       setUserAnswer("");
       setAnsweredCorrect(null);
       setPhase("question");
+    } else {
+      // Both players done — end of round
+      const currentRound = totalRoundRef.current;
+      if (currentRound < TOTAL_ROUNDS) {
+        setPhase("roundOver");
+      } else {
+        // Game over
+        const winner = pts[0] > pts[1] ? 0 : pts[1] > pts[0] ? 1 : -1;
+        setGameWinner(winner);
+        setPhase("gameOver");
+      }
     }
   }
 
   function startGame() {
     roundPointsRef.current = [0, 0];
-    playerAttemptsRef.current = [0, 0];
-    roundShotCountRef.current = 0;
+    totalRoundRef.current = 1;
     hoopTimeRef.current = 0;
-    setPhase("question");
-    setCurrentPlayer(0);
     setRoundPoints([0, 0]);
-    setPlayerAttempts([0, 0]);
-    setRoundWins([0, 0]);
     setTotalRound(1);
-    setRoundWinner(0);
+    setGameWinner(-1);
+    setCurrentPlayer(0);
     setCurrentQ(makeQuestion(difficulty));
     setUserAnswer("");
     setAnsweredCorrect(null);
+    setPhase("question");
   }
 
   function handleAnswer(e) {
@@ -621,20 +587,17 @@ export default function Basketball() {
     } else {
       setAnsweredCorrect(false);
       setTimeout(() => {
-        advanceTurn(currentPlayer, false, false); // wrong answer — no shot taken
+        advanceTurn(currentPlayer, false);
       }, 1400);
     }
   }
 
   function startNextRound() {
-    roundPointsRef.current = [0, 0];
-    playerAttemptsRef.current = [0, 0];
-    roundShotCountRef.current = 0;
+    const nextRound = totalRoundRef.current + 1;
+    totalRoundRef.current = nextRound;
     hoopTimeRef.current = 0;
-    const nextPlayer = roundWinner === 0 ? 1 : 0;
-    setRoundPoints([0, 0]);
-    setPlayerAttempts([0, 0]);
-    setCurrentPlayer(nextPlayer);
+    setTotalRound(nextRound);
+    setCurrentPlayer(0);
     setCurrentQ(makeQuestion(difficulty));
     setUserAnswer("");
     setAnsweredCorrect(null);
@@ -643,7 +606,7 @@ export default function Basketball() {
 
   // ── Shared scoreboard props ─────────────────────────────────────────────
 
-  const sbProps = { names, roundPoints, playerAttempts, roundWins, totalRound, currentPlayer };
+  const sbProps = { names, roundPoints, totalRound, currentPlayer };
 
   // ── Render ──────────────────────────────────────────────────────────────
 
@@ -652,8 +615,8 @@ export default function Basketball() {
       <div className="bball-page">
         <div className="bball-setup-card">
           <div className="bball-logo">🏀</div>
-          <h1 className="bball-title">Math Basketball</h1>
-          <p className="bball-subtitle">Each player gets 5 shots — most baskets wins!</p>
+          <h1 className="bball-title">Math-sketball</h1>
+          <p className="bball-subtitle">5 rounds · 1 shot each · most baskets wins!</p>
           <div className="bball-field">
             <label className="bball-label">Player 1</label>
             <input className="bball-input" value={names[0]}
@@ -685,28 +648,50 @@ export default function Basketball() {
   }
 
   if (phase === "roundOver") {
+    const roundsLeft = TOTAL_ROUNDS - totalRound;
+    return (
+      <div className="bball-page">
+        <div className="bball-round-card">
+          <h2 className="bball-round-title">Round {totalRound} complete!</h2>
+          <div className="bball-scores">
+            <div className="bball-score-box">
+              <span className="bball-score-name">{names[0]}</span>
+              <span className="bball-score-val">{roundPoints[0]} basket{roundPoints[0] !== 1 ? "s" : ""}</span>
+            </div>
+            <div className="bball-score-vs">vs</div>
+            <div className="bball-score-box">
+              <span className="bball-score-name">{names[1]}</span>
+              <span className="bball-score-val">{roundPoints[1]} basket{roundPoints[1] !== 1 ? "s" : ""}</span>
+            </div>
+          </div>
+          <p className="bball-round-note">{roundsLeft} round{roundsLeft !== 1 ? "s" : ""} left — hoop gets faster!</p>
+          <button className="bball-primary-btn" onClick={startNextRound}>Round {totalRound + 1} →</button>
+          <Link to="/secretGames" className="bball-end-game">End Game</Link>
+        </div>
+      </div>
+    );
+  }
+
+  if (phase === "gameOver") {
     return (
       <div className="bball-page">
         <div className="bball-round-card">
           <div className="bball-trophy">🏆</div>
-          <h2 className="bball-round-title">{names[roundWinner]} wins the round!</h2>
+          <h2 className="bball-round-title">
+            {gameWinner === -1 ? "It's a tie!" : `${names[gameWinner]} wins!`}
+          </h2>
           <div className="bball-scores">
-            <div className={`bball-score-box ${roundWinner === 0 ? "winner" : ""}`}>
+            <div className={`bball-score-box ${gameWinner === 0 ? "winner" : ""}`}>
               <span className="bball-score-name">{names[0]}</span>
-              <span className="bball-score-val">
-                {roundWins[0]} round{roundWins[0] !== 1 ? "s" : ""}
-              </span>
+              <span className="bball-score-val">{roundPoints[0]} basket{roundPoints[0] !== 1 ? "s" : ""}</span>
             </div>
             <div className="bball-score-vs">vs</div>
-            <div className={`bball-score-box ${roundWinner === 1 ? "winner" : ""}`}>
+            <div className={`bball-score-box ${gameWinner === 1 ? "winner" : ""}`}>
               <span className="bball-score-name">{names[1]}</span>
-              <span className="bball-score-val">
-                {roundWins[1]} round{roundWins[1] !== 1 ? "s" : ""}
-              </span>
+              <span className="bball-score-val">{roundPoints[1]} basket{roundPoints[1] !== 1 ? "s" : ""}</span>
             </div>
           </div>
-          <p className="bball-round-note">Round {totalRound} — hoop starts fresh</p>
-          <button className="bball-primary-btn" onClick={startNextRound}>Play Next Round</button>
+          <button className="bball-primary-btn" onClick={startGame}>Play Again</button>
           <Link to="/secretGames" className="bball-end-game">End Game</Link>
         </div>
       </div>
