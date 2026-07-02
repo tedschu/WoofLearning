@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Woof Learning — Math &amp; Reading for Kids</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:        #043d5c;
+      --navy-dark:   #021f30;
+      --blue:        #0a6fa8;
+      --blue-mid:    #0d89ca;
+      --blue-bg:     #eef7fb;
+      --orange:      #d4492b;
+      --orange-dark: #b83a21;
+      --orange-bg:   #fef3ef;
+      --purple-dark: #120324;
+      --gold:        #f59e0b;
+      --text:        #1a2332;
+      --muted:       #64748b;
+      --border:      #e2e8f0;
+      --gray-bg:     #f8fafc;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      color: var(--text);
+      background: white;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ─────────────────────────────────────────── */
+    .nav {
+      position: sticky; top: 0; z-index: 100;
+      height: 64px;
+      background: var(--navy);
+      display: flex; align-items: center;
+      padding: 0 48px; gap: 24px;
+      box-shadow: 0 1px 0 rgba(255,255,255,0.06);
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 9px;
+      text-decoration: none; flex-shrink: 0;
+    }
+    .nav-logo img { width: 36px; height: 36px; object-fit: contain; }
+    .nav-logo-text {
+      font-family: 'Patrick Hand', sans-serif;
+      font-size: 20px; color: white; letter-spacing: -0.01em;
+    }
+    .nav-spacer { flex: 1; }
+    .nav-link {
+      font-size: 14px; font-weight: 600;
+      color: rgba(255,255,255,0.65);
+      text-decoration: none; transition: color 0.15s;
+    }
+    .nav-link:hover { color: white; }
+    .nav-actions { display: flex; gap: 8px; }
+    .btn-ghost-sm {
+      font-family: 'Nunito', sans-serif;
+      font-size: 14px; font-weight: 700;
+      color: rgba(255,255,255,0.85);
+      background: transparent;
+      border: 1.5px solid rgba(255,255,255,0.22);
+      padding: 7px 18px; border-radius: 8px;
+      cursor: pointer; transition: all 0.15s;
+    }
+    .btn-ghost-sm:hover { border-color: rgba(255,255,255,0.5); color: white; }
+    .btn-primary-sm {
+      font-family: 'Nunito', sans-serif;
+      font-size: 14px; font-weight: 800;
+      color: white; background: var(--orange);
+      border: none; padding: 8px 20px; border-radius: 8px;
+      cursor: pointer; transition: background 0.15s;
+    }
+    .btn-primary-sm:hover { background: var(--orange-dark); }
+
+    /* ── HERO ────────────────────────────────────────── */
+    .hero {
+      background: linear-gradient(140deg, #032e47 0%, #054f7a 45%, #0b7ab5 100%);
+      padding: 80px 80px 88px;
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 56px;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(ellipse at 75% 40%, rgba(255,255,255,0.05) 0%, transparent 65%);
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(255,255,255,0.11);
+      border: 1px solid rgba(255,255,255,0.18);
+      color: rgba(255,255,255,0.88);
+      font-size: 13px; font-weight: 700;
+      padding: 6px 14px; border-radius: 50px;
+      margin-bottom: 22px; letter-spacing: 0.01em;
+    }
+    .hero-h1 {
+      font-family: 'Patrick Hand', sans-serif;
+      font-size: 54px; color: white; line-height: 1.1;
+      margin-bottom: 18px;
+    }
+    .hero-h1 em { color: #ffd580; font-style: normal; }
+    .hero-sub {
+      font-size: 17px; font-weight: 500;
+      color: rgba(255,255,255,0.78);
+      line-height: 1.7; max-width: 480px;
+      margin-bottom: 32px;
+    }
+    .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 40px; }
+    .btn-hero-primary {
+      font-family: 'Nunito', sans-serif;
+      font-size: 16px; font-weight: 800;
+      color: white; background: var(--orange);
+      border: none; padding: 14px 34px; border-radius: 50px;
+      cursor: pointer; transition: all 0.15s;
+      box-shadow: 0 4px 20px rgba(212,73,43,0.45);
+    }
+    .btn-hero-primary:hover { background: var(--orange-dark); transform: translateY(-1px); }
+    .btn-hero-ghost {
+      font-family: 'Nunito', sans-serif;
+      font-size: 16px; font-weight: 700;
+      color: white;
+      background: rgba(255,255,255,0.09);
+      border: 1.5px solid rgba(255,255,255,0.28);
+      padding: 14px 32px; border-radius: 50px;
+      cursor: pointer; transition: all 0.15s;
+    }
+    .btn-hero-ghost:hover { background: rgba(255,255,255,0.16); }
+    .hero-stats { display: flex; gap: 32px; }
+    .hero-stat-num {
+      font-family: 'Patrick Hand', sans-serif;
+      font-size: 24px; color: #ffd580; line-height: 1;
+    }
+    .hero-stat-label {
+      font-size: 14px; color: rgba(255,255,255,0.65);
+      font-weight: 600; margin-top: 4px; letter-spacing: 0.01em;
+    }
+    .hero-visual {
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .hero-mascot {
+      width: 400px; height: 400px; object-fit: contain;
+      position: relative; z-index: 1;
+      filter: drop-shadow(0 24px 48px rgba(0,0,0,0.35));
+    }
+    .hero-float {
+      position: absolute;
+      background: white; border-radius: 50px;
+      padding: 9px 16px;
+      display: flex; align-items: center; gap: 9px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.22);
+      z-index: 2;
+    }
+    .hero-float.points {
+      top: 18px; right: -18px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 14px; font-weight: 800; color: var(--orange);
+    }
+    .hero-float.points img { width: 30px; height: 30px; object-fit: contain; }
+    .hero-float.streak {
+      bottom: 52px; left: -24px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 13px; font-weight: 700; color: var(--blue);
+    }
+    .hero-float.streak img { width: 28px; height: 28px; object-fit: contain; }
+
+    /* ── FEATURE STRIP ───────────────────────────────── */
+    .feature-strip {
+      background: white;
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .feature-strip-item {
+      display: flex; align-items: center; gap: 14px;
+      padding: 20px 32px;
+      border-right: 1px solid var(--border);
+    }
+    .feature-strip-item:last-child { border-right: none; }
+    .strip-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 19px; flex-shrink: 0;
+    }
+    .strip-icon.math     { background: var(--orange-bg); color: var(--orange); }
+    .strip-icon.reading  { background: var(--blue-bg);   color: var(--blue); }
+    .strip-icon.games    { background: #f3e8ff; color: #9333ea; }
+    .strip-icon.progress { background: #fefce8; color: #d97706; }
+    .strip-title {
+      font-family: 'Patrick Hand', sans-serif;
+      font-size: 15px; color: var(--text);
+    }
+    .strip-desc {
+      font-size: 13px; color: var(--muted);
+      font-weight: 600; margin-top: 1px; letter-spacing: 0.01em;
+    }
+
+    /* ── SHARED SECTION STYLES ───────────────────────── */
+    .section { padding: 88px 80px; }
+    .section-inner {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 72px; align-items: center;
+      max-width: 1200px; margin: 0 auto;
+    }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 12px; font-weight: 800;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 5px 13px; border-radius: 50px;
+      margin-bottom: 18px;
+    }
+    .section-h2 {
+      font-family: 'Patrick Hand', sans-serif;
+      font-size: 40px; line-height: 1.12;
+      margin-bottom: 14px;
+    }
+    .section-p {
+      font-size: 16px; font-weight: 500;
+      color: var(--muted); line-height: 1.72;
+      margin-bottom: 26px;
+    }
+    .pill-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 22px; }
+    .pill {
+      font-size: 12px; font-weight: 700;
+      padding: 4px 13px; border-radius: 50px;
+    }
+    .feature-list { list-style: none; margin-bottom: 30px; }
+    .feature-list li {
+      display: flex; align-items: flex-start; gap: 12px;
+      font-size: 15px; font-weight: 600; color: var(--text);
+      padding: 10px 0; border-bottom: 1px solid var(--border);
+    }
+    .feature-list li:first-child { border-top: 1px solid var(--border); }
+    .fi-icon {
+      width: 26px; height: 26px; border-radius: 7px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; flex-shrink: 0; margin-top: 1px;
+    }
+    .section-cta {
+      font-family: 'Nunito', sans-serif;
+      font-size: 15px; font-weight: 800;
+      padding: 12px 30px; border-radius: 50px;
+      border: none; cursor: pointer;
+      display: inline-flex; align-items: center; gap: 8px;
+      transition: all 0.15s;
+    }
+
+    /* Screenshot frame */
+    .screenshot {
+      width: 100%; display: block; border-radius: 14px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.04),
+                  0 8px 24px rgba(0,0,0,0.10),
+                  0 24px 56px rgba(0,0,0,0.08);
+    }
+
+    /* Layered math visual */
+    .math-visual {
+      position: relative;
+      padding-bottom: 80px; /* room for the overlay to hang below */
+    }
+    .math-visual .screenshot { display: block; }
+    .math-overlay {
+      position: absolute;
+      bottom: 0; right: -16px;
+      width: 46%;
+      border-radius: 12px;
+      border: 3px solid white;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.28);
+    }
+
+    /* ── MATH SECTION ────────────────────────────────── */
+    .s-math { background: #fdf5f2; }
+    .s-math .eyebrow   { background: #fde0d6; color: #a83020; }
+    .s-math .section-h2 { color: var(--text); }
+    .s-math .section-h2 em { color: var(--orange); font-style: normal; }
+    .s-math .pill      { background: #fde0d6; color: #a83020; border: 1px solid #f9bcac; }
+    .s-math .fi-icon   { background: #fde0d6; color: var(--orange); }
+    .s-math .section-cta {
+      background: var(--orange); color: white;
+      box-shadow: 0 4px 16px rgba(212,73,43,0.35);
+    }
+    .s-math .section-cta:hover { background: var(--orange-dark); }
+
+    /* ── READING SECTION ─────────────────────────────── */
+    .s-reading { background: var(--blue-bg); }
+    .s-reading .eyebrow   { background: #c5e5f5; color: #035a8c; }
+    .s-reading .section-h2 { color: var(--text); }
+    .s-reading .section-h2 em { color: var(--blue); font-style: normal; }
+    .s-reading .pill      { background: #c5e5f5; color: #035a8c; border: 1px solid #8dcde8; }
+    .s-reading .fi-icon   { background: #c5e5f5; color: var(--blue); }
+    .s-reading .section-cta {
+      background: var(--blue); color: white;
+      box-shadow: 0 4px 16px rgba(10,111,168,0.35);
+    }
+    .s-reading .section-cta:hover { background: #095f96; }
+
+    /* ── CATSINO SECTION ─────────────────────────────── */
+    .s-catsino { background: var(--purple-dark); padding: 88px 80px; }
+    .s-catsino .eyebrow { background: rgba(196,97,255,0.18); color: #d49fff; border: 1px solid rgba(196,97,255,0.3); }
+    .s-catsino .section-h2 { color: white; }
+    .s-catsino .section-h2 em { color: #d49fff; font-style: normal; }
+    .s-catsino .section-p { color: rgba(255,255,255,0.6); }
+    .s-catsino .pill { background: rgba(196,97,255,0.18); color: #d49fff; border: 1px solid rgba(196,97,255,0.3); }
+    .s-catsino .fi-icon { background: rgba(196,97,255,0.18); color: #d49fff; }
+    .s-catsino .feature-list li { color: rgba(255,255,255,0.82); border-bottom-color: rgba(255,255,255,0.08); }
+    .s-catsino .feature-list li:first-child { border-top-color: rgba(255,255,255,0.08); }
+    .s-catsino .section-cta { background: linear-gradient(135deg, #8b3fd9, #d4492b); color: white; }
+
+    .game-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 30px; }
+    .game-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 12px; padding: 16px;
+      transition: background 0.15s;
+    }
+    .game-card:hover { background: rgba(255,255,255,0.09); }
+    .game-card-head { display: flex; align-items: center; gap: 7px; margin-bottom: 3px; }
+    .game-card-name { font-family: 'Patrick Hand', sans-serif; font-size: 15px; color: white; }
+    .game-card-tag { font-size: 12px; font-weight: 800; color: #c084fc; letter-spacing: 0.07em; text-transform: uppercase; margin-bottom: 6px; }
+    .game-card-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.5; font-weight: 500; }
+
+    .catsino-mock {
+      background: linear-gradient(155deg, #3b0b60 0%, #c0175c 100%);
+      border-radius: 18px; padding: 28px 24px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+    }
+    .cm-title { font-family: 'Patrick Hand', sans-serif; font-size: 22px; color: white; text-align: center; margin-bottom: 4px; }
+    .cm-sub { font-size: 13px; color: rgba(255,255,255,0.6); text-align: center; font-weight: 600; margin-bottom: 20px; }
+    .cm-btn {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 10px; padding: 14px 16px;
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 10px; cursor: pointer;
+      transition: background 0.15s;
+    }
+    .cm-btn:last-child { margin-bottom: 0; }
+    .cm-btn:hover { background: rgba(255,255,255,0.18); }
+    .cm-btn-name { font-family: 'Patrick Hand', sans-serif; font-size: 16px; color: white; }
+    .cm-btn-tag { font-size: 12px; font-weight: 800; color: rgba(255,255,255,0.45); letter-spacing: 0.07em; text-transform: uppercase; }
+
+    /* ── BADGES SECTION ──────────────────────────────── */
+    .s-badges {
+      background: white;
+      padding: 88px 80px;
+      text-align: center;
+    }
+    .s-badges .eyebrow { background: #fefce8; color: #92400e; border: 1px solid #fde68a; }
+    .badges-h2 {
+      font-family: 'Patrick Hand', sans-serif;
+      font-size: 40px; color: var(--text); margin-bottom: 12px;
+    }
+    .badges-h2 em { color: #d97706; font-style: normal; }
+    .badges-sub {
+      font-size: 16px; color: var(--muted); font-weight: 500;
+      line-height: 1.7; max-width: 540px;
+      margin: 0 auto 56px;
+    }
+    .badges-level-label {
+      font-size: 13px; font-weight: 800; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 20px;
+    }
+    .badges-row {
+      display: flex; gap: 16px;
+      justify-content: center; flex-wrap: wrap;
+      margin-bottom: 8px;
+    }
+    .badge-item {
+      width: 82px; height: 82px; object-fit: contain;
+      transition: transform 0.2s, filter 0.2s;
+      cursor: default;
+    }
+    .badge-item:hover { transform: scale(1.18) rotate(-3deg); }
+    .badges-divider {
+      width: 80px; height: 2px;
+      background: var(--border);
+      margin: 40px auto;
+      border-radius: 2px;
+    }
+
+    /* ── PROGRESS SECTION ────────────────────────────── */
+    .s-progress { background: var(--gray-bg); }
+    .s-progress .eyebrow { background: #fefce8; color: #92400e; }
+    .s-progress .section-h2 { color: var(--text); }
+    .s-progress .section-h2 em { color: #d97706; font-style: normal; }
+    .s-progress .fi-icon { background: #fefce8; color: #d97706; }
+    .s-progress .section-cta { background: #d97706; color: white; }
+    .s-progress .section-cta:hover { background: #b85e06; }
+
+    /* Progress panel mock */
+    .progress-panel {
+      background: white; border-radius: 16px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+    .pp-header {
+      background: var(--navy); padding: 14px 20px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .pp-header-title {
+      font-family: 'Patrick Hand', sans-serif;
+      font-size: 16px; color: white;
+    }
+    .pp-level {
+      font-size: 12px; font-weight: 700;
+      background: rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.85);
+      padding: 3px 10px; border-radius: 50px;
+    }
+    .pp-stats {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      border-bottom: 1px solid var(--border);
+    }
+    .pp-stat {
+      padding: 16px; text-align: center;
+      border-right: 1px solid var(--border);
+    }
+    .pp-stat:last-child { border-right: none; }
+    .pp-stat-num {
+      font-family: 'Patrick Hand', sans-serif;
+      font-size: 26px; color: var(--orange);
+    }
+    .pp-stat-label { font-size: 12px; font-weight: 800; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; margin-top: 2px; }
+    .pp-feedback { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+    .pp-feedback-label {
+      font-size: 12px; font-weight: 800; letter-spacing: 0.06em;
+      text-transform: uppercase; color: #d97706;
+      margin-bottom: 7px;
+    }
+    .pp-feedback-text { font-size: 14px; font-weight: 500; color: #555; line-height: 1.6; }
+    .pp-chart { padding: 16px 20px; }
+    .pp-chart-label { font-size: 12px; font-weight: 700; color: var(--muted); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.06em; }
+    .pp-bars { display: flex; gap: 5px; align-items: flex-end; height: 60px; }
+    .pp-bar { flex: 1; border-radius: 3px 3px 0 0; background: var(--orange); opacity: 0.75; }
+
+    /* ── TRUST SECTION ───────────────────────────────── */
+    .s-trust { background: var(--navy); padding: 80px; }
+    .trust-h2 {
+      font-family: 'Patrick Hand', sans-serif;
+      font-size: 36px; color: white; text-align: center; margin-bottom: 10px;
+    }
+    .trust-sub { font-size: 16px; color: rgba(255,255,255,0.6); font-weight: 500; text-align: center; margin-bottom: 48px; }
+    .trust-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; max-width: 1000px; margin: 0 auto; }
+    .trust-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 14px; padding: 28px;
+      text-align: center;
+    }
+    .trust-icon { font-size: 30px; color: #ffd580; margin-bottom: 12px; }
+    .trust-title { font-family: 'Patrick Hand', sans-serif; font-size: 19px; color: white; margin-bottom: 8px; }
+    .trust-desc { font-size: 14px; color: rgba(255,255,255,0.58); line-height: 1.65; font-weight: 500; }
+
+    /* ── CTA SECTION ─────────────────────────────────── */
+    .s-cta {
+      background: var(--orange);
+      padding: 72px 80px;
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 48px;
+      overflow: hidden;
+    }
+    .cta-content { flex: 1; }
+    .cta-h2 {
+      font-family: 'Patrick Hand', sans-serif;
+      font-size: 44px; color: white; margin-bottom: 12px; line-height: 1.1;
+    }
+    .cta-sub { font-size: 17px; color: rgba(255,255,255,0.82); font-weight: 500; margin-bottom: 28px; }
+    .btn-cta {
+      font-family: 'Nunito', sans-serif;
+      font-size: 16px; font-weight: 900;
+      color: var(--orange); background: white;
+      border: none; padding: 14px 36px; border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      transition: all 0.15s;
+    }
+    .btn-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(0,0,0,0.25); }
+    .cta-dog {
+      width: 200px; height: 200px; object-fit: contain;
+      flex-shrink: 0;
+      filter: drop-shadow(0 8px 24px rgba(0,0,0,0.25));
+    }
+
+    /* ── FOOTER ──────────────────────────────────────── */
+    .footer {
+      background: var(--navy-dark);
+      padding: 22px 48px;
+      display: flex; align-items: center;
+      justify-content: space-between;
+    }
+    .footer-logo { display: flex; align-items: center; gap: 8px; }
+    .footer-logo img { width: 26px; height: 26px; object-fit: contain; opacity: 0.5; }
+    .footer-logo-text {
+      font-family: 'Patrick Hand', sans-serif;
+      font-size: 15px; color: rgba(255,255,255,0.35);
+    }
+    .footer-copy { font-size: 13px; color: rgba(255,255,255,0.3); font-weight: 500; }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-link {
+      font-size: 13px; color: rgba(255,255,255,0.4);
+      text-decoration: none; font-weight: 600;
+      transition: color 0.15s;
+    }
+    .footer-link:hover { color: rgba(255,255,255,0.7); }
+    /* ── RESPONSIVE ──────────────────────────────────── */
+    @media (max-width: 1000px) {
+      .hero-mascot { width: 320px; height: 320px; }
+    }
+    @media (max-width: 768px) {
+      /* Nav */
+      .nav { padding: 0 20px; gap: 12px; }
+      .nav-link { display: none; }
+
+      /* Hero: stack image below text */
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 48px 24px 56px;
+        gap: 40px;
+        text-align: center;
+      }
+      .hero-h1 { font-size: 38px; }
+      .hero-sub { font-size: 15px; max-width: 100%; margin-left: auto; margin-right: auto; }
+      .hero-eyebrow { margin-left: auto; margin-right: auto; }
+      .hero-btns { justify-content: center; }
+      .hero-stats { justify-content: center; }
+      .hero-visual { order: 2; }
+      .hero-mascot { width: 280px; height: 280px; }
+      .hero-float.points { right: 8px; top: 8px; }
+      .hero-float.streak { left: 8px; bottom: 24px; }
+
+      /* Feature strip */
+      .feature-strip { grid-template-columns: 1fr 1fr; }
+      .feature-strip-item { padding: 16px; }
+
+      /* Section layouts */
+      .section { padding: 56px 24px; }
+      .section-inner { grid-template-columns: 1fr; gap: 36px; }
+
+      /* Reading: text first, image below on mobile */
+      .s-reading .section-inner > div:first-child { order: 2; }
+      .s-reading .section-inner > div:last-child  { order: 1; }
+
+      /* Math: hide overlay on mobile, remove extra padding */
+      .math-visual { padding-bottom: 0; }
+      .math-overlay { display: none; }
+      .section-h2 { font-size: 32px; }
+      .s-catsino { padding: 56px 24px; }
+      .game-cards { grid-template-columns: 1fr; }
+
+      /* Badges */
+      .s-badges { padding: 56px 24px; }
+      .badge-item { width: 64px; height: 64px; }
+
+      /* Trust */
+      .s-trust { padding: 56px 24px; }
+      .trust-grid { grid-template-columns: 1fr; gap: 12px; }
+
+      /* CTA */
+      .s-cta { padding: 56px 24px; flex-direction: column; text-align: center; }
+      .cta-h2 { font-size: 34px; }
+      .cta-dog { width: 160px; height: 160px; }
+
+      /* Footer */
+      .footer { padding: 20px 24px; flex-direction: column; gap: 12px; text-align: center; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-h1 { font-size: 32px; }
+      .feature-strip { grid-template-columns: 1fr; }
+      .feature-strip-item { border-right: none; border-bottom: 1px solid var(--border); }
+      .feature-strip-item:last-child { border-bottom: none; }
+      .hero-mascot { width: 240px; height: 240px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <a class="nav-logo" href="#">
+      <img src="./client/src/assets/wooflogo_nobackground.png" alt="Woof Learning" />
+      <span class="nav-logo-text">Woof Learning</span>
+    </a>
+    <div class="nav-spacer"></div>
+    <a class="nav-link" href="#" style="margin-right: 8px;">About</a>
+    <div class="nav-actions">
+      <button class="btn-ghost-sm">Log in</button>
+      <button class="btn-primary-sm">Sign up free</button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div>
+      <div class="hero-eyebrow">
+        <i class="ti ti-sparkles" style="font-size:13px;"></i>
+        Math &middot; Reading &middot; Games for kids
+      </div>
+      <h1 class="hero-h1">
+        Building skills<br>is a journey.<br>
+        <em>Make it an adventure.</em>
+      </h1>
+      <p class="hero-sub">
+        Practice math and reading, earn dog badges, track progress, and
+        play games with friends and family &mdash; all in one place
+        designed for kids.
+      </p>
+      <div class="hero-btns">
+        <button class="btn-hero-primary">Sign up free</button>
+        <button class="btn-hero-ghost">See how it works</button>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-num">32</div>
+          <div class="hero-stat-label">dog badges to collect</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">90+</div>
+          <div class="hero-stat-label">curated reading topics</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">K&ndash;5+</div>
+          <div class="hero-stat-label">reading levels</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <img class="hero-mascot" src="./client/src/assets/wooflogo_3d.png" alt="Woof Learning mascot" />
+      <div class="hero-float points">
+        <img src="./client/src/assets/badges/badge_1_8_goldendoodle.png" alt="" />
+        3,039 pts
+      </div>
+      <div class="hero-float streak">
+        <img src="./client/src/assets/badges/badge_2_7_poodle.png" alt="" />
+        5-day streak!
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURE STRIP -->
+  <div class="feature-strip">
+    <div class="feature-strip-item">
+      <div class="strip-icon math"><i class="ti ti-calculator"></i></div>
+      <div>
+        <div class="strip-title">Woof Math</div>
+        <div class="strip-desc">5 levels &middot; timed challenges &middot; 16 badges</div>
+      </div>
+    </div>
+    <div class="feature-strip-item">
+      <div class="strip-icon reading"><i class="ti ti-books"></i></div>
+      <div>
+        <div class="strip-title">Woof Reading</div>
+        <div class="strip-desc">90+ topics &middot; K&ndash;5th+ &middot; AI feedback</div>
+      </div>
+    </div>
+    <div class="feature-strip-item">
+      <div class="strip-icon games"><i class="ti ti-cards"></i></div>
+      <div>
+        <div class="strip-title">Catsino Royale</div>
+        <div class="strip-desc">4 games &middot; strategy, memory, vocab, math</div>
+      </div>
+    </div>
+    <div class="feature-strip-item">
+      <div class="strip-icon progress"><i class="ti ti-chart-line"></i></div>
+      <div>
+        <div class="strip-title">Progress Dashboard</div>
+        <div class="strip-desc">charts &middot; AI insights &middot; badge tracking</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MATH SECTION -->
+  <section class="section s-math">
+    <div class="section-inner">
+      <div>
+        <div class="eyebrow"><i class="ti ti-calculator" style="font-size:12px;"></i> Woof Math</div>
+        <h2 class="section-h2">Build math skills<br><em>that actually stick.</em></h2>
+        <p class="section-p">
+          Practice all four operations at your own pace, or try the 60-second Timed Challenge for an extra rush. Five difficulty levels keep things fresh whether you're just starting out or already a math whiz.
+        </p>
+        <div class="pill-row">
+          <span class="pill">Add</span>
+          <span class="pill">Subtract</span>
+          <span class="pill">Multiply</span>
+          <span class="pill">Divide</span>
+        </div>
+        <ul class="feature-list">
+          <li>
+            <div class="fi-icon"><i class="ti ti-layers-intersect"></i></div>
+            <div><strong>5 difficulty levels</strong> &mdash; from easier to expert</div>
+          </li>
+          <li>
+            <div class="fi-icon"><i class="ti ti-clock-hour-4"></i></div>
+            <div><strong>Timed challenge mode</strong> &mdash; race the 60-second clock</div>
+          </li>
+          <li>
+            <div class="fi-icon"><i class="ti ti-award"></i></div>
+            <div><strong>16 badges to collect</strong> across two mastery levels</div>
+          </li>
+        </ul>
+        <button class="section-cta">Try Woof Math <i class="ti ti-arrow-right" style="font-size:14px;"></i></button>
+      </div>
+      <div class="math-visual">
+        <img class="screenshot" src="./client/src/assets/gameplay_large.png" alt="Woof Math gameplay" />
+        <img class="math-overlay" src="./client/src/assets/gameplay-math.png" alt="Woof Math question" />
+      </div>
+    </div>
+  </section>
+
+  <!-- READING SECTION -->
+  <section class="section s-reading">
+    <div class="section-inner">
+      <div>
+        <img class="screenshot" src="./client/src/assets/gameplay-reading.png" alt="Woof Reading interface" />
+      </div>
+      <div>
+        <div class="eyebrow"><i class="ti ti-books" style="font-size:12px;"></i> Woof Reading</div>
+        <h2 class="section-h2">A new story every time,<br><em>built around what you love.</em></h2>
+        <p class="section-p">
+          Pick a topic from 90+ kid-safe ideas &mdash; outer space, sneaky cats, magical wizards &mdash; and choose a story, poem, or ballad. Read it, answer questions, and get feedback that coaches, not just scores.
+        </p>
+        <div class="pill-row">
+          <span class="pill">Story</span>
+          <span class="pill">Poem</span>
+          <span class="pill">Ballad</span>
+        </div>
+        <ul class="feature-list">
+          <li>
+            <div class="fi-icon"><i class="ti ti-list"></i></div>
+            <div><strong>90+ curated topics</strong>, all kid-safe and age-appropriate</div>
+          </li>
+          <li>
+            <div class="fi-icon"><i class="ti ti-school"></i></div>
+            <div><strong>Reading levels K&ndash;5th+</strong>, adjustable any time</div>
+          </li>
+          <li>
+            <div class="fi-icon"><i class="ti ti-sparkles"></i></div>
+            <div><strong>AI-powered feedback</strong> that coaches, not just scores</div>
+          </li>
+        </ul>
+        <button class="section-cta">Try Woof Reading <i class="ti ti-arrow-right" style="font-size:14px;"></i></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATSINO SECTION -->
+  <section class="section s-catsino">
+    <div class="section-inner">
+      <div>
+        <div class="eyebrow"><i class="ti ti-cards" style="font-size:12px;"></i> Catsino Royale</div>
+        <h2 class="section-h2">Fun games.<br><em>Sneaky learning.</em></h2>
+        <p class="section-p">
+          Four quick games designed to be played together &mdash; in the car, at the table, anywhere kids need a fun break. They feel like pure play, but every game sharpens a real skill underneath.
+        </p>
+        <div class="game-cards">
+          <div class="game-card">
+            <div class="game-card-head"><i class="ti ti-grid-dots" style="color:#c084fc;font-size:15px;"></i><span class="game-card-name">Connect</span></div>
+            <div class="game-card-tag">Strategy</div>
+            <div class="game-card-desc">A Connect 4-style game that builds planning and forward-thinking.</div>
+          </div>
+          <div class="game-card">
+            <div class="game-card-head"><i class="ti ti-cards" style="color:#c084fc;font-size:15px;"></i><span class="game-card-name">Card Match</span></div>
+            <div class="game-card-tag">Memory</div>
+            <div class="game-card-desc">Flip and match &mdash; strengthens short-term memory and focus.</div>
+          </div>
+          <div class="game-card">
+            <div class="game-card-head"><i class="ti ti-letter-w" style="color:#c084fc;font-size:15px;"></i><span class="game-card-name">Word Scramble</span></div>
+            <div class="game-card-tag">Vocabulary</div>
+            <div class="game-card-desc">Unscramble letters to build spelling and word recognition.</div>
+          </div>
+          <div class="game-card">
+            <div class="game-card-head"><i class="ti ti-basketball" style="color:#c084fc;font-size:15px;"></i><span class="game-card-name">Math-sketball</span></div>
+            <div class="game-card-tag">Math Fluency</div>
+            <div class="game-card-desc">Sink shots by solving problems &mdash; practice while keeping score.</div>
+          </div>
+        </div>
+        <button class="section-cta">Enter Catsino Royale <i class="ti ti-arrow-right" style="font-size:14px;"></i></button>
+      </div>
+      <div>
+        <div class="catsino-mock">
+          <div class="cm-title">&#x1F431; Catsino Royale</div>
+          <div class="cm-sub">Choose your game</div>
+          <div class="cm-btn">
+            <span class="cm-btn-name">Connect</span>
+            <span class="cm-btn-tag">Strategy</span>
+          </div>
+          <div class="cm-btn">
+            <span class="cm-btn-name">Card Match</span>
+            <span class="cm-btn-tag">Memory</span>
+          </div>
+          <div class="cm-btn">
+            <span class="cm-btn-name">Word Scramble</span>
+            <span class="cm-btn-tag">Vocabulary</span>
+          </div>
+          <div class="cm-btn">
+            <span class="cm-btn-name">Math-sketball</span>
+            <span class="cm-btn-tag">Math Fluency</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BADGES SECTION -->
+  <section class="s-badges">
+    <div class="eyebrow" style="margin-bottom:18px;"><i class="ti ti-award" style="font-size:12px;"></i> Dog Badge Collection</div>
+    <h2 class="badges-h2">Earn badges as you <em>level up.</em></h2>
+    <p class="badges-sub">
+      Practice math and reading to unlock 32 unique dog badges across two mastery levels. Every badge you earn is a real achievement &mdash; can you collect them all?
+    </p>
+
+    <div class="badges-level-label">Level 1 Badges</div>
+    <div class="badges-row">
+      <img class="badge-item" src="./client/src/assets/badges/badge_1_1_bernese.png"     alt="Bernese" />
+      <img class="badge-item" src="./client/src/assets/badges/badge_1_2_chihuahua.png"   alt="Chihuahua" />
+      <img class="badge-item" src="./client/src/assets/badges/badge_1_3_waterdog.png"    alt="Waterdog" />
+      <img class="badge-item" src="./client/src/assets/badges/badge_1_4_boxer.png"       alt="Boxer" />
+      <img class="badge-item" src="./client/src/assets/badges/badge_1_5_husky.png"       alt="Husky" />
+      <img class="badge-item" src="./client/src/assets/badges/badge_1_6_golden.png"      alt="Golden" />
+      <img class="badge-item" src="./client/src/assets/badges/badge_1_7_cat.png"         alt="Cat" />
+      <img class="badge-item" src="./client/src/assets/badges/badge_1_8_goldendoodle.png" alt="Goldendoodle" />
+    </div>
+
+    <div class="badges-divider"></div>
+
+    <div class="badges-level-label">Level 2 Badges</div>
+    <div class="badges-row">
+      <img class="badge-item" src="./client/src/assets/badges/badge_2_1_borderCollie.png"       alt="Border Collie" />
+      <img class="badge-item" src="./client/src/assets/badges/badge_2_2_terrier.png"             alt="Terrier" />
+      <img class="badge-item" src="./client/src/assets/badges/badge_2_3_australianShepherd.png"  alt="Australian Shepherd" />
+      <img class="badge-item" src="./client/src/assets/badges/badge_2_4_shibaInu.png"            alt="Shiba Inu" />
+      <img class="badge-item" src="./client/src/assets/badges/badge_2_5_cat.png"                 alt="Cat" />
+      <img class="badge-item" src="./client/src/assets/badges/badge_2_6_bernese.png"             alt="Bernese" />
+      <img class="badge-item" src="./client/src/assets/badges/badge_2_7_poodle.png"              alt="Poodle" />
+      <img class="badge-item" src="./client/src/assets/badges/badge_2_8_golden.png"              alt="Golden" />
+    </div>
+  </section>
+
+  <!-- PROGRESS SECTION -->
+  <section class="section s-progress">
+    <div class="section-inner">
+      <div>
+        <div class="progress-panel">
+          <div class="pp-header">
+            <span class="pp-header-title">&#x1F4CA; Your Progress</span>
+            <span class="pp-level">Level 1</span>
+          </div>
+          <div class="pp-stats">
+            <div class="pp-stat">
+              <div class="pp-stat-num">40</div>
+              <div class="pp-stat-label">Challenges</div>
+            </div>
+            <div class="pp-stat">
+              <div class="pp-stat-num">95%</div>
+              <div class="pp-stat-label">Correct</div>
+            </div>
+            <div class="pp-stat">
+              <div class="pp-stat-num">2,145</div>
+              <div class="pp-stat-label">Points</div>
+            </div>
+          </div>
+          <div class="pp-feedback">
+            <div class="pp-feedback-label">&#x2728; Feedback from your last 10 challenges</div>
+            <div class="pp-feedback-text">
+              Fantastic score! You're doing great, but a few multiplication questions
+              (especially 7, 9, 11, and 12) need a little extra practice. Keep it up!
+            </div>
+          </div>
+          <div class="pp-chart">
+            <div class="pp-chart-label">Score over time</div>
+            <div class="pp-bars">
+              <div class="pp-bar" style="height:28%;"></div>
+              <div class="pp-bar" style="height:42%;"></div>
+              <div class="pp-bar" style="height:36%;"></div>
+              <div class="pp-bar" style="height:58%;"></div>
+              <div class="pp-bar" style="height:50%;"></div>
+              <div class="pp-bar" style="height:68%;"></div>
+              <div class="pp-bar" style="height:63%;"></div>
+              <div class="pp-bar" style="height:82%;"></div>
+              <div class="pp-bar" style="height:76%;"></div>
+              <div class="pp-bar" style="height:96%;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="eyebrow"><i class="ti ti-chart-line" style="font-size:12px;"></i> Progress Dashboard</div>
+        <h2 class="section-h2">See how far<br><em>you've come.</em></h2>
+        <p class="section-p">
+          Every challenge, every story, every badge &mdash; tracked in one place. Smart feedback points out where to focus next, and charts show exactly how skills are growing over time.
+        </p>
+        <ul class="feature-list">
+          <li>
+            <div class="fi-icon"><i class="ti ti-sparkles"></i></div>
+            <div><strong>AI-powered feedback</strong> on your last 10 challenges</div>
+          </li>
+          <li>
+            <div class="fi-icon"><i class="ti ti-chart-bar"></i></div>
+            <div><strong>Progress charts</strong> for each operation and level</div>
+          </li>
+          <li>
+            <div class="fi-icon"><i class="ti ti-medal"></i></div>
+            <div><strong>Badge tracker</strong> across both math and reading</div>
+          </li>
+        </ul>
+        <button class="section-cta">See the dashboard <i class="ti ti-arrow-right" style="font-size:14px;"></i></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST SECTION -->
+  <section class="s-trust">
+    <h2 class="trust-h2">Real learning. Real fun. Zero worries.</h2>
+    <p class="trust-sub">No ads. No data sharing with third parties. Just learning and fun.</p>
+    <div class="trust-grid">
+      <div class="trust-card">
+        <div class="trust-icon"><i class="ti ti-lock"></i></div>
+        <div class="trust-title">Safe by design</div>
+        <div class="trust-desc">Curated topics only. No free-text prompts, no ads, and no data sharing with third parties.</div>
+      </div>
+      <div class="trust-card">
+        <div class="trust-icon"><i class="ti ti-adjustments"></i></div>
+        <div class="trust-title">Adjustable levels</div>
+        <div class="trust-desc">Reading and math difficulty scales from grades K&ndash;5+. Every kid works at their own pace.</div>
+      </div>
+      <div class="trust-card">
+        <div class="trust-icon"><i class="ti ti-award"></i></div>
+        <div class="trust-title">Rewarding progress</div>
+        <div class="trust-desc">32 dog badges to collect across math and reading. Real achievements, real motivation.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA SECTION -->
+  <div class="s-cta">
+    <div class="cta-content">
+      <h2 class="cta-h2">Ready to start the adventure?</h2>
+      <p class="cta-sub">Join kids building real math and reading skills through stories, challenges, and games.</p>
+      <button class="btn-cta">Sign up free &mdash; it&rsquo;s quick!</button>
+    </div>
+    <img class="cta-dog" src="./client/src/assets/welcome_dog_large.png" alt="Dog mascot at chalkboard" />
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-logo">
+      <img src="./client/src/assets/wooflogo_nobackground.png" alt="" />
+      <span class="footer-logo-text">Woof Learning</span>
+    </div>
+    <span class="footer-copy">&copy; 2025 Woof Learning &middot; Built in Illinois</span>
+    <div class="footer-links">
+      <a class="footer-link" href="#">About</a>
+      <a class="footer-link" href="#">Privacy</a>
+      <a class="footer-link" href="#">Contact</a>
+    </div>
+  </footer>
+
+</body>
+</html>

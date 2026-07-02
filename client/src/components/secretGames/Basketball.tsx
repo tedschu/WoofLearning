@@ -52,8 +52,8 @@ const NET_H = 32;
 const BOARD_W = 88;
 const BOARD_H = 52;
 const BOARD_CY = 106;
-const CLEAN_TOL = 17;       // ball clears rim cleanly: HOOP_RX(30) - ball_r_at_hoop(~13)
-const RIM_OUTER = 44;       // outer rim clip: HOOP_RX(30) + ball_r_at_hoop(~13) + 1
+const CLEAN_TOL = 19;       // ball clears rim cleanly: HOOP_RX(30) - ball_r_at_hoop(~13)
+const RIM_OUTER = 46;       // outer rim clip: HOOP_RX(30) + ball_r_at_hoop(~13) + 1
 const BACKBOARD_PWR = 0.82;
 const TOTAL_ROUNDS = 5;
 
@@ -120,7 +120,7 @@ function drawBall(ctx, x, y, r) {
 
 // aimTarget: { x: number (absolute, fixed), power: number, hoopX: number (live) }
 // hitFlash:  { type: 'rim'|'board', alpha: 0..1 } | null
-function drawScene(ctx, hoopOffset, bx, by, br, aimTarget, hitFlash) {
+function drawScene(ctx, hoopOffset, bx, by, br, aimTarget, hitFlash, cleanTol = CLEAN_TOL, rimOuter = RIM_OUTER) {
   ctx.clearRect(0, 0, CW, CH);
 
   // ── Arena ──
@@ -222,21 +222,56 @@ function drawScene(ctx, hoopOffset, bx, by, br, aimTarget, hitFlash) {
   // aimTarget.hoopX is the LIVE hoop position — used only for the alignment dot color
   if (aimTarget && aimTarget.power > 0.12) {
     const arcH = aimTarget.power * 220;
+    
+    // Determine preview landing Y based on power
+    let previewY = HOOP_Y;
+    if (aimTarget.power < 0.30) {
+      const dy = aimTarget.power * 175;
+      previewY = aimTarget.power < 0.28
+        ? BALL_Y - Math.max(dy * 1.3, 60)
+        : HOOP_Y + 45;
+    } else if (aimTarget.power > BACKBOARD_PWR) {
+      previewY = BOARD_CY;
+    }
+
     ctx.setLineDash([4, 5]);
     ctx.strokeStyle = "rgba(255,230,80,0.55)"; ctx.lineWidth = 2;
     ctx.beginPath();
     for (let i = 0; i <= 28; i++) {
       const t = i / 28;
       const px = BALL_X + (aimTarget.x - BALL_X) * t;
-      const py = BALL_Y + (HOOP_Y - BALL_Y) * t - arcH * Math.sin(Math.PI * t);
+      const py = BALL_Y + (previewY - BALL_Y) * t - arcH * Math.sin(Math.PI * t);
       if (i === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
     }
     ctx.stroke(); ctx.setLineDash([]);
-    // Dot at hoop height on the fixed aim line — green when aligned with moving hoop
-    const aligned = Math.abs(aimTarget.x - aimTarget.hoopX) < CLEAN_TOL;
+
+    // Check alignment and power
+    const absAim = Math.abs(aimTarget.x - aimTarget.hoopX);
+    const isAligned = absAim <= rimOuter;
+    const isCleanAligned = absAim < cleanTol;
+    
+    let powerState = "ok"; // "low" | "ok" | "high"
+    if (aimTarget.power < 0.26) {
+      powerState = "low";
+    } else if (aimTarget.power > BACKBOARD_PWR) {
+      powerState = "high";
+    }
+    
+    let dotColor = "rgba(255, 80, 80, 0.75)"; // Red (not aligned)
+    if (isAligned) {
+      if (powerState === "low") {
+        dotColor = "rgba(255, 180, 50, 0.8)"; // Orange (aligned but too low power)
+      } else if (isCleanAligned) {
+        dotColor = "rgba(80, 255, 80, 0.9)"; // Green (perfect!)
+      } else {
+        // Aligned for rim/board but might bounce or bank
+        dotColor = "rgba(120, 220, 255, 0.9)"; // Light Blue (bank/rim shot possible)
+      }
+    }
+
     ctx.beginPath();
-    ctx.arc(aimTarget.x, HOOP_Y, 6, 0, Math.PI * 2);
-    ctx.fillStyle = aligned ? "rgba(80,255,80,0.8)" : "rgba(255,80,80,0.75)";
+    ctx.arc(aimTarget.x, previewY, 6, 0, Math.PI * 2);
+    ctx.fillStyle = dotColor;
     ctx.fill();
   }
 
@@ -319,6 +354,8 @@ export default function Basketball() {
       const dt = Math.min((now - last) / 1000, 0.1);
       last = now;
 
+      const shot = shotRef.current;
+
       // Hoop oscillation — grows each round (round 1 = static, round 5 = fastest)
       const { amp, omega } = hoopConfig(totalRoundRef.current);
       if (omega > 0) {
@@ -335,7 +372,6 @@ export default function Basketball() {
       }
 
       // Advance shot animation
-      const shot = shotRef.current;
       if (shot?.active) {
         const curPhase = shot.phase === 1 ? shot.p1 : shot.p2;
         shot.t += dt * curPhase.speed;
@@ -359,7 +395,7 @@ export default function Basketball() {
         }
       }
 
-      // Ball position
+      // Ball position (flies straight, no curving)
       let bx = BALL_X, by = BALL_Y, br = BALL_R;
       if (shot && (shot.active || shot.t > 0)) {
         const p = shot.phase === 1 ? shot.p1 : (shot.p2 ?? shot.p1);
@@ -370,18 +406,26 @@ export default function Basketball() {
       }
 
       // Aim preview — x is FIXED to where the user dragged (independent of hoop movement)
-      // hoopX is live and only used to color the alignment dot
       let aimTarget = null;
       if (dragRef.current.active && phaseRef.current === "shooting" && !shot?.active) {
         const dy = BALL_Y - dragRef.current.my;
         const dx = dragRef.current.mx - BALL_X;
         const power = Math.max(0, Math.min(1, dy / 175));
-        const fixedTargetX = BALL_X + dx * 0.85;  // absolute — does not move with hoop
-        const liveHoopX = CW / 2 + hoopOffsetRef.current;
-        aimTarget = { x: fixedTargetX, power, hoopX: liveHoopX };
+        const fixedTargetX = BALL_X + dx * 0.85;  
+        
+        // Calculate future hoop position (where it will be when the ball arrives)
+        const flightTime = 1 / 0.85;
+        const futureTime = hoopTimeRef.current + flightTime;
+        const futureHoopX = omega > 0 ? CW / 2 + amp * Math.sin(futureTime * omega) : CW / 2;
+        
+        aimTarget = { x: fixedTargetX, power, hoopX: futureHoopX };
       }
 
-      drawScene(ctx, hoopOffsetRef.current, bx, by, br, aimTarget, hitFlashRef.current);
+      const round = totalRoundRef.current;
+      const currentCleanTol = CLEAN_TOL + (round - 1) * 1.5;
+      const currentRimOuter = RIM_OUTER + (round - 1) * 2.0;
+
+      drawScene(ctx, hoopOffsetRef.current, bx, by, br, aimTarget, hitFlashRef.current, currentCleanTol, currentRimOuter);
       rafRef.current = requestAnimationFrame(loop);
     }
 
@@ -422,44 +466,67 @@ export default function Basketball() {
     const targetX = BALL_X + dx * 0.85;
     const arcH = power * 220;
 
-    // Hoop position captured at the moment of release — scoring is fair to where
-    // the hoop actually IS right now, not where it was when the drag started
-    const hoopX = CW / 2 + hoopOffsetRef.current;
-    const absAim = Math.abs(targetX - hoopX);
-    const aimDir = targetX >= hoopX ? 1 : -1;
+    const round = totalRoundRef.current;
+    const { amp, omega } = hoopConfig(round);
+    
+    // Calculate future hoop position at time of impact (speed = 0.85)
+    const flightTime = 1 / 0.85;
+    const futureTime = hoopTimeRef.current + flightTime;
+    const futureHoopX = omega > 0 ? CW / 2 + amp * Math.sin(futureTime * omega) : CW / 2;
+    
+    // Dynamic tolerances scale with the round number to compensate for speed
+    const currentCleanTol = CLEAN_TOL + (round - 1) * 1.5;
+    const currentRimOuter = RIM_OUTER + (round - 1) * 2.0;
+
+    const absAim = Math.abs(targetX - futureHoopX);
+    const aimDir = targetX >= futureHoopX ? 1 : -1;
 
     let shot;
 
-    if (power > BACKBOARD_PWR && absAim <= RIM_OUTER) {
+    if (power > BACKBOARD_PWR && absAim <= currentRimOuter) {
       // ── Backboard bank ──────────────────────────────────────────────────
-      const impactX = hoopX + (targetX - hoopX) * 0.35;
-      // Chance decays linearly from 70% (dead center) to 20% (outer rim)
-      const chanceIn = Math.max(0.20, 0.70 - 0.50 * (absAim / RIM_OUTER));
+      // Phase 1 (flight to backboard) takes 1 / 0.70 = 1.428s
+      const flightTime1 = 1 / 0.70;
+      const futureTime1 = hoopTimeRef.current + flightTime1;
+      
+      // Phase 2 (bounce to hoop) takes 1 / 1.1 = 0.909s
+      const flightTime2 = 1 / 1.1;
+      const futureTime2 = futureTime1 + flightTime2;
+      const futureHoopX2 = omega > 0 ? CW / 2 + amp * Math.sin(futureTime2 * omega) : CW / 2;
+      
+      const chanceIn = Math.max(0.25, 0.75 - 0.50 * (absAim / currentRimOuter));
       const made = Math.random() < chanceIn;
-      const finalX = made ? hoopX : hoopX + aimDir * 68;
+      const finalX = made ? futureHoopX2 : futureHoopX2 + aimDir * 68;
       const finalY = made ? HOOP_Y + 10 : HOOP_Y + 88;
+      
       shot = {
         active: true, phase: 1, t: 0, type: "backboard", made,
-        p1: { fromX: BALL_X, fromY: BALL_Y, toX: impactX, toY: BOARD_CY,
+        p1: { fromX: BALL_X, fromY: BALL_Y, toX: targetX, toY: BOARD_CY,
               arcH: arcH * 0.52, fromR: BALL_R, toR: 11, speed: 0.70 },
-        p2: { fromX: impactX, fromY: BOARD_CY, toX: finalX, toY: finalY,
+        p2: { fromX: targetX, fromY: BOARD_CY, toX: finalX, toY: finalY,
               arcH: made ? 20 : 30, fromR: 11, toR: made ? 13 : 18, speed: 1.1 },
       };
-    } else if (absAim < CLEAN_TOL && power >= 0.30 && power <= BACKBOARD_PWR) {
+    } else if (absAim < currentCleanTol && power >= 0.30 && power <= BACKBOARD_PWR) {
       // ── Clean make ─────────────────────────────────────────────────────
       shot = {
         active: true, phase: 1, t: 0, type: "clean", made: true, p2: null,
-        p1: { fromX: BALL_X, fromY: BALL_Y, toX: hoopX, toY: HOOP_Y,
+        p1: { fromX: BALL_X, fromY: BALL_Y, toX: targetX, toY: HOOP_Y,
               arcH, fromR: BALL_R, toR: 12, speed: 0.85 },
       };
-    } else if (absAim >= CLEAN_TOL && absAim <= RIM_OUTER && power >= 0.26 && power <= BACKBOARD_PWR) {
+    } else if (absAim >= currentCleanTol && absAim <= currentRimOuter && power >= 0.26 && power <= BACKBOARD_PWR) {
       // ── Rim bounce ─────────────────────────────────────────────────────
-      const rimEdgeX = hoopX + aimDir * HOOP_RX * 0.88;
-      // Chance decays linearly from 45% (just inside rim) to 5% (outer edge)
-      const chanceIn = Math.max(0.05, 0.45 - 0.40 * (absAim - CLEAN_TOL) / (RIM_OUTER - CLEAN_TOL));
+      // Hits the future rim edge!
+      const rimEdgeX = futureHoopX + aimDir * HOOP_RX * 0.88;
+      const chanceIn = Math.max(0.10, 0.50 - 0.40 * (absAim - currentCleanTol) / (currentRimOuter - currentCleanTol));
       const made = Math.random() < chanceIn;
-      const finalX = made ? hoopX : hoopX + aimDir * 74;
+      
+      // Phase 2 takes 1 / 1.3 = 0.769s
+      const futureTime2 = futureTime + (1 / 1.3);
+      const futureHoopX2 = omega > 0 ? CW / 2 + amp * Math.sin(futureTime2 * omega) : CW / 2;
+      
+      const finalX = made ? futureHoopX2 : futureHoopX2 + aimDir * 74;
       const finalY = made ? HOOP_Y + 12 : HOOP_Y + 88;
+      
       shot = {
         active: true, phase: 1, t: 0, type: "rim", made,
         p1: { fromX: BALL_X, fromY: BALL_Y, toX: rimEdgeX, toY: HOOP_Y,
@@ -469,9 +536,14 @@ export default function Basketball() {
       };
     } else {
       // ── Clean miss ─────────────────────────────────────────────────────
-      const missY = power < 0.28
-        ? BALL_Y - Math.max(dy * 1.3, 60)   // falls short in court
-        : HOOP_Y + 45;                       // sails wide of hoop
+      let missY;
+      if (power < 0.28) {
+        missY = BALL_Y - Math.max(dy * 1.3, 60); // falls short in court
+      } else if (power > BACKBOARD_PWR && absAim > currentRimOuter) {
+        missY = HOOP_Y - 30; // overshoots the hoop / goes long
+      } else {
+        missY = HOOP_Y + 45; // lands slightly short / under the hoop
+      }
       shot = {
         active: true, phase: 1, t: 0, type: "clean", made: false, p2: null,
         p1: { fromX: BALL_X, fromY: BALL_Y, toX: targetX, toY: missY,
