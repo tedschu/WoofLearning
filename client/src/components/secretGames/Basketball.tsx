@@ -8,34 +8,49 @@ function getOps(diff) {
   if (diff === 1) return ["+", "+", "-", "-"];
   if (diff === 2) return ["+", "+", "-", "-"];
   if (diff === 3) return ["+", "-", "*"];
-  if (diff === 4) return ["+", "-", "*", "*", "/"];
-  return ["+", "-", "*", "/", "/"];
+  if (diff === 4) return ["+", "-", "*", "*", "/", "two"];
+  return ["+", "-", "*", "/", "/", "two", "two"];
 }
 
 function makeQuestion(diff) {
   const ops = getOps(diff);
   const op = ops[Math.floor(Math.random() * ops.length)];
   if (op === "+") {
-    const max = diff <= 2 ? 20 : diff <= 3 ? 50 : 99;
+    const max = diff === 1 ? 20 : diff === 2 ? 30 : diff === 3 ? 75 : diff === 4 ? 150 : 200;
     const a = Math.floor(Math.random() * max) + 1;
     const b = Math.floor(Math.random() * max) + 1;
     return { q: `${a} + ${b}`, a: a + b };
   }
   if (op === "-") {
-    const max = diff <= 2 ? 20 : diff <= 3 ? 50 : 99;
+    const max = diff === 1 ? 20 : diff === 2 ? 30 : diff === 3 ? 75 : diff === 4 ? 150 : 200;
     const a = Math.floor(Math.random() * (max - 1)) + 2;
     const b = Math.floor(Math.random() * (a - 1)) + 1;
     return { q: `${a} − ${b}`, a: a - b };
   }
   if (op === "*") {
-    const tableMax = diff <= 3 ? 5 : 10;
+    const tableMax = diff <= 3 ? 8 : 12;
     const a = Math.floor(Math.random() * tableMax) + 1;
     const b = Math.floor(Math.random() * tableMax) + 1;
     return { q: `${a} × ${b}`, a: a * b };
   }
-  const divisor = Math.floor(Math.random() * 8) + 2;
-  const quotient = Math.floor(Math.random() * 9) + 1;
-  return { q: `${divisor * quotient} ÷ ${divisor}`, a: quotient };
+  if (op === "/") {
+    const divisorMax = diff <= 3 ? 9 : 12;
+    const quotientMax = diff <= 3 ? 9 : 12;
+    const divisor = Math.floor(Math.random() * (divisorMax - 1)) + 2;
+    const quotient = Math.floor(Math.random() * quotientMax) + 1;
+    return { q: `${divisor * quotient} ÷ ${divisor}`, a: quotient };
+  }
+  // Two-step: a × b ± c  (diff 4–5 only)
+  const tableMax = diff === 4 ? 10 : 12;
+  const a = Math.floor(Math.random() * tableMax) + 1;
+  const b = Math.floor(Math.random() * tableMax) + 1;
+  const product = a * b;
+  const c = Math.floor(Math.random() * 20) + 1;
+  if (Math.random() < 0.5 || product <= 1) {
+    return { q: `${a} × ${b} + ${c}`, a: product + c };
+  }
+  const safeC = Math.floor(Math.random() * (product - 1)) + 1;
+  return { q: `${a} × ${b} − ${safeC}`, a: product - safeC };
 }
 
 // ─── Constants ─────────────────────────────────────────────────────────────
@@ -56,6 +71,8 @@ const CLEAN_TOL = 19;       // ball clears rim cleanly: HOOP_RX(30) - ball_r_at_
 const RIM_OUTER = 46;       // outer rim clip: HOOP_RX(30) + ball_r_at_hoop(~13) + 1
 const BACKBOARD_PWR = 0.82;
 const TOTAL_ROUNDS = 5;
+const QUESTION_TIME = 10;
+const SHOOT_TIME = 10;
 
 // Hoop movement grows each round: round 1 = static, round 5 = fastest
 function hoopConfig(roundNum) {
@@ -71,11 +88,11 @@ function diffLabel(d) {
 function diffDesc(d) {
   return [
     "",
-    "Addition & subtraction — small numbers",
-    "Addition & subtraction — larger numbers",
-    "Addition, subtraction & multiplication",
-    "All operations including division",
-    "Challenging mix of all operations",
+    "Addition & subtraction up to 20",
+    "Addition & subtraction up to 30",
+    "Add, subtract & multiply — up to ×8 tables",
+    "All operations + two-step problems — up to ×12 tables",
+    "Hard mix — large numbers, two-step, all operations",
   ][d];
 }
 function shotResultLabel(made, type) {
@@ -281,7 +298,15 @@ function drawScene(ctx, hoopOffset, bx, by, br, aimTarget, hitFlash, cleanTol = 
 
 // ─── Scoreboard component (defined outside to avoid recreation on re-render) ──
 
-function Scoreboard({ names, roundPoints, totalRound, currentPlayer }) {
+function Scoreboard({ names, roundPoints, totalRound, currentPlayer, timeLeft }) {
+  const tl = timeLeft ?? null;
+  const timerColor = tl === null ? "#555"
+    : tl <= 3 ? "#ff2222"
+    : tl <= 6 ? "#ff8800"
+    : "#ffd700";
+  const timerGlow = tl !== null && tl > 0
+    ? `0 0 10px ${timerColor}aa, 0 0 24px ${timerColor}44`
+    : "none";
   return (
     <div className="bball-scoreboard">
       <div className={`bball-sb-team ${currentPlayer === 0 ? "active-team" : ""}`}>
@@ -290,9 +315,43 @@ function Scoreboard({ names, roundPoints, totalRound, currentPlayer }) {
           <span className="bball-sb-digit">{roundPoints[0]}</span>
         </div>
       </div>
+
       <div className="bball-sb-center">
-        <div className="bball-sb-rd">Round {totalRound} / {TOTAL_ROUNDS}</div>
+        <div className="bball-sb-rd" style={{ marginBottom: "5px" }}>RD {totalRound}/{TOTAL_ROUNDS}</div>
+        <div style={{
+          background: "#080808",
+          border: "2px solid #2a2a2a",
+          borderRadius: "6px",
+          padding: "4px 12px 6px",
+          boxShadow: "inset 0 2px 10px rgba(0,0,0,0.9)",
+          minWidth: "62px",
+          textAlign: "center",
+        }}>
+          <div style={{
+            fontFamily: "'Courier New', monospace",
+            fontSize: "38px",
+            fontWeight: "900",
+            lineHeight: 1,
+            letterSpacing: "0.05em",
+            color: timerColor,
+            textShadow: timerGlow,
+            transition: "color 0.25s, text-shadow 0.25s",
+          }}>
+            {tl !== null ? String(tl).padStart(2, "0") : "--"}
+          </div>
+          <div style={{
+            fontSize: "9px",
+            fontWeight: "700",
+            letterSpacing: "0.12em",
+            color: "#555",
+            textTransform: "uppercase",
+            marginTop: "1px",
+          }}>
+            sec
+          </div>
+        </div>
       </div>
+
       <div className={`bball-sb-team ${currentPlayer === 1 ? "active-team" : ""}`}>
         <div className="bball-sb-name">{names[1].toUpperCase()}</div>
         <div className="bball-sb-digit-box">
@@ -318,6 +377,8 @@ export default function Basketball() {
   const [answeredCorrect, setAnsweredCorrect] = useState(null);
   const [shotMade, setShotMade] = useState(null);
   const [shotType, setShotType] = useState("clean");
+  const [timeLeft, setTimeLeft] = useState(null);
+  const answeredRef = useRef(false);
 
   // Canvas refs
   const canvasRef = useRef(null);
@@ -439,6 +500,38 @@ export default function Basketball() {
     }
     cancelAnimationFrame(rafRef.current);
   }, [phase, startLoop]);
+
+  // ── Question & shot timers ──────────────────────────────────────────────
+  useEffect(() => {
+    if (phase !== "question" && phase !== "shooting") {
+      setTimeLeft(null);
+      return;
+    }
+    const limit = phase === "question"
+      ? (totalRoundRef.current >= 4 ? 15 : QUESTION_TIME)
+      : SHOOT_TIME;
+    setTimeLeft(limit);
+    answeredRef.current = false;
+
+    const id = setInterval(() => {
+      setTimeLeft(prev => {
+        if (prev <= 1) {
+          clearInterval(id);
+          if (phase === "question" && !answeredRef.current) {
+            answeredRef.current = true;
+            setAnsweredCorrect("timeout");
+            setTimeout(() => advanceTurn(currentPlayerRef.current, false), 1000);
+          } else if (phase === "shooting" && phaseRef.current === "shooting") {
+            dragRef.current.active = false;
+            setTimeout(() => advanceTurn(currentPlayerRef.current, false), 500);
+          }
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+    return () => clearInterval(id);
+  }, [phase]);
 
   // ── Mouse / touch ───────────────────────────────────────────────────────
 
@@ -649,6 +742,7 @@ export default function Basketball() {
     e?.preventDefault();
     const num = parseInt(userAnswer, 10);
     if (isNaN(num)) return;
+    answeredRef.current = true;
     if (num === currentQ.a) {
       setAnsweredCorrect(true);
       setTimeout(() => {
@@ -678,7 +772,7 @@ export default function Basketball() {
 
   // ── Shared scoreboard props ─────────────────────────────────────────────
 
-  const sbProps = { names, roundPoints, totalRound, currentPlayer };
+  const sbProps = { names, roundPoints, totalRound, currentPlayer, timeLeft };
 
   // ── Render ──────────────────────────────────────────────────────────────
 
@@ -790,6 +884,9 @@ export default function Basketball() {
           )}
           {answeredCorrect === false && (
             <p className="bball-feedback wrong">✗ Nope — the answer was {currentQ.a}</p>
+          )}
+          {answeredCorrect === "timeout" && (
+            <p className="bball-feedback wrong">⏱ Time's up! The answer was {currentQ.a}</p>
           )}
         </div>
         <Link to="/secretGames" className="bball-end-game">End Game</Link>
