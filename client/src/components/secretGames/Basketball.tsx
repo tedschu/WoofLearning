@@ -531,7 +531,7 @@ export default function Basketball() {
       });
     }, 1000);
     return () => clearInterval(id);
-  }, [phase]);
+  }, [phase, currentPlayer]);
 
   // ── Mouse / touch ───────────────────────────────────────────────────────
 
